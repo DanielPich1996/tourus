@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3436C34B12530129A0A53615 /* Pods_TourusTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69E149F3742025E8D629FDF0 /* Pods_TourusTests.framework */; };
+		422F9A4484FE7EBADD89A4A1 /* Pods_TourusUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 061A154EA91F4A4ADE7EC42F /* Pods_TourusUITests.framework */; };
 		84D2D44721CE6AAC004524D3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D2D44621CE6AAC004524D3 /* AppDelegate.swift */; };
 		84D2D44921CE6AAC004524D3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D2D44821CE6AAC004524D3 /* ViewController.swift */; };
 		84D2D44C21CE6AAC004524D3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84D2D44A21CE6AAC004524D3 /* Main.storyboard */; };
@@ -14,6 +16,8 @@
 		84D2D45121CE6AAE004524D3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84D2D44F21CE6AAE004524D3 /* LaunchScreen.storyboard */; };
 		84D2D45C21CE6AAE004524D3 /* TourusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D2D45B21CE6AAE004524D3 /* TourusTests.swift */; };
 		84D2D46721CE6AAE004524D3 /* TourusUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D2D46621CE6AAE004524D3 /* TourusUITests.swift */; };
+		84D2D47521CE6EB8004524D3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 84D2D47421CE6EB8004524D3 /* GoogleService-Info.plist */; };
+		F2DC9ACDC3D5861E2EE851B3 /* Pods_Tourus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94A8D8BCB1BF426C538DA8AE /* Pods_Tourus.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +38,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		02F3022251874EC8C077F2D6 /* Pods-TourusTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TourusTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TourusTests/Pods-TourusTests.release.xcconfig"; sourceTree = "<group>"; };
+		061A154EA91F4A4ADE7EC42F /* Pods_TourusUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TourusUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5BEDB67B36EF30DACBDB381F /* Pods-TourusTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TourusTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TourusTests/Pods-TourusTests.debug.xcconfig"; sourceTree = "<group>"; };
+		69E149F3742025E8D629FDF0 /* Pods_TourusTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TourusTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		84D2D44321CE6AAC004524D3 /* Tourus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tourus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84D2D44621CE6AAC004524D3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		84D2D44821CE6AAC004524D3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -47,6 +55,12 @@
 		84D2D46221CE6AAE004524D3 /* TourusUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TourusUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		84D2D46621CE6AAE004524D3 /* TourusUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TourusUITests.swift; sourceTree = "<group>"; };
 		84D2D46821CE6AAE004524D3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		84D2D47421CE6EB8004524D3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		8F726E5FF9087ED1C78FE734 /* Pods-TourusUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TourusUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TourusUITests/Pods-TourusUITests.release.xcconfig"; sourceTree = "<group>"; };
+		94A8D8BCB1BF426C538DA8AE /* Pods_Tourus.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tourus.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B5FE3A27884616B280352506 /* Pods-Tourus.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tourus.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tourus/Pods-Tourus.debug.xcconfig"; sourceTree = "<group>"; };
+		ECCBCDBE37C4055B7475E701 /* Pods-Tourus.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tourus.release.xcconfig"; path = "Pods/Target Support Files/Pods-Tourus/Pods-Tourus.release.xcconfig"; sourceTree = "<group>"; };
+		F87CFDDD5412DBEB90CDA8C3 /* Pods-TourusUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TourusUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TourusUITests/Pods-TourusUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +68,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F2DC9ACDC3D5861E2EE851B3 /* Pods_Tourus.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -61,6 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3436C34B12530129A0A53615 /* Pods_TourusTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,12 +84,23 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				422F9A4484FE7EBADD89A4A1 /* Pods_TourusUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		43149C8A1ADE4A2878B0249F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				94A8D8BCB1BF426C538DA8AE /* Pods_Tourus.framework */,
+				69E149F3742025E8D629FDF0 /* Pods_TourusTests.framework */,
+				061A154EA91F4A4ADE7EC42F /* Pods_TourusUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		84D2D43A21CE6AAC004524D3 = {
 			isa = PBXGroup;
 			children = (
@@ -81,6 +108,8 @@
 				84D2D45A21CE6AAE004524D3 /* TourusTests */,
 				84D2D46521CE6AAE004524D3 /* TourusUITests */,
 				84D2D44421CE6AAC004524D3 /* Products */,
+				C24FB5CF0180E2593092A809 /* Pods */,
+				43149C8A1ADE4A2878B0249F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -97,6 +126,7 @@
 		84D2D44521CE6AAC004524D3 /* Tourus */ = {
 			isa = PBXGroup;
 			children = (
+				84D2D47421CE6EB8004524D3 /* GoogleService-Info.plist */,
 				84D2D44621CE6AAC004524D3 /* AppDelegate.swift */,
 				84D2D44821CE6AAC004524D3 /* ViewController.swift */,
 				84D2D44A21CE6AAC004524D3 /* Main.storyboard */,
@@ -125,6 +155,19 @@
 			path = TourusUITests;
 			sourceTree = "<group>";
 		};
+		C24FB5CF0180E2593092A809 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B5FE3A27884616B280352506 /* Pods-Tourus.debug.xcconfig */,
+				ECCBCDBE37C4055B7475E701 /* Pods-Tourus.release.xcconfig */,
+				5BEDB67B36EF30DACBDB381F /* Pods-TourusTests.debug.xcconfig */,
+				02F3022251874EC8C077F2D6 /* Pods-TourusTests.release.xcconfig */,
+				F87CFDDD5412DBEB90CDA8C3 /* Pods-TourusUITests.debug.xcconfig */,
+				8F726E5FF9087ED1C78FE734 /* Pods-TourusUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -132,9 +175,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 84D2D46B21CE6AAE004524D3 /* Build configuration list for PBXNativeTarget "Tourus" */;
 			buildPhases = (
+				06E0113AED4FC7BB56BCE4FC /* [CP] Check Pods Manifest.lock */,
 				84D2D43F21CE6AAC004524D3 /* Sources */,
 				84D2D44021CE6AAC004524D3 /* Frameworks */,
 				84D2D44121CE6AAC004524D3 /* Resources */,
+				E81BFED3656604164071041A /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -149,6 +194,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 84D2D46E21CE6AAE004524D3 /* Build configuration list for PBXNativeTarget "TourusTests" */;
 			buildPhases = (
+				F63ABCE8B177A25C7B5A44FD /* [CP] Check Pods Manifest.lock */,
 				84D2D45321CE6AAE004524D3 /* Sources */,
 				84D2D45421CE6AAE004524D3 /* Frameworks */,
 				84D2D45521CE6AAE004524D3 /* Resources */,
@@ -167,6 +213,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 84D2D47121CE6AAE004524D3 /* Build configuration list for PBXNativeTarget "TourusUITests" */;
 			buildPhases = (
+				800A5B2A822B599FD677B6DF /* [CP] Check Pods Manifest.lock */,
 				84D2D45E21CE6AAE004524D3 /* Sources */,
 				84D2D45F21CE6AAE004524D3 /* Frameworks */,
 				84D2D46021CE6AAE004524D3 /* Resources */,
@@ -230,6 +277,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				84D2D45121CE6AAE004524D3 /* LaunchScreen.storyboard in Resources */,
+				84D2D47521CE6EB8004524D3 /* GoogleService-Info.plist in Resources */,
 				84D2D44E21CE6AAE004524D3 /* Assets.xcassets in Resources */,
 				84D2D44C21CE6AAC004524D3 /* Main.storyboard in Resources */,
 			);
@@ -250,6 +298,87 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		06E0113AED4FC7BB56BCE4FC /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Tourus-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		800A5B2A822B599FD677B6DF /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TourusUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E81BFED3656604164071041A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Tourus/Pods-Tourus-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Tourus/Pods-Tourus-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F63ABCE8B177A25C7B5A44FD /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TourusTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		84D2D43F21CE6AAC004524D3 /* Sources */ = {
@@ -430,6 +559,7 @@
 		};
 		84D2D46C21CE6AAE004524D3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B5FE3A27884616B280352506 /* Pods-Tourus.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -448,6 +578,7 @@
 		};
 		84D2D46D21CE6AAE004524D3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = ECCBCDBE37C4055B7475E701 /* Pods-Tourus.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -466,6 +597,7 @@
 		};
 		84D2D46F21CE6AAE004524D3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5BEDB67B36EF30DACBDB381F /* Pods-TourusTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -487,6 +619,7 @@
 		};
 		84D2D47021CE6AAE004524D3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 02F3022251874EC8C077F2D6 /* Pods-TourusTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -508,6 +641,7 @@
 		};
 		84D2D47221CE6AAE004524D3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F87CFDDD5412DBEB90CDA8C3 /* Pods-TourusUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -528,6 +662,7 @@
 		};
 		84D2D47321CE6AAE004524D3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8F726E5FF9087ED1C78FE734 /* Pods-TourusUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
