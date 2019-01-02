@@ -9,11 +9,14 @@
 /* Begin PBXBuildFile section */
 		3436C34B12530129A0A53615 /* Pods_TourusTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69E149F3742025E8D629FDF0 /* Pods_TourusTests.framework */; };
 		422F9A4484FE7EBADD89A4A1 /* Pods_TourusUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 061A154EA91F4A4ADE7EC42F /* Pods_TourusUITests.framework */; };
+		843F5E5921DD55440098FA3E /* FirebaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843F5E5821DD55440098FA3E /* FirebaseModel.swift */; };
+		843F5E5B21DD58B80098FA3E /* MainModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843F5E5A21DD58B80098FA3E /* MainModel.swift */; };
+		843F5E5D21DD593F0098FA3E /* SqlModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843F5E5C21DD593F0098FA3E /* SqlModel.swift */; };
+		843F5E5F21DD59C60098FA3E /* NotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843F5E5E21DD59C60098FA3E /* NotificationModel.swift */; };
 		84D2D44721CE6AAC004524D3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D2D44621CE6AAC004524D3 /* AppDelegate.swift */; };
 		84D2D44921CE6AAC004524D3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D2D44821CE6AAC004524D3 /* ViewController.swift */; };
 		84D2D44C21CE6AAC004524D3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84D2D44A21CE6AAC004524D3 /* Main.storyboard */; };
 		84D2D44E21CE6AAE004524D3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84D2D44D21CE6AAE004524D3 /* Assets.xcassets */; };
-		84D2D45121CE6AAE004524D3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84D2D44F21CE6AAE004524D3 /* LaunchScreen.storyboard */; };
 		84D2D45C21CE6AAE004524D3 /* TourusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D2D45B21CE6AAE004524D3 /* TourusTests.swift */; };
 		84D2D46721CE6AAE004524D3 /* TourusUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D2D46621CE6AAE004524D3 /* TourusUITests.swift */; };
 		84D2D47521CE6EB8004524D3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 84D2D47421CE6EB8004524D3 /* GoogleService-Info.plist */; };
@@ -42,12 +45,15 @@
 		061A154EA91F4A4ADE7EC42F /* Pods_TourusUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TourusUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BEDB67B36EF30DACBDB381F /* Pods-TourusTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TourusTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TourusTests/Pods-TourusTests.debug.xcconfig"; sourceTree = "<group>"; };
 		69E149F3742025E8D629FDF0 /* Pods_TourusTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TourusTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		843F5E5821DD55440098FA3E /* FirebaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseModel.swift; sourceTree = "<group>"; };
+		843F5E5A21DD58B80098FA3E /* MainModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainModel.swift; sourceTree = "<group>"; };
+		843F5E5C21DD593F0098FA3E /* SqlModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SqlModel.swift; sourceTree = "<group>"; };
+		843F5E5E21DD59C60098FA3E /* NotificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationModel.swift; sourceTree = "<group>"; };
 		84D2D44321CE6AAC004524D3 /* Tourus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tourus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84D2D44621CE6AAC004524D3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		84D2D44821CE6AAC004524D3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		84D2D44B21CE6AAC004524D3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		84D2D44D21CE6AAE004524D3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		84D2D45021CE6AAE004524D3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		84D2D45221CE6AAE004524D3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84D2D45721CE6AAE004524D3 /* TourusTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TourusTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		84D2D45B21CE6AAE004524D3 /* TourusTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TourusTests.swift; sourceTree = "<group>"; };
@@ -101,6 +107,39 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		843F5E5421DD54C10098FA3E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				843F5E5821DD55440098FA3E /* FirebaseModel.swift */,
+				843F5E5A21DD58B80098FA3E /* MainModel.swift */,
+				843F5E5C21DD593F0098FA3E /* SqlModel.swift */,
+				843F5E5E21DD59C60098FA3E /* NotificationModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		843F5E5521DD54D10098FA3E /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		843F5E5621DD54F90098FA3E /* Images */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
+		843F5E5721DD55020098FA3E /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				84D2D44821CE6AAC004524D3 /* ViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
 		84D2D43A21CE6AAC004524D3 = {
 			isa = PBXGroup;
 			children = (
@@ -126,12 +165,14 @@
 		84D2D44521CE6AAC004524D3 /* Tourus */ = {
 			isa = PBXGroup;
 			children = (
+				843F5E5721DD55020098FA3E /* Controllers */,
+				843F5E5621DD54F90098FA3E /* Images */,
+				843F5E5521DD54D10098FA3E /* Classes */,
+				843F5E5421DD54C10098FA3E /* Models */,
 				84D2D47421CE6EB8004524D3 /* GoogleService-Info.plist */,
-				84D2D44621CE6AAC004524D3 /* AppDelegate.swift */,
-				84D2D44821CE6AAC004524D3 /* ViewController.swift */,
 				84D2D44A21CE6AAC004524D3 /* Main.storyboard */,
+				84D2D44621CE6AAC004524D3 /* AppDelegate.swift */,
 				84D2D44D21CE6AAE004524D3 /* Assets.xcassets */,
-				84D2D44F21CE6AAE004524D3 /* LaunchScreen.storyboard */,
 				84D2D45221CE6AAE004524D3 /* Info.plist */,
 			);
 			path = Tourus;
@@ -276,7 +317,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84D2D45121CE6AAE004524D3 /* LaunchScreen.storyboard in Resources */,
 				84D2D47521CE6EB8004524D3 /* GoogleService-Info.plist in Resources */,
 				84D2D44E21CE6AAE004524D3 /* Assets.xcassets in Resources */,
 				84D2D44C21CE6AAC004524D3 /* Main.storyboard in Resources */,
@@ -385,7 +425,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				843F5E5F21DD59C60098FA3E /* NotificationModel.swift in Sources */,
+				843F5E5B21DD58B80098FA3E /* MainModel.swift in Sources */,
+				843F5E5921DD55440098FA3E /* FirebaseModel.swift in Sources */,
 				84D2D44921CE6AAC004524D3 /* ViewController.swift in Sources */,
+				843F5E5D21DD593F0098FA3E /* SqlModel.swift in Sources */,
 				84D2D44721CE6AAC004524D3 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -428,14 +472,6 @@
 				84D2D44B21CE6AAC004524D3 /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		84D2D44F21CE6AAE004524D3 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				84D2D45021CE6AAE004524D3 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
