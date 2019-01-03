@@ -22,8 +22,6 @@ class FirebaseModel {
     }
     
     func addUserInfo(_ userInfo:UserInfo, _ image:UIImage?, _ completionBlock:@escaping (Bool) -> Void = {_  in}) {
-       
-        
         if image != nil {
             saveImage(folderName: Consts.Names.ProfileImagesFolderName, image: image!) { (url:String?) in
                 if url != nil {
