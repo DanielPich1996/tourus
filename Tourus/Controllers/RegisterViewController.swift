@@ -42,7 +42,7 @@ class RegisterViewController: UIViewController {
             
             MainModel.instance.signUp(email!, password!, { (res) in
                 if(res) {
-                    self.gotoMainview()
+                    //self.gotoMainview()
                 } else {
                     self.present(Consts.General.getCancelAlertController(title: "Registration", messgae: "Failed while trying to register. Please try again"), animated: true)
                 }

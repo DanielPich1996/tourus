@@ -19,10 +19,6 @@ class FirebaseModel {
     init() {
         FirebaseApp.configure()
         databaseRef = Database.database().reference()
-         self.databaseRef!.child(Consts.Names.UserInfoTableName).child("ss").setValue("")
-        //completionBlock(true)
-        //self.databaseRef!.child("jjd").setValue("hello")
-      //  self.databaseRef!.child("jj").setValue("hello")
     }
     
     func addUserInfo(_ userInfo:UserInfo, _ image:UIImage?, _ completionBlock:@escaping (Bool) -> Void = {_  in}) {
