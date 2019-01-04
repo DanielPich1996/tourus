@@ -62,14 +62,14 @@ class LoginViewController: UIViewController {
     
     func gotoMainview(){
         //bundle is the place where all of the app's assets and source codes lived in before they compiled
-       //let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+       let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         
         //Getting the navigation controller
-      //guard let mainNavigationVC = mainStoryboard.instantiateViewController(withIdentifier: "MainNavigationController") as? MainViewController else {
-         //   return
-        //}
+      guard let mainVC = mainStoryboard.instantiateViewController(withIdentifier: "MainViewController") as? MainViewController else {
+            return
+        }
         //Navigate to the main view
-       // present(mainNavigationVC, animated: true, completion: nil)
+        present(mainVC, animated: true, completion: nil)
     }
 
 }

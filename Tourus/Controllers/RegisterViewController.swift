@@ -42,7 +42,7 @@ class RegisterViewController: UIViewController {
             
             MainModel.instance.signUp(email!, password!, { (res) in
                 if(res) {
-                    //self.gotoMainview()
+                    self.gotoMainview()
                 } else {
                     self.present(Consts.General.getCancelAlertController(title: "Registration", messgae: "Failed while trying to register. Please try again"), animated: true)
                 }
@@ -55,11 +55,11 @@ class RegisterViewController: UIViewController {
         let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         
         //Getting the navigation controller
-        guard let mainNavigationVC = mainStoryboard.instantiateViewController(withIdentifier: "MainNavigationController") as? MainNavigationController else {
+        guard let mainVC = mainStoryboard.instantiateViewController(withIdentifier: "MainViewController") as? MainViewController else {
             return
         }
         //Navigate to the main view
-        present(mainNavigationVC, animated: true, completion: nil)
+        present(mainVC, animated: true, completion: nil)
     }
 }
 

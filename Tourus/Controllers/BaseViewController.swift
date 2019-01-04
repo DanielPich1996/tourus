@@ -1,5 +1,5 @@
 //
-//  MainNavigationController.swift
+//  BaseViewController.swift
 //  Tourus
 //
 //  Created by admin on 03/01/2019.
@@ -8,12 +8,15 @@
 
 import UIKit
 
-class MainNavigationController: UIViewController {
-
+class BaseViewController : UIViewController {
+    
     override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+    super.viewDidLoad()
+        self.view.backgroundColor = UIColor.init(displayP3Red: 10, green: 255, blue: 2, alpha: 2)
+   //  let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
+    // backgroundImage.image = UIImage(named: "bg_name.png")
+   // backgroundImage.contentMode = UIViewContentMode.scaleAspectFill
+   //  self.view.insertSubview(backgroundImage, at: 0)
     }
     
 
