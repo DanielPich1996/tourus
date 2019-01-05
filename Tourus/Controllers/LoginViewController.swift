@@ -19,15 +19,21 @@ class LoginViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        self.view.isUserInteractionEnabled = false
+        BuisyIndicator.Instance.showBuisyIndicator()
+        
         let user = MainModel.instance.currentUser()
         
         if(user != nil) {
             self.gotoMainview();
         }
         else {
-            let singleTap = UITapGestureRecognizer(target: self, action:        #selector(LoginViewController.tapDetected))
+            let singleTap = UITapGestureRecognizer(target: self, action: #selector(LoginViewController.tapDetected))
             viewcontainer.addGestureRecognizer(singleTap)
         }
+        
+        BuisyIndicator.Instance.hideBuisyIndicator()
+        self.view.isUserInteractionEnabled = true
     }
     
     @objc func tapDetected() {
@@ -43,17 +49,19 @@ class LoginViewController: UIViewController {
         let password = PasswordText.text
         
         if(email == "" || password == "" ){
-            present(Consts.General.getCancelAlertController(title: "Login", messgae: "Please enter Email or Password"), animated: true)
+            present(Consts.General.getCancelAlertController(title: "Login", messgae: "Please enter email and password"), animated: true)
         }
         else{
+            self.view.isUserInteractionEnabled = false
             BuisyIndicator.Instance.showBuisyIndicator()
             MainModel.instance.signIn(email!, password!, { (res) in
                 if(res) {
                     self.gotoMainview();
                 } else {
-                    self.present(Consts.General.getCancelAlertController(title: "Login", messgae: "Failed while trying to Login. Please try again"), animated: true)
+                    self.present(Consts.General.getCancelAlertController(title: "Login Failed", messgae: "Incorrect email or password"), animated: true)
                 }
                 BuisyIndicator.Instance.hideBuisyIndicator()
+                self.view.isUserInteractionEnabled = true
             })
             
         }

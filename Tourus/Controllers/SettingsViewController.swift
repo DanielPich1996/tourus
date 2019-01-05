@@ -43,9 +43,9 @@ class SettingsViewController: UIViewController {
     
     @IBAction func onSignoutTap(_ sender: Any) {
         //Create the alert controller and actions
-        let alert = UIAlertController(title: "Sign Out", message: "That's it?", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Log Out", message: "That's it?", preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        let deleteAction = UIAlertAction(title: "Sign Out", style: .destructive) { _ in
+        let deleteAction = UIAlertAction(title: "Log Out", style: .destructive) { _ in
             DispatchQueue.main.async {
                 MainModel.instance.signOut() {() in
                     let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)

@@ -36,21 +36,23 @@ class RegisterViewController: UIViewController {
         
         if(email == "" || password == "" || password != repassword){
             if(password != repassword){
-                present(Consts.General.getCancelAlertController(title: "Registration", messgae: "Please enter same passwords"), animated: true)
+                present(Consts.General.getCancelAlertController(title: "Registration", messgae: "Please enter same password"), animated: true)
             }
             else{
-                present(Consts.General.getCancelAlertController(title: "Registration", messgae: "Please enter Email or Password"), animated: true)
+                present(Consts.General.getCancelAlertController(title: "Registration", messgae: "Please enter email and password"), animated: true)
             }
         }
         else{
+            self.view.isUserInteractionEnabled = false
             BuisyIndicator.Instance.showBuisyIndicator()
             MainModel.instance.signUp(email!, password!, { (res) in
                 if(res) {
                     self.gotoMainview()
                 } else {
-                    self.present(Consts.General.getCancelAlertController(title: "Registration", messgae: "Failed while trying to register. Please try again"), animated: true)
+                    self.present(Consts.General.getCancelAlertController(title: "Registration Failed", messgae: "Failed while trying to register. Please try again"), animated: true)
                 }
                 BuisyIndicator.Instance.hideBuisyIndicator()
+                self.view.isUserInteractionEnabled = true
             })
         }
     }
