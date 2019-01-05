@@ -9,8 +9,8 @@
 import Foundation
 
 class NotificationModel{
-    //static let userInfoNotification = Notification<UserInfo>("notification.userinfo")
-    
+    static let userInfoNotification = Notification<UserInfo>("notification.userinfo")
+
     class Notification<T>{
         let name:String
         var count = 0;

@@ -26,6 +26,10 @@ class RegisterViewController: UIViewController {
     }
     
     @IBAction func onRegisterTapped(_ sender: Any) {
+        self.emailField.endEditing(true)
+        self.passwordFiled.endEditing(true)
+        self.repasswordFiled.endEditing(true)
+        
         let email = emailField.text
         let password = passwordFiled.text
         let repassword = repasswordFiled.text
@@ -39,13 +43,14 @@ class RegisterViewController: UIViewController {
             }
         }
         else{
-            
+            BuisyIndicator.Instance.showBuisyIndicator()
             MainModel.instance.signUp(email!, password!, { (res) in
                 if(res) {
                     self.gotoMainview()
                 } else {
                     self.present(Consts.General.getCancelAlertController(title: "Registration", messgae: "Failed while trying to register. Please try again"), animated: true)
                 }
+                BuisyIndicator.Instance.hideBuisyIndicator()
             })
         }
     }
@@ -62,33 +67,3 @@ class RegisterViewController: UIViewController {
         present(mainVC, animated: true, completion: nil)
     }
 }
-
-
-
-
-/*  guard
- let email = emailField.text,
- email != "",
- 
- let password = passwordFiled.text,
- password != "",
- 
- let repassword = repasswordFiled.text,
- repassword != "",
- 
- password == repassword
- 
- else {
- present(Consts.General.getCancelAlertController(title: "Registration", messgae: "Please enter Email or Password"), animated: true)
- return
- }
- 
- Model.instance.signUp(email, password, { (res) in
- 
- if(res) {
- self.performSegue(withIdentifier: "registerSugue", sender: nil)
- } else {
- self.present(Consts.General.getCancelAlertController(title: "Registration", messgae: "Failed while trying to register. Please try again"), animated: true)
- }
- })
- */

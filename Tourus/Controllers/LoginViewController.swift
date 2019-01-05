@@ -36,6 +36,9 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func onLoginTapped(_ sender: Any) {
+        self.UsernameText.endEditing(true)
+        self.PasswordText.endEditing(true)
+        
         let email = UsernameText.text
         let password = PasswordText.text
         
@@ -43,13 +46,14 @@ class LoginViewController: UIViewController {
             present(Consts.General.getCancelAlertController(title: "Login", messgae: "Please enter Email or Password"), animated: true)
         }
         else{
-            
+            BuisyIndicator.Instance.showBuisyIndicator()
             MainModel.instance.signIn(email!, password!, { (res) in
                 if(res) {
                     self.gotoMainview();
                 } else {
                     self.present(Consts.General.getCancelAlertController(title: "Login", messgae: "Failed while trying to Login. Please try again"), animated: true)
                 }
+                BuisyIndicator.Instance.hideBuisyIndicator()
             })
             
         }
@@ -71,5 +75,4 @@ class LoginViewController: UIViewController {
         //Navigate to the main view
         present(mainVC, animated: true, completion: nil)
     }
-
 }

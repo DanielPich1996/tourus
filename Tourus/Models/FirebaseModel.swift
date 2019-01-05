@@ -57,6 +57,18 @@ class FirebaseModel {
         }
     }
     
+    func getImage(_ url:String, _ callback:@escaping (UIImage?) -> Void) {
+        let ref = Storage.storage().reference(forURL: url)
+        ref.getData(maxSize: 10 * 1024 * 1024) { data, error in
+            if error != nil {
+                callback(nil)
+            } else {
+                let image = UIImage(data: data!)
+                callback(image)
+            }
+        }
+    }
+    
     func getUserInfo(_ uid:String, callback:@escaping (UserInfo?) -> Void) {
         self.databaseRef!.child(Consts.Names.UserInfoTableName).child(uid).observeSingleEvent(of: .value, with: {
             (snapshot) in
@@ -71,8 +83,7 @@ class FirebaseModel {
                 callback(nil)
             }
         })
-    }
-    
+    }    
     
     func signUp(_ email:String, _ password:String, _ callback:@escaping (Bool) -> Void) {
         Auth.auth().createUser(withEmail: email, password: password) { (authResult, error) in
@@ -83,12 +94,10 @@ class FirebaseModel {
                 
                 let userInfo = UserInfo(_uid: authResult!.user.uid, _displayName: display, _email: email, _profileImageUrl: nil)
                 self.addUserInfo(userInfo, nil, { (val) in
-                    print("1")
                     callback(true)
                 })
             }
             else {
-                print("0")
                 callback(false)
             }
         }
@@ -102,6 +111,15 @@ class FirebaseModel {
             else {
                 callback(false)
             }
+        }
+    }
+    
+    func signOut(_ callback:@escaping () -> Void) {
+        do {
+            try Auth.auth().signOut()
+            callback()
+        } catch {
+            print("Error while signing out!")
         }
     }
     
