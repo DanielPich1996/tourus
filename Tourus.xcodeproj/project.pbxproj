@@ -13,18 +13,29 @@
 		843F5E5B21DD58B80098FA3E /* MainModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843F5E5A21DD58B80098FA3E /* MainModel.swift */; };
 		843F5E5D21DD593F0098FA3E /* SqlModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843F5E5C21DD593F0098FA3E /* SqlModel.swift */; };
 		843F5E5F21DD59C60098FA3E /* NotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843F5E5E21DD59C60098FA3E /* NotificationModel.swift */; };
+		8449C6DF21E11235002A6AF6 /* tourus_settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 8449C6DE21E11235002A6AF6 /* tourus_settings.png */; };
+		8449C6E121E13280002A6AF6 /* BuisyIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8449C6E021E13280002A6AF6 /* BuisyIndicator.swift */; };
+		8449C6E421E1362C002A6AF6 /* UiImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8449C6E321E1362C002A6AF6 /* UiImageExtension.swift */; };
+		8449C6EE21E13D5E002A6AF6 /* loading.gif in Resources */ = {isa = PBXBuildFile; fileRef = 8449C6ED21E13D5D002A6AF6 /* loading.gif */; };
+		8449C6F021E14093002A6AF6 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8449C6EF21E14093002A6AF6 /* SettingsViewController.swift */; };
+		8449C6F221E14748002A6AF6 /* OHCircleSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8449C6F121E14748002A6AF6 /* OHCircleSegue.swift */; };
 		849D3EAF21DE8D18002F74B2 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849D3EAE21DE8D18002F74B2 /* RegisterViewController.swift */; };
 		849D3EB121DE8D2D002F74B2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849D3EB021DE8D2D002F74B2 /* LoginViewController.swift */; };
 		849D3EB321DE8F4A002F74B2 /* Consts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849D3EB221DE8F4A002F74B2 /* Consts.swift */; };
-		849D3EB721DE90CD002F74B2 /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849D3EB621DE90CD002F74B2 /* MainNavigationController.swift */; };
 		849D3EB921DE91E2002F74B2 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849D3EB821DE91E2002F74B2 /* UserInfo.swift */; };
 		84D2D44721CE6AAC004524D3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D2D44621CE6AAC004524D3 /* AppDelegate.swift */; };
-		84D2D44921CE6AAC004524D3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D2D44821CE6AAC004524D3 /* ViewController.swift */; };
 		84D2D44C21CE6AAC004524D3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84D2D44A21CE6AAC004524D3 /* Main.storyboard */; };
 		84D2D44E21CE6AAE004524D3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84D2D44D21CE6AAE004524D3 /* Assets.xcassets */; };
 		84D2D45C21CE6AAE004524D3 /* TourusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D2D45B21CE6AAE004524D3 /* TourusTests.swift */; };
 		84D2D46721CE6AAE004524D3 /* TourusUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D2D46621CE6AAE004524D3 /* TourusUITests.swift */; };
 		84D2D47521CE6EB8004524D3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 84D2D47421CE6EB8004524D3 /* GoogleService-Info.plist */; };
+		84DAFA3F21DEB462009DAC2E /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DAFA3E21DEB462009DAC2E /* MainViewController.swift */; };
+		84DAFA4121DEB985009DAC2E /* pizza.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 84DAFA4021DEB985009DAC2E /* pizza.jpg */; };
+		84E3672321E1533200122FD8 /* default_profile_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 84E3672121E1533100122FD8 /* default_profile_2.png */; };
+		84E3672621E1544000122FD8 /* default_profile.png in Resources */ = {isa = PBXBuildFile; fileRef = 84E3672521E1544000122FD8 /* default_profile.png */; };
+		84E3672A21E1573900122FD8 /* UserInfoSqlExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E3672921E1573900122FD8 /* UserInfoSqlExtension.swift */; };
+		84E3672D21E1578A00122FD8 /* LastUpdateSplDates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E3672C21E1578A00122FD8 /* LastUpdateSplDates.swift */; };
+		84E3673121E15EC500122FD8 /* SBCardPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E3673021E15EC500122FD8 /* SBCardPopupViewController.swift */; };
 		F2DC9ACDC3D5861E2EE851B3 /* Pods_Tourus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94A8D8BCB1BF426C538DA8AE /* Pods_Tourus.framework */; };
 /* End PBXBuildFile section */
 
@@ -54,14 +65,18 @@
 		843F5E5A21DD58B80098FA3E /* MainModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainModel.swift; sourceTree = "<group>"; };
 		843F5E5C21DD593F0098FA3E /* SqlModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SqlModel.swift; sourceTree = "<group>"; };
 		843F5E5E21DD59C60098FA3E /* NotificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationModel.swift; sourceTree = "<group>"; };
+		8449C6DE21E11235002A6AF6 /* tourus_settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tourus_settings.png; path = ../../../tourus_settings.png; sourceTree = "<group>"; };
+		8449C6E021E13280002A6AF6 /* BuisyIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuisyIndicator.swift; sourceTree = "<group>"; };
+		8449C6E321E1362C002A6AF6 /* UiImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UiImageExtension.swift; sourceTree = "<group>"; };
+		8449C6ED21E13D5D002A6AF6 /* loading.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = loading.gif; sourceTree = "<group>"; };
+		8449C6EF21E14093002A6AF6 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		8449C6F121E14748002A6AF6 /* OHCircleSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OHCircleSegue.swift; sourceTree = "<group>"; };
 		849D3EAE21DE8D18002F74B2 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		849D3EB021DE8D2D002F74B2 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		849D3EB221DE8F4A002F74B2 /* Consts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Consts.swift; sourceTree = "<group>"; };
-		849D3EB621DE90CD002F74B2 /* MainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
 		849D3EB821DE91E2002F74B2 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		84D2D44321CE6AAC004524D3 /* Tourus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tourus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84D2D44621CE6AAC004524D3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		84D2D44821CE6AAC004524D3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		84D2D44B21CE6AAC004524D3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		84D2D44D21CE6AAE004524D3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		84D2D45221CE6AAE004524D3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -72,6 +87,13 @@
 		84D2D46621CE6AAE004524D3 /* TourusUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TourusUITests.swift; sourceTree = "<group>"; };
 		84D2D46821CE6AAE004524D3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84D2D47421CE6EB8004524D3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		84DAFA3E21DEB462009DAC2E /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		84DAFA4021DEB985009DAC2E /* pizza.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pizza.jpg; sourceTree = "<group>"; };
+		84E3672121E1533100122FD8 /* default_profile_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = default_profile_2.png; sourceTree = "<group>"; };
+		84E3672521E1544000122FD8 /* default_profile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = default_profile.png; path = ../../../default_profile.png; sourceTree = "<group>"; };
+		84E3672921E1573900122FD8 /* UserInfoSqlExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoSqlExtension.swift; sourceTree = "<group>"; };
+		84E3672C21E1578A00122FD8 /* LastUpdateSplDates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastUpdateSplDates.swift; sourceTree = "<group>"; };
+		84E3673021E15EC500122FD8 /* SBCardPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SBCardPopupViewController.swift; sourceTree = "<group>"; };
 		8F726E5FF9087ED1C78FE734 /* Pods-TourusUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TourusUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TourusUITests/Pods-TourusUITests.release.xcconfig"; sourceTree = "<group>"; };
 		94A8D8BCB1BF426C538DA8AE /* Pods_Tourus.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tourus.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5FE3A27884616B280352506 /* Pods-Tourus.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tourus.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tourus/Pods-Tourus.debug.xcconfig"; sourceTree = "<group>"; };
@@ -131,6 +153,10 @@
 		843F5E5521DD54D10098FA3E /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				84E3672B21E1577200122FD8 /* Dates */,
+				8449C6E221E13603002A6AF6 /* Extensions */,
+				8449C6F121E14748002A6AF6 /* OHCircleSegue.swift */,
+				8449C6E021E13280002A6AF6 /* BuisyIndicator.swift */,
 				849D3EB221DE8F4A002F74B2 /* Consts.swift */,
 				849D3EB821DE91E2002F74B2 /* UserInfo.swift */,
 			);
@@ -140,6 +166,11 @@
 		843F5E5621DD54F90098FA3E /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				8449C6ED21E13D5D002A6AF6 /* loading.gif */,
+				84E3672121E1533100122FD8 /* default_profile_2.png */,
+				8449C6DE21E11235002A6AF6 /* tourus_settings.png */,
+				84E3672521E1544000122FD8 /* default_profile.png */,
+				84DAFA4021DEB985009DAC2E /* pizza.jpg */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -147,12 +178,22 @@
 		843F5E5721DD55020098FA3E /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				84D2D44821CE6AAC004524D3 /* ViewController.swift */,
 				849D3EAE21DE8D18002F74B2 /* RegisterViewController.swift */,
 				849D3EB021DE8D2D002F74B2 /* LoginViewController.swift */,
-				849D3EB621DE90CD002F74B2 /* MainNavigationController.swift */,
+				84DAFA3E21DEB462009DAC2E /* MainViewController.swift */,
+				8449C6EF21E14093002A6AF6 /* SettingsViewController.swift */,
+				84E3673021E15EC500122FD8 /* SBCardPopupViewController.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		8449C6E221E13603002A6AF6 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				8449C6E321E1362C002A6AF6 /* UiImageExtension.swift */,
+				84E3672921E1573900122FD8 /* UserInfoSqlExtension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		84D2D43A21CE6AAC004524D3 = {
@@ -209,6 +250,14 @@
 				84D2D46821CE6AAE004524D3 /* Info.plist */,
 			);
 			path = TourusUITests;
+			sourceTree = "<group>";
+		};
+		84E3672B21E1577200122FD8 /* Dates */ = {
+			isa = PBXGroup;
+			children = (
+				84E3672C21E1578A00122FD8 /* LastUpdateSplDates.swift */,
+			);
+			path = Dates;
 			sourceTree = "<group>";
 		};
 		C24FB5CF0180E2593092A809 /* Pods */ = {
@@ -334,7 +383,12 @@
 			files = (
 				84D2D47521CE6EB8004524D3 /* GoogleService-Info.plist in Resources */,
 				84D2D44E21CE6AAE004524D3 /* Assets.xcassets in Resources */,
+				84DAFA4121DEB985009DAC2E /* pizza.jpg in Resources */,
 				84D2D44C21CE6AAC004524D3 /* Main.storyboard in Resources */,
+				8449C6DF21E11235002A6AF6 /* tourus_settings.png in Resources */,
+				84E3672321E1533200122FD8 /* default_profile_2.png in Resources */,
+				84E3672621E1544000122FD8 /* default_profile.png in Resources */,
+				8449C6EE21E13D5E002A6AF6 /* loading.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -440,14 +494,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				849D3EB721DE90CD002F74B2 /* MainNavigationController.swift in Sources */,
+				84DAFA3F21DEB462009DAC2E /* MainViewController.swift in Sources */,
+				84E3673121E15EC500122FD8 /* SBCardPopupViewController.swift in Sources */,
 				843F5E5F21DD59C60098FA3E /* NotificationModel.swift in Sources */,
 				843F5E5B21DD58B80098FA3E /* MainModel.swift in Sources */,
 				849D3EAF21DE8D18002F74B2 /* RegisterViewController.swift in Sources */,
 				843F5E5921DD55440098FA3E /* FirebaseModel.swift in Sources */,
+				8449C6E421E1362C002A6AF6 /* UiImageExtension.swift in Sources */,
+				8449C6F221E14748002A6AF6 /* OHCircleSegue.swift in Sources */,
+				84E3672A21E1573900122FD8 /* UserInfoSqlExtension.swift in Sources */,
 				849D3EB121DE8D2D002F74B2 /* LoginViewController.swift in Sources */,
-				84D2D44921CE6AAC004524D3 /* ViewController.swift in Sources */,
+				8449C6F021E14093002A6AF6 /* SettingsViewController.swift in Sources */,
+				84E3672D21E1578A00122FD8 /* LastUpdateSplDates.swift in Sources */,
 				843F5E5D21DD593F0098FA3E /* SqlModel.swift in Sources */,
+				8449C6E121E13280002A6AF6 /* BuisyIndicator.swift in Sources */,
 				849D3EB321DE8F4A002F74B2 /* Consts.swift in Sources */,
 				849D3EB921DE91E2002F74B2 /* UserInfo.swift in Sources */,
 				84D2D44721CE6AAC004524D3 /* AppDelegate.swift in Sources */,

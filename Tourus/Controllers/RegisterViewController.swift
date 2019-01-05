@@ -26,26 +26,33 @@ class RegisterViewController: UIViewController {
     }
     
     @IBAction func onRegisterTapped(_ sender: Any) {
+        self.emailField.endEditing(true)
+        self.passwordFiled.endEditing(true)
+        self.repasswordFiled.endEditing(true)
+        
         let email = emailField.text
         let password = passwordFiled.text
         let repassword = repasswordFiled.text
         
         if(email == "" || password == "" || password != repassword){
             if(password != repassword){
-                present(Consts.General.getCancelAlertController(title: "Registration", messgae: "Please enter same passwords"), animated: true)
+                present(Consts.General.getCancelAlertController(title: "Registration", messgae: "Please enter same password"), animated: true)
             }
             else{
-                present(Consts.General.getCancelAlertController(title: "Registration", messgae: "Please enter Email or Password"), animated: true)
+                present(Consts.General.getCancelAlertController(title: "Registration", messgae: "Please enter email and password"), animated: true)
             }
         }
         else{
-            
+            self.view.isUserInteractionEnabled = false
+            BuisyIndicator.Instance.showBuisyIndicator()
             MainModel.instance.signUp(email!, password!, { (res) in
                 if(res) {
-                    //self.gotoMainview()
+                    self.gotoMainview()
                 } else {
-                    self.present(Consts.General.getCancelAlertController(title: "Registration", messgae: "Failed while trying to register. Please try again"), animated: true)
+                    self.present(Consts.General.getCancelAlertController(title: "Registration Failed", messgae: "Failed while trying to register. Please try again"), animated: true)
                 }
+                BuisyIndicator.Instance.hideBuisyIndicator()
+                self.view.isUserInteractionEnabled = true
             })
         }
     }
@@ -55,40 +62,10 @@ class RegisterViewController: UIViewController {
         let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         
         //Getting the navigation controller
-        guard let mainNavigationVC = mainStoryboard.instantiateViewController(withIdentifier: "MainNavigationController") as? MainNavigationController else {
+        guard let mainVC = mainStoryboard.instantiateViewController(withIdentifier: "MainViewController") as? MainViewController else {
             return
         }
         //Navigate to the main view
-        present(mainNavigationVC, animated: true, completion: nil)
+        present(mainVC, animated: true, completion: nil)
     }
 }
-
-
-
-
-/*  guard
- let email = emailField.text,
- email != "",
- 
- let password = passwordFiled.text,
- password != "",
- 
- let repassword = repasswordFiled.text,
- repassword != "",
- 
- password == repassword
- 
- else {
- present(Consts.General.getCancelAlertController(title: "Registration", messgae: "Please enter Email or Password"), animated: true)
- return
- }
- 
- Model.instance.signUp(email, password, { (res) in
- 
- if(res) {
- self.performSegue(withIdentifier: "registerSugue", sender: nil)
- } else {
- self.present(Consts.General.getCancelAlertController(title: "Registration", messgae: "Failed while trying to register. Please try again"), animated: true)
- }
- })
- */
