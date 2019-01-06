@@ -23,11 +23,106 @@ class MainViewController: UIViewController {
     @IBOutlet var interactionSettingsConstraint: NSLayoutConstraint!
     @IBOutlet var settingsInteractionConstraint: NSLayoutConstraint!
     
+    
+    
+    
+    @IBOutlet weak var verticalStackView: UIStackView!
+    @IBOutlet var optionsStackHeightConstraint: NSLayoutConstraint!
+    @IBOutlet var optionsView: UIView!
+    
+    var allButtons = [UIButton]()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setInteraction(.question, "Hello to you")
+        //addButtonsUsingStackView()
+        addButtonsUsingStackView()
+       
     }
+    
+    func addButtonsUsingStackView()
+    {
+        let buttonArray=["Button 1","Button 2","Button 444","Button 334","Button 334"]
+        var i = 0
+
+        verticalStackView.spacing = 15.0
+        //verticalStackView.alignment = .fill
+         //verticalStackView.distribution = .fillProportionally
+        
+        var panel:UIStackView? = nil
+        // var subWidth:CGFloat = 0
+        //var maxWidth:CGFloat = 0
+        for buttonName in buttonArray{
+            if(i % 2 == 0) {
+                if(panel != nil) {
+                    //let delta = optionsView.frame.width - maxWidth*2
+                    //panel!.spacing = delta
+                    
+                    verticalStackView.addArrangedSubview(panel!)
+                }
+                
+                panel = UIStackView()
+                panel!.axis = .horizontal
+                panel!.spacing = 15.0
+                //subWidth = 0
+            }
+            
+            let button = addingCustomButton(buttonTitle: buttonName, buttonFontSize: 15, buttonCount: i, buttonColor: UIColor.orange)
+            button.contentMode = UIView.ContentMode.scaleToFill
+            //subWidth += button.frame.size.width
+            
+            //if(subWidth > maxWidth) {
+            //    maxWidth = subWidth
+            //}
+            
+            panel!.addArrangedSubview(button)
+            i += 1
+        }
+        
+        verticalStackView.addArrangedSubview(panel!)
+       
+        
+        optionsStackHeightConstraint.constant = CGFloat(25 * (i+1))
+        self.view.layoutIfNeeded()
+    }
+    
+    func addingCustomButton(buttonTitle : String, buttonFontSize: CGFloat, buttonCount : Int, buttonColor:UIColor) -> UIButton
+    {
+        let ownButton = UIButton()
+        
+        ownButton.setTitle(buttonTitle, for: UIControl.State.normal)
+        
+        
+        ownButton.titleLabel?.font = UIFont.systemFont(ofSize: buttonFontSize)
+        
+        let buttonTitleSize = (buttonTitle as NSString).size(withAttributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: buttonFontSize + 1)])
+        
+        ownButton.frame.size.height = buttonTitleSize.height * 2
+        ownButton.frame.size.width = buttonTitleSize.width
+        //ownButton.frame.origin.x = 30
+        
+        //yPos = yPos + (ownButton.frame.size.height) + 10
+        
+        //ownButton.frame.origin.y = 10
+        
+        ownButton.tintColor = UIColor.white
+        ownButton.backgroundColor = buttonColor
+        
+        ownButton.tag = buttonCount
+        
+        ownButton.setTitleColor(UIColor.darkGray, for: UIControl.State.highlighted)
+        ownButton.addTarget(self, action: #selector(ownButtonAction), for: UIControl.Event.touchUpInside)
+        
+        return ownButton
+    }
+    
+    @objc func ownButtonAction( _ button : UIButton)
+    {
+    }
+    
+    
     
     var counter:Int = 0
     @IBAction func onSettingsClick(_ sender: Any) {
@@ -41,6 +136,7 @@ class MainViewController: UIViewController {
         counter += 1
     }
     
+
     // MARK:Interaction functions
     private func setInteraction(_ type:InteractionType, _ text:String) {
         var topConstraint:CGFloat = 30
