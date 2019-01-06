@@ -19,6 +19,7 @@
 		8449C6EE21E13D5E002A6AF6 /* loading.gif in Resources */ = {isa = PBXBuildFile; fileRef = 8449C6ED21E13D5D002A6AF6 /* loading.gif */; };
 		8449C6F021E14093002A6AF6 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8449C6EF21E14093002A6AF6 /* SettingsViewController.swift */; };
 		8449C6F221E14748002A6AF6 /* OHCircleSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8449C6F121E14748002A6AF6 /* OHCircleSegue.swift */; };
+		84562EA021E274CB007F3A59 /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 84562E9F21E274CB007F3A59 /* settings.png */; };
 		849D3EAF21DE8D18002F74B2 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849D3EAE21DE8D18002F74B2 /* RegisterViewController.swift */; };
 		849D3EB121DE8D2D002F74B2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849D3EB021DE8D2D002F74B2 /* LoginViewController.swift */; };
 		849D3EB321DE8F4A002F74B2 /* Consts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849D3EB221DE8F4A002F74B2 /* Consts.swift */; };
@@ -71,6 +72,7 @@
 		8449C6ED21E13D5D002A6AF6 /* loading.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = loading.gif; sourceTree = "<group>"; };
 		8449C6EF21E14093002A6AF6 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		8449C6F121E14748002A6AF6 /* OHCircleSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OHCircleSegue.swift; sourceTree = "<group>"; };
+		84562E9F21E274CB007F3A59 /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = settings.png; path = ../../../settings.png; sourceTree = "<group>"; };
 		849D3EAE21DE8D18002F74B2 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		849D3EB021DE8D2D002F74B2 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		849D3EB221DE8F4A002F74B2 /* Consts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Consts.swift; sourceTree = "<group>"; };
@@ -170,6 +172,7 @@
 				84E3672121E1533100122FD8 /* default_profile_2.png */,
 				8449C6DE21E11235002A6AF6 /* tourus_settings.png */,
 				84E3672521E1544000122FD8 /* default_profile.png */,
+				84562E9F21E274CB007F3A59 /* settings.png */,
 				84DAFA4021DEB985009DAC2E /* pizza.jpg */,
 			);
 			path = Images;
@@ -387,6 +390,7 @@
 				84D2D44C21CE6AAC004524D3 /* Main.storyboard in Resources */,
 				8449C6DF21E11235002A6AF6 /* tourus_settings.png in Resources */,
 				84E3672321E1533200122FD8 /* default_profile_2.png in Resources */,
+				84562EA021E274CB007F3A59 /* settings.png in Resources */,
 				84E3672621E1544000122FD8 /* default_profile.png in Resources */,
 				8449C6EE21E13D5E002A6AF6 /* loading.gif in Resources */,
 			);
