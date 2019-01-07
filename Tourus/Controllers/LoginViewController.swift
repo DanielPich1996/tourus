@@ -49,7 +49,7 @@ class LoginViewController: UIViewController {
         let password = PasswordText.text
         
         if(email == "" || password == "" ){
-            present(Consts.General.getCancelAlertController(title: "Login", messgae: "Please enter email and password"), animated: true)
+            present(consts.general.getCancelAlertController(title: "Login", messgae: "Please enter email and password"), animated: true)
         }
         else{
             self.view.isUserInteractionEnabled = false
@@ -58,7 +58,7 @@ class LoginViewController: UIViewController {
                 if(res) {
                     self.gotoMainview();
                 } else {
-                    self.present(Consts.General.getCancelAlertController(title: "Login Failed", messgae: "Incorrect email or password"), animated: true)
+                    self.present(consts.general.getCancelAlertController(title: "Login Failed", messgae: "Incorrect email or password"), animated: true)
                 }
                 BuisyIndicator.Instance.hideBuisyIndicator()
                 self.view.isUserInteractionEnabled = true

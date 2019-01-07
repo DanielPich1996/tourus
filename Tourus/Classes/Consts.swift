@@ -9,14 +9,18 @@
 import Foundation
 import UIKit
 
-struct Consts{
-    struct Names {
-        static let UserInfoTableName: String = "Users"
-        static let ImagesFolderName: String = "ImagesStorage"
-        static let ProfileImagesFolderName: String = "ProfileImagesStorage"
+struct consts{
+    struct names {
+        static let userInfoTableName: String = "Users"
+        static let imagesFolderName: String = "ImagesStorage"
+        static let profileImagesFolderName: String = "ProfileImagesStorage"
     }
     
-    struct General {
+    struct text {
+        static let lineBreak:String = "\n"
+    }
+    
+    struct general {
         static func convertTimestampToStringDate(_ serverTimestamp: Double, _ format:String = "dd/MM/yyyy HH:mm") -> String {
             let x = serverTimestamp / 1000
             let date = NSDate(timeIntervalSince1970: x)
