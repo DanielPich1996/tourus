@@ -74,7 +74,8 @@ class MainViewController: UIViewController {
             backgroundImage.tag = 100
             backgroundImage.image = image!
             backgroundImage.contentMode = UIView.ContentMode.scaleAspectFill
-        
+            backgroundImage.alpha = 0.0
+            
             self.view.insertSubview(backgroundImage, at: 0)
         }
     }
@@ -92,6 +93,10 @@ class MainViewController: UIViewController {
             self.optionsView.fadeIn()
             self.interactionView.fadeIn()
             self.moreInfoView.fadeIn()
+            
+            if let preImageView = self.view.viewWithTag(100) {
+                preImageView.fadeIn()
+            }
             
             self.count += 1//temp
         }
