@@ -20,6 +20,9 @@
 		8449C6F021E14093002A6AF6 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8449C6EF21E14093002A6AF6 /* SettingsViewController.swift */; };
 		8449C6F221E14748002A6AF6 /* OHCircleSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8449C6F121E14748002A6AF6 /* OHCircleSegue.swift */; };
 		84562EA021E274CB007F3A59 /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 84562E9F21E274CB007F3A59 /* settings.png */; };
+		8458502D21E3CA5500DF7C68 /* UIOptionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8458502C21E3CA5500DF7C68 /* UIOptionButton.swift */; };
+		8458503321E3D85900DF7C68 /* Interaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8458503221E3D85900DF7C68 /* Interaction.swift */; };
+		8458503521E3E51200DF7C68 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8458503421E3E51200DF7C68 /* UIColorExtension.swift */; };
 		849D3EAF21DE8D18002F74B2 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849D3EAE21DE8D18002F74B2 /* RegisterViewController.swift */; };
 		849D3EB121DE8D2D002F74B2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849D3EB021DE8D2D002F74B2 /* LoginViewController.swift */; };
 		849D3EB321DE8F4A002F74B2 /* Consts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849D3EB221DE8F4A002F74B2 /* Consts.swift */; };
@@ -73,6 +76,9 @@
 		8449C6EF21E14093002A6AF6 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		8449C6F121E14748002A6AF6 /* OHCircleSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OHCircleSegue.swift; sourceTree = "<group>"; };
 		84562E9F21E274CB007F3A59 /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = settings.png; path = ../../../settings.png; sourceTree = "<group>"; };
+		8458502C21E3CA5500DF7C68 /* UIOptionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIOptionButton.swift; sourceTree = "<group>"; };
+		8458503221E3D85900DF7C68 /* Interaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interaction.swift; sourceTree = "<group>"; };
+		8458503421E3E51200DF7C68 /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		849D3EAE21DE8D18002F74B2 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		849D3EB021DE8D2D002F74B2 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		849D3EB221DE8F4A002F74B2 /* Consts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Consts.swift; sourceTree = "<group>"; };
@@ -155,12 +161,13 @@
 		843F5E5521DD54D10098FA3E /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				84E3672B21E1577200122FD8 /* Dates */,
+				8458503121E3D38100DF7C68 /* Segue */,
+				8458503021E3D16200DF7C68 /* Controls */,
+				84E3672B21E1577200122FD8 /* SQL */,
 				8449C6E221E13603002A6AF6 /* Extensions */,
-				8449C6F121E14748002A6AF6 /* OHCircleSegue.swift */,
-				8449C6E021E13280002A6AF6 /* BuisyIndicator.swift */,
 				849D3EB221DE8F4A002F74B2 /* Consts.swift */,
 				849D3EB821DE91E2002F74B2 /* UserInfo.swift */,
+				8458503221E3D85900DF7C68 /* Interaction.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -195,8 +202,26 @@
 			children = (
 				8449C6E321E1362C002A6AF6 /* UiImageExtension.swift */,
 				84E3672921E1573900122FD8 /* UserInfoSqlExtension.swift */,
+				8458503421E3E51200DF7C68 /* UIColorExtension.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		8458503021E3D16200DF7C68 /* Controls */ = {
+			isa = PBXGroup;
+			children = (
+				8449C6E021E13280002A6AF6 /* BuisyIndicator.swift */,
+				8458502C21E3CA5500DF7C68 /* UIOptionButton.swift */,
+			);
+			path = Controls;
+			sourceTree = "<group>";
+		};
+		8458503121E3D38100DF7C68 /* Segue */ = {
+			isa = PBXGroup;
+			children = (
+				8449C6F121E14748002A6AF6 /* OHCircleSegue.swift */,
+			);
+			path = Segue;
 			sourceTree = "<group>";
 		};
 		84D2D43A21CE6AAC004524D3 = {
@@ -255,12 +280,12 @@
 			path = TourusUITests;
 			sourceTree = "<group>";
 		};
-		84E3672B21E1577200122FD8 /* Dates */ = {
+		84E3672B21E1577200122FD8 /* SQL */ = {
 			isa = PBXGroup;
 			children = (
 				84E3672C21E1578A00122FD8 /* LastUpdateSplDates.swift */,
 			);
-			path = Dates;
+			path = SQL;
 			sourceTree = "<group>";
 		};
 		C24FB5CF0180E2593092A809 /* Pods */ = {
@@ -504,12 +529,15 @@
 				843F5E5B21DD58B80098FA3E /* MainModel.swift in Sources */,
 				849D3EAF21DE8D18002F74B2 /* RegisterViewController.swift in Sources */,
 				843F5E5921DD55440098FA3E /* FirebaseModel.swift in Sources */,
+				8458502D21E3CA5500DF7C68 /* UIOptionButton.swift in Sources */,
+				8458503521E3E51200DF7C68 /* UIColorExtension.swift in Sources */,
 				8449C6E421E1362C002A6AF6 /* UiImageExtension.swift in Sources */,
 				8449C6F221E14748002A6AF6 /* OHCircleSegue.swift in Sources */,
 				84E3672A21E1573900122FD8 /* UserInfoSqlExtension.swift in Sources */,
 				849D3EB121DE8D2D002F74B2 /* LoginViewController.swift in Sources */,
 				8449C6F021E14093002A6AF6 /* SettingsViewController.swift in Sources */,
 				84E3672D21E1578A00122FD8 /* LastUpdateSplDates.swift in Sources */,
+				8458503321E3D85900DF7C68 /* Interaction.swift in Sources */,
 				843F5E5D21DD593F0098FA3E /* SqlModel.swift in Sources */,
 				8449C6E121E13280002A6AF6 /* BuisyIndicator.swift in Sources */,
 				849D3EB321DE8F4A002F74B2 /* Consts.swift in Sources */,

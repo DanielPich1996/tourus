@@ -23,16 +23,16 @@ class FirebaseModel {
     
     func addUserInfo(_ userInfo:UserInfo, _ image:UIImage?, _ completionBlock:@escaping (Bool) -> Void = {_  in}) {
         if image != nil {
-            saveImage(folderName: Consts.Names.ProfileImagesFolderName, image: image!) { (url:String?) in
+            saveImage(folderName: consts.names.profileImagesFolderName, image: image!) { (url:String?) in
                 if url != nil {
                     userInfo.profileImageUrl = url!
                 }
-                self.databaseRef!.child(Consts.Names.UserInfoTableName).child(userInfo.uid).setValue(userInfo.toJson())
+                self.databaseRef!.child(consts.names.userInfoTableName).child(userInfo.uid).setValue(userInfo.toJson())
                 completionBlock(true)
             }
         }
         else {
-            self.databaseRef!.child(Consts.Names.UserInfoTableName).child(userInfo.uid).setValue(userInfo.toJson())
+            self.databaseRef!.child(consts.names.userInfoTableName).child(userInfo.uid).setValue(userInfo.toJson())
             completionBlock(true)
         }
     }
@@ -70,7 +70,7 @@ class FirebaseModel {
     }
     
     func getUserInfo(_ uid:String, callback:@escaping (UserInfo?) -> Void) {
-        self.databaseRef!.child(Consts.Names.UserInfoTableName).child(uid).observeSingleEvent(of: .value, with: {
+        self.databaseRef!.child(consts.names.userInfoTableName).child(uid).observeSingleEvent(of: .value, with: {
             (snapshot) in
             
             if snapshot.exists() {
