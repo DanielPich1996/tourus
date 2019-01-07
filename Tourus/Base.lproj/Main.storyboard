@@ -211,6 +211,13 @@
                                     <constraint firstAttribute="height" constant="130" id="eSK-oR-a5M"/>
                                 </constraints>
                             </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="378-zo-7tN" userLabel="InquiryImage">
+                                <rect key="frame" x="329" y="59" width="70" height="70"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="70" id="XMq-Wv-x9h"/>
+                                    <constraint firstAttribute="height" constant="70" id="kXm-bF-jRA"/>
+                                </constraints>
+                            </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QGh-js-Baf" userLabel="More Info View">
                                 <rect key="frame" x="302" y="355" width="100" height="100"/>
                                 <subviews>
@@ -235,9 +242,11 @@
                             <constraint firstItem="baG-Uy-0zi" firstAttribute="leading" secondItem="3CK-ay-r8h" secondAttribute="leading" id="RFC-5u-kd5"/>
                             <constraint firstItem="BtF-Sg-pGr" firstAttribute="top" secondItem="3CK-ay-r8h" secondAttribute="top" constant="15" id="W4m-sO-kQz"/>
                             <constraint firstItem="3CK-ay-r8h" firstAttribute="trailing" secondItem="baG-Uy-0zi" secondAttribute="trailing" id="fMV-60-7Ri"/>
+                            <constraint firstItem="3CK-ay-r8h" firstAttribute="trailing" secondItem="378-zo-7tN" secondAttribute="trailing" constant="15" id="ibj-en-Lcx"/>
                             <constraint firstItem="BtF-Sg-pGr" firstAttribute="leading" secondItem="3CK-ay-r8h" secondAttribute="leading" constant="10" id="jpU-af-OQA"/>
                             <constraint firstItem="baG-Uy-0zi" firstAttribute="top" secondItem="BtF-Sg-pGr" secondAttribute="bottom" constant="30" id="nTj-xc-6Yq"/>
                             <constraint firstItem="3CK-ay-r8h" firstAttribute="trailing" secondItem="adU-CM-jQG" secondAttribute="trailing" id="qx9-XV-81A"/>
+                            <constraint firstItem="378-zo-7tN" firstAttribute="top" secondItem="BtF-Sg-pGr" secondAttribute="top" id="viZ-JA-W7B"/>
                             <constraint firstItem="baG-Uy-0zi" firstAttribute="top" secondItem="BtF-Sg-pGr" secondAttribute="bottom" constant="30" id="xph-td-QAf"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="3CK-ay-r8h"/>
@@ -248,6 +257,7 @@
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="inquiryImage" destination="378-zo-7tN" id="uD1-1X-mEc"/>
                         <outlet property="interactionLabel" destination="1YX-95-pPz" id="NS8-V3-E6s"/>
                         <outlet property="interactionSettingsConstraint" destination="xph-td-QAf" id="avP-Ur-aHl"/>
                         <outlet property="interactionView" destination="baG-Uy-0zi" id="hzv-9S-aMd"/>
@@ -263,7 +273,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KQ7-Xz-Uto" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-4952" y="369"/>
+            <point key="canvasLocation" x="-4952.1739130434789" y="368.97321428571428"/>
         </scene>
         <!--Settings View Controller-->
         <scene sceneID="BX8-z4-tCA">

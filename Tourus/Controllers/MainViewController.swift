@@ -22,31 +22,46 @@ class MainViewController: UIViewController {
     @IBOutlet var optionsStackHeightConstraint: NSLayoutConstraint!
     @IBOutlet var optionsView: UIView!
     @IBOutlet var moreInfoView: UIView!
-
+    @IBOutlet var inquiryImage: UIImageView!
+    
     // MARK:Outlets - Constraints
     @IBOutlet var interactionSettingsConstraint: NSLayoutConstraint!
     @IBOutlet var settingsInteractionConstraint: NSLayoutConstraint!
     @IBOutlet var optionsBottomConstraint: NSLayoutConstraint!
     
-    
+    var interaction1:Interaction? = nil
+    var interaction2:Interaction? = nil
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //sample of interaction set:
-        let options:[Interaction.Option] =  [ Interaction.Option(.positive, "I love pubs"), Interaction.Option(.negative, "Clubs sounds\nbetter"), Interaction.Option(.neutral, "Something different")]
-        let interaction = Interaction(.suggestion, "How pubs sounds like?", options)
-      
-        setInteraction(interaction)
+        verticalStackView.spacing = 15.0
+        inquiryImage.isHidden = true
+        
+        //sample 1 of interaction set:
+        let options1:[Interaction.Option] =  [ Interaction.Option(.positive, "I love pubs"), Interaction.Option(.negative, "Clubs sounds\nbetter"), Interaction.Option(.neutral, "Something different")]
+        interaction1 = Interaction(.question, "How pubs sounds like?", options1)
+        //sample 2 of interaction set:
+        let options2:[Interaction.Option] =  [ Interaction.Option(.positive, "Let's go!"), Interaction.Option(.negative, "Not hungry\nbut thanx")]
+        interaction2 = Interaction(.suggestion, "What about a yummy\npizza near by?", options2)
+        
+        setInteraction(interaction1!)
     }
- 
+    
+    
+    var count = 0
     @objc func optionButtonAction( _ button : UIOptionButton)
     {
         //what to do when an option button tapped?
+        if(count % 2 == 0) {
+            setInteractionwithAnimation(interaction2!)
+        } else {
+            setInteractionwithAnimation(interaction1!)
+        }
     }
     
     @IBAction func onSettingsClick(_ sender: Any) {
         //do something when settings button tapped?
-    }    
+    }
 
     // MARK:Background image funcs
     private func setBackroundImage(_ image:UIImage?) {
@@ -63,10 +78,27 @@ class MainViewController: UIViewController {
             self.view.insertSubview(backgroundImage, at: 0)
         }
     }
-    
+
     // MARK:interaction setting funcs
+    func setInteractionwithAnimation(_ interaction:Interaction) {
+        optionsView.fadeOut()
+        interactionView.fadeOut()
+        if let preImageView = self.view.viewWithTag(100) {
+            preImageView.fadeOut()
+        }
+        moreInfoView.fadeOut() { (res) in
+            self.setInteraction(interaction)
+            
+            self.optionsView.fadeIn()
+            self.interactionView.fadeIn()
+            self.moreInfoView.fadeIn()
+            
+            self.count += 1//temp
+        }
+    }
+    
     func setInteraction(_ interaction:Interaction) {
-        var topConstraint:CGFloat = 30
+        let topConstraint:CGFloat = self.view.frame.height / 5
         var bottomConstraint:CGFloat = 0
         var interactionBackOpacity:CGFloat = 0
         
@@ -85,7 +117,6 @@ class MainViewController: UIViewController {
             }
         case .suggestion:
             do {
-                topConstraint = self.view.frame.height / 5
                 interactionBackOpacity = 0.3
                 moreInfoView.isHidden = false
                 setBackroundImage(UIImage(named: "pizza")!.alpha(0.3)) //temp pic
@@ -109,10 +140,12 @@ class MainViewController: UIViewController {
         //setting the option buttons
         setOptionsButtons(interaction.options)
     }
-    
+  
     func setOptionsButtons(_ options:[Interaction.Option])
     {
-        verticalStackView.spacing = 15.0
+        for view in verticalStackView.subviews {
+            view.removeFromSuperview()
+        }
         
         var panel:UIStackView? = nil
         var subWidth:CGFloat = 0
