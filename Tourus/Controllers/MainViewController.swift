@@ -23,6 +23,8 @@ class MainViewController: UIViewController {
     @IBOutlet var optionsView: UIView!
     @IBOutlet var moreInfoView: UIView!
     @IBOutlet var inquiryImage: UIImageView!
+    @IBOutlet var moreInfoImage: UIImageView!
+    @IBOutlet var moreInfoButtonView: UIView!
     
     // MARK:Outlets - Constraints
     @IBOutlet var interactionSettingsConstraint: NSLayoutConstraint!
@@ -100,6 +102,10 @@ class MainViewController: UIViewController {
             
             self.count += 1//temp
         }
+    }
+    
+    @IBAction func moreInfoTapped(_ sender: Any) {
+        
     }
     
     func setInteraction(_ interaction:Interaction) {
