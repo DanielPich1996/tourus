@@ -13,7 +13,6 @@
 		843F5E5B21DD58B80098FA3E /* MainModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843F5E5A21DD58B80098FA3E /* MainModel.swift */; };
 		843F5E5D21DD593F0098FA3E /* SqlModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843F5E5C21DD593F0098FA3E /* SqlModel.swift */; };
 		843F5E5F21DD59C60098FA3E /* NotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843F5E5E21DD59C60098FA3E /* NotificationModel.swift */; };
-		8449C6DF21E11235002A6AF6 /* tourus_settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 8449C6DE21E11235002A6AF6 /* tourus_settings.png */; };
 		8449C6E121E13280002A6AF6 /* BuisyIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8449C6E021E13280002A6AF6 /* BuisyIndicator.swift */; };
 		8449C6E421E1362C002A6AF6 /* UiImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8449C6E321E1362C002A6AF6 /* UiImageExtension.swift */; };
 		8449C6EE21E13D5E002A6AF6 /* loading.gif in Resources */ = {isa = PBXBuildFile; fileRef = 8449C6ED21E13D5D002A6AF6 /* loading.gif */; };
@@ -36,7 +35,6 @@
 		84D2D47521CE6EB8004524D3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 84D2D47421CE6EB8004524D3 /* GoogleService-Info.plist */; };
 		84DAFA3F21DEB462009DAC2E /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84DAFA3E21DEB462009DAC2E /* MainViewController.swift */; };
 		84DAFA4121DEB985009DAC2E /* pizza.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 84DAFA4021DEB985009DAC2E /* pizza.jpg */; };
-		84E3672321E1533200122FD8 /* default_profile_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 84E3672121E1533100122FD8 /* default_profile_2.png */; };
 		84E3672621E1544000122FD8 /* default_profile.png in Resources */ = {isa = PBXBuildFile; fileRef = 84E3672521E1544000122FD8 /* default_profile.png */; };
 		84E3672A21E1573900122FD8 /* UserInfoSqlExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E3672921E1573900122FD8 /* UserInfoSqlExtension.swift */; };
 		84E3672D21E1578A00122FD8 /* LastUpdateSplDates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E3672C21E1578A00122FD8 /* LastUpdateSplDates.swift */; };
@@ -70,7 +68,6 @@
 		843F5E5A21DD58B80098FA3E /* MainModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainModel.swift; sourceTree = "<group>"; };
 		843F5E5C21DD593F0098FA3E /* SqlModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SqlModel.swift; sourceTree = "<group>"; };
 		843F5E5E21DD59C60098FA3E /* NotificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationModel.swift; sourceTree = "<group>"; };
-		8449C6DE21E11235002A6AF6 /* tourus_settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tourus_settings.png; path = ../../../tourus_settings.png; sourceTree = "<group>"; };
 		8449C6E021E13280002A6AF6 /* BuisyIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuisyIndicator.swift; sourceTree = "<group>"; };
 		8449C6E321E1362C002A6AF6 /* UiImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UiImageExtension.swift; sourceTree = "<group>"; };
 		8449C6ED21E13D5D002A6AF6 /* loading.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = loading.gif; sourceTree = "<group>"; };
@@ -99,7 +96,6 @@
 		84D2D47421CE6EB8004524D3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		84DAFA3E21DEB462009DAC2E /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		84DAFA4021DEB985009DAC2E /* pizza.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pizza.jpg; sourceTree = "<group>"; };
-		84E3672121E1533100122FD8 /* default_profile_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = default_profile_2.png; sourceTree = "<group>"; };
 		84E3672521E1544000122FD8 /* default_profile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = default_profile.png; path = ../../../default_profile.png; sourceTree = "<group>"; };
 		84E3672921E1573900122FD8 /* UserInfoSqlExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoSqlExtension.swift; sourceTree = "<group>"; };
 		84E3672C21E1578A00122FD8 /* LastUpdateSplDates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastUpdateSplDates.swift; sourceTree = "<group>"; };
@@ -178,8 +174,6 @@
 			isa = PBXGroup;
 			children = (
 				8449C6ED21E13D5D002A6AF6 /* loading.gif */,
-				84E3672121E1533100122FD8 /* default_profile_2.png */,
-				8449C6DE21E11235002A6AF6 /* tourus_settings.png */,
 				84E3672521E1544000122FD8 /* default_profile.png */,
 				84562E9F21E274CB007F3A59 /* settings.png */,
 				84DAFA4021DEB985009DAC2E /* pizza.jpg */,
@@ -416,8 +410,6 @@
 				84D2D44E21CE6AAE004524D3 /* Assets.xcassets in Resources */,
 				84DAFA4121DEB985009DAC2E /* pizza.jpg in Resources */,
 				84D2D44C21CE6AAC004524D3 /* Main.storyboard in Resources */,
-				8449C6DF21E11235002A6AF6 /* tourus_settings.png in Resources */,
-				84E3672321E1533200122FD8 /* default_profile_2.png in Resources */,
 				84562EA021E274CB007F3A59 /* settings.png in Resources */,
 				84E3672621E1544000122FD8 /* default_profile.png in Resources */,
 				8449C6EE21E13D5E002A6AF6 /* loading.gif in Resources */,
