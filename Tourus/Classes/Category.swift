@@ -15,7 +15,7 @@ class Category{
     init(_mainCategory : String, json : [String:Any]) {
         mainCategory = _mainCategory
         
-        for (subCategory, temp) in json {
+        for (subCategory, _) in json {
             self.subCategories.append(subCategory)
         }
     }
