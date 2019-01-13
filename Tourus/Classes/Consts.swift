@@ -14,6 +14,8 @@ struct consts{
         static let userInfoTableName: String = "Users"
         static let imagesFolderName: String = "ImagesStorage"
         static let profileImagesFolderName: String = "ProfileImagesStorage"
+        static let attractionsTableName : String = "Attractions"
+        static let categoriesTableName : String = "Categories"
     }
     
     struct text {

@@ -21,6 +21,8 @@ class FirebaseModel {
         databaseRef = Database.database().reference()
     }
     
+    //MARK:- UserFunctons
+    
     func addUserInfo(_ userInfo:UserInfo, _ image:UIImage?, _ completionBlock:@escaping (Bool) -> Void = {_  in}) {
         if image != nil {
             saveImage(folderName: consts.names.profileImagesFolderName, image: image!) { (url:String?) in
@@ -126,5 +128,64 @@ class FirebaseModel {
     func currentUser() -> User? {
         return Auth.auth().currentUser
     }
+    
+    //MARK:- AttractionFunctons
+    
+    func getAttraction(_ uid:String, callback:@escaping (Attraction?) -> Void) {
+        self.databaseRef!.child(consts.names.attractionsTableName).child(uid).observeSingleEvent(of: .value, with: {
+            (snapshot) in
+            
+            if snapshot.exists() {
+                let value = snapshot.value as! [String:Any]
+                let attraction = Attraction(_uid: uid, json: value)
+                
+                callback(attraction)
+            }
+            else {
+                callback(nil)
+            }
+        })
+    }
+    
+    func setAttraction(_ attraction:Attraction, _ completionBlock:@escaping (Bool) -> Void = {_  in}) {
+        self.databaseRef!.child(consts.names.attractionsTableName).child(attraction.uid).setValue(attraction.toJson()){
+            (error:Error?, ref:DatabaseReference) in
+            if error != nil {
+                completionBlock(false)
+            } else {
+                completionBlock(true)
+            }
+        }
+    }
+    
+    //MARK:- CategoryFunctons
+    
+    func getAllCaregories(callback:@escaping (Category?) -> Void) {
+        self.databaseRef!.child(consts.names.categoriesTableName).observeSingleEvent(of: .value, with: {
+            (snapshot) in
+            
+            if snapshot.exists() {
+                let value = snapshot.value as! [String:Any]
+                let categories = Category(_mainCategory: "", json: value)
+                
+                callback(categories)
+            }
+            else {
+                callback(nil)
+            }
+        })
+    }
+    
+    func setCategory(_ category:Category, _ completionBlock:@escaping (Bool) -> Void = {_  in}) {
+        self.databaseRef!.child(consts.names.categoriesTableName).child(category.mainCategory).setValue(category.toJson()){
+            (error:Error?, ref:DatabaseReference) in
+            if error != nil {
+                completionBlock(false)
+            } else {
+                completionBlock(true)
+            }
+        }
+    }
+    
 }
 
