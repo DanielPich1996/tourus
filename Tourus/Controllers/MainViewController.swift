@@ -59,6 +59,8 @@ class MainViewController: UIViewController {
         } else {
             setInteractionwithAnimation(interaction1!)
         }
+        
+        self.count += 1//temp
     }
     
     @IBAction func onSettingsClick(_ sender: Any) {
@@ -99,8 +101,6 @@ class MainViewController: UIViewController {
             if let preImageView = self.view.viewWithTag(100) {
                 preImageView.fadeIn()
             }
-            
-            self.count += 1//temp
         }
     }
     
