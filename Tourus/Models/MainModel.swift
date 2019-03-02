@@ -13,8 +13,9 @@ import Firebase
 class MainModel {
     static let instance:MainModel = MainModel()
     
-    var firebaseModel = FirebaseModel();
-    var sqlModel = SqlModel();
+    var firebaseModel = FirebaseModel()
+    var placesModel = PlacesModel()
+    var sqlModel = SqlModel()
     
     private init(){
     }

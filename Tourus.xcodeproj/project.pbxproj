@@ -16,6 +16,8 @@
 		843F5E5B21DD58B80098FA3E /* MainModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843F5E5A21DD58B80098FA3E /* MainModel.swift */; };
 		843F5E5D21DD593F0098FA3E /* SqlModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843F5E5C21DD593F0098FA3E /* SqlModel.swift */; };
 		843F5E5F21DD59C60098FA3E /* NotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843F5E5E21DD59C60098FA3E /* NotificationModel.swift */; };
+		8440930D222AD2F1007E058D /* PlacesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8440930C222AD2F1007E058D /* PlacesModel.swift */; };
+		8440930F222AE7EB007E058D /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8440930E222AE7EB007E058D /* Place.swift */; };
 		8449C6E121E13280002A6AF6 /* BuisyIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8449C6E021E13280002A6AF6 /* BuisyIndicator.swift */; };
 		8449C6E421E1362C002A6AF6 /* UiImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8449C6E321E1362C002A6AF6 /* UiImageExtension.swift */; };
 		8449C6EE21E13D5E002A6AF6 /* loading.gif in Resources */ = {isa = PBXBuildFile; fileRef = 8449C6ED21E13D5D002A6AF6 /* loading.gif */; };
@@ -71,6 +73,8 @@
 		843F5E5A21DD58B80098FA3E /* MainModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainModel.swift; sourceTree = "<group>"; };
 		843F5E5C21DD593F0098FA3E /* SqlModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SqlModel.swift; sourceTree = "<group>"; };
 		843F5E5E21DD59C60098FA3E /* NotificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationModel.swift; sourceTree = "<group>"; };
+		8440930C222AD2F1007E058D /* PlacesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesModel.swift; sourceTree = "<group>"; };
+		8440930E222AE7EB007E058D /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
 		8449C6E021E13280002A6AF6 /* BuisyIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuisyIndicator.swift; sourceTree = "<group>"; };
 		8449C6E321E1362C002A6AF6 /* UiImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UiImageExtension.swift; sourceTree = "<group>"; };
 		8449C6ED21E13D5D002A6AF6 /* loading.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = loading.gif; sourceTree = "<group>"; };
@@ -152,6 +156,7 @@
 				843F5E5A21DD58B80098FA3E /* MainModel.swift */,
 				843F5E5C21DD593F0098FA3E /* SqlModel.swift */,
 				843F5E5E21DD59C60098FA3E /* NotificationModel.swift */,
+				8440930C222AD2F1007E058D /* PlacesModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -169,6 +174,7 @@
 				849D3EB821DE91E2002F74B2 /* UserInfo.swift */,
 				8458503221E3D85900DF7C68 /* Interaction.swift */,
 				8414695B21EAA801002967BB /* Category.swift */,
+				8440930E222AE7EB007E058D /* Place.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -318,6 +324,7 @@
 				84D2D44021CE6AAC004524D3 /* Frameworks */,
 				84D2D44121CE6AAC004524D3 /* Resources */,
 				E81BFED3656604164071041A /* [CP] Embed Pods Frameworks */,
+				99F1612320EB56BCE8F98945 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -474,6 +481,26 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		99F1612320EB56BCE8F98945 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Tourus/Pods-Tourus-resources.sh",
+				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
+				"${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GooglePlaces.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Tourus/Pods-Tourus-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		E81BFED3656604164071041A /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -524,6 +551,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				84DAFA3F21DEB462009DAC2E /* MainViewController.swift in Sources */,
+				8440930F222AE7EB007E058D /* Place.swift in Sources */,
 				84E3673121E15EC500122FD8 /* SBCardPopupViewController.swift in Sources */,
 				843F5E5F21DD59C60098FA3E /* NotificationModel.swift in Sources */,
 				843F5E5B21DD58B80098FA3E /* MainModel.swift in Sources */,
@@ -547,6 +575,7 @@
 				849D3EB921DE91E2002F74B2 /* UserInfo.swift in Sources */,
 				84D2D44721CE6AAC004524D3 /* AppDelegate.swift in Sources */,
 				8414695C21EAA801002967BB /* Category.swift in Sources */,
+				8440930D222AD2F1007E058D /* PlacesModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

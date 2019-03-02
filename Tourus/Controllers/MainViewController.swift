@@ -34,7 +34,7 @@ class MainViewController: UIViewController {
     var interaction1:Interaction? = nil
     var interaction2:Interaction? = nil
     override func viewDidLoad() {
-        super.viewDidLoad()
+        super.viewDidLoad()       
         
         verticalStackView.spacing = 15.0
         inquiryImage.isHidden = true
@@ -48,7 +48,6 @@ class MainViewController: UIViewController {
         
         setInteraction(interaction1!)
     }
-    
     
     var count = 0
     @objc func optionButtonAction( _ button : UIOptionButton)

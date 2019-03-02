@@ -5,11 +5,14 @@ target 'Tourus' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
 
-  # Pods for Tourus
+# Pods for Tourus
 pod 'Firebase/Auth'
 pod 'Firebase/Core'
 pod 'Firebase/Database'
 pod 'Firebase/Storage'
+# Google api pods for Tourus
+pod 'GooglePlaces'
+pod 'GoogleMaps'
 
   target 'TourusTests' do
     inherit! :search_paths
