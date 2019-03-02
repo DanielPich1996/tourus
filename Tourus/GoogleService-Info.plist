@@ -11,7 +11,7 @@
 	<key>REVERSED_CLIENT_ID</key>
 	<string>com.googleusercontent.apps.1066561087904-8im8mpvdqevd9gcjhiraqtcc3aakka73</string>
 	<key>API_KEY</key>
-	<string>AIzaSyB8e1JyLjdPlluOYthirdbUlOQEDY6DAQA</string>
+	<string>AIzaSyBjnEwXHsPT3DafV_Ud2BKrscJQ_ll0XRI</string>
 	<key>GCM_SENDER_ID</key>
 	<string>1066561087904</string>
 	<key>PLIST_VERSION</key>
@@ -23,15 +23,15 @@
 	<key>STORAGE_BUCKET</key>
 	<string>org-tourus-acb4d.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>IS_ANALYTICS_ENABLED</key>
-	<false></false>
+	<false/>
 	<key>IS_APPINVITE_ENABLED</key>
-	<false></false>
+	<false/>
 	<key>IS_GCM_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>IS_SIGNIN_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>GOOGLE_APP_ID</key>
 	<string>1:1066561087904:ios:3aa74e1a6444c8e7</string>
 	<key>DATABASE_URL</key>
