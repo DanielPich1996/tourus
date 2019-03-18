@@ -12,6 +12,7 @@
 		8414695821EA8DA3002967BB /* Attraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8414695721EA8DA3002967BB /* Attraction.swift */; };
 		8414695A21EA8E18002967BB /* Adress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8414695921EA8E18002967BB /* Adress.swift */; };
 		8414695C21EAA801002967BB /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8414695B21EAA801002967BB /* Category.swift */; };
+		842ACC68223D861A0002D9B1 /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842ACC67223D861A0002D9B1 /* Question.swift */; };
 		843F5E5921DD55440098FA3E /* FirebaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843F5E5821DD55440098FA3E /* FirebaseModel.swift */; };
 		843F5E5B21DD58B80098FA3E /* MainModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843F5E5A21DD58B80098FA3E /* MainModel.swift */; };
 		843F5E5D21DD593F0098FA3E /* SqlModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843F5E5C21DD593F0098FA3E /* SqlModel.swift */; };
@@ -69,6 +70,7 @@
 		8414695721EA8DA3002967BB /* Attraction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attraction.swift; sourceTree = "<group>"; };
 		8414695921EA8E18002967BB /* Adress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Adress.swift; sourceTree = "<group>"; };
 		8414695B21EAA801002967BB /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		842ACC67223D861A0002D9B1 /* Question.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
 		843F5E5821DD55440098FA3E /* FirebaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseModel.swift; sourceTree = "<group>"; };
 		843F5E5A21DD58B80098FA3E /* MainModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainModel.swift; sourceTree = "<group>"; };
 		843F5E5C21DD593F0098FA3E /* SqlModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SqlModel.swift; sourceTree = "<group>"; };
@@ -170,6 +172,7 @@
 				84E3672B21E1577200122FD8 /* SQL */,
 				8449C6E221E13603002A6AF6 /* Extensions */,
 				849D3EB221DE8F4A002F74B2 /* Consts.swift */,
+				842ACC67223D861A0002D9B1 /* Question.swift */,
 				8414695721EA8DA3002967BB /* Attraction.swift */,
 				849D3EB821DE91E2002F74B2 /* UserInfo.swift */,
 				8458503221E3D85900DF7C68 /* Interaction.swift */,
@@ -571,6 +574,7 @@
 				843F5E5D21DD593F0098FA3E /* SqlModel.swift in Sources */,
 				8449C6E121E13280002A6AF6 /* BuisyIndicator.swift in Sources */,
 				849D3EB321DE8F4A002F74B2 /* Consts.swift in Sources */,
+				842ACC68223D861A0002D9B1 /* Question.swift in Sources */,
 				8458503721E4049100DF7C68 /* UIViewExtension.swift in Sources */,
 				849D3EB921DE91E2002F74B2 /* UserInfo.swift in Sources */,
 				84D2D44721CE6AAC004524D3 /* AppDelegate.swift in Sources */,
