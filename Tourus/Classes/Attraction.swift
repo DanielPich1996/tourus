@@ -11,21 +11,19 @@ import Foundation
 class Attraction {
     let uid : String
     let atractionName : String
-    let adress : Adress
     //let categories = [String]()
     let email : String
     let phone : Float
     let discription : String?
     let openHours : String?
     
-    init(_uid:String, _atractionName:String, _adress:Adress, _categories:[String], _email:String, _phone:Float, _discription:String? = nil, _openHours:String? = nil) {
+    init(_uid:String, _atractionName:String, _categories:[String], _email:String, _phone:Float, _discription:String? = nil, _openHours:String? = nil) {
         uid = _uid
         atractionName = _atractionName
         email = _email
         phone = _phone
         discription = _discription
         openHours = _openHours
-        adress = _adress
         //categories = _categories
     }
     
@@ -36,7 +34,6 @@ class Attraction {
         phone = json["phone"] as! Float
         discription = json["discription"] as? String
         openHours = json["openHours"] as? String
-        adress = Adress(json: json["openHours"] as! [String:Any])
         //categories = ((json["categories"] as? [String]) ?? nil)!
     }
     
@@ -49,7 +46,6 @@ class Attraction {
         json["phone"] = phone
         json["discription"] = discription ?? ""
         json["openHours"] = openHours ?? ""
-        json["adress"] = ["country" : adress.country, "city" : adress.city, "building" : adress.building]
         
         return json
     }

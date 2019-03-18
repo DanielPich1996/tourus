@@ -16,7 +16,7 @@ class PlacesModel {
     init() {
         enableLocationServices()
         
-        //GetCurrentPlace(callback: { place in () })
+        GetCurrentPlace(callback: { place in () })
     }
     
     private func enableLocationServices() {
