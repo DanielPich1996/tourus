@@ -20,14 +20,11 @@ class FirebaseModel {
         FirebaseApp.configure()
         databaseRef = Database.database().reference()
         
-        //let options1:[Interaction.Option] =  [ Interaction.Option(.accept, "I love pubs"), Interaction.Option(.decline, "Clubs sounds\nbetter"), Interaction.Option(.negative, "Something different")]
-        //let inter = Interaction(.question, "How pubs sounds like?", options1)
-
-        //addInteraction(inter)
+        self.databaseRef!.child("fff").setValue("gg")       
     }
     
     func addInteraction(_ interaction:Interaction) {
-        self.databaseRef!.child(consts.names.interactionsTableName).child("1").setValue(interaction.toJson())
+      self.databaseRef!.child(consts.names.interactionsTableName).child("1").setValue(interaction.toJson())
     }
     
     func getAllInteractionsFromDate(from:Double, callback:@escaping ([Interaction])->Void) {

@@ -116,6 +116,12 @@ enum OptionType : String {
     case neutral
     case opinionless
     
+    case similiar
+    case food
+    case extreme
+    case relaxing
+    case nature
+    
     var color: UIColor {
         switch self {
         case .accept:
@@ -128,6 +134,16 @@ enum OptionType : String {
             return .neutralColor
         case .opinionless:
             return .opinionlessColor
+        case .similiar:
+            return .neutralColor
+        case .food:
+            return .neutralColor
+        case .extreme:
+            return .neutralColor
+        case .relaxing:
+            return .neutralColor
+        case .nature:
+            return .neutralColor
         }
     }
     
@@ -143,6 +159,16 @@ enum OptionType : String {
             return .neutralLightColor
         case .opinionless:
             return .opinionlessLightColor
+        case .similiar:
+            return .neutralLightColor
+        case .food:
+            return .neutralLightColor
+        case .extreme:
+            return .neutralLightColor
+        case .relaxing:
+            return .neutralLightColor
+        case .nature:
+            return .neutralLightColor
         }
     }
     
@@ -157,6 +183,16 @@ enum OptionType : String {
         case .neutral:
             return 0
         case .opinionless:
+            return 0
+        case .similiar:
+            return 0
+        case .food:
+            return 0
+        case .extreme:
+            return 0
+        case .relaxing:
+            return 0
+        case .nature:
             return 0
         }
     }

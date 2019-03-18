@@ -32,6 +32,7 @@
 		849D3EB121DE8D2D002F74B2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849D3EB021DE8D2D002F74B2 /* LoginViewController.swift */; };
 		849D3EB321DE8F4A002F74B2 /* Consts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849D3EB221DE8F4A002F74B2 /* Consts.swift */; };
 		849D3EB921DE91E2002F74B2 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849D3EB821DE91E2002F74B2 /* UserInfo.swift */; };
+		84A0102D22403CB500BADC55 /* org-tourus-acb4d-interactions.json in Resources */ = {isa = PBXBuildFile; fileRef = 84A0102C22403CB500BADC55 /* org-tourus-acb4d-interactions.json */; };
 		84D2D44721CE6AAC004524D3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D2D44621CE6AAC004524D3 /* AppDelegate.swift */; };
 		84D2D44C21CE6AAC004524D3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84D2D44A21CE6AAC004524D3 /* Main.storyboard */; };
 		84D2D44E21CE6AAE004524D3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84D2D44D21CE6AAE004524D3 /* Assets.xcassets */; };
@@ -90,6 +91,7 @@
 		849D3EB021DE8D2D002F74B2 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		849D3EB221DE8F4A002F74B2 /* Consts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Consts.swift; sourceTree = "<group>"; };
 		849D3EB821DE91E2002F74B2 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
+		84A0102C22403CB500BADC55 /* org-tourus-acb4d-interactions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "org-tourus-acb4d-interactions.json"; sourceTree = "<group>"; };
 		84D2D44321CE6AAC004524D3 /* Tourus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tourus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84D2D44621CE6AAC004524D3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		84D2D44B21CE6AAC004524D3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -238,9 +240,18 @@
 			path = Segue;
 			sourceTree = "<group>";
 		};
+		84A0102B22403C8800BADC55 /* Files */ = {
+			isa = PBXGroup;
+			children = (
+				84A0102C22403CB500BADC55 /* org-tourus-acb4d-interactions.json */,
+			);
+			path = Files;
+			sourceTree = "<group>";
+		};
 		84D2D43A21CE6AAC004524D3 = {
 			isa = PBXGroup;
 			children = (
+				84A0102B22403C8800BADC55 /* Files */,
 				84D2D44521CE6AAC004524D3 /* Tourus */,
 				84D2D45A21CE6AAE004524D3 /* TourusTests */,
 				84D2D46521CE6AAE004524D3 /* TourusUITests */,
@@ -427,6 +438,7 @@
 				84D2D47521CE6EB8004524D3 /* GoogleService-Info.plist in Resources */,
 				84D2D44E21CE6AAE004524D3 /* Assets.xcassets in Resources */,
 				84D2D44C21CE6AAC004524D3 /* Main.storyboard in Resources */,
+				84A0102D22403CB500BADC55 /* org-tourus-acb4d-interactions.json in Resources */,
 				8449C6EE21E13D5E002A6AF6 /* loading.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
