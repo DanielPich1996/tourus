@@ -12,7 +12,8 @@ import GooglePlaces
 class Place {
     var name:String = ""
     var address:String = ""
-    
+    var picturesUrls:[String]? = nil
+
     init(googlePlace:GMSPlace?) {
         if googlePlace != nil {
             name = googlePlace!.name!

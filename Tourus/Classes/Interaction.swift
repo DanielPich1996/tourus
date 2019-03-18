@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 
-
 class Interaction {
     var type:InteractionType
     var text:String
@@ -19,6 +18,10 @@ class Interaction {
         self.type = type
         self.text = text
         self.options = options
+    }
+    
+    init(_ question:Question) {
+        
     }
     
     class Option {
