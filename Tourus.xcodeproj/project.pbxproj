@@ -10,7 +10,6 @@
 		3436C34B12530129A0A53615 /* Pods_TourusTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69E149F3742025E8D629FDF0 /* Pods_TourusTests.framework */; };
 		422F9A4484FE7EBADD89A4A1 /* Pods_TourusUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 061A154EA91F4A4ADE7EC42F /* Pods_TourusUITests.framework */; };
 		8414695821EA8DA3002967BB /* Attraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8414695721EA8DA3002967BB /* Attraction.swift */; };
-		8414695A21EA8E18002967BB /* Adress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8414695921EA8E18002967BB /* Adress.swift */; };
 		8414695C21EAA801002967BB /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8414695B21EAA801002967BB /* Category.swift */; };
 		842ACC68223D861A0002D9B1 /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842ACC67223D861A0002D9B1 /* Question.swift */; };
 		843F5E5921DD55440098FA3E /* FirebaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843F5E5821DD55440098FA3E /* FirebaseModel.swift */; };
@@ -68,7 +67,6 @@
 		5BEDB67B36EF30DACBDB381F /* Pods-TourusTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TourusTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TourusTests/Pods-TourusTests.debug.xcconfig"; sourceTree = "<group>"; };
 		69E149F3742025E8D629FDF0 /* Pods_TourusTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TourusTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8414695721EA8DA3002967BB /* Attraction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attraction.swift; sourceTree = "<group>"; };
-		8414695921EA8E18002967BB /* Adress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Adress.swift; sourceTree = "<group>"; };
 		8414695B21EAA801002967BB /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		842ACC67223D861A0002D9B1 /* Question.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
 		843F5E5821DD55440098FA3E /* FirebaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseModel.swift; sourceTree = "<group>"; };
@@ -166,7 +164,6 @@
 		843F5E5521DD54D10098FA3E /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				8414695921EA8E18002967BB /* Adress.swift */,
 				8458503121E3D38100DF7C68 /* Segue */,
 				8458503021E3D16200DF7C68 /* Controls */,
 				84E3672B21E1577200122FD8 /* SQL */,
@@ -570,7 +567,6 @@
 				8449C6F021E14093002A6AF6 /* SettingsViewController.swift in Sources */,
 				84E3672D21E1578A00122FD8 /* LastUpdateSplDates.swift in Sources */,
 				8458503321E3D85900DF7C68 /* Interaction.swift in Sources */,
-				8414695A21EA8E18002967BB /* Adress.swift in Sources */,
 				843F5E5D21DD593F0098FA3E /* SqlModel.swift in Sources */,
 				8449C6E121E13280002A6AF6 /* BuisyIndicator.swift in Sources */,
 				849D3EB321DE8F4A002F74B2 /* Consts.swift in Sources */,
