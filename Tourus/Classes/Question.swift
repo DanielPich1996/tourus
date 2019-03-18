@@ -11,13 +11,13 @@ import Foundation
 class Question {
     let questionType : String
     let category : String
-    var offers = [String]()
+    var answers = [String]()
     let question : String
     
-    init(_questionType : String, _category : String, _offers : [String], _question : String) {
+    init(_questionType : String, _category : String, _answers : [String], _question : String) {
         questionType = _questionType
         category = _category
-        offers = _offers
+        answers = _answers
         question = _question
     }
     
@@ -26,9 +26,9 @@ class Question {
         question = json["question"] as! String
         questionType = json["questionType"] as! String
         
-        let offersTmp = (json["offers"] as! String).split(separator: ",")
-        for offer in offersTmp {
-            offers.append(String(offer))
+        let offersTmp = (json["answers"] as! String).split(separator: ",")
+        for answer in offersTmp {
+            answers.append(String(answer))
         }
     }
     
@@ -39,11 +39,11 @@ class Question {
         json["question"] = question
         json["questionType"] = questionType
         
-        var offerStr = ""
-        for offer in offers {
-            offerStr = "\(offerStr),\(offer)"
+        var answersStr = ""
+        for answer in answers {
+            answersStr = "\(answersStr),\(answer)"
         }
-        json["offers"] = offerStr
+        json["answers"] = answersStr
         
         return json
     }
