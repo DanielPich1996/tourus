@@ -27,6 +27,7 @@
 		8458503321E3D85900DF7C68 /* Interaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8458503221E3D85900DF7C68 /* Interaction.swift */; };
 		8458503521E3E51200DF7C68 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8458503421E3E51200DF7C68 /* UIColorExtension.swift */; };
 		8458503721E4049100DF7C68 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8458503621E4049100DF7C68 /* UIViewExtension.swift */; };
+		845D1F8F223FEC2000C73585 /* InteractionSqlExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845D1F8E223FEC2000C73585 /* InteractionSqlExtension.swift */; };
 		849D3EAF21DE8D18002F74B2 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849D3EAE21DE8D18002F74B2 /* RegisterViewController.swift */; };
 		849D3EB121DE8D2D002F74B2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849D3EB021DE8D2D002F74B2 /* LoginViewController.swift */; };
 		849D3EB321DE8F4A002F74B2 /* Consts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849D3EB221DE8F4A002F74B2 /* Consts.swift */; };
@@ -84,6 +85,7 @@
 		8458503221E3D85900DF7C68 /* Interaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interaction.swift; sourceTree = "<group>"; };
 		8458503421E3E51200DF7C68 /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		8458503621E4049100DF7C68 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
+		845D1F8E223FEC2000C73585 /* InteractionSqlExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionSqlExtension.swift; sourceTree = "<group>"; };
 		849D3EAE21DE8D18002F74B2 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		849D3EB021DE8D2D002F74B2 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		849D3EB221DE8F4A002F74B2 /* Consts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Consts.swift; sourceTree = "<group>"; };
@@ -214,6 +216,7 @@
 				84E3672921E1573900122FD8 /* UserInfoSqlExtension.swift */,
 				8458503421E3E51200DF7C68 /* UIColorExtension.swift */,
 				8458503621E4049100DF7C68 /* UIViewExtension.swift */,
+				845D1F8E223FEC2000C73585 /* InteractionSqlExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -565,6 +568,7 @@
 				8414695821EA8DA3002967BB /* Attraction.swift in Sources */,
 				849D3EB121DE8D2D002F74B2 /* LoginViewController.swift in Sources */,
 				8449C6F021E14093002A6AF6 /* SettingsViewController.swift in Sources */,
+				845D1F8F223FEC2000C73585 /* InteractionSqlExtension.swift in Sources */,
 				84E3672D21E1578A00122FD8 /* LastUpdateSplDates.swift in Sources */,
 				8458503321E3D85900DF7C68 /* Interaction.swift in Sources */,
 				843F5E5D21DD593F0098FA3E /* SqlModel.swift in Sources */,

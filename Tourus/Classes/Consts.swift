@@ -11,9 +11,10 @@ import UIKit
 
 struct consts{
     struct names {
-        static let userInfoTableName: String = "Users"
-        static let imagesFolderName: String = "ImagesStorage"
-        static let profileImagesFolderName: String = "ProfileImagesStorage"
+        static let userInfoTableName : String = "Users"
+        static let interactionsTableName : String = "Interactions"
+        static let imagesFolderName : String = "ImagesStorage"
+        static let profileImagesFolderName : String = "ProfileImagesStorage"
         static let attractionsTableName : String = "Attractions"
         static let categoriesTableName : String = "Categories"
     }

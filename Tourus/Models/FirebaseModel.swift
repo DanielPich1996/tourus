@@ -19,6 +19,29 @@ class FirebaseModel {
     init() {
         FirebaseApp.configure()
         databaseRef = Database.database().reference()
+        
+        //let options1:[Interaction.Option] =  [ Interaction.Option(.accept, "I love pubs"), Interaction.Option(.decline, "Clubs sounds\nbetter"), Interaction.Option(.negative, "Something different")]
+        //let inter = Interaction(.question, "How pubs sounds like?", options1)
+
+        //addInteraction(inter)
+    }
+    
+    func addInteraction(_ interaction:Interaction) {
+        self.databaseRef!.child(consts.names.interactionsTableName).child("1").setValue(interaction.toJson())
+    }
+    
+    func getAllInteractionsFromDate(from:Double, callback:@escaping ([Interaction])->Void) {
+        let stRef = databaseRef.child(consts.names.interactionsTableName)
+        let fbQuery = stRef.queryOrdered(byChild: "lastUpdate").queryStarting(atValue: from)
+        fbQuery.observe(.value) { (snapshot) in
+            var data = [Interaction]()
+            if let value = snapshot.value as? [String:Any] {
+                for (_, json) in value{
+                    data.append(Interaction(json: json as! [String : Any]))
+                }
+            }
+            callback(data)
+        }
     }
     
     //MARK:- UserFunctons

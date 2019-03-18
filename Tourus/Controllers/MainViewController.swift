@@ -40,10 +40,10 @@ class MainViewController: UIViewController {
         inquiryImage.isHidden = true
         
         //sample 1 of interaction set:
-        let options1:[Interaction.Option] =  [ Interaction.Option(.positive, "I love pubs"), Interaction.Option(.negative, "Clubs sounds\nbetter"), Interaction.Option(.neutral, "Something different")]
+        let options1:[Interaction.Option] =  [ Interaction.Option(.accept, "I love pubs"), Interaction.Option(.negative, "Clubs sounds\nbetter"), Interaction.Option(.neutral, "Something different")]
         interaction1 = Interaction(.question, "How pubs sounds like?", options1)
         //sample 2 of interaction set:
-        let options2:[Interaction.Option] =  [ Interaction.Option(.positive, "Let's go!"), Interaction.Option(.negative, "Not hungry\nbut thanx")]
+        let options2:[Interaction.Option] =  [ Interaction.Option(.accept, "Let's go!"), Interaction.Option(.negative, "Not hungry\nbut thanx")]
         interaction2 = Interaction(.suggestion, "What about a yummy\npizza near by?", options2)
         
         setInteraction(interaction1!)

@@ -10,18 +10,73 @@ import Foundation
 import UIKit
 
 class Interaction {
+    var isDeleted:Int = 0
     var type:InteractionType
     var text:String
     var options:[Option]
+    var category:String = ""
+    var lastUpdate:Double
+    var place:Place? = nil
     
-    init(_ type:InteractionType, _ text:String, _ options:[Option]) {
+    init(_ type:InteractionType, _ text:String, _ options:[Option], _ place:Place? = nil) {
         self.type = type
         self.text = text
         self.options = options
+        self.place = place
+        lastUpdate = 0
+    }    
+    
+    init(json:[String:Any]) {
+        isDeleted = json["isDeleted"] as? Int ?? 0
+        type = InteractionType(rawValue: json["type"] as! String) ?? InteractionType.question
+        text = json["text"] as! String
+        category = json["category"] as! String
+        options = [Option]()
+        
+        let _lastUpdate = json["lastUpdate"] as! Double?
+        if(_lastUpdate != nil) {
+            lastUpdate = _lastUpdate!
+        }
+        else {
+            lastUpdate = 0
+        }
+        
+        //setting options
+        if json.keys.contains("options") {
+            let jsonOptions = json["options"] as? [String:Any]
+            if jsonOptions != nil {
+                jsonToOptions(jsonOptions!)
+            }
+        }
     }
     
-    init(_ question:Question) {
+    func toJson() -> [String:Any] {
+        var json = [String:Any]()
         
+        json["isDeleted"] = isDeleted
+        json["type"] = type.rawValue
+        json["text"] = text
+        json["category"] = category
+        json["options"] = optionsToJson()
+        json["lastUpdate"] = lastUpdate
+
+        return json
+    }
+    
+    private func optionsToJson() -> [String:Any] {
+        var array:[String:Any] = [String:Any]()
+        
+        for option in options {
+            array[option.type.rawValue] = option.toJson()
+        }
+        
+        return array
+    }
+    
+    private func jsonToOptions(_ jsonOptions:[String:Any]) {
+        for option in jsonOptions {
+            options.append(Option(option.key, option.value as! [String:Any]))
+        }
     }
     
     class Option {
@@ -32,25 +87,41 @@ class Interaction {
             self.type = type
             self.text = text
         }
+
+        init(_ type:String, _ details:[String:Any]) {
+            self.type = OptionType(rawValue: type) ?? OptionType.neutral
+            self.text = details["text"] as! String
+        }
+        
+        func toJson() -> [String:Any] {
+            var option:[String:Any] = [String:Any]()
+            
+            option["text"] = self.text
+            
+            return option
+        }
     }
 }
 
-enum InteractionType {
+enum InteractionType : String {
     case question
     case info
     case suggestion
 }
 
-enum OptionType {
-    case positive
+enum OptionType : String {
+    case accept
+    case decline
     case negative
     case neutral
     case opinionless
     
     var color: UIColor {
         switch self {
-        case .positive:
-            return .positiveColor
+        case .accept:
+            return .acceptColor
+        case .decline:
+            return .declineColor
         case .negative:
             return .negativeColor
         case .neutral:
@@ -62,8 +133,10 @@ enum OptionType {
     
     var lightColor: UIColor {
         switch self {
-        case .positive:
-            return .positiveLightColor
+        case .accept:
+            return .acceptLightColor
+        case .decline:
+                return .declineLightColor
         case .negative:
             return .negativeLightColor
         case .neutral:
@@ -72,6 +145,19 @@ enum OptionType {
             return .opinionlessLightColor
         }
     }
+    
+    var value : Int {
+        switch self {
+        case .accept:
+            return 1
+        case .decline:
+            return -1
+        case .negative:
+            return -5
+        case .neutral:
+            return 0
+        case .opinionless:
+            return 0
+        }
+    }
 }
-
-

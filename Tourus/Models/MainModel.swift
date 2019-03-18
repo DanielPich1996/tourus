@@ -17,7 +17,8 @@ class MainModel {
     var placesModel = PlacesModel()
     var sqlModel = SqlModel()
     
-    private init(){
+    init() {
+        listenToInteractionUpdates()
     }
    
     func signIn(_ email:String, _ password:String, _ callback:@escaping (Bool)->Void)
@@ -32,6 +33,44 @@ class MainModel {
     
     func signOut(_ callback:@escaping () -> Void) {
         firebaseModel.signOut(callback)
+    }
+    
+    private func listenToInteractionUpdates() {
+        var lastUpdated = Interaction.getLastUpdateDate(database: sqlModel.database)
+        lastUpdated += 1
+        
+        firebaseModel.getAllInteractionsFromDate(from:0){ (data:[Interaction]) in
+            self.sqlHandler(data: data) {(isUpdated:Bool) in
+                if(isUpdated) {
+                    //do something?
+                }
+            }
+        }
+    }
+    
+    private func sqlHandler(data:[Interaction], callback: (Bool) -> Void) {
+        var lastUpdated = Interaction.getLastUpdateDate(database: sqlModel.database)
+        lastUpdated += 1
+        var isUpdated = false
+        
+        for interaction in data {
+            if(interaction.isDeleted == 1) {
+                //interaction.delete(database: self.sqlModel.database, postId: interaction.id)
+            } else {
+                //interaction.addNew(database: self.sqlModel.database, post: interaction)
+            }
+            
+            if(interaction.lastUpdate > lastUpdated) {
+                lastUpdated = interaction.lastUpdate
+                isUpdated = true
+            }
+        }
+        
+        if(isUpdated) {
+            Interaction.setLastUpdateDate(database: self.sqlModel.database, date: lastUpdated)
+        }
+        
+        callback(isUpdated)
     }
     
     func getUserInfo(_ uid:String, callback:@escaping (UserInfo?) -> Void) {
