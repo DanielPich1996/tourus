@@ -34,14 +34,13 @@ class MainViewController: UIViewController {
     var interaction1:Interaction? = nil
     var interaction2:Interaction? = nil
     override func viewDidLoad() {
-        super.viewDidLoad()        
-        
+        super.viewDidLoad()
+
         verticalStackView.spacing = 15.0
         inquiryImage.isHidden = true
         
         //sample 1 of interaction set:
-        let options1:[Interaction.Option] =  [ Interaction.Option(.accept, "I love pubs"), Interaction.Option(.negative, "Clubs sounds\nbetter"), Interaction.Option(.neutral, "Something different")]
-        interaction1 = Interaction(.question, "How pubs sounds like?", options1)
+        interaction1 = MainModel.instance.getInteraction("bar")
         //sample 2 of interaction set:
         let options2:[Interaction.Option] =  [ Interaction.Option(.accept, "Let's go!"), Interaction.Option(.negative, "Not hungry\nbut thanx")]
         interaction2 = Interaction(.suggestion, "What about a yummy\npizza near by?", options2)
@@ -56,6 +55,7 @@ class MainViewController: UIViewController {
         if(count % 2 == 0) {
             setInteractionwithAnimation(interaction2!)
         } else {
+            interaction1 = MainModel.instance.getInteraction()
             setInteractionwithAnimation(interaction1!)
         }
         
@@ -161,8 +161,9 @@ class MainViewController: UIViewController {
         var subWidth:CGFloat = 0
         var maxWidth:CGFloat = 0
         var i = 0
+        let sortedOptions = options.sorted(by: { $0.type.rawValue < $1.type.rawValue })
         
-        for option in options {
+        for option in sortedOptions {
             if(i % 2 == 0) {
                 if(panel != nil) {
                     let delta = (optionsView.frame.width - maxWidth) / 2

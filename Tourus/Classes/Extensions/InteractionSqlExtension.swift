@@ -29,9 +29,14 @@ extension Interaction {
         }
     }
     
-    static func get(database: OpaquePointer?, category:String)-> Interaction? {
+    static func get(database: OpaquePointer?, category:String? = nil)-> Interaction? {
         var sqlite3_stmt: OpaquePointer? = nil
-        let query = "SELECT ID, TYPE, TEXT, CATEGORY, LAST_UPDATE, OPTIONS from INTERACTION where CATEGORY = '" + category + "' ORDER BY RANDOM() LIMIT 1"
+        
+        var query = "SELECT ID, TYPE, TEXT, CATEGORY, LAST_UPDATE, OPTIONS from INTERACTION ORDER BY RANDOM() LIMIT 1"
+        if(category != nil) {
+            query = "SELECT ID, TYPE, TEXT, CATEGORY, LAST_UPDATE, OPTIONS from INTERACTION where CATEGORY = '" + category! + "' ORDER BY RANDOM() LIMIT 1"
+        }
+        
         var info:Interaction? = nil
         if (sqlite3_prepare_v2(database,query,-1,&sqlite3_stmt,nil)
             == SQLITE_OK){
@@ -51,7 +56,11 @@ extension Interaction {
                 for option in splited_options {
                     let option_data:[String] = option.components(separatedBy: "||")
                     if(option_data.count == 2) {
-                        options.append(Interaction.Option(option_data[0], option_data[1]))
+                        var text:String = ""
+                        if(option_data[1] == "") {
+                            text = Interaction.Option.get(database: database, type: option_data[0])?.text ?? ""
+                        }
+                        options.append(Interaction.Option(option_data[0], text))
                     }
                     else {
                         print("option don't have the expected args count")

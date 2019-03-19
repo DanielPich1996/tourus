@@ -9,10 +9,9 @@
 /* Begin PBXBuildFile section */
 		3436C34B12530129A0A53615 /* Pods_TourusTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69E149F3742025E8D629FDF0 /* Pods_TourusTests.framework */; };
 		422F9A4484FE7EBADD89A4A1 /* Pods_TourusUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 061A154EA91F4A4ADE7EC42F /* Pods_TourusUITests.framework */; };
-		8414695821EA8DA3002967BB /* Attraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8414695721EA8DA3002967BB /* Attraction.swift */; };
-		8414695C21EAA801002967BB /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8414695B21EAA801002967BB /* Category.swift */; };
-		842ACC68223D861A0002D9B1 /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842ACC67223D861A0002D9B1 /* Question.swift */; };
-		842F90292241336100003932 /* org-tourus-acb4d-interactions.json in Resources */ = {isa = PBXBuildFile; fileRef = 842F90282241336100003932 /* org-tourus-acb4d-interactions.json */; };
+		842F902B22416C8600003932 /* OptionSqlExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842F902A22416C8600003932 /* OptionSqlExtension.swift */; };
+		842F902E2241878500003932 /* org-tourus-acb4d-interactions.json in Resources */ = {isa = PBXBuildFile; fileRef = 842F902C2241878500003932 /* org-tourus-acb4d-interactions.json */; };
+		842F902F2241878500003932 /* org-tourus-acb4d-options.json in Resources */ = {isa = PBXBuildFile; fileRef = 842F902D2241878500003932 /* org-tourus-acb4d-options.json */; };
 		843F5E5921DD55440098FA3E /* FirebaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843F5E5821DD55440098FA3E /* FirebaseModel.swift */; };
 		843F5E5B21DD58B80098FA3E /* MainModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843F5E5A21DD58B80098FA3E /* MainModel.swift */; };
 		843F5E5D21DD593F0098FA3E /* SqlModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843F5E5C21DD593F0098FA3E /* SqlModel.swift */; };
@@ -68,10 +67,9 @@
 		061A154EA91F4A4ADE7EC42F /* Pods_TourusUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TourusUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BEDB67B36EF30DACBDB381F /* Pods-TourusTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TourusTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TourusTests/Pods-TourusTests.debug.xcconfig"; sourceTree = "<group>"; };
 		69E149F3742025E8D629FDF0 /* Pods_TourusTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TourusTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8414695721EA8DA3002967BB /* Attraction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attraction.swift; sourceTree = "<group>"; };
-		8414695B21EAA801002967BB /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
-		842ACC67223D861A0002D9B1 /* Question.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
-		842F90282241336100003932 /* org-tourus-acb4d-interactions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "org-tourus-acb4d-interactions.json"; sourceTree = "<group>"; };
+		842F902A22416C8600003932 /* OptionSqlExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionSqlExtension.swift; sourceTree = "<group>"; };
+		842F902C2241878500003932 /* org-tourus-acb4d-interactions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "org-tourus-acb4d-interactions.json"; sourceTree = "<group>"; };
+		842F902D2241878500003932 /* org-tourus-acb4d-options.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "org-tourus-acb4d-options.json"; sourceTree = "<group>"; };
 		843F5E5821DD55440098FA3E /* FirebaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseModel.swift; sourceTree = "<group>"; };
 		843F5E5A21DD58B80098FA3E /* MainModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainModel.swift; sourceTree = "<group>"; };
 		843F5E5C21DD593F0098FA3E /* SqlModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SqlModel.swift; sourceTree = "<group>"; };
@@ -173,11 +171,8 @@
 				84E3672B21E1577200122FD8 /* SQL */,
 				8449C6E221E13603002A6AF6 /* Extensions */,
 				849D3EB221DE8F4A002F74B2 /* Consts.swift */,
-				842ACC67223D861A0002D9B1 /* Question.swift */,
-				8414695721EA8DA3002967BB /* Attraction.swift */,
 				849D3EB821DE91E2002F74B2 /* UserInfo.swift */,
 				8458503221E3D85900DF7C68 /* Interaction.swift */,
-				8414695B21EAA801002967BB /* Category.swift */,
 				8440930E222AE7EB007E058D /* Place.swift */,
 			);
 			path = Classes;
@@ -219,6 +214,7 @@
 				8458503421E3E51200DF7C68 /* UIColorExtension.swift */,
 				8458503621E4049100DF7C68 /* UIViewExtension.swift */,
 				845D1F8E223FEC2000C73585 /* InteractionSqlExtension.swift */,
+				842F902A22416C8600003932 /* OptionSqlExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -240,18 +236,19 @@
 			path = Segue;
 			sourceTree = "<group>";
 		};
-		84A0102B22403C8800BADC55 /* Files */ = {
+		84A0102B22403C8800BADC55 /* Json Files */ = {
 			isa = PBXGroup;
 			children = (
-				842F90282241336100003932 /* org-tourus-acb4d-interactions.json */,
+				842F902C2241878500003932 /* org-tourus-acb4d-interactions.json */,
+				842F902D2241878500003932 /* org-tourus-acb4d-options.json */,
 			);
-			path = Files;
+			path = "Json Files";
 			sourceTree = "<group>";
 		};
 		84D2D43A21CE6AAC004524D3 = {
 			isa = PBXGroup;
 			children = (
-				84A0102B22403C8800BADC55 /* Files */,
+				84A0102B22403C8800BADC55 /* Json Files */,
 				84D2D44521CE6AAC004524D3 /* Tourus */,
 				84D2D45A21CE6AAE004524D3 /* TourusTests */,
 				84D2D46521CE6AAE004524D3 /* TourusUITests */,
@@ -435,10 +432,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				842F902F2241878500003932 /* org-tourus-acb4d-options.json in Resources */,
 				84D2D47521CE6EB8004524D3 /* GoogleService-Info.plist in Resources */,
 				84D2D44E21CE6AAE004524D3 /* Assets.xcassets in Resources */,
 				84D2D44C21CE6AAC004524D3 /* Main.storyboard in Resources */,
-				842F90292241336100003932 /* org-tourus-acb4d-interactions.json in Resources */,
+				842F902E2241878500003932 /* org-tourus-acb4d-interactions.json in Resources */,
 				8449C6EE21E13D5E002A6AF6 /* loading.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -570,6 +568,7 @@
 				84E3673121E15EC500122FD8 /* SBCardPopupViewController.swift in Sources */,
 				843F5E5F21DD59C60098FA3E /* NotificationModel.swift in Sources */,
 				843F5E5B21DD58B80098FA3E /* MainModel.swift in Sources */,
+				842F902B22416C8600003932 /* OptionSqlExtension.swift in Sources */,
 				849D3EAF21DE8D18002F74B2 /* RegisterViewController.swift in Sources */,
 				843F5E5921DD55440098FA3E /* FirebaseModel.swift in Sources */,
 				8458502D21E3CA5500DF7C68 /* UIOptionButton.swift in Sources */,
@@ -577,7 +576,6 @@
 				8449C6E421E1362C002A6AF6 /* UiImageExtension.swift in Sources */,
 				8449C6F221E14748002A6AF6 /* OHCircleSegue.swift in Sources */,
 				84E3672A21E1573900122FD8 /* UserInfoSqlExtension.swift in Sources */,
-				8414695821EA8DA3002967BB /* Attraction.swift in Sources */,
 				849D3EB121DE8D2D002F74B2 /* LoginViewController.swift in Sources */,
 				8449C6F021E14093002A6AF6 /* SettingsViewController.swift in Sources */,
 				845D1F8F223FEC2000C73585 /* InteractionSqlExtension.swift in Sources */,
@@ -586,11 +584,9 @@
 				843F5E5D21DD593F0098FA3E /* SqlModel.swift in Sources */,
 				8449C6E121E13280002A6AF6 /* BuisyIndicator.swift in Sources */,
 				849D3EB321DE8F4A002F74B2 /* Consts.swift in Sources */,
-				842ACC68223D861A0002D9B1 /* Question.swift in Sources */,
 				8458503721E4049100DF7C68 /* UIViewExtension.swift in Sources */,
 				849D3EB921DE91E2002F74B2 /* UserInfo.swift in Sources */,
 				84D2D44721CE6AAC004524D3 /* AppDelegate.swift in Sources */,
-				8414695C21EAA801002967BB /* Category.swift in Sources */,
 				8440930D222AD2F1007E058D /* PlacesModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

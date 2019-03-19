@@ -93,22 +93,37 @@ class Interaction {
     }
     
     class Option {
+        var id:String = ""
         var type:OptionType
         var text:String
         
         init(_ type:OptionType, _ text:String) {
             self.type = type
             self.text = text
+            
+            checkTextEmpty()
         }
         
         init(_ type:String, _ text:String) {
             self.type = OptionType(rawValue: type) ?? .neutral
             self.text = text
+            
+             checkTextEmpty()
+        }
+        
+        init(_id:String, _ type:String, _ text:String) {
+            id = _id
+            self.type = OptionType(rawValue: type) ?? .neutral
+            self.text = text
+            
+             checkTextEmpty()
         }
 
         init(_ type:String, _ details:[String:Any]) {
             self.type = OptionType(rawValue: type) ?? .neutral
             self.text = details["text"] as! String
+            
+             checkTextEmpty()
         }
         
         func toJson() -> [String:Any] {
@@ -121,6 +136,12 @@ class Interaction {
         
         func toString() -> String {
             return String(format: "%@||%@", type.rawValue, text)
+        }
+        
+        private func checkTextEmpty() {
+            if self.text == "" {
+                self.text = type.defaultString
+            }
         }
     }
 }
@@ -216,6 +237,31 @@ enum OptionType : String {
             return 0
         case .nature:
             return 0
+        }
+    }
+    
+    var defaultString : String {
+        switch self {
+        case .accept:
+            return "Ok"
+        case .decline:
+            return "No"
+        case .negative:
+            return "Not at all"
+        case .neutral:
+            return "Whateve"
+        case .opinionless:
+            return "I don't care"
+        case .similiar:
+            return "Something similiar?"
+        case .food:
+            return "Food?"
+        case .extreme:
+            return "Extreme?"
+        case .relaxing:
+            return "Relaxing?"
+        case .nature:
+            return "Nature?"
         }
     }
 }

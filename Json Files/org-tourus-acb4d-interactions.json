@@ -3,7 +3,8 @@
   {
     "category": "amusement_park",
     "isDeleted": 0,
-    "lastUpdate": 0,
+    "lastUpdate": 1552912050596,
+
     "options": {
       "accept": {
         "text": ""
@@ -25,7 +26,8 @@
   {
     "category": "amusement_park",
     "isDeleted": 0,
-    "lastUpdate": 0,
+    "lastUpdate": 1552912050596,
+
     "options": {
       "accept": {
         "text": ""
@@ -47,7 +49,8 @@
   {
     "category": "amusement_park",
     "isDeleted": 0,
-    "lastUpdate": 0,
+    "lastUpdate": 1552912050596,
+
     "options": {
       "accept": {
         "text": ""
@@ -69,7 +72,8 @@
   {
     "category": "amusement_park",
     "isDeleted": 0,
-    "lastUpdate": 0,
+    "lastUpdate": 1552912050596,
+
     "options": {
       "accept": {
         "text": ""
@@ -88,7 +92,8 @@
   {
     "category": "aquarium",
     "isDeleted": 0,
-    "lastUpdate": 0,
+    "lastUpdate": 1552912050596,
+
     "options": {
       "accept": {
         "text": ""
@@ -110,7 +115,8 @@
   {
     "category": "aquarium",
     "isDeleted": 0,
-    "lastUpdate": 0,
+    "lastUpdate": 1552912050596,
+
     "options": {
       "accept": {
         "text": ""
@@ -129,7 +135,8 @@
   {
     "category": "aquarium",
     "isDeleted": 0,
-    "lastUpdate": 0,
+    "lastUpdate": 1552912050596,
+
     "options": {
       "accept": {
         "text": "They are\nmy friends"
@@ -148,7 +155,8 @@
   {
     "category": "art_gallery",
     "isDeleted": 0,
-    "lastUpdate": 0,
+    "lastUpdate": 1552912050596,
+
     "options": {
       "accept": {
         "text": "They are\nmy friends"
@@ -167,7 +175,8 @@
   {
     "category": "art_gallery",
     "isDeleted": 0,
-    "lastUpdate": 0,
+    "lastUpdate": 1552912050596,
+
     "options": {
       "accept": {
         "text": ""
@@ -192,7 +201,8 @@
   {
     "category": "art_gallery",
     "isDeleted": 0,
-    "lastUpdate": 0,
+    "lastUpdate": 1552912050596,
+
     "options": {
       "accept": {
         "text": ""
@@ -211,7 +221,8 @@
   {
     "category": "art_gallery",
     "isDeleted": 0,
-    "lastUpdate": 0,
+    "lastUpdate": 1552912050596,
+
     "options": {
       "accept": {
         "text": "Very unique"
@@ -220,20 +231,21 @@
         "text": "I had better\nexperiences"
       }
     },
-    "text": "Walking through a gallery is a unique experience, don’t you think?",
+    "text": "Walking through a gallery is a unique experience, donâ€™t you think?",
     "type": "suggestion"
   },
   "bakery_1":
   {
     "category": "bakery",
     "isDeleted": 0,
-    "lastUpdate": 0,
+    "lastUpdate": 1552912050596,
+
     "options": {
       "accept": {
         "text": "Wow, sure I am!"
       },
       "decline": {
-        "text": "Later? I’m\nnot hungry"
+        "text": "Later? Iâ€™m\nnot hungry"
       }
     },
     "text": "Are you hungry for pastries?",
@@ -243,7 +255,8 @@
   {
     "category": "bakery",
     "isDeleted": 0,
-    "lastUpdate": 0,
+    "lastUpdate": 1552912050596,
+
     "options": {
       "accept": {
         "text": ""
@@ -262,7 +275,8 @@
   {
     "category": "bakery",
     "isDeleted": 0,
-    "lastUpdate": 0,
+    "lastUpdate": 1552912050596,
+
     "options": {
       "accept": {
         "text": ""
@@ -284,7 +298,8 @@
   {
     "category": "bar",
     "isDeleted": 0,
-    "lastUpdate": 0,
+    "lastUpdate": 1552912050596,
+
     "options": {
       "accept": {
         "text": ""
@@ -303,7 +318,8 @@
   {
     "category": "bar",
     "isDeleted": 0,
-    "lastUpdate": 0,
+    "lastUpdate": 1552912050596,
+
     "options": {
       "accept": {
         "text": ""
@@ -318,14 +334,15 @@
         "text": ""
       }
     },
-    "text": "Let’s go to a bar?",
+    "text": "Letâ€™s go to a bar?",
     "type": "suggestion"
   },
   "bar_3":
   {
     "category": "bar",
     "isDeleted": 0,
-    "lastUpdate": 0,
+    "lastUpdate": 1552912050596,
+
     "options": {
       "accept": {
         "text": ""
@@ -337,17 +354,18 @@
         "text": ""
       }
     },
-    "text": "Let’s drink tonight?",
+    "text": "Letâ€™s drink tonight?",
     "type": "suggestion"
   },
   "beauty_salon_1":
   {
     "category": "beauty_salon",
     "isDeleted": 0,
-    "lastUpdate": 0,
+    "lastUpdate": 1552912050596,
+
     "options": {
       "accept": {
-        "text": "Let’s try it"
+        "text": "Letâ€™s try it"
       },
       "decline": {
         "text": ""
@@ -356,33 +374,35 @@
         "text": ""
       }
     },
-    "text": "Let’s go to a beauty salon?",
+    "text": "Letâ€™s go to a beauty salon?",
     "type": "suggestion"
   },
   "beauty_salon_2":
   {
     "category": "beauty_salon",
     "isDeleted": 0,
-    "lastUpdate": 0,
+    "lastUpdate": 1552912050596,
+
     "options": {
       "accept": {
         "text": ""
       },
       "decline": {
-        "text": "I don’t need it"
+        "text": "I donâ€™t need it"
       },
       "negative": {
         "text": ""
       }
     },
-    "text": "Let’s be prettier? ;)",
+    "text": "Letâ€™s be prettier? ;)",
     "type": "suggestion"
   },
   "book_store_1":
   {
     "category": "book_store",
     "isDeleted": 0,
-    "lastUpdate": 0,
+    "lastUpdate": 1552912050596,
+
     "options": {
       "accept": {
         "text": ""
@@ -398,10 +418,11 @@
   {
     "category": "book_store",
     "isDeleted": 0,
-    "lastUpdate": 0,
+    "lastUpdate": 1552912050596,
+
     "options": {
       "accept": {
-        "text": "I love books\nlet’s go"
+        "text": "I love books\nletâ€™s go"
       },
       "decline": {
         "text": ""
