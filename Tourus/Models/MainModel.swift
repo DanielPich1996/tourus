@@ -36,16 +36,23 @@ class MainModel {
     }
     
     private func listenToInteractionUpdates() {
-        let lastUpdated = Interaction.getLastUpdateDate(database: sqlModel.database)
-        //lastUpdated += 1
+        var lastUpdated = Interaction.getLastUpdateDate(database: sqlModel.database)
+        lastUpdated += 1
         
         firebaseModel.getAllInteractionsFromDate(from:lastUpdated) { (data:[Interaction]) in
             self.sqlHandler(data: data) { (isUpdated:Bool) in
                 if(isUpdated) {
                     //do something?
                 }
+                
+                //let interaction = self.getInteractionByCategory("aquarium")
             }
         }
+    }
+    
+    func getInteractionByCategory(_ category:String) -> Interaction? {
+        let interaction = Interaction.get(database: self.sqlModel.database, category: category)
+        return interaction ?? nil
     }
     
     private func sqlHandler(data:[Interaction], callback: (Bool) -> Void) {
@@ -55,9 +62,9 @@ class MainModel {
         
         for interaction in data {
             if(interaction.isDeleted == 1) {
-                //interaction.delete(database: self.sqlModel.database, postId: interaction.id)
+                Interaction.delete(database: self.sqlModel.database, id: interaction.id)
             } else {
-                //interaction.addNew(database: self.sqlModel.database, post: interaction)
+                Interaction.addNew(database: self.sqlModel.database, interaction: interaction)
             }
             
             if(interaction.lastUpdate > lastUpdated) {

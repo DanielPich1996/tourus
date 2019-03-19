@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 
 class Interaction {
+    var id:String = ""
     var isDeleted:Int = 0
     var type:InteractionType
     var text:String
@@ -24,9 +25,21 @@ class Interaction {
         self.options = options
         self.place = place
         lastUpdate = 0
-    }    
+    }
     
-    init(json:[String:Any]) {
+    init(_ id:String, _ isDeleted:Int, _ type:String, _ text:String, _ options:[Option], _ category:String, _ lastUpdate:Double, _ place:Place? = nil) {
+        self.id = id
+        self.isDeleted = isDeleted
+        self.type = InteractionType(rawValue: type) ?? .question
+        self.text = text
+        self.options = options
+        self.category = category
+        self.lastUpdate = lastUpdate
+        self.place = place
+    }
+    
+    init(_id:String, json:[String:Any]) {
+        id = _id
         isDeleted = json["isDeleted"] as? Int ?? 0
         type = InteractionType(rawValue: json["type"] as! String) ?? InteractionType.question
         text = json["text"] as! String
@@ -87,9 +100,14 @@ class Interaction {
             self.type = type
             self.text = text
         }
+        
+        init(_ type:String, _ text:String) {
+            self.type = OptionType(rawValue: type) ?? .neutral
+            self.text = text
+        }
 
         init(_ type:String, _ details:[String:Any]) {
-            self.type = OptionType(rawValue: type) ?? OptionType.neutral
+            self.type = OptionType(rawValue: type) ?? .neutral
             self.text = details["text"] as! String
         }
         
@@ -99,6 +117,10 @@ class Interaction {
             option["text"] = self.text
             
             return option
+        }
+        
+        func toString() -> String {
+            return String(format: "%@||%@", type.rawValue, text)
         }
     }
 }

@@ -22,18 +22,20 @@ class SqlModel {
                 print("Failed to open db file: \(path.absoluteString)")
                 return
             }
-            //dropTables()
+            dropTables()
             createTables()
         }
     }
     
     func createTables() {
         UserInfo.createTable(database: database);
+        Interaction.createTable(database: database)
         LastUpdateSplDates.createTable(database: database);
     }
     
     func dropTables() {
         UserInfo.drop(database: database);
+        Interaction.drop(database: database)
         LastUpdateSplDates.drop(database: database);
     }
 }

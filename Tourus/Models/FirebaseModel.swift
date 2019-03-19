@@ -19,17 +19,11 @@ class FirebaseModel {
     init() {
         FirebaseApp.configure()
         databaseRef = Database.database().reference()
-        
-        let options1:[Interaction.Option] =  [ Interaction.Option(.accept, "I love pubs"), Interaction.Option(.negative, "Clubs sounds\nbetter"), Interaction.Option(.neutral, "Something different")]
-        let interaction1 = Interaction(.question, "How pubs sounds like?", options1)
-        
-        //addInteraction(interaction1)
-        //databaseRef!.child("1").setValue("gg")
     }
     
-    func addInteraction(_ interaction:Interaction) {
-      self.databaseRef!.child(consts.names.interactionsTableName).child("23").setValue(interaction.toJson())
-    }
+    //func addInteraction(_ interaction:Interaction) {
+    //  self.databaseRef!.child(consts.names.interactionsTableName).child("23").setValue(interaction.toJson())
+    //}
     
     func getAllInteractionsFromDate(from:Double, callback:@escaping ([Interaction])->Void) {        
         let stRef = databaseRef.child("Interactions")
@@ -39,8 +33,8 @@ class FirebaseModel {
             var data = [Interaction]()
 
             if let value = snapshot.value as? [String : Any] {
-                for (_, json) in value{
-                    data.append(Interaction(json: json as! [String : Any]))
+                for (id, json) in value{
+                    data.append(Interaction(_id: id, json: json as! [String : Any]))
                 }
             }
             

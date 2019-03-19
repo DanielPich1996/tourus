@@ -13,7 +13,7 @@ extension Interaction {
     
     static func createTable(database: OpaquePointer?)  {
         var errormsg: UnsafeMutablePointer<Int8>? = nil
-        let res = sqlite3_exec(database, "CREATE TABLE IF NOT EXISTS INTERACTION (UID TEXT PRIMARY KEY, DISPLAY_NAME TEXT, EMAIL TEXT, IMAGEURL TEXT, TIMESTAMP DOUBLE)", nil, nil, &errormsg);
+        let res = sqlite3_exec(database, "CREATE TABLE IF NOT EXISTS INTERACTION (ID TEXT PRIMARY KEY, TYPE TEXT, TEXT TEXT, CATEGORY TEXT, LAST_UPDATE DOUBLE, OPTIONS TEXT)", nil, nil, &errormsg);
         if(res != 0){
             print("error creating table INTERACTION");
             return
@@ -29,21 +29,36 @@ extension Interaction {
         }
     }
     
-    static func get(database: OpaquePointer?, userId:String)-> UserInfo? {
+    static func get(database: OpaquePointer?, category:String)-> Interaction? {
         var sqlite3_stmt: OpaquePointer? = nil
-        let query = "SELECT UID, DISPLAY_NAME, EMAIL, IMAGEURL, TIMESTAMP from INTERACTION where UID = '" + userId + "' ;"
-        var info:UserInfo? = nil
+        let query = "SELECT ID, TYPE, TEXT, CATEGORY, LAST_UPDATE, OPTIONS from INTERACTION where CATEGORY = '" + category + "' ORDER BY RANDOM() LIMIT 1"
+        var info:Interaction? = nil
         if (sqlite3_prepare_v2(database,query,-1,&sqlite3_stmt,nil)
             == SQLITE_OK){
             
             if(sqlite3_step(sqlite3_stmt) == SQLITE_ROW){
-                let uid = String(cString:sqlite3_column_text(sqlite3_stmt,0)!)
-                let displayName = String(cString:sqlite3_column_text(sqlite3_stmt,1)!)
-                let email = String(cString:sqlite3_column_text(sqlite3_stmt,2)!)
-                let imageUrl = String(cString:sqlite3_column_text(sqlite3_stmt,3)!)
-                let timestamp:Double = sqlite3_column_double(sqlite3_stmt,4)
+                let id = String(cString:sqlite3_column_text(sqlite3_stmt,0)!)
+                let type = String(cString:sqlite3_column_text(sqlite3_stmt,1)!)
+                let text = String(cString:sqlite3_column_text(sqlite3_stmt,2)!)
+                let category = String(cString:sqlite3_column_text(sqlite3_stmt,3)!)
+                let lastUpdate:Double = sqlite3_column_double(sqlite3_stmt,4)
+                let options_string = String(cString:sqlite3_column_text(sqlite3_stmt,5)!)
+
+                let splited_options:[String] = options_string.components(separatedBy: "&&")
+                var options = [Option]()
+
+                //expected format: "type||text&&type2||text2"
+                for option in splited_options {
+                    let option_data:[String] = option.components(separatedBy: "||")
+                    if(option_data.count == 2) {
+                        options.append(Interaction.Option(option_data[0], option_data[1]))
+                    }
+                    else {
+                        print("option don't have the expected args count")
+                    }
+                }
                 
-                info = UserInfo(_uid: uid, _displayName: displayName, _email: email, _profileImageUrl: imageUrl, _timestamp: timestamp)
+                info = Interaction(id, 0, type, text, options, category, lastUpdate)
             }
         }
         
@@ -51,24 +66,52 @@ extension Interaction {
         return info
     }
     
-    static func addNew(database: OpaquePointer?, info:UserInfo) {
+    static func addNew(database: OpaquePointer?, interaction:Interaction) {
         var sqlite3_stmt: OpaquePointer? = nil
-        if (sqlite3_prepare_v2(database,"INSERT OR REPLACE INTO INTERACTION(UID, DISPLAY_NAME, EMAIL, IMAGEURL, TIMESTAMP) VALUES (?,?,?,?,?);",-1, &sqlite3_stmt,nil) == SQLITE_OK){
-            let uid = info.uid.cString(using: .utf8)
-            let displayName = info.displayName.cString(using: .utf8)
-            let email = info.email.cString(using: .utf8)
-            let imageUrl = info.profileImageUrl?.cString(using: .utf8)
-            let timestamp = info.timestamp
+        if (sqlite3_prepare_v2(database,"INSERT OR REPLACE INTO INTERACTION(ID, TYPE, TEXT, CATEGORY, LAST_UPDATE, OPTIONS) VALUES (?,?,?,?,?,?);",-1, &sqlite3_stmt,nil) == SQLITE_OK) {
+
+            let id = interaction.id.cString(using: .utf8)
+            let type = interaction.type.rawValue.cString(using: .utf8)
+            let text = interaction.text.cString(using: .utf8)
+            let category = interaction.category.cString(using: .utf8)
+            let lastUpdate = interaction.lastUpdate
             
-            sqlite3_bind_text(sqlite3_stmt, 1, uid,-1,nil);
-            sqlite3_bind_text(sqlite3_stmt, 2, displayName,-1,nil);
-            sqlite3_bind_text(sqlite3_stmt, 3, email,-1,nil);
-            sqlite3_bind_text(sqlite3_stmt, 4, imageUrl,-1,nil);
-            sqlite3_bind_double(sqlite3_stmt, 5, timestamp);
-            
-            if(sqlite3_step(sqlite3_stmt) == SQLITE_DONE){
-                print("new row added succefully")
+            var options_string = ""
+            for (idx, option) in interaction.options.enumerated() {
+                options_string.append(option.toString())
+
+                //add '&&' if the current item isn't the last in the array
+                if idx != interaction.options.endIndex-1 {
+                   options_string.append("&&")
+                }
             }
+            let options = options_string.cString(using: .utf8)
+            
+            sqlite3_bind_text(sqlite3_stmt, 1, id,-1,nil);
+            sqlite3_bind_text(sqlite3_stmt, 2, type,-1,nil);
+            sqlite3_bind_text(sqlite3_stmt, 3, text,-1,nil);
+            sqlite3_bind_text(sqlite3_stmt, 4, category,-1,nil);
+            sqlite3_bind_double(sqlite3_stmt, 5, lastUpdate);
+            sqlite3_bind_text(sqlite3_stmt, 6, options,-1,nil);
+
+            if(sqlite3_step(sqlite3_stmt) == SQLITE_DONE){
+                print("new interaction row added succefully")
+            }
+        }
+    }
+    
+    static func delete(database: OpaquePointer?, id:String) {
+        var sqlite3_stmt: OpaquePointer? = nil
+        let query = "DELETE FROM INTERACTION WHERE ID = '" + id + "' ;"
+        
+        if (sqlite3_prepare_v2(database,query,-1, &sqlite3_stmt,nil) == SQLITE_OK){
+            if sqlite3_step(sqlite3_stmt) == SQLITE_DONE {
+                print("Successfully deleted interaction row.")
+            } else {
+                print("Could not delete interaction row.")
+            }
+        } else {
+            print("DELETE statement could not be prepared for interaction")
         }
     }
     
