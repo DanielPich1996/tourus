@@ -31,32 +31,29 @@ class MainViewController: UIViewController {
     @IBOutlet var settingsInteractionConstraint: NSLayoutConstraint!
     @IBOutlet var optionsBottomConstraint: NSLayoutConstraint!
     
-    var interaction1:Interaction? = nil
-    var interaction2:Interaction? = nil
+    var interaction:Interaction? = nil
+    
     override func viewDidLoad() {
-        super.viewDidLoad()       
-        
+        super.viewDidLoad()
+
         verticalStackView.spacing = 15.0
         inquiryImage.isHidden = true
         
-        //sample 1 of interaction set:
-        let options1:[Interaction.Option] =  [ Interaction.Option(.positive, "I love pubs"), Interaction.Option(.negative, "Clubs sounds\nbetter"), Interaction.Option(.neutral, "Something different")]
-        interaction1 = Interaction(.question, "How pubs sounds like?", options1)
-        //sample 2 of interaction set:
-        let options2:[Interaction.Option] =  [ Interaction.Option(.positive, "Let's go!"), Interaction.Option(.negative, "Not hungry\nbut thanx")]
-        interaction2 = Interaction(.suggestion, "What about a yummy\npizza near by?", options2)
-        
-        setInteraction(interaction1!)
+        interaction = MainModel.instance.getInteraction("bar")
+        setInteraction(interaction!)
     }
     
     var count = 0
     @objc func optionButtonAction( _ button : UIOptionButton)
     {
         //what to do when an option button tapped?
+        interaction = MainModel.instance.getInteraction()
+
         if(count % 2 == 0) {
-            setInteractionwithAnimation(interaction2!)
+            interaction?.type = .question
+            setInteractionwithAnimation(interaction!)
         } else {
-            setInteractionwithAnimation(interaction1!)
+            setInteractionwithAnimation(interaction!)
         }
         
         self.count += 1//temp
@@ -161,8 +158,9 @@ class MainViewController: UIViewController {
         var subWidth:CGFloat = 0
         var maxWidth:CGFloat = 0
         var i = 0
+        let sortedOptions = options.sorted(by: { $0.type.rawValue < $1.type.rawValue })
         
-        for option in options {
+        for option in sortedOptions {
             if(i % 2 == 0) {
                 if(panel != nil) {
                     let delta = (optionsView.frame.width - maxWidth) / 2

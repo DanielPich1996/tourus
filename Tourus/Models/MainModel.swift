@@ -17,7 +17,9 @@ class MainModel {
     var placesModel = PlacesModel()
     var sqlModel = SqlModel()
     
-    private init(){
+    init() {
+        listenToOptionUpdates()
+        listenToInteractionUpdates()
     }
    
     func signIn(_ email:String, _ password:String, _ callback:@escaping (Bool)->Void)
@@ -32,6 +34,69 @@ class MainModel {
     
     func signOut(_ callback:@escaping () -> Void) {
         firebaseModel.signOut(callback)
+    }
+    
+    func getInteraction(_ category:String? = nil) -> Interaction? {
+        var interaction = Interaction.get(database: self.sqlModel.database, category: category)
+        if(interaction == nil) {
+            interaction = Interaction.get(database: self.sqlModel.database)
+        }
+        
+        return interaction ?? nil
+    }
+    
+    private func listenToInteractionUpdates() {
+        var lastUpdated = Interaction.getLastUpdateDate(database: sqlModel.database)
+        lastUpdated += 1
+        
+        firebaseModel.getAllInteractionsFromDate(from:lastUpdated) { (data:[Interaction]) in
+            self.sqlInteractionHandler(data: data) { (isUpdated:Bool) in
+                if(isUpdated) {
+                    //do something?
+                }
+            }
+        }
+    }
+    
+    private func listenToOptionUpdates() {
+        firebaseModel.getAllOptionsFromDate(from:0) { (data:[Interaction.Option]) in
+            self.sqlOptionsHandler(data: data) {
+                //do something?
+            }
+        }
+    }
+    
+    private func sqlInteractionHandler(data:[Interaction], callback: (Bool) -> Void) {
+        var lastUpdated = Interaction.getLastUpdateDate(database: sqlModel.database)
+        lastUpdated += 1
+        var isUpdated = false
+        
+        for interaction in data {
+            if(interaction.isDeleted == 1) {
+                Interaction.delete(database: self.sqlModel.database, id: interaction.id)
+            } else {
+                Interaction.addNew(database: self.sqlModel.database, interaction: interaction)
+            }
+            
+            if(interaction.lastUpdate > lastUpdated) {
+                lastUpdated = interaction.lastUpdate
+                isUpdated = true
+            }
+        }
+        
+        if(isUpdated) {
+            Interaction.setLastUpdateDate(database: self.sqlModel.database, date: lastUpdated)
+        }
+        
+        callback(isUpdated)
+    }
+    
+    private func sqlOptionsHandler(data:[Interaction.Option], callback: () -> Void) {
+        for option in data {
+            Interaction.Option.addNew(database: self.sqlModel.database, option: option)
+        }
+        
+        callback()
     }
     
     func getUserInfo(_ uid:String, callback:@escaping (UserInfo?) -> Void) {
