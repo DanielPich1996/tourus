@@ -39,7 +39,7 @@ class MainViewController: UIViewController {
         verticalStackView.spacing = 15.0
         inquiryImage.isHidden = true
         
-        interaction = MainModel.instance.getInteraction("bar")
+        interaction = MainModel.instance.getInteraction("bar")        
         setInteraction(interaction!)
     }
     
