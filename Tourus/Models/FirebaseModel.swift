@@ -20,23 +20,30 @@ class FirebaseModel {
         FirebaseApp.configure()
         databaseRef = Database.database().reference()
         
-        self.databaseRef!.child("fff").setValue("gg")       
+        let options1:[Interaction.Option] =  [ Interaction.Option(.accept, "I love pubs"), Interaction.Option(.negative, "Clubs sounds\nbetter"), Interaction.Option(.neutral, "Something different")]
+        let interaction1 = Interaction(.question, "How pubs sounds like?", options1)
+        
+        //addInteraction(interaction1)
+        //databaseRef!.child("1").setValue("gg")
     }
     
     func addInteraction(_ interaction:Interaction) {
-      self.databaseRef!.child(consts.names.interactionsTableName).child("1").setValue(interaction.toJson())
+      self.databaseRef!.child(consts.names.interactionsTableName).child("23").setValue(interaction.toJson())
     }
     
-    func getAllInteractionsFromDate(from:Double, callback:@escaping ([Interaction])->Void) {
-        let stRef = databaseRef.child(consts.names.interactionsTableName)
+    func getAllInteractionsFromDate(from:Double, callback:@escaping ([Interaction])->Void) {        
+        let stRef = databaseRef.child("Interactions")
         let fbQuery = stRef.queryOrdered(byChild: "lastUpdate").queryStarting(atValue: from)
         fbQuery.observe(.value) { (snapshot) in
+            
             var data = [Interaction]()
-            if let value = snapshot.value as? [String:Any] {
+
+            if let value = snapshot.value as? [String : Any] {
                 for (_, json) in value{
                     data.append(Interaction(json: json as! [String : Any]))
                 }
             }
+            
             callback(data)
         }
     }

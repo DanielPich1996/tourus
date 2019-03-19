@@ -1,395 +1,416 @@
-[ null,
-    {
-      "category": "amusement_park",
-      "isDeleted": 0,
-      "lastUpdate": 0,
-      "options": {
-        "accept": {
-          "text": ""
-        },
-        "decline": {
-          "text": ""
-        },
-        "negative": {
-          "text": ""
-        },
-        "relaxing": {
-          "text": ""
-        }
+{
+  "amusement_park_1":
+  {
+    "category": "amusement_park",
+    "isDeleted": 0,
+    "lastUpdate": 0,
+    "options": {
+      "accept": {
+        "text": ""
       },
-      "text": "How roller coaster sounds?",
-      "type": "suggestion"
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      },
+      "relaxing": {
+        "text": ""
+      }
     },
-    {
-      "category": "amusement_park",
-      "isDeleted": 0,
-      "lastUpdate": 0,
-      "options": {
-        "accept": {
-          "text": ""
-        },
-        "decline": {
-          "text": ""
-        },
-        "negative": {
-          "text": ""
-        },
-        "relaxing": {
-          "text": ""
-        }
+    "text": "How roller coaster sounds?",
+    "type": "suggestion"
+  },
+  "amusement_park_2":
+  {
+    "category": "amusement_park",
+    "isDeleted": 0,
+    "lastUpdate": 0,
+    "options": {
+      "accept": {
+        "text": ""
       },
-      "text": "Do you like the extreme way?",
-      "type": "suggestion"
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      },
+      "relaxing": {
+        "text": ""
+      }
     },
-    {
-      "category": "amusement_park",
-      "isDeleted": 0,
-      "lastUpdate": 0,
-      "options": {
-        "accept": {
-          "text": ""
-        },
-        "decline": {
-          "text": ""
-        },
-        "negative": {
-          "text": ""
-        },
-        "similiar": {
-          "text": "No, but I want\nsomething similar"
-        }
+    "text": "Do you like the extreme way?",
+    "type": "suggestion"
+  },
+  "amusement_park_3":
+  {
+    "category": "amusement_park",
+    "isDeleted": 0,
+    "lastUpdate": 0,
+    "options": {
+      "accept": {
+        "text": ""
       },
-      "text": "There is an amusement park near by, wanna go?",
-      "type": "suggestion"
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      },
+      "similiar": {
+        "text": "No, but I want\nsomething similar"
+      }
     },
-    {
-      "category": "amusement_park",
-      "isDeleted": 0,
-      "lastUpdate": 0,
-      "options": {
-        "accept": {
-          "text": ""
-        },
-        "decline": {
-          "text": ""
-        },
-        "negative": {
-          "text": ""
-        }
+    "text": "There is an amusement park near by, wanna go?",
+    "type": "suggestion"
+  },
+  "amusement_park_4":
+  {
+    "category": "amusement_park",
+    "isDeleted": 0,
+    "lastUpdate": 0,
+    "options": {
+      "accept": {
+        "text": ""
       },
-      "text": "Amusement parks are cool for you?",
-      "type": "suggestion"
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
     },
-    {
-      "category": "aquarium",
-      "isDeleted": 0,
-      "lastUpdate": 0,
-      "options": {
-        "accept": {
-          "text": ""
-        },
-        "decline": {
-          "text": ""
-        },
-        "negative": {
-          "text": ""
-        },
-        "food": {
-          "text": ""
-        }
+    "text": "Amusement parks are cool for you?",
+    "type": "suggestion"
+  },
+  "aquarium_1":
+  {
+    "category": "aquarium",
+    "isDeleted": 0,
+    "lastUpdate": 0,
+    "options": {
+      "accept": {
+        "text": ""
       },
-      "text": "Do you like aquariums?",
-      "type": "suggestion"
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      },
+      "food": {
+        "text": ""
+      }
     },
-    {
-      "category": "aquarium",
-      "isDeleted": 0,
-      "lastUpdate": 0,
-      "options": {
-        "accept": {
-          "text": ""
-        },
-        "decline": {
-          "text": ""
-        },
-        "negative": {
-          "text": ""
-        }
+    "text": "Do you like aquariums?",
+    "type": "suggestion"
+  },
+  "aquarium_2":
+  {
+    "category": "aquarium",
+    "isDeleted": 0,
+    "lastUpdate": 0,
+    "options": {
+      "accept": {
+        "text": ""
       },
-      "text": "I love to see sea creatures, what about you?",
-      "type": "suggestion"
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
     },
-    {
-      "category": "aquarium",
-      "isDeleted": 0,
-      "lastUpdate": 0,
-      "options": {
-        "accept": {
-          "text": "They are\nmy friends"
-        },
-        "decline": {
-          "text": "Food only"
-        },
-        "negative": {
-          "text": ""
-        }
+    "text": "I love to see sea creatures, what about you?",
+    "type": "suggestion"
+  },
+  "aquarium_3":
+  {
+    "category": "aquarium",
+    "isDeleted": 0,
+    "lastUpdate": 0,
+    "options": {
+      "accept": {
+        "text": "They are\nmy friends"
       },
-      "text": "For your opinion, sea creatures are more then just a food on a plate?",
-      "type": "suggestion"
+      "decline": {
+        "text": "Food only"
+      },
+      "negative": {
+        "text": ""
+      }
     },
-    {
-      "category": "art_gallery",
-      "isDeleted": 0,
-      "lastUpdate": 0,
-      "options": {
-        "accept": {
-          "text": "They are\nmy friends"
-        },
-        "decline": {
-          "text": "Food only"
-        },
-        "negative": {
-          "text": ""
-        }
+    "text": "For your opinion, sea creatures are more then just a food on a plate?",
+    "type": "suggestion"
+  },
+  "art_gallery_1":
+  {
+    "category": "art_gallery",
+    "isDeleted": 0,
+    "lastUpdate": 0,
+    "options": {
+      "accept": {
+        "text": "They are\nmy friends"
       },
-      "text": "Paints and statues are your thing?",
-      "type": "suggestion"
+      "decline": {
+        "text": "Food only"
+      },
+      "negative": {
+        "text": ""
+      }
     },
-    {
-      "category": "art_gallery",
-      "isDeleted": 0,
-      "lastUpdate": 0,
-      "options": {
-        "accept": {
-          "text": ""
-        },
-        "decline": {
-          "text": "Art..? Me?"
-        },
-        "negative": {
-          "text": ""
-        },
-        "extreme": {
-          "text": ""
-        },
-        "nature": {
-          "text": ""
-        }
+    "text": "Paints and statues are your thing?",
+    "type": "suggestion"
+  },
+  "art_gallery_2":
+  {
+    "category": "art_gallery",
+    "isDeleted": 0,
+    "lastUpdate": 0,
+    "options": {
+      "accept": {
+        "text": ""
       },
-      "text": "Art?",
-      "type": "suggestion"
+      "decline": {
+        "text": "Art..? Me?"
+      },
+      "negative": {
+        "text": ""
+      },
+      "extreme": {
+        "text": ""
+      },
+      "nature": {
+        "text": ""
+      }
     },
-    {
-      "category": "art_gallery",
-      "isDeleted": 0,
-      "lastUpdate": 0,
-      "options": {
-        "accept": {
-          "text": ""
-        },
-        "decline": {
-          "text": "Art..? Me?"
-        },
-        "negative": {
-          "text": ""
-        }
+    "text": "Art?",
+    "type": "suggestion"
+  },
+  "art_gallery_3":
+  {
+    "category": "art_gallery",
+    "isDeleted": 0,
+    "lastUpdate": 0,
+    "options": {
+      "accept": {
+        "text": ""
       },
-      "text": "Art?",
-      "type": "suggestion"
+      "decline": {
+        "text": "Art..? Me?"
+      },
+      "negative": {
+        "text": ""
+      }
     },
-    {
-      "category": "art_gallery",
-      "isDeleted": 0,
-      "lastUpdate": 0,
-      "options": {
-        "accept": {
-          "text": "Very unique"
-        },
-        "decline": {
-          "text": "I had better\nexperiences"
-        }
+    "text": "Art?",
+    "type": "suggestion"
+  },
+  "art_gallery_4":
+  {
+    "category": "art_gallery",
+    "isDeleted": 0,
+    "lastUpdate": 0,
+    "options": {
+      "accept": {
+        "text": "Very unique"
       },
-      "text": "Walking through a gallery is a unique experience, don’t you think?",
-      "type": "suggestion"
+      "decline": {
+        "text": "I had better\nexperiences"
+      }
     },
-    {
-      "category": "bakery",
-      "isDeleted": 0,
-      "lastUpdate": 0,
-      "options": {
-        "accept": {
-          "text": "Wow, sure I am!"
-        },
-        "decline": {
-          "text": "Later? I’m\nnot hungry"
-        }
+    "text": "Walking through a gallery is a unique experience, don’t you think?",
+    "type": "suggestion"
+  },
+  "bakery_1":
+  {
+    "category": "bakery",
+    "isDeleted": 0,
+    "lastUpdate": 0,
+    "options": {
+      "accept": {
+        "text": "Wow, sure I am!"
       },
-      "text": "Are you hungry for pastries?",
-      "type": "suggestion"
+      "decline": {
+        "text": "Later? I’m\nnot hungry"
+      }
     },
-    {
-      "category": "bakery",
-      "isDeleted": 0,
-      "lastUpdate": 0,
-      "options": {
-        "accept": {
-          "text": ""
-        },
-        "decline": {
-          "text": ""
-        },
-        "nature": {
-          "text": ""
-        }
+    "text": "Are you hungry for pastries?",
+    "type": "suggestion"
+  },
+  "bakery_2":
+  {
+    "category": "bakery",
+    "isDeleted": 0,
+    "lastUpdate": 0,
+    "options": {
+      "accept": {
+        "text": ""
       },
-      "text": "There is a bakery in that area, want to go?",
-      "type": "suggestion"
+      "decline": {
+        "text": ""
+      },
+      "nature": {
+        "text": ""
+      }
     },
-    {
-      "category": "bakery",
-      "isDeleted": 0,
-      "lastUpdate": 0,
-      "options": {
-        "accept": {
-          "text": ""
-        },
-        "decline": {
-          "text": ""
-        },
-        "extreme": {
-          "text": ""
-        },
-        "relaxing": {
-          "text": ""
-        }
+    "text": "There is a bakery in that area, want to go?",
+    "type": "suggestion"
+  },
+  "bakery_3":
+  {
+    "category": "bakery",
+    "isDeleted": 0,
+    "lastUpdate": 0,
+    "options": {
+      "accept": {
+        "text": ""
       },
-      "text": "Hungry for a bakery?",
-      "type": "suggestion"
+      "decline": {
+        "text": ""
+      },
+      "extreme": {
+        "text": ""
+      },
+      "relaxing": {
+        "text": ""
+      }
     },
-    {
-      "category": "bar",
-      "isDeleted": 0,
-      "lastUpdate": 0,
-      "options": {
-        "accept": {
-          "text": ""
-        },
-        "decline": {
-          "text": ""
-        },
-        "negative": {
-          "text": ""
-        }
+    "text": "Hungry for a bakery?",
+    "type": "suggestion"
+  },
+  "bar_1":
+  {
+    "category": "bar",
+    "isDeleted": 0,
+    "lastUpdate": 0,
+    "options": {
+      "accept": {
+        "text": ""
       },
-      "text": "Want a drink? On me ;)",
-      "type": "suggestion"
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
     },
-    {
-      "category": "bar",
-      "isDeleted": 0,
-      "lastUpdate": 0,
-      "options": {
-        "accept": {
-          "text": ""
-        },
-        "decline": {
-          "text": ""
-        },
-        "relaxing": {
-          "text": ""
-        },
-        "food": {
-          "text": ""
-        }
+    "text": "Want a drink? On me ;)",
+    "type": "suggestion"
+  },
+  "bar_2":
+  {
+    "category": "bar",
+    "isDeleted": 0,
+    "lastUpdate": 0,
+    "options": {
+      "accept": {
+        "text": ""
       },
-      "text": "Let’s go to a bar?",
-      "type": "suggestion"
+      "decline": {
+        "text": ""
+      },
+      "relaxing": {
+        "text": ""
+      },
+      "food": {
+        "text": ""
+      }
     },
-    {
-      "category": "bar",
-      "isDeleted": 0,
-      "lastUpdate": 0,
-      "options": {
-        "accept": {
-          "text": ""
-        },
-        "decline": {
-          "text": ""
-        },
-        "negative": {
-          "text": ""
-        }
+    "text": "Let’s go to a bar?",
+    "type": "suggestion"
+  },
+  "bar_3":
+  {
+    "category": "bar",
+    "isDeleted": 0,
+    "lastUpdate": 0,
+    "options": {
+      "accept": {
+        "text": ""
       },
-      "text": "Let’s drink tonight?",
-      "type": "suggestion"
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
     },
-    {
-      "category": "beauty_salon",
-      "isDeleted": 0,
-      "lastUpdate": 0,
-      "options": {
-        "accept": {
-          "text": "Let’s try it"
-        },
-        "decline": {
-          "text": ""
-        },
-        "negative": {
-          "text": ""
-        }
+    "text": "Let’s drink tonight?",
+    "type": "suggestion"
+  },
+  "beauty_salon_1":
+  {
+    "category": "beauty_salon",
+    "isDeleted": 0,
+    "lastUpdate": 0,
+    "options": {
+      "accept": {
+        "text": "Let’s try it"
       },
-      "text": "Let’s go to a beauty salon?",
-      "type": "suggestion"
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
     },
-    {
-      "category": "beauty_salon",
-      "isDeleted": 0,
-      "lastUpdate": 0,
-      "options": {
-        "accept": {
-          "text": ""
-        },
-        "decline": {
-          "text": "I don’t need it"
-        },
-        "negative": {
-          "text": ""
-        }
+    "text": "Let’s go to a beauty salon?",
+    "type": "suggestion"
+  },
+  "beauty_salon_2":
+  {
+    "category": "beauty_salon",
+    "isDeleted": 0,
+    "lastUpdate": 0,
+    "options": {
+      "accept": {
+        "text": ""
       },
-      "text": "Let’s be prettier? ;)",
-      "type": "suggestion"
+      "decline": {
+        "text": "I don’t need it"
+      },
+      "negative": {
+        "text": ""
+      }
     },
-    {
-      "category": "book_store",
-      "isDeleted": 0,
-      "lastUpdate": 0,
-      "options": {
-        "accept": {
-          "text": ""
-        },
-        "decline": {
-          "text": "lol"
-        }
+    "text": "Let’s be prettier? ;)",
+    "type": "suggestion"
+  },
+  "book_store_1":
+  {
+    "category": "book_store",
+    "isDeleted": 0,
+    "lastUpdate": 0,
+    "options": {
+      "accept": {
+        "text": ""
       },
-      "text": "Can we go to buy a book?",
-      "type": "suggestion"
+      "decline": {
+        "text": "lol"
+      }
     },
-    {
-      "category": "book_store",
-      "isDeleted": 0,
-      "lastUpdate": 0,
-      "options": {
-        "accept": {
-          "text": "I love books\nlet’s go"
-        },
-        "decline": {
-          "text": ""
-        },
-        "negative": {
-          "text": ""
-        }
+    "text": "Can we go to buy a book?",
+    "type": "suggestion"
+  },
+  "book_store_2":
+  {
+    "category": "book_store",
+    "isDeleted": 0,
+    "lastUpdate": 0,
+    "options": {
+      "accept": {
+        "text": "I love books\nlet’s go"
       },
-      "text": "There are books up for sale here, want to go?",
-      "type": "suggestion"
-    }
-  ]
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "There are books up for sale here, want to go?",
+    "type": "suggestion"
+  }
+}

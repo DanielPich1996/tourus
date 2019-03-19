@@ -90,27 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Tourus/Models/FirebaseModel.swift"
-            timestampString = "574637065.2227859"
+            timestampString = "574698421.356389"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "112"
-            endingLineNumber = "112"
-            landmarkName = "signUp(_:_:_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Tourus/Models/FirebaseModel.swift"
-            timestampString = "574637065.223336"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "130"
-            endingLineNumber = "130"
+            startingLineNumber = "137"
+            endingLineNumber = "137"
             landmarkName = "signIn(_:_:_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -122,7 +106,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Tourus/Models/MainModel.swift"
-            timestampString = "574637065.223725"
+            timestampString = "574698421.356517"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "43"
@@ -138,7 +122,7 @@
                   moduleName = "Tourus"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/admin/Desktop/Tourus/Tourus/Models/MainModel.swift"
-                  timestampString = "574637065.2962559"
+                  timestampString = "574698421.442255"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "43"
@@ -153,7 +137,7 @@
                   moduleName = "Tourus"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/admin/Desktop/Tourus/Tourus/Models/MainModel.swift"
-                  timestampString = "574637065.299557"
+                  timestampString = "574698421.446491"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "44"
@@ -161,22 +145,6 @@
                   offsetFromSymbolStart = "15">
                </Location>
             </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Tourus/Models/FirebaseModel.swift"
-            timestampString = "574637065.223794"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "23"
-            endingLineNumber = "23"
-            landmarkName = "init()"
-            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

@@ -36,11 +36,11 @@ class MainModel {
     }
     
     private func listenToInteractionUpdates() {
-        var lastUpdated = Interaction.getLastUpdateDate(database: sqlModel.database)
-        lastUpdated += 1
+        let lastUpdated = Interaction.getLastUpdateDate(database: sqlModel.database)
+        //lastUpdated += 1
         
-        firebaseModel.getAllInteractionsFromDate(from:-1){ (data:[Interaction]) in
-            self.sqlHandler(data: data) {(isUpdated:Bool) in
+        firebaseModel.getAllInteractionsFromDate(from:lastUpdated) { (data:[Interaction]) in
+            self.sqlHandler(data: data) { (isUpdated:Bool) in
                 if(isUpdated) {
                     //do something?
                 }

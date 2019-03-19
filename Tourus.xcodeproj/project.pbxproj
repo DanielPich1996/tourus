@@ -12,6 +12,7 @@
 		8414695821EA8DA3002967BB /* Attraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8414695721EA8DA3002967BB /* Attraction.swift */; };
 		8414695C21EAA801002967BB /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8414695B21EAA801002967BB /* Category.swift */; };
 		842ACC68223D861A0002D9B1 /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842ACC67223D861A0002D9B1 /* Question.swift */; };
+		842F90292241336100003932 /* org-tourus-acb4d-interactions.json in Resources */ = {isa = PBXBuildFile; fileRef = 842F90282241336100003932 /* org-tourus-acb4d-interactions.json */; };
 		843F5E5921DD55440098FA3E /* FirebaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843F5E5821DD55440098FA3E /* FirebaseModel.swift */; };
 		843F5E5B21DD58B80098FA3E /* MainModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843F5E5A21DD58B80098FA3E /* MainModel.swift */; };
 		843F5E5D21DD593F0098FA3E /* SqlModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843F5E5C21DD593F0098FA3E /* SqlModel.swift */; };
@@ -32,7 +33,6 @@
 		849D3EB121DE8D2D002F74B2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849D3EB021DE8D2D002F74B2 /* LoginViewController.swift */; };
 		849D3EB321DE8F4A002F74B2 /* Consts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849D3EB221DE8F4A002F74B2 /* Consts.swift */; };
 		849D3EB921DE91E2002F74B2 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849D3EB821DE91E2002F74B2 /* UserInfo.swift */; };
-		84A0102D22403CB500BADC55 /* org-tourus-acb4d-interactions.json in Resources */ = {isa = PBXBuildFile; fileRef = 84A0102C22403CB500BADC55 /* org-tourus-acb4d-interactions.json */; };
 		84D2D44721CE6AAC004524D3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D2D44621CE6AAC004524D3 /* AppDelegate.swift */; };
 		84D2D44C21CE6AAC004524D3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84D2D44A21CE6AAC004524D3 /* Main.storyboard */; };
 		84D2D44E21CE6AAE004524D3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84D2D44D21CE6AAE004524D3 /* Assets.xcassets */; };
@@ -71,6 +71,7 @@
 		8414695721EA8DA3002967BB /* Attraction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attraction.swift; sourceTree = "<group>"; };
 		8414695B21EAA801002967BB /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		842ACC67223D861A0002D9B1 /* Question.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
+		842F90282241336100003932 /* org-tourus-acb4d-interactions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "org-tourus-acb4d-interactions.json"; sourceTree = "<group>"; };
 		843F5E5821DD55440098FA3E /* FirebaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseModel.swift; sourceTree = "<group>"; };
 		843F5E5A21DD58B80098FA3E /* MainModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainModel.swift; sourceTree = "<group>"; };
 		843F5E5C21DD593F0098FA3E /* SqlModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SqlModel.swift; sourceTree = "<group>"; };
@@ -91,7 +92,6 @@
 		849D3EB021DE8D2D002F74B2 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		849D3EB221DE8F4A002F74B2 /* Consts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Consts.swift; sourceTree = "<group>"; };
 		849D3EB821DE91E2002F74B2 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
-		84A0102C22403CB500BADC55 /* org-tourus-acb4d-interactions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "org-tourus-acb4d-interactions.json"; sourceTree = "<group>"; };
 		84D2D44321CE6AAC004524D3 /* Tourus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tourus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84D2D44621CE6AAC004524D3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		84D2D44B21CE6AAC004524D3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -243,7 +243,7 @@
 		84A0102B22403C8800BADC55 /* Files */ = {
 			isa = PBXGroup;
 			children = (
-				84A0102C22403CB500BADC55 /* org-tourus-acb4d-interactions.json */,
+				842F90282241336100003932 /* org-tourus-acb4d-interactions.json */,
 			);
 			path = Files;
 			sourceTree = "<group>";
@@ -438,7 +438,7 @@
 				84D2D47521CE6EB8004524D3 /* GoogleService-Info.plist in Resources */,
 				84D2D44E21CE6AAE004524D3 /* Assets.xcassets in Resources */,
 				84D2D44C21CE6AAC004524D3 /* Main.storyboard in Resources */,
-				84A0102D22403CB500BADC55 /* org-tourus-acb4d-interactions.json in Resources */,
+				842F90292241336100003932 /* org-tourus-acb4d-interactions.json in Resources */,
 				8449C6EE21E13D5E002A6AF6 /* loading.gif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
