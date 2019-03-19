@@ -31,32 +31,29 @@ class MainViewController: UIViewController {
     @IBOutlet var settingsInteractionConstraint: NSLayoutConstraint!
     @IBOutlet var optionsBottomConstraint: NSLayoutConstraint!
     
-    var interaction1:Interaction? = nil
-    var interaction2:Interaction? = nil
+    var interaction:Interaction? = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         verticalStackView.spacing = 15.0
         inquiryImage.isHidden = true
         
-        //sample 1 of interaction set:
-        interaction1 = MainModel.instance.getInteraction("bar")
-        //sample 2 of interaction set:
-        let options2:[Interaction.Option] =  [ Interaction.Option(.accept, "Let's go!"), Interaction.Option(.negative, "Not hungry\nbut thanx")]
-        interaction2 = Interaction(.suggestion, "What about a yummy\npizza near by?", options2)
-        
-        setInteraction(interaction1!)
+        interaction = MainModel.instance.getInteraction("bar")
+        setInteraction(interaction!)
     }
     
     var count = 0
     @objc func optionButtonAction( _ button : UIOptionButton)
     {
         //what to do when an option button tapped?
+        interaction = MainModel.instance.getInteraction()
+
         if(count % 2 == 0) {
-            setInteractionwithAnimation(interaction2!)
+            interaction?.type = .question
+            setInteractionwithAnimation(interaction!)
         } else {
-            interaction1 = MainModel.instance.getInteraction()
-            setInteractionwithAnimation(interaction1!)
+            setInteractionwithAnimation(interaction!)
         }
         
         self.count += 1//temp

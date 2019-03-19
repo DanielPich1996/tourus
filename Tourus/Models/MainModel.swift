@@ -59,14 +59,9 @@ class MainModel {
     }
     
     private func listenToOptionUpdates() {
-        var lastUpdated = Interaction.Option.getLastUpdateDate(database: sqlModel.database)
-        lastUpdated += 1
-        
-        firebaseModel.getAllOptionsFromDate(from:lastUpdated) { (data:[Interaction.Option]) in
-            self.sqlOptionsHandler(data: data) { (isUpdated:Bool) in
-                if(isUpdated) {
-                    //do something?
-                }
+        firebaseModel.getAllOptionsFromDate(from:0) { (data:[Interaction.Option]) in
+            self.sqlOptionsHandler(data: data) {
+                //do something?
             }
         }
     }
@@ -96,29 +91,12 @@ class MainModel {
         callback(isUpdated)
     }
     
-    private func sqlOptionsHandler(data:[Interaction.Option], callback: (Bool) -> Void) {
-        //var lastUpdated = Interaction.Option.getLastUpdateDate(database: sqlModel.database)
-        //lastUpdated += 1
-        //var isUpdated = false
-        
+    private func sqlOptionsHandler(data:[Interaction.Option], callback: () -> Void) {
         for option in data {
-            //if(interaction.isDeleted == 1) {
-             //   Interaction.delete(database: self.sqlModel.database, id: interaction.id)
-            //} else {
-                Interaction.Option.addNew(database: self.sqlModel.database, option: option)
-            //}
-            
-           // if(interaction.lastUpdate > lastUpdated) {
-             //   lastUpdated = interaction.lastUpdate
-             //   isUpdated = true
-            //}
+            Interaction.Option.addNew(database: self.sqlModel.database, option: option)
         }
         
-       // if(isUpdated) {
-            //Interaction.setLastUpdateDate(database: self.sqlModel.database, date: lastUpdated)
-       // }
-        
-        //callback(isUpdated)
+        callback()
     }
     
     func getUserInfo(_ uid:String, callback:@escaping (UserInfo?) -> Void) {
