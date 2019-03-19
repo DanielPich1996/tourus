@@ -56,7 +56,7 @@ extension Interaction {
                 for option in splited_options {
                     let option_data:[String] = option.components(separatedBy: "||")
                     if(option_data.count == 2) {
-                        var text:String = ""
+                        var text:String = option_data[1]
                         if(option_data[1] == "") {
                             text = Interaction.Option.get(database: database, type: option_data[0])?.text ?? ""
                         }

@@ -116,14 +116,12 @@ class Interaction {
             self.type = OptionType(rawValue: type) ?? .neutral
             self.text = text
             
-             checkTextEmpty()
+            checkTextEmpty()
         }
 
         init(_ type:String, _ details:[String:Any]) {
             self.type = OptionType(rawValue: type) ?? .neutral
             self.text = details["text"] as! String
-            
-             checkTextEmpty()
         }
         
         func toJson() -> [String:Any] {
