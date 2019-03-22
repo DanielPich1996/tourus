@@ -99,6 +99,11 @@ class MainModel {
         callback()
     }
     
+    func getAdditionalOptionText(_ category:String) -> String {
+        //return Interaction.Option.get(database: self.sqlModel.database, type: type.rawValue)?.text ?? type.defaultString
+    return ""
+    }
+    
     func getUserInfo(_ uid:String, callback:@escaping (UserInfo?) -> Void) {
         firebaseModel.getUserInfo(uid) { (info:UserInfo?) in
             if(info != nil) {
@@ -168,5 +173,25 @@ class MainModel {
     
     func currentUser() -> User? {
         return firebaseModel.currentUser()
+    }
+    
+    private func downloadImageData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
+        URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
+    }
+    
+    func getImage(_ url: URL, _ alpha:CGFloat, _ callback: @escaping (UIImage?) -> Void) {
+        print("Download Started")
+        downloadImageData(from: url) { data, response, error in
+            guard let data = data, error == nil else { return }
+            print(response?.suggestedFilename ?? url.lastPathComponent)
+            print("Download Finished")
+            DispatchQueue.main.async() {
+                var image = UIImage(data: data)
+                if(image != nil) {
+                    image = image!.alpha(alpha)
+                }
+                callback(image)
+            }
+        }
     }
 }

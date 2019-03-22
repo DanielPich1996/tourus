@@ -16,10 +16,12 @@ extension UIColor
     static var negativeColor:UIColor { return UIColor(red: 202.0/255.0, green: 100.0/255.0, blue: 100.0/255.0, alpha: 1.0) }
     static var neutralColor:UIColor { return UIColor(red: 239.0/255.0, green: 228.0/255.0, blue: 176.0/255.0, alpha: 1.0) }
     static var opinionlessColor:UIColor { return UIColor(red: 152.0/255.0, green: 127.0/255.0, blue: 231.0/255.0, alpha: 1.0) }
+    static var additionalColor:UIColor { return UIColor(red: 140.0/255.0, green: 127.0/255.0, blue: 231.0/255.0, alpha: 1.0) }
     
     static var acceptLightColor:UIColor { return UIColor(red: 233.0/255.0, green: 252.0/255.0, blue: 252.0/255.0, alpha: 1.0) }
     static var declineLightColor:UIColor { return UIColor(red: 255.0/255.0, green: 239.0/255.0, blue: 231.0/255.0, alpha: 1.0) }
     static var negativeLightColor:UIColor { return UIColor(red: 222.0/255.0, green: 162.0/255.0, blue: 162.0/255.0, alpha: 1.0) }
     static var neutralLightColor:UIColor { return UIColor(red: 255.0/255.0, green: 252.0/255.0, blue: 234.0/255.0, alpha: 1.0) }
     static var opinionlessLightColor:UIColor { return UIColor(red: 235.0/255.0, green: 213.0/255.0, blue: 241.0/255.0, alpha: 1.0) }
+    static var additionalLightColor:UIColor { return UIColor(red: 220.0/255.0, green: 213.0/255.0, blue: 241.0/255.0, alpha: 1.0) }
 }
