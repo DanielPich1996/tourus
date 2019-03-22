@@ -63,6 +63,13 @@ class Interaction {
         }
     }
     
+    func addAdditionalOption(_ category:String, _ id:String) {
+        let maniCategory = category.replacingOccurrences(of: "_", with: " ").capitalized + "?"
+        let option = Interaction.Option(.additional, maniCategory, id)
+        
+        options.append(option)
+    }
+    
     func toJson() -> [String:Any] {
         var json = [String:Any]()
         
@@ -97,10 +104,11 @@ class Interaction {
         var type:OptionType
         var text:String
         
-        init(_ type:OptionType, _ text:String) {
+        init(_ type:OptionType, _ text:String, _ id:String = "") {
             self.type = type
             self.text = text
-            
+            self.id = id
+
             checkTextEmpty()
         }
         
@@ -156,12 +164,7 @@ enum OptionType : String {
     case negative
     case neutral
     case opinionless
-    
-    case similiar
-    case food
-    case extreme
-    case relaxing
-    case nature
+    case additional
     
     var color: UIColor {
         switch self {
@@ -175,16 +178,8 @@ enum OptionType : String {
             return .neutralColor
         case .opinionless:
             return .opinionlessColor
-        case .similiar:
-            return .neutralColor
-        case .food:
-            return .neutralColor
-        case .extreme:
-            return .neutralColor
-        case .relaxing:
-            return .neutralColor
-        case .nature:
-            return .neutralColor
+        case .additional:
+             return .additionalColor
         }
     }
     
@@ -200,16 +195,8 @@ enum OptionType : String {
             return .neutralLightColor
         case .opinionless:
             return .opinionlessLightColor
-        case .similiar:
-            return .neutralLightColor
-        case .food:
-            return .neutralLightColor
-        case .extreme:
-            return .neutralLightColor
-        case .relaxing:
-            return .neutralLightColor
-        case .nature:
-            return .neutralLightColor
+        case .additional:
+            return .additionalLightColor
         }
     }
     
@@ -225,15 +212,7 @@ enum OptionType : String {
             return 0
         case .opinionless:
             return 0
-        case .similiar:
-            return 0
-        case .food:
-            return 0
-        case .extreme:
-            return 0
-        case .relaxing:
-            return 0
-        case .nature:
+        case .additional:
             return 0
         }
     }
@@ -250,16 +229,8 @@ enum OptionType : String {
             return "Whateve"
         case .opinionless:
             return "I don't care"
-        case .similiar:
-            return "Something similiar?"
-        case .food:
-            return "Food?"
-        case .extreme:
-            return "Extreme?"
-        case .relaxing:
-            return "Relaxing?"
-        case .nature:
-            return "Nature?"
+        case .additional:
+            return "Something else?"
         }
     }
 }

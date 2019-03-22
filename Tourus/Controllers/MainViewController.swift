@@ -12,7 +12,9 @@ class MainViewController: UIViewController {
     let optionButtonMinHeight = 20
     let optionButtonSpace = 10
     let minimumBottomConstraint:CGFloat = -30
-    
+    let defaultInfoImage:UIImage? = UIImage(named: "no_image") ?? nil
+    let backgroundImage:UIImageView = UIImageView(frame: UIScreen.main.bounds)
+
     // MARK:Outlets
     @IBOutlet var settingsBtn: UIButton!
     @IBOutlet var mainView: UIView!
@@ -35,10 +37,13 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         verticalStackView.spacing = 15.0
         inquiryImage.isHidden = true
         
+        addBackgroundImage()
+        
+        //temp code for testing:
         interaction = MainModel.instance.getInteraction("bar")        
         setInteraction(interaction!)
     }
@@ -64,22 +69,24 @@ class MainViewController: UIViewController {
     }
 
     // MARK:Background image funcs
-    private func setBackroundImage(_ image:UIImage?) {
-        if let preImageView = self.view.viewWithTag(100) {
-            preImageView.removeFromSuperview()
-        }
-        
-        if (image != nil) {
-            let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
-            backgroundImage.tag = 100
-            backgroundImage.image = image!
-            backgroundImage.contentMode = UIView.ContentMode.scaleAspectFill
-            backgroundImage.alpha = 0.0
-            
-            self.view.insertSubview(backgroundImage, at: 0)
-        }
+    private func removeMainImage() {
+        self.backgroundImage.image = nil
     }
-
+    
+    private func removeInfoImage() {
+        self.moreInfoImage.image = defaultInfoImage
+    }
+    
+    private func setBackroundImage(_ image:UIImage?) {
+        removeMainImage()
+        self.backgroundImage.image = image
+    }
+    
+    private func setInfoImage(_ image:UIImage?) {
+        removeInfoImage()
+        self.moreInfoImage.image = image
+    }
+    
     // MARK:interaction setting funcs
     func setInteractionwithAnimation(_ interaction:Interaction) {
         optionsView.fadeOut()
@@ -109,24 +116,34 @@ class MainViewController: UIViewController {
         var bottomConstraint:CGFloat = 0
         var interactionBackOpacity:CGFloat = 0
         
+        removeMainImage()
+        removeInfoImage()
+        
         switch interaction.type {
         case .question:
             do {
                 bottomConstraint = (self.view.frame.height / 5 - moreInfoView.frame.height) * -1
                 moreInfoView.isHidden = true
-                setBackroundImage(nil)
             }
         case .info:
             do {
                 bottomConstraint = (self.view.frame.height / 5 - moreInfoView.frame.height) * -1
                 moreInfoView.isHidden = true
-                setBackroundImage(nil)
             }
         case .suggestion:
             do {
                 interactionBackOpacity = 0.3
                 moreInfoView.isHidden = false
-                setBackroundImage(UIImage(named: "pizza")!.alpha(0.3)) //temp pic
+                
+                if(interaction.place != nil && interaction.place!.picturesUrls != nil && interaction.place!.picturesUrls!.count > 0) {
+                    let mainImageUrl = URL(string: interaction.place!.picturesUrls![0])!
+                    MainModel.instance.getImage(mainImageUrl, 0.3, setBackroundImage)
+                    
+                    if(interaction.place!.picturesUrls!.count > 1) {
+                        let infoImageUrl = URL(string: interaction.place!.picturesUrls![1])!
+                        MainModel.instance.getImage(infoImageUrl, 1, setInfoImage)
+                    }
+                }
             }
         }
         
@@ -196,4 +213,10 @@ class MainViewController: UIViewController {
         self.view.layoutIfNeeded()
     }
     
+    private func addBackgroundImage() {
+        backgroundImage.tag = 100
+        backgroundImage.contentMode = UIView.ContentMode.scaleAspectFill
+        backgroundImage.alpha = 0.0
+        self.view.insertSubview(backgroundImage, at: 0)
+    }
 }
