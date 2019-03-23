@@ -21,7 +21,15 @@ class MainModel {
         listenToOptionUpdates()
         listenToInteractionUpdates()
     }
-   
+    
+    func getCurrentUserHistory(_ callback:@escaping ([String : Double]?) -> Void){
+        firebaseModel.getCurrentUserHistory(callback)
+    }
+    
+    func updateUserHistory(_ category:String ,_ addedvalue:Double){
+        firebaseModel.updateUserHistory(category,addedvalue)
+    }
+    
     func signIn(_ email:String, _ password:String, _ callback:@escaping (Bool)->Void)
     {
         firebaseModel.signIn(email, password, callback)

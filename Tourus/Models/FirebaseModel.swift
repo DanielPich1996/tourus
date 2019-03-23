@@ -19,7 +19,10 @@ class FirebaseModel {
     init() {
         FirebaseApp.configure()
         databaseRef = Database.database().reference()
+  
+        updateUserHistory("zoo" ,1)
     }
+    
     
     func getAllInteractionsFromDate(from:Double, callback:@escaping ([Interaction])->Void) {        
         let stRef = databaseRef.child(consts.names.interactionsTableName)
@@ -168,4 +171,43 @@ class FirebaseModel {
     func currentUser() -> User? {
         return Auth.auth().currentUser
     }
+    
+    
+    func getCurrentUserHistory(_ callback:@escaping ([String : Double]?) -> Void) {
+        let user = currentUser()
+       
+        if(user != nil){
+        self.databaseRef!.child(consts.names.userInfoTableName).child(user!.uid).child("History").observe(.value){ (snapshot)       in
+                if snapshot.exists() {
+                    if let value = snapshot.value as? [String : Double]{
+                    callback(value)
+                    }
+                }
+                else {
+                    callback(nil)
+                }
+            }
+        }
+    }
+    func updateUserHistory(_ category:String ,_ addedvalue:Double) {
+        let user = currentUser()
+       
+        if(user != nil) {
+        let db = self.databaseRef!.child(consts.names.userInfoTableName).child(user!.uid).child("History").child(category)
+        
+            //fix- check if the category exists
+            db.observeSingleEvent(of: .value, with: { (snapshot) in
+            if snapshot.exists() {
+                if let value = snapshot.value as? Double {
+                    db.setValue(value + addedvalue)
+                }
+            }
+            
+            
+        })
+    }
+    
+    }
+    
+
 }
