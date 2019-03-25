@@ -14,9 +14,7 @@ class PlacesModel {
     var placesClient: GMSPlacesClient! = GMSPlacesClient.shared()
 
     init() {
-        enableLocationServices()
-        
-        GetCurrentPlace(callback: { place in () })
+        enableLocationServices()        
     }
     
     private func enableLocationServices() {
@@ -56,5 +54,49 @@ class PlacesModel {
                 }
             }
         })
+    }
+    
+    //A function that returns only if user is leaving the place.
+    func isLeavingPlace() {
+        var isStillThere = true
+        var probablyFirstPlace : String?
+        var probablySecondPlace : String?
+
+        // Specify the place data types to return.
+        let fields: GMSPlaceField = GMSPlaceField(rawValue: UInt(GMSPlaceField.name.rawValue) |
+            UInt(GMSPlaceField.placeID.rawValue))!
+        placesClient?.findPlaceLikelihoodsFromCurrentLocation(withPlaceFields: fields, callback: {
+            (placeLikelihoodList: Array<GMSPlaceLikelihood>?, error: Error?) in
+            if let error = error {
+                print("An error occurred: \(error.localizedDescription)")
+                return
+            }
+            
+            
+            if let placeLikelihoodList = placeLikelihoodList {
+                
+                probablyFirstPlace = placeLikelihoodList.first?.place.placeID
+            }
+        })
+    
+        while isStillThere {
+            sleep(10)
+            placesClient?.findPlaceLikelihoodsFromCurrentLocation(withPlaceFields: fields, callback: {
+                (placeLikelihoodList: Array<GMSPlaceLikelihood>?, error: Error?) in
+                if let error = error {
+                    print("An error occurred: \(error.localizedDescription)")
+                    return
+                }
+                
+                if let placeLikelihoodList = placeLikelihoodList {
+                    
+                    probablySecondPlace = placeLikelihoodList.first?.place.placeID
+                }
+            })
+            
+            if probablyFirstPlace != probablySecondPlace {
+                isStillThere = false
+            }
+        }
     }
 }
