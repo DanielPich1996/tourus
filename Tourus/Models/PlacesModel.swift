@@ -14,7 +14,7 @@ class PlacesModel {
     var placesClient: GMSPlacesClient! = GMSPlacesClient.shared()
 
     init() {
-        enableLocationServices()        
+        enableLocationServices()
     }
     
     private func enableLocationServices() {
@@ -80,7 +80,6 @@ class PlacesModel {
         })
     
         while isStillThere {
-            sleep(10)
             placesClient?.findPlaceLikelihoodsFromCurrentLocation(withPlaceFields: fields, callback: {
                 (placeLikelihoodList: Array<GMSPlaceLikelihood>?, error: Error?) in
                 if let error = error {
@@ -97,6 +96,8 @@ class PlacesModel {
             if probablyFirstPlace != probablySecondPlace {
                 isStillThere = false
             }
+            
+            sleep(10)
         }
     }
 }
