@@ -49,8 +49,7 @@ class MainViewController: UIViewController {
     }
     
     var count = 0
-    @objc func optionButtonAction( _ button : UIOptionButton)
-    {
+    @objc func optionButtonAction( _ button : UIOptionButton) {
         //what to do when an option button tapped?
         interaction = MainModel.instance.getInteraction()
 
