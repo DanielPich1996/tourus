@@ -17,6 +17,8 @@
 		843F5E5F21DD59C60098FA3E /* NotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843F5E5E21DD59C60098FA3E /* NotificationModel.swift */; };
 		8440930D222AD2F1007E058D /* PlacesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8440930C222AD2F1007E058D /* PlacesModel.swift */; };
 		8440930F222AE7EB007E058D /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8440930E222AE7EB007E058D /* Place.swift */; };
+		8448D806224F6CC800594661 /* GooglePlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8448D805224F6CC800594661 /* GooglePlace.swift */; };
+		8448D808224F95F700594661 /* GooglePlacesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8448D807224F95F700594661 /* GooglePlacesResponse.swift */; };
 		8449C6E121E13280002A6AF6 /* BuisyIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8449C6E021E13280002A6AF6 /* BuisyIndicator.swift */; };
 		8449C6E421E1362C002A6AF6 /* UiImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8449C6E321E1362C002A6AF6 /* UiImageExtension.swift */; };
 		8449C6EE21E13D5E002A6AF6 /* loading.gif in Resources */ = {isa = PBXBuildFile; fileRef = 8449C6ED21E13D5D002A6AF6 /* loading.gif */; };
@@ -75,6 +77,8 @@
 		843F5E5E21DD59C60098FA3E /* NotificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationModel.swift; sourceTree = "<group>"; };
 		8440930C222AD2F1007E058D /* PlacesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesModel.swift; sourceTree = "<group>"; };
 		8440930E222AE7EB007E058D /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
+		8448D805224F6CC800594661 /* GooglePlace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GooglePlace.swift; sourceTree = "<group>"; };
+		8448D807224F95F700594661 /* GooglePlacesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GooglePlacesResponse.swift; sourceTree = "<group>"; };
 		8449C6E021E13280002A6AF6 /* BuisyIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuisyIndicator.swift; sourceTree = "<group>"; };
 		8449C6E321E1362C002A6AF6 /* UiImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UiImageExtension.swift; sourceTree = "<group>"; };
 		8449C6ED21E13D5D002A6AF6 /* loading.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = loading.gif; sourceTree = "<group>"; };
@@ -166,6 +170,7 @@
 		843F5E5521DD54D10098FA3E /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				8448D809224F981B00594661 /* Google */,
 				8458503121E3D38100DF7C68 /* Segue */,
 				8458503021E3D16200DF7C68 /* Controls */,
 				84E3672B21E1577200122FD8 /* SQL */,
@@ -204,6 +209,15 @@
 				84E3673021E15EC500122FD8 /* SBCardPopupViewController.swift */,
 			);
 			path = "Controls Controllers";
+			sourceTree = "<group>";
+		};
+		8448D809224F981B00594661 /* Google */ = {
+			isa = PBXGroup;
+			children = (
+				8448D807224F95F700594661 /* GooglePlacesResponse.swift */,
+				8448D805224F6CC800594661 /* GooglePlace.swift */,
+			);
+			path = Google;
 			sourceTree = "<group>";
 		};
 		8449C6E221E13603002A6AF6 /* Extensions */ = {
@@ -571,6 +585,7 @@
 				842F902B22416C8600003932 /* OptionSqlExtension.swift in Sources */,
 				849D3EAF21DE8D18002F74B2 /* RegisterViewController.swift in Sources */,
 				843F5E5921DD55440098FA3E /* FirebaseModel.swift in Sources */,
+				8448D806224F6CC800594661 /* GooglePlace.swift in Sources */,
 				8458502D21E3CA5500DF7C68 /* UIOptionButton.swift in Sources */,
 				8458503521E3E51200DF7C68 /* UIColorExtension.swift in Sources */,
 				8449C6E421E1362C002A6AF6 /* UiImageExtension.swift in Sources */,
@@ -580,6 +595,7 @@
 				8449C6F021E14093002A6AF6 /* SettingsViewController.swift in Sources */,
 				845D1F8F223FEC2000C73585 /* InteractionSqlExtension.swift in Sources */,
 				84E3672D21E1578A00122FD8 /* LastUpdateSplDates.swift in Sources */,
+				8448D808224F95F700594661 /* GooglePlacesResponse.swift in Sources */,
 				8458503321E3D85900DF7C68 /* Interaction.swift in Sources */,
 				843F5E5D21DD593F0098FA3E /* SqlModel.swift in Sources */,
 				8449C6E121E13280002A6AF6 /* BuisyIndicator.swift in Sources */,
