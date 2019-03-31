@@ -154,7 +154,7 @@ class MainModel {
     }
     
     func getPlaseImage(_ placeId:String, _ maxwidth:Int, _ callback:@escaping (UIImage?)->Void) {
-        placesModel.fetchGoogleNearbyPlacesPhoto(placeId, 50, callback)
+        placesModel.fetchGoogleNearbyPlacesPhoto(placeId, maxwidth, callback)
     }
     
     func saveImageToFile(image:UIImage, name:String){
