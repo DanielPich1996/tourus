@@ -17,16 +17,6 @@ class PlacesModel {
         enableLocationServices()
         
         GetCurrentPlace(callback: { place in () })
-        
-        //NSURL googlePlacesURL = [NSURL (fileURLWithPath: "https://maps.googleapis.com/maps/api/place/search/json?location9=34.0522222,-118.2427778&radius=500&types=museum|art_gallery&sensor=false&key=AIzaSyBjnEwXHsPT3DafV_Ud2BKrscJQ_ll0XRI")]
-        
-        //googlePlacesResult()
-        fetchGoogleNearbyPlaces(key: "AIzaSyChHqn4cqme0MTgu6QRmaJHppcGs_NbeIc",location: "-33.8670522,151.1957362",radius: 1500) {
-            (places:[Place]?, err:String?) in
-            if(places != nil) {
-                places?.forEach { place in print(place)}
-            }
-        }
     }
     
     
@@ -57,6 +47,8 @@ class PlacesModel {
             }
             }.resume()
     }
+    
+    
     
     private func enableLocationServices() {
         let status = CLLocationManager.authorizationStatus()

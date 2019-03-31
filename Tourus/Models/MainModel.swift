@@ -194,4 +194,8 @@ class MainModel {
             }
         }
     }
+    
+    func fetchNearbyPlaces(location: String, radius: Int, callback: @escaping ([Place]?, String?) -> Void){
+        placesModel.fetchGoogleNearbyPlaces(key: "AIzaSyChHqn4cqme0MTgu6QRmaJHppcGs_NbeIc",location: location ,radius: radius, callback: callback);
+    }
 }
