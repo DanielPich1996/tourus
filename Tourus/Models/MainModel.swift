@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import Firebase
+import GooglePlaces
 
 class MainModel {
     static let instance:MainModel = MainModel()
@@ -150,6 +151,10 @@ class MainModel {
                 print("got image from firebase \(localImageName)")
             }
         }
+    }
+    
+    func getPlaseImage(_ placeId:String, _ callback:@escaping (UIImage?)->Void) {
+        placesModel.fetchGoogleNearbyPlacesPhoto(placeId, callback)
     }
     
     func saveImageToFile(image:UIImage, name:String){

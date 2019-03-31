@@ -12,7 +12,8 @@ import GooglePlaces
 class Place {
     var name:String = ""
     var address:String = ""
-    var picturesUrls:[String]? = nil
+    var picturesUrls:[String] = [String]()
+    var photos: [Photo]?
     var rating: Double? = nil
     var ratingsAmount: Int? = nil
     var priceLevel: Int? = nil
@@ -35,6 +36,12 @@ class Place {
             priceLevel = googlePlace?.price_level
             types = googlePlace?.types
             isOpen = googlePlace?.opening_hours?.open_now
+            photos = googlePlace?.photos
+            if let photos = googlePlace!.photos {
+                for photo in photos{
+                    picturesUrls.append(photo.photoReference!)
+                }
+            }
         }
     }
 }
