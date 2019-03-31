@@ -134,12 +134,12 @@ class MainViewController: UIViewController {
                 interactionBackOpacity = 0.3
                 moreInfoView.isHidden = false
                 
-                if(interaction.place != nil && interaction.place!.picturesUrls != nil && interaction.place!.picturesUrls!.count > 0) {
-                    let mainImageUrl = URL(string: interaction.place!.picturesUrls![0])!
+                if(interaction.place != nil  && interaction.place!.picturesUrls.count > 0) {
+                    let mainImageUrl = URL(string: interaction.place!.picturesUrls[0])!
                     MainModel.instance.getImage(mainImageUrl, 0.3, setBackroundImage)
-                    
-                    if(interaction.place!.picturesUrls!.count > 1) {
-                        let infoImageUrl = URL(string: interaction.place!.picturesUrls![1])!
+
+                    if(interaction.place!.picturesUrls.count > 1) {
+                        let infoImageUrl = URL(string: interaction.place!.picturesUrls[1])!
                         MainModel.instance.getImage(infoImageUrl, 1, setInfoImage)
                     }
                 }

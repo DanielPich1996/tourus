@@ -12,6 +12,8 @@ import GooglePlaces
 class PlacesModel {
     let locationManager = CLLocationManager()
     var placesClient: GMSPlacesClient! = GMSPlacesClient.shared()
+    var currPlace : Place? = nil
+    let apiWebKey = "AIzaSyChHqn4cqme0MTgu6QRmaJHppcGs_NbeIc"
     
     init() {
         enableLocationServices()
@@ -26,6 +28,7 @@ class PlacesModel {
         urlString+="location="+location
         urlString+="&radius="+String(radius)
         urlString+="&key="+key
+        urlString+="&fields=photos" //,formatted_address,name,rating,opening_hours"
         
         let urlObj = URL(string: urlString)
         URLSession.shared.dataTask(with: urlObj!) {(data, response, error) in
@@ -48,7 +51,33 @@ class PlacesModel {
             }.resume()
     }
     
-    
+    func fetchGoogleNearbyPlacesPhoto(_ reference:String, _ maxwidth:Int,_ callback: @escaping (UIImage?) -> Void) {
+
+        // Method 3
+        let urlString = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=\(maxwidth)&photoreference=\(reference)&key=\(apiWebKey)"
+        let url = URL(string: urlString)
+        
+        DispatchQueue.main.async {
+            UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        }
+        
+        URLSession.shared.downloadTask(with: url!) { url, response, error in
+            var downloadedPhoto: UIImage? = nil
+            defer {
+                DispatchQueue.main.async {
+                    UIApplication.shared.isNetworkActivityIndicatorVisible = false
+                }
+            }
+            guard let url = url else {
+                return
+            }
+            guard let imageData = try? Data(contentsOf: url) else {
+                return
+            }
+            downloadedPhoto = UIImage(data: imageData)
+            callback(downloadedPhoto)
+        }.resume()
+    }
     
     private func enableLocationServices() {
         let status = CLLocationManager.authorizationStatus()
