@@ -13,23 +13,12 @@ class PlacesModel {
     let locationManager = CLLocationManager()
     var placesClient: GMSPlacesClient! = GMSPlacesClient.shared()
     var currPlace : Place? = nil
+    let apiWebKey = "AIzaSyChHqn4cqme0MTgu6QRmaJHppcGs_NbeIc"
     
     init() {
         enableLocationServices()
         
         GetCurrentPlace(callback: { place in () })
-        
-        //NSURL googlePlacesURL = [NSURL (fileURLWithPath: "https://maps.googleapis.com/maps/api/place/search/json?location9=34.0522222,-118.2427778&radius=500&types=museum|art_gallery&sensor=false&key=AIzaSyBjnEwXHsPT3DafV_Ud2BKrscJQ_ll0XRI")]
-        
-        //googlePlacesResult()
-        fetchGoogleNearbyPlaces(key: "AIzaSyChHqn4cqme0MTgu6QRmaJHppcGs_NbeIc",location: "-33.8670522,151.1957362",radius: 500) {
-            (places:[Place]?, err:String?) in
-            if(places != nil) {
-                places?.forEach { place in
-                    self.fetchGoogleNearbyPlacesPhoto(place.picturesUrls[0], {(image) in  })
-                    print(place)}
-            }
-        }
     }
     
     
@@ -62,48 +51,10 @@ class PlacesModel {
             }.resume()
     }
     
-    func fetchGoogleNearbyPlacesPhoto(_ reference:String, _ callback: @escaping (UIImage?) -> Void) {
-//        //Method 1
-//        var photoMetadata : GMSPlacePhotoMetadata = photo
-//        self.placesClient?.loadPlacePhoto(photoMetadata, callback: { (photo, error) -> Void in
-//            if let error = error {
-//                // TODO: Handle the error.
-//                print("Error loading photo metadata: \(error.localizedDescription)")
-//                return
-//            } else {
-//                callback(photo)
-//            }
-//        })
-//
-//
-//        // Method 2
-//        let fields: GMSPlaceField = GMSPlaceField(rawValue: UInt(GMSPlaceField.photos.rawValue))!
-//
-//        placesClient?.fetchPlace(fromPlaceID: placeID, placeFields: fields, sessionToken: nil, callback: {
-//                                (place: GMSPlace?, error: Error?) in
-//                                    if let error = error {
-//                                        print("An error occurred: \(error.localizedDescription)")
-//                                        return
-//                                    }
-//                                    if let place = place {
-//                                        // Get the metadata for the first photo in the place photo metadata list.
-//                                        let photoMetadata: GMSPlacePhotoMetadata = place.photos![0]
-//
-//                                        // Call loadPlacePhoto to display the bitmap and attribution.
-//                                        self.placesClient?.loadPlacePhoto(photoMetadata, callback: { (photo, error) -> Void in
-//                                            if let error = error {
-//                                                // TODO: Handle the error.
-//                                                print("Error loading photo metadata: \(error.localizedDescription)")
-//                                                return
-//                                            } else {
-//                                                // Display the first image and its attributions.
-//                                               callback(photo)
-//                                            }
-//                                        })
-//                                    }
-//        })
+    func fetchGoogleNearbyPlacesPhoto(_ reference:String, _ maxwidth:Int,_ callback: @escaping (UIImage?) -> Void) {
+
         // Method 3
-        let urlString = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=200&photoreference=\(reference)&key=AIzaSyChHqn4cqme0MTgu6QRmaJHppcGs_NbeIc"
+        let urlString = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=\(maxwidth)&photoreference=\(reference)&key=\(apiWebKey)"
         let url = URL(string: urlString)
         
         DispatchQueue.main.async {
@@ -166,6 +117,4 @@ class PlacesModel {
             }
         })
     }
-    
-    
 }
