@@ -13,6 +13,7 @@ class Place {
     var name:String = ""
     var address:String = ""
     var picturesUrls:[String] = [String]()
+    var googleID: String? = nil
     var rating: Double? = nil
     var ratingsAmount: Int? = nil
     var priceLevel: Int? = nil
@@ -31,6 +32,7 @@ class Place {
         if googlePlace != nil {
             name = googlePlace!.name ?? ""
             address = String(googlePlace!.geometry.location.lat) + "," + String(googlePlace!.geometry.location.lng)
+            googleID = googlePlace?.place_id
             rating = googlePlace?.rating
             ratingsAmount = googlePlace?.user_ratings_total
             priceLevel = googlePlace?.price_level
