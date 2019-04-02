@@ -6,15 +6,18 @@
 //  Copyright © 2019 Tourus. All rights reserved.
 //
 import UIKit
+import CoreLocation
 
-class MainViewController: UIViewController {
+class MainViewController: UIViewController, CLLocationManagerDelegate {
+    
     // MARK:Local const props
     let optionButtonMinHeight = 20
     let optionButtonSpace = 10
     let minimumBottomConstraint:CGFloat = -30
     let defaultInfoImage:UIImage? = UIImage(named: "no_image") ?? nil
     let backgroundImage:UIImageView = UIImageView(frame: UIScreen.main.bounds)
-
+    let locationManager = CLLocationManager()
+    
     // MARK:Outlets
     @IBOutlet var settingsBtn: UIButton!
     @IBOutlet var mainView: UIView!
@@ -34,13 +37,14 @@ class MainViewController: UIViewController {
     @IBOutlet var optionsBottomConstraint: NSLayoutConstraint!
     
     var interaction:Interaction? = nil
+    var currUserLocation:CLLocation? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         verticalStackView.spacing = 15.0
         inquiryImage.isHidden = true
-        
+        initLocationManager()
         addBackgroundImage()
         
         //temp code for testing:
@@ -135,8 +139,7 @@ class MainViewController: UIViewController {
                 moreInfoView.isHidden = false
                 
                 if(interaction.place != nil  && interaction.place!.picturesUrls.count > 0) {
-                    let mainImageUrl = URL(string: interaction.place!.picturesUrls[0])!
-                    MainModel.instance.getImage(mainImageUrl, 0.3, setBackroundImage)
+                    MainModel.instance.getPlaceImage(interaction.place!.picturesUrls[0], 400, setBackroundImage)
 
                     if(interaction.place!.picturesUrls.count > 1) {
                         let infoImageUrl = URL(string: interaction.place!.picturesUrls[1])!
@@ -217,5 +220,59 @@ class MainViewController: UIViewController {
         backgroundImage.contentMode = UIView.ContentMode.scaleAspectFill
         backgroundImage.alpha = 0.0
         self.view.insertSubview(backgroundImage, at: 0)
+    }
+    
+    ///MARK: Location Manager Functions
+    func initLocationManager() {
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+        enableLocationServices()
+        locationManager.startUpdatingLocation()
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let location = locations[locations.count - 1]
+        if location.horizontalAccuracy > 0 && currUserLocation == nil {
+            currUserLocation = location
+            locationManager.stopUpdatingLocation()
+            let strLocation = "\(location.coordinate.latitude),\(location.coordinate.longitude)"
+            MainModel.instance.fetchNearbyPlaces(location: strLocation, type:"restaurant", callback: {(places, error) in
+                print(places!)
+            })
+        }
+    }
+    
+    
+    //Write the didFailWithError method here:
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print(error)
+    }
+    
+    func updateLocation(){
+        currUserLocation = nil
+        locationManager.startUpdatingLocation()
+    }
+    
+    private func enableLocationServices() {
+        let status = CLLocationManager.authorizationStatus()
+        
+        switch status {
+        case .notDetermined:
+            // Request when-in-use authorization initially
+            locationManager.requestAlwaysAuthorization()
+            break
+            
+        case .restricted, .denied:
+            // Disable location features
+            break
+            
+        case .authorizedWhenInUse:
+            // Enable basic location features
+            break
+            
+        case .authorizedAlways:
+            // Enable any of your app's location features
+            break
+        }
     }
 }

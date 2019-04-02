@@ -19,7 +19,8 @@ class Place {
     var priceLevel: Int? = nil
     var types: [String]? = nil
     var isOpen: Bool? = nil
-
+    var location:String? = nil //format : lat,lng
+    
     init(googlePlace:GMSPlace?) {
         if googlePlace != nil {
             name = googlePlace!.name!
@@ -37,6 +38,7 @@ class Place {
             priceLevel = googlePlace?.price_level
             types = googlePlace?.types
             isOpen = googlePlace?.opening_hours?.open_now
+            location = "\(String(describing: googlePlace?.geometry.location.lat)),\(String(describing: googlePlace?.geometry.location.lng))"
             if let photos = googlePlace!.photos {
                 for photo in photos{
                     picturesUrls.append(photo.photoReference!)
