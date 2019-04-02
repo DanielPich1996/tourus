@@ -153,7 +153,7 @@ class MainModel {
         }
     }
     
-    func getPlaseImage(_ placeId:String, _ maxwidth:Int, _ callback:@escaping (UIImage?)->Void) {
+    func getPlaceImage(_ placeId:String, _ maxwidth:Int, _ callback:@escaping (UIImage?)->Void) {
         placesModel.fetchGoogleNearbyPlacesPhoto(placeId, maxwidth, callback)
     }
     
@@ -200,7 +200,7 @@ class MainModel {
         }
     }
     
-    func fetchNearbyPlaces(location: String, radius: Int, callback: @escaping ([Place]?, String?) -> Void){
-        placesModel.fetchGoogleNearbyPlaces(key: "AIzaSyChHqn4cqme0MTgu6QRmaJHppcGs_NbeIc",location: location ,radius: radius, callback: callback);
+    func fetchNearbyPlaces(location: String, radius:Int = 3000, type:String?=nil, isOpen:Bool=true, callback: @escaping ([Place]?, String?) -> Void){
+        placesModel.fetchGoogleNearbyPlaces(location: location ,radius: radius, type:type, isOpen:isOpen, callback: callback);
     }
 }

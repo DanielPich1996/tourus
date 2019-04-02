@@ -10,25 +10,31 @@ import Foundation
 import GooglePlaces
 
 class PlacesModel {
-    let locationManager = CLLocationManager()
     var placesClient: GMSPlacesClient! = GMSPlacesClient.shared()
     var currPlace : Place? = nil
     let apiWebKey = "AIzaSyChHqn4cqme0MTgu6QRmaJHppcGs_NbeIc"
+    let maxW = 200
     
     init() {
-        enableLocationServices()
         
-        GetCurrentPlace(callback: { place in () })
     }
     
     
     
-    func fetchGoogleNearbyPlaces(key: String!, location: String!, radius: Int!, callback: @escaping ([Place]?, String?) -> Void) {
+    func fetchGoogleNearbyPlaces(location: String!, radius: Int!, type:String? = nil, isOpen:Bool?=true, callback: @escaping ([Place]?, String?) -> Void) {
         var urlString = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?"
         urlString+="location="+location
         urlString+="&radius="+String(radius)
-        urlString+="&key="+key
-        urlString+="&fields=photos" //,formatted_address,name,rating,opening_hours"
+        urlString+="&key="+apiWebKey
+        //urlString+="&fields=photos" //,formatted_address,name,rating,opening_hours"
+        urlString+="&language=en"
+        
+        if isOpen! {
+            urlString+="&opennow"
+        }
+        if let strType = type {
+            urlString+="&type=\(strType)"
+        }
         
         let urlObj = URL(string: urlString)
         URLSession.shared.dataTask(with: urlObj!) {(data, response, error) in
@@ -48,7 +54,7 @@ class PlacesModel {
             } catch {
                 callback(nil,error.localizedDescription)
             }
-            }.resume()
+        }.resume()
     }
     
     func fetchGoogleNearbyPlacesPhoto(_ reference:String, _ maxwidth:Int,_ callback: @escaping (UIImage?) -> Void) {
@@ -77,29 +83,6 @@ class PlacesModel {
             downloadedPhoto = UIImage(data: imageData)
             callback(downloadedPhoto)
         }.resume()
-    }
-    
-    private func enableLocationServices() {
-        let status = CLLocationManager.authorizationStatus()
-        
-        switch status {
-        case .notDetermined:
-            // Request when-in-use authorization initially
-            locationManager.requestAlwaysAuthorization()
-            break
-            
-        case .restricted, .denied:
-            // Disable location features
-            break
-            
-        case .authorizedWhenInUse:
-            // Enable basic location features
-            break
-            
-        case .authorizedAlways:
-            // Enable any of your app's location features
-            break
-        }
     }
     
     func GetCurrentPlace(callback: @escaping (Place)-> Void) {
