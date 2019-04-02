@@ -12,6 +12,7 @@ import GooglePlaces
 
 
 class GooglePlace : Decodable{
+    let place_id: String!
     let geometry: Geometry!
     let name: String!
     let opening_hours: OpeningHours?
