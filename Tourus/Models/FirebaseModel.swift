@@ -172,6 +172,17 @@ class FirebaseModel {
         return Auth.auth().currentUser
     }
     
+    func getAllUsersHistory(_ callback: @escaping ([String : [String : Double]]?) -> Void){
+        // Gets all users history, the [String : Double] part should look just like in getCurrentUserHistory
+        // and the String that comes along with each [String : Double] should be the user's email
+        
+        let stub = ["Joe@gmail.com" : ["cafe" : 3.0 , "food" : 2.0 , "movie" : 4.0],
+                    "Misha@gmail.com" : ["cafe" : 2.0 , "food" : 5.0 , "movie" : 3.0],
+                    "Alice@gmail.com" : ["casino" : 3.0 , "food" : 2.0 , "movie" : 4.0],
+                    "Greg@gmail.com" : ["cafe" : 3.0 , "casino" : 2.0 , "movie" : 4.0]]
+        
+        callback(stub)
+    }
     
     func getCurrentUserHistory(_ callback:@escaping ([String : Double]?) -> Void) {
         let user = currentUser()
