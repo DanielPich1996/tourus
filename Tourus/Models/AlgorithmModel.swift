@@ -63,6 +63,9 @@ class AlgorithmModel{
         //data = [["food", "pizza"], ["sleep", "tv"]]
         //if data is empty - take Baruch's places categories as the data
         // if not empty and there is a place with preffered category - send place
+        
+        
+        
     }
     
     private func loadFreqSet(_ availableUsersCategories:[[String]]) -> [String:Int] {
@@ -121,8 +124,6 @@ class AlgorithmModel{
         frequencyTable = loadFreqSet(data)
         
         
-        
-        
         var newFreqTable:[String:Int] = frequencyTable
         
         for (key,value) in newFreqTable {
@@ -151,7 +152,6 @@ class AlgorithmModel{
         return genereteTable[lastFreqCounts.index(of: lastFreqCounts.max()!)!]
     }
     //print(apriori(minSupport: 3)) // [A,C]
-    
 }
 
 
