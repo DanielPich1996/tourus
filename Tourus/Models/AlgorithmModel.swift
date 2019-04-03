@@ -64,8 +64,6 @@ class AlgorithmModel{
         //if data is empty - take Baruch's places categories as the data
         // if not empty and there is a place with preffered category - send place
         
-        
-        
     }
     
     private func loadFreqSet(_ availableUsersCategories:[[String]]) -> [String:Int] {
