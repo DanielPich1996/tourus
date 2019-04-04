@@ -100,4 +100,18 @@ class PlacesModel {
             }
         })
     }
+    
+    func navigate(_ latitude:String, _ longitude:String) {
+        var navigationPath = consts.googleMaps.browserLink //initialize with the browser link
+
+        if let UrlNavigation = URL.init(string: consts.googleMaps.applicationLink) {
+            if UIApplication.shared.canOpenURL(UrlNavigation) {
+                navigationPath = consts.googleMaps.applicationLink //google maps app link
+            }
+        }
+        
+        if let urlDestination = URL.init(string: navigationPath + "?saddr=&daddr=\(latitude),\(longitude)&&directionsmode=walking&zoom=17") {
+            UIApplication.shared.open(urlDestination, options: [:], completionHandler: nil)
+        }
+    }
 }

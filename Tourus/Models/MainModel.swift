@@ -203,4 +203,8 @@ class MainModel {
     func fetchNearbyPlaces(location: String, radius:Int = 3000, type:String?=nil, isOpen:Bool=true, callback: @escaping ([Place]?, String?) -> Void){
         placesModel.fetchGoogleNearbyPlaces(location: location ,radius: radius, type:type, isOpen:isOpen, callback: callback);
     }
+    
+    func navigate(_ latitude:String, _ longitude:String) {
+        placesModel.navigate(latitude, longitude)
+    }
 }

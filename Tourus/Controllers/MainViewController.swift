@@ -20,6 +20,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     
     // MARK:Outlets
     @IBOutlet var settingsBtn: UIButton!
+    @IBOutlet var navigationBtn: UIButton!
     @IBOutlet var mainView: UIView!
     @IBOutlet var interactionLabel: UILabel!
     @IBOutlet var interactionView: UIView!
@@ -44,12 +45,26 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         
         verticalStackView.spacing = 15.0
         inquiryImage.isHidden = true
+        navigationBtn.isHidden = true
         initLocationManager()
         addBackgroundImage()
         
         //temp code for testing:
         interaction = MainModel.instance.getInteraction("bar")        
         setInteraction(interaction!)
+    }
+    
+    @IBAction func navigationButtonAction(_ sender: Any) {
+        if (interaction != nil && interaction?.place != nil) {
+            let coordinates:[Substring]? = (interaction?.place?.location?.split(separator: ","))
+            
+            if coordinates != nil {
+                let lat = coordinates![0]
+                let long = coordinates![1]
+            
+                MainModel.instance.navigate(String(lat), String(long))
+            }
+        }
     }
     
     var count = 0
@@ -66,7 +81,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         
         self.count += 1//temp
     }
-    
+
     @IBAction func onSettingsClick(_ sender: Any) {
         //do something when settings button tapped?
     }
@@ -115,10 +130,14 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     func setInteraction(_ interaction:Interaction) {
+        navigationBtn.isEnabled = true
+        navigationBtn.isHidden = true
+        moreInfoView.isHidden = true
+        
         let topConstraint:CGFloat = self.view.frame.height / 5
         var bottomConstraint:CGFloat = 0
         var interactionBackOpacity:CGFloat = 0
-        
+
         removeMainImage()
         removeInfoImage()
         
@@ -126,17 +145,20 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         case .question:
             do {
                 bottomConstraint = (self.view.frame.height / 5 - moreInfoView.frame.height) * -1
-                moreInfoView.isHidden = true
             }
         case .info:
             do {
                 bottomConstraint = (self.view.frame.height / 5 - moreInfoView.frame.height) * -1
-                moreInfoView.isHidden = true
             }
         case .suggestion:
             do {
                 interactionBackOpacity = 0.3
+                navigationBtn.isHidden = false
                 moreInfoView.isHidden = false
+                
+                if interaction.place == nil {
+                     navigationBtn.isEnabled = false
+                }
                 
                 if(interaction.place != nil  && interaction.place!.picturesUrls.count > 0) {
                     MainModel.instance.getPlaceImage(interaction.place!.picturesUrls[0], 400, setBackroundImage)
