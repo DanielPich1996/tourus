@@ -37,13 +37,30 @@ class MainModel {
         firebaseModel.signOut(callback)
     }
     
-    func getInteraction(_ category:String? = nil, _ callback: (Interaction?) -> Void) {
-        var interaction = Interaction.get(database: self.sqlModel.database, category: category)
-        if(interaction == nil) {
-            interaction = Interaction.get(database: self.sqlModel.database)
+    func getInteraction(_ categories:[String]? = nil, _ callback: (Interaction?) -> Void) {
+        var interaction:Interaction? = nil
+        
+        //try to get an interaction by one of the given categories
+        if categories != nil {
+            for category in categories! {
+                interaction = Interaction.get(database: self.sqlModel.database, category: category)
+                
+                if interaction != nil {
+                    callback(interaction!)
+                    return
+                }
+            }
+        }
+
+        //if none interaction was found - return a default interaction for non-categorized place
+        if interaction == nil {
+            interaction = Interaction.get(database: self.sqlModel.database, category: "not_mapped")
+            callback(interaction)
+            return
         }
         
-        callback(interaction ?? nil)
+        //should never get to this line
+        callback(nil)
     }
     
     private func listenToInteractionUpdates() {

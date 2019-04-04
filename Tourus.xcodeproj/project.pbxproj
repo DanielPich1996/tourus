@@ -29,7 +29,7 @@
 		8458503521E3E51200DF7C68 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8458503421E3E51200DF7C68 /* UIColorExtension.swift */; };
 		8458503721E4049100DF7C68 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8458503621E4049100DF7C68 /* UIViewExtension.swift */; };
 		845D1F8F223FEC2000C73585 /* InteractionSqlExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845D1F8E223FEC2000C73585 /* InteractionSqlExtension.swift */; };
-		8472DBB8224555BE002A8AC0 /* org-tourus-acb4d-interactions.json in Resources */ = {isa = PBXBuildFile; fileRef = 8472DBB7224555BE002A8AC0 /* org-tourus-acb4d-interactions.json */; };
+		848812772256A8B200FC14B6 /* org-tourus-acb4d-interactions.json in Resources */ = {isa = PBXBuildFile; fileRef = 848812762256A8B100FC14B6 /* org-tourus-acb4d-interactions.json */; };
 		849D3EAF21DE8D18002F74B2 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849D3EAE21DE8D18002F74B2 /* RegisterViewController.swift */; };
 		849D3EB121DE8D2D002F74B2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849D3EB021DE8D2D002F74B2 /* LoginViewController.swift */; };
 		849D3EB321DE8F4A002F74B2 /* Consts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849D3EB221DE8F4A002F74B2 /* Consts.swift */; };
@@ -89,7 +89,7 @@
 		8458503421E3E51200DF7C68 /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		8458503621E4049100DF7C68 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		845D1F8E223FEC2000C73585 /* InteractionSqlExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionSqlExtension.swift; sourceTree = "<group>"; };
-		8472DBB7224555BE002A8AC0 /* org-tourus-acb4d-interactions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "org-tourus-acb4d-interactions.json"; sourceTree = "<group>"; };
+		848812762256A8B100FC14B6 /* org-tourus-acb4d-interactions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "org-tourus-acb4d-interactions.json"; sourceTree = "<group>"; };
 		849D3EAE21DE8D18002F74B2 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		849D3EB021DE8D2D002F74B2 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		849D3EB221DE8F4A002F74B2 /* Consts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Consts.swift; sourceTree = "<group>"; };
@@ -253,7 +253,7 @@
 		84A0102B22403C8800BADC55 /* Json Files */ = {
 			isa = PBXGroup;
 			children = (
-				8472DBB7224555BE002A8AC0 /* org-tourus-acb4d-interactions.json */,
+				848812762256A8B100FC14B6 /* org-tourus-acb4d-interactions.json */,
 				842F902D2241878500003932 /* org-tourus-acb4d-options.json */,
 			);
 			path = "Json Files";
@@ -448,7 +448,7 @@
 			files = (
 				842F902F2241878500003932 /* org-tourus-acb4d-options.json in Resources */,
 				84D2D47521CE6EB8004524D3 /* GoogleService-Info.plist in Resources */,
-				8472DBB8224555BE002A8AC0 /* org-tourus-acb4d-interactions.json in Resources */,
+				848812772256A8B200FC14B6 /* org-tourus-acb4d-interactions.json in Resources */,
 				84D2D44E21CE6AAE004524D3 /* Assets.xcassets in Resources */,
 				84D2D44C21CE6AAC004524D3 /* Main.storyboard in Resources */,
 				8449C6EE21E13D5E002A6AF6 /* loading.gif in Resources */,
