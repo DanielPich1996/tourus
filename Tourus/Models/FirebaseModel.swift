@@ -202,23 +202,24 @@ class FirebaseModel {
     }
     func updateUserHistory(_ category:String ,_ addedvalue:Double) {
         let user = currentUser()
-       
-        if(user != nil) {
-        let db = self.databaseRef!.child(consts.names.userInfoTableName).child(user!.uid).child("History").child(category)
+        let uid = user?.uid
         
-            //fix- check if the category exists
+        if(uid != nil) {
+            let db = self.databaseRef!.child("Users").child(uid!).child("History").child(category)
+            
             db.observeSingleEvent(of: .value, with: { (snapshot) in
-            if snapshot.exists() {
-                if let value = snapshot.value as? Double {
-                    db.setValue(value + addedvalue)
+                
+                if snapshot.exists() {
+                    
+                    if let value = snapshot.value as? Double {
+                        db.setValue(value + addedvalue)
+             }
+        }
+                else{
+                    db.setValue(addedvalue)
                 }
-            }
-            
-            
-        })
+            })
     }
+}
     
-    }
-    
-
 }
