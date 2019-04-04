@@ -108,6 +108,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     // MARK:interaction setting funcs
     func setInteractionwithAnimation(_ interaction:Interaction) {
         optionsView.fadeOut()
+        navigationBtn.fadeOut()
         interactionView.fadeOut()
         if let preImageView = self.view.viewWithTag(100) {
             preImageView.fadeOut()
@@ -115,6 +116,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         moreInfoView.fadeOut() { (res) in
             self.setInteraction(interaction)
             
+            self.navigationBtn.fadeIn()
             self.optionsView.fadeIn()
             self.interactionView.fadeIn()
             self.moreInfoView.fadeIn()
