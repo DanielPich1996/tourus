@@ -50,9 +50,13 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         addBackgroundImage()
         
         //temp code for testing:
-        MainModel.instance.getInteraction("bar", { interact in
+        var categories = [String]()
+        categories.append("bar")
+        MainModel.instance.getInteraction(categories, { interact in
             self.interaction = interact
-            self.setInteraction(self.interaction!)
+            if interaction != nil {
+                self.setInteraction(self.interaction!)
+            }
         })
     }
     
@@ -86,18 +90,20 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         MainModel.instance.fetchNearbyPlaces(location: loc, callback: { (places,err)  in
             DispatchQueue.main.async {
                 if places != nil {
-                    MainModel.instance.getInteraction(places![0].types![0], { intereact in
+                    MainModel.instance.getInteraction(places![0].types, { intereact in
                         self.interaction = intereact
-                        self.interaction?.place = places![0]
-                        
-                        if(self.count % 2 == 0) {
+                        if self.interaction != nil {
+                            self.interaction?.place = places![0]
+                            
+                            if(self.count % 2 == 0) {
                                 self.interaction?.type = .question
                                 self.setInteractionwithAnimation(self.interaction!)
-                        } else {
+                            } else {
                                 self.setInteractionwithAnimation(self.interaction!)
-                        }
-                                            
-                        self.count += 1
+                            }
+                            
+                            self.count += 1
+                        }                       
                     })
                 }
             }
