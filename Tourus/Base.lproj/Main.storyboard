@@ -306,11 +306,24 @@
                                     <constraint firstAttribute="height" constant="100" id="g95-uV-17c"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lIU-Fg-3QF" userLabel="navigation btn">
+                                <rect key="frame" x="83" y="69.5" width="50" height="55"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="704-an-nhp"/>
+                                    <constraint firstAttribute="height" constant="55" id="RBY-l2-dWO"/>
+                                </constraints>
+                                <state key="normal" image="google_maps"/>
+                                <connections>
+                                    <action selector="navigationButtonAction:" destination="fWm-qP-zMK" eventType="touchUpInside" id="UGd-YP-YbO"/>
+                                    <action selector="onSettingsClick:" destination="fWm-qP-zMK" eventType="touchUpInside" id="xo2-qH-DQG"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.10536711682894402" green="0.17293294733316644" blue="0.27875158629441621" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="adU-CM-jQG" firstAttribute="top" secondItem="gok-U5-wgO" secondAttribute="bottom" id="5l2-fO-rdi"/>
                             <constraint firstItem="adU-CM-jQG" firstAttribute="bottom" secondItem="3CK-ay-r8h" secondAttribute="bottom" constant="-20" id="Jk2-To-1mz"/>
+                            <constraint firstItem="BtF-Sg-pGr" firstAttribute="centerY" relation="lessThanOrEqual" secondItem="3CK-ay-r8h" secondAttribute="centerY" id="L4c-6P-lEJ"/>
                             <constraint firstItem="gok-U5-wgO" firstAttribute="trailing" secondItem="3CK-ay-r8h" secondAttribute="trailing" id="LXX-L0-hIV"/>
                             <constraint firstItem="adU-CM-jQG" firstAttribute="leading" secondItem="3CK-ay-r8h" secondAttribute="leading" id="Nzf-xU-m3Q"/>
                             <constraint firstItem="baG-Uy-0zi" firstAttribute="leading" secondItem="3CK-ay-r8h" secondAttribute="leading" id="RFC-5u-kd5"/>
@@ -319,8 +332,11 @@
                             <constraint firstItem="3CK-ay-r8h" firstAttribute="trailing" secondItem="378-zo-7tN" secondAttribute="trailing" constant="15" id="ibj-en-Lcx"/>
                             <constraint firstItem="BtF-Sg-pGr" firstAttribute="leading" secondItem="3CK-ay-r8h" secondAttribute="leading" constant="10" id="jpU-af-OQA"/>
                             <constraint firstItem="baG-Uy-0zi" firstAttribute="top" secondItem="BtF-Sg-pGr" secondAttribute="bottom" constant="30" id="nTj-xc-6Yq"/>
+                            <constraint firstItem="BtF-Sg-pGr" firstAttribute="top" secondItem="3CK-ay-r8h" secondAttribute="top" constant="15" id="okZ-iX-yu7"/>
                             <constraint firstItem="3CK-ay-r8h" firstAttribute="trailing" secondItem="adU-CM-jQG" secondAttribute="trailing" id="qx9-XV-81A"/>
                             <constraint firstItem="378-zo-7tN" firstAttribute="top" secondItem="BtF-Sg-pGr" secondAttribute="top" id="viZ-JA-W7B"/>
+                            <constraint firstItem="lIU-Fg-3QF" firstAttribute="centerY" secondItem="BtF-Sg-pGr" secondAttribute="centerY" constant="3" id="vje-za-9vM"/>
+                            <constraint firstItem="lIU-Fg-3QF" firstAttribute="leading" secondItem="BtF-Sg-pGr" secondAttribute="trailing" constant="13" id="vut-hJ-FdA"/>
                             <constraint firstItem="baG-Uy-0zi" firstAttribute="top" secondItem="BtF-Sg-pGr" secondAttribute="bottom" constant="30" id="xph-td-QAf"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="3CK-ay-r8h"/>
@@ -339,6 +355,7 @@
                         <outlet property="moreInfoButtonView" destination="7SD-mu-rhu" id="TC8-U4-91j"/>
                         <outlet property="moreInfoImage" destination="fpA-14-vzo" id="lYx-rN-q5c"/>
                         <outlet property="moreInfoView" destination="gok-U5-wgO" id="2Da-dT-b5N"/>
+                        <outlet property="navigationBtn" destination="lIU-Fg-3QF" id="QC7-e1-Hri"/>
                         <outlet property="optionsBottomConstraint" destination="Jk2-To-1mz" id="kry-Oe-8ri"/>
                         <outlet property="optionsStackHeightConstraint" destination="jma-Mi-he0" id="NhM-Sl-BaI"/>
                         <outlet property="optionsView" destination="adU-CM-jQG" id="JxD-PG-GiW"/>
@@ -594,6 +611,7 @@
     </scenes>
     <resources>
         <image name="default_profile" width="327" height="281"/>
+        <image name="google_maps" width="85" height="100"/>
         <image name="no image" width="180" height="152"/>
         <image name="settings" width="240" height="289"/>
     </resources>
