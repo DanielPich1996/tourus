@@ -57,7 +57,7 @@ class PlacesModel {
         }.resume()
     }
     
-    func fetchGoogleNearbyPlacesPhoto(_ reference:String, _ maxwidth:Int,_ callback: @escaping (UIImage?) -> Void) {
+    func fetchGoogleNearbyPlacesPhoto(_ reference:String, _ maxwidth:Int, _ alpha:CGFloat, _ callback: @escaping (UIImage?) -> Void) {
 
         // Method 3
         let urlString = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=\(maxwidth)&photoreference=\(reference)&key=\(apiWebKey)"
@@ -80,7 +80,11 @@ class PlacesModel {
             guard let imageData = try? Data(contentsOf: url) else {
                 return
             }
+            
             downloadedPhoto = UIImage(data: imageData)
+            if(downloadedPhoto != nil) {
+                downloadedPhoto = downloadedPhoto!.alpha(alpha)
+            }
             callback(downloadedPhoto)
         }.resume()
     }

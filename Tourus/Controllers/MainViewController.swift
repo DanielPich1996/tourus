@@ -50,65 +50,95 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         addBackgroundImage()
         
         //temp code for testing:
-        interaction = MainModel.instance.getInteraction("bar")        
-        setInteraction(interaction!)
+        MainModel.instance.getInteraction("bar", { interact in
+            self.interaction = interact
+            self.setInteraction(self.interaction!)
+        })
     }
     
     @IBAction func navigationButtonAction(_ sender: Any) {
         if (interaction != nil && interaction?.place != nil) {
-            let coordinates:[Substring]? = (interaction?.place?.location?.split(separator: ","))
-            
-            if coordinates != nil {
-                let lat = coordinates![0]
-                let long = coordinates![1]
-            
-                MainModel.instance.navigate(String(lat), String(long))
-            }
+            navigate((interaction?.place)!)
         }
     }
     
     var count = 0
     @objc func optionButtonAction( _ button : UIOptionButton) {
         //what to do when an option button tapped?
-        interaction = MainModel.instance.getInteraction()
-
-        if(count % 2 == 0) {
-            interaction?.type = .question
-            setInteractionwithAnimation(interaction!)
-        } else {
-            setInteractionwithAnimation(interaction!)
+        
+        switch button.type {
+        case .accept: //navigate if a place is exist
+            if (interaction != nil && interaction?.place != nil) {
+                navigate((interaction?.place)!)
+            }
+        case .decline: break
+        case .negative: break
+        case .neutral: break
+        case .opinionless: break
+        case .additional: break
         }
         
-        self.count += 1//temp
+        //tmp code for simulation:
+        let latitude:String = String(format: "%f", currUserLocation!.coordinate.latitude)
+        let longitude:String = String(format:"%f", currUserLocation!.coordinate.longitude)
+        let loc:String = latitude + "," + longitude
+        
+        MainModel.instance.fetchNearbyPlaces(location: loc, callback: { (places,err)  in
+            DispatchQueue.main.async {
+                if places != nil {
+                    MainModel.instance.getInteraction(places![0].types![0], { intereact in
+                        self.interaction = intereact
+                        self.interaction?.place = places![0]
+                        
+                        if(self.count % 2 == 0) {
+                                self.interaction?.type = .question
+                                self.setInteractionwithAnimation(self.interaction!)
+                        } else {
+                                self.setInteractionwithAnimation(self.interaction!)
+                        }
+                                            
+                        self.count += 1
+                    })
+                }
+            }
+        })
     }
 
     @IBAction func onSettingsClick(_ sender: Any) {
         //do something when settings button tapped?
     }
 
+    // MARK:Navigation funcs
+    private func navigate(_ place:Place) {
+        let lat = String((place.location?.lat)!)
+        let long = String((place.location?.lng)!)
+            
+        MainModel.instance.navigate(lat, long)
+    }
+    
     // MARK:Background image funcs
-    private func removeMainImage() {
-        self.backgroundImage.image = nil
-    }
-    
-    private func removeInfoImage() {
-        self.moreInfoImage.image = defaultInfoImage
-    }
-    
     private func setBackroundImage(_ image:UIImage?) {
-        removeMainImage()
-        self.backgroundImage.image = image
+        DispatchQueue.main.async {
+            self.backgroundImage.image = image
+        }
     }
     
     private func setInfoImage(_ image:UIImage?) {
-        removeInfoImage()
-        self.moreInfoImage.image = image
+        DispatchQueue.main.async {
+            //self.removeInfoImage()
+            if image == nil {
+                 self.moreInfoImage.image = self.defaultInfoImage
+            }
+            else {
+                self.moreInfoImage.image = image
+            }
+        }
     }
     
     // MARK:interaction setting funcs
     func setInteractionwithAnimation(_ interaction:Interaction) {
         optionsView.fadeOut()
-        navigationBtn.fadeOut()
+        //navigationBtn.fadeOut()
         interactionView.fadeOut()
         if let preImageView = self.view.viewWithTag(100) {
             preImageView.fadeOut()
@@ -116,7 +146,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         moreInfoView.fadeOut() { (res) in
             self.setInteraction(interaction)
             
-            self.navigationBtn.fadeIn()
+            //self.navigationBtn.fadeIn()
             self.optionsView.fadeIn()
             self.interactionView.fadeIn()
             self.moreInfoView.fadeIn()
@@ -132,16 +162,16 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     func setInteraction(_ interaction:Interaction) {
-        navigationBtn.isEnabled = true
-        navigationBtn.isHidden = true
+        //navigationBtn.isEnabled = true
+        //navigationBtn.isHidden = true
         moreInfoView.isHidden = true
         
         let topConstraint:CGFloat = self.view.frame.height / 5
         var bottomConstraint:CGFloat = 0
         var interactionBackOpacity:CGFloat = 0
 
-        removeMainImage()
-        removeInfoImage()
+        setBackroundImage(nil)
+        setInfoImage(nil)
         
         switch interaction.type {
         case .question:
@@ -155,19 +185,18 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         case .suggestion:
             do {
                 interactionBackOpacity = 0.3
-                navigationBtn.isHidden = false
+                //navigationBtn.isHidden = false
                 moreInfoView.isHidden = false
                 
-                if interaction.place == nil {
-                     navigationBtn.isEnabled = false
-                }
+                //if interaction.place == nil {
+                //     navigationBtn.isEnabled = false
+                //}
                 
                 if(interaction.place != nil  && interaction.place!.picturesUrls.count > 0) {
-                    MainModel.instance.getPlaceImage(interaction.place!.picturesUrls[0], 400, setBackroundImage)
+                    MainModel.instance.getPlaceImage(interaction.place!.picturesUrls[0], 800, 0.4, setBackroundImage)
 
                     if(interaction.place!.picturesUrls.count > 1) {
-                        let infoImageUrl = URL(string: interaction.place!.picturesUrls[1])!
-                        MainModel.instance.getImage(infoImageUrl, 1, setInfoImage)
+                        MainModel.instance.getPlaceImage(interaction.place!.picturesUrls[1], 800, 1, setBackroundImage)
                     }
                 }
             }

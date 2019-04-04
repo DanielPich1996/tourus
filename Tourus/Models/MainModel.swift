@@ -37,13 +37,13 @@ class MainModel {
         firebaseModel.signOut(callback)
     }
     
-    func getInteraction(_ category:String? = nil) -> Interaction? {
+    func getInteraction(_ category:String? = nil, _ callback: (Interaction?) -> Void) {
         var interaction = Interaction.get(database: self.sqlModel.database, category: category)
         if(interaction == nil) {
             interaction = Interaction.get(database: self.sqlModel.database)
         }
         
-        return interaction ?? nil
+        callback(interaction ?? nil)
     }
     
     private func listenToInteractionUpdates() {
@@ -139,7 +139,7 @@ class MainModel {
         if let image = self.getImageFromFile(name: localImageName){
             callback(image)
             print("got image from cache \(localImageName)")
-        }else{
+        } else {
             //2. get the image from Firebase
             firebaseModel.getImage(url){(image:UIImage?) in
                 if (image != nil){
@@ -153,8 +153,8 @@ class MainModel {
         }
     }
     
-    func getPlaceImage(_ placeId:String, _ maxwidth:Int, _ callback:@escaping (UIImage?)->Void) {
-        placesModel.fetchGoogleNearbyPlacesPhoto(placeId, maxwidth, callback)
+    func getPlaceImage(_ placeId:String, _ maxwidth:Int, _ alpha:CGFloat, _ callback:@escaping (UIImage?)->Void) {
+        placesModel.fetchGoogleNearbyPlacesPhoto(placeId, maxwidth, alpha, callback)
     }
     
     func saveImageToFile(image:UIImage, name:String){

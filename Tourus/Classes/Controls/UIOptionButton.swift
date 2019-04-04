@@ -12,7 +12,7 @@ import UIKit
 class UIOptionButton: UIButton {
     private static let fontSize:CGFloat = 20
     private static let background:UIColor = .clear
-    
+    var type:OptionType = .additional
 
     required init(option:Interaction.Option, tag:Int? = nil) {
         super.init(frame: .zero)
@@ -22,10 +22,12 @@ class UIOptionButton: UIButton {
     
     required init(title:String, type:OptionType, tag:Int? = nil) {
         super.init(frame: .zero)
+        
         setData(title: title, type: type, tag: tag)
     }
     
     private func setData(title:String, type:OptionType, tag:Int? = nil) {
+        self.type = type
         self.setTitle(title, for: UIControl.State.normal)
         //self.titleLabel?.font =  UIFont(name: "Trebuchet MS", size: 22)
         self.titleLabel?.font = UIFont.systemFont(ofSize: 22, weight: .semibold)
