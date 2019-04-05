@@ -200,20 +200,20 @@ enum OptionType : String {
         }
     }
     
-    var value : Int {
+    var value : Double {
         switch self {
         case .accept:
-            return 1
+            return 10
         case .decline:
             return -1
         case .negative:
-            return -5
+            return -10
         case .neutral:
-            return 0
+            return 1
         case .opinionless:
-            return 0
+            return 1
         case .additional:
-            return 0
+            return 1
         }
     }
     

@@ -19,8 +19,7 @@ class FirebaseModel {
     init() {
         FirebaseApp.configure()
         databaseRef = Database.database().reference()
-  
-        updateUserHistory("zoo" ,1)
+
     }
     
     
@@ -172,23 +171,40 @@ class FirebaseModel {
         return Auth.auth().currentUser
     }
     
-    func getAllUsersHistory(_ callback: @escaping ([String : [String : Double]]?) -> Void){
+    func getAllUsersHistory(_ callback: @escaping ([[String : Double]]) -> Void){
         // Gets all users history, the [String : Double] part should look just like in getCurrentUserHistory
         // and the String that comes along with each [String : Double] should be the user's email
+        let user = currentUser()
+        let uid = user?.uid
         
-        let stub = ["Joe@gmail.com" : ["cafe" : 3.0 , "food" : 2.0 , "movie" : 4.0],
-                    "Misha@gmail.com" : ["cafe" : 2.0 , "food" : 5.0 , "movie" : 3.0],
-                    "Alice@gmail.com" : ["casino" : 3.0 , "food" : 2.0 , "movie" : 4.0],
-                    "Greg@gmail.com" : ["cafe" : 3.0 , "casino" : 2.0 , "movie" : 4.0]]
-        
-        callback(stub)
-    }
+        if (user != nil && uid != nil) {
+            self.databaseRef!.child("History").observeSingleEvent(of: .value) { (snapshot) in
+
+             var history = [[String : Double]]()
+            
+            if snapshot.exists() {
+                if let value = snapshot.value as? [String : [String:Double]]{
+                    for otherUsersHistory in value{
+                        if(otherUsersHistory.key != uid){
+                            history.append(otherUsersHistory.value)
+                        }
+                    }
+                }
+            }
+                callback(history)
+            }
+        }
+        else {
+            callback([[String : Double]]())
+        }
+}
     
     func getCurrentUserHistory(_ callback:@escaping ([String : Double]?) -> Void) {
         let user = currentUser()
+        let uid = user?.uid
        
         if(user != nil){
-        self.databaseRef!.child(consts.names.userInfoTableName).child(user!.uid).child("History").observe(.value){ (snapshot)       in
+        self.databaseRef!.child("History").child(uid!).observeSingleEvent(of: .value) { (snapshot) in
                 if snapshot.exists() {
                     if let value = snapshot.value as? [String : Double]{
                     callback(value)
@@ -200,26 +216,31 @@ class FirebaseModel {
             }
         }
     }
-    func updateUserHistory(_ category:String ,_ addedvalue:Double) {
+    
+    func updateUserHistory(_ categories:[String] ,_ addedvalue:Double) {
         let user = currentUser()
         let uid = user?.uid
         
         if(uid != nil) {
-            let db = self.databaseRef!.child("Users").child(uid!).child("History").child(category)
-            
-            db.observeSingleEvent(of: .value, with: { (snapshot) in
-                
-                if snapshot.exists() {
-                    
-                    if let value = snapshot.value as? Double {
-                        db.setValue(value + addedvalue)
-             }
+
+            for category in categories{
+                let db = self.databaseRef!.child("History").child(uid!).child(category)
+
+                db.observeSingleEvent(of: .value, with: { (snapshot) in
+
+                    if snapshot.exists() {
+
+                        if let value = snapshot.value as? Double {
+                            db.setValue(value + addedvalue)
+                        }
+                    }
+                    else{
+                        db.setValue(addedvalue)
+                    }
+                })
+            }
         }
-                else{
-                    db.setValue(addedvalue)
-                }
-            })
     }
-}
+
     
 }
