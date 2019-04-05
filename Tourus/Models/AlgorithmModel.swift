@@ -14,7 +14,9 @@ class AlgorithmModel{
     
     private let otherUsersHistoryData:[[String]] = [[String]()] //update every 30min time
     //private let data:[[String]] = [["A","B","C"],["A","C"],["A","D"],["B","E","F"],["D","C","A"],["B","C","F"]]
-    private let candidateSet:[String] = ["A","B","C","D","E","F"]//update after every question
+    private var candidateSet:[String] = ["A","B","C","D","E","F"]//update after every question
+    
+    private var refusingHistory: [String] = []
     
     private func updateHistoryData(){
         //30min time
@@ -63,8 +65,10 @@ class AlgorithmModel{
         //data = [["food", "pizza"], ["sleep", "tv"]]
         //if data is empty - take Baruch's places categories as the data
         // if not empty and there is a place with preffered category - send place
-        
+        updateHistoryData()
     }
+    
+    //func algorithmOrchestra(_ )
     
     private func loadFreqSet(_ availableUsersCategories:[[String]]) -> [String:Int] {
         var counter:Int = 0
