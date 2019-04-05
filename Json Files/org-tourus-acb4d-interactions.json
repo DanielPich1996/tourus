@@ -1,0 +1,2441 @@
+{
+  "amusement_park_1": {
+    "category": "amusement_park",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "How roller coaster sounds?",
+    "type": "suggestion"
+  },
+  "amusement_park_2": {
+    "category": "amusement_park",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "Do you like the extreme way?",
+    "type": "suggestion"
+  },
+  "amusement_park_3": {
+    "category": "amusement_park",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "There is an amusement park near by, wanna go?",
+    "type": "suggestion"
+  },
+  "amusement_park_4": {
+    "category": "amusement_park",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "Amusement parks are cool for you?",
+    "type": "suggestion"
+  },
+  "aquarium_1": {
+    "category": "aquarium",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "Do you like aquariums?",
+    "type": "suggestion"
+  },
+  "aquarium_2": {
+    "category": "aquarium",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "I love to see sea creatures, what about you?",
+    "type": "suggestion"
+  },
+  "aquarium_3": {
+    "category": "aquarium",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": "They are\nmy friends"
+      },
+      "decline": {
+        "text": "Food only"
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "For your opinion, sea creatures are more then just a food on a plate?",
+    "type": "suggestion"
+  },
+  "art_gallery_1": {
+    "category": "art_gallery",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": "They are\nmy friends"
+      },
+      "decline": {
+        "text": "Food only"
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "Paints and statues are your thing?",
+    "type": "suggestion"
+  },
+  "art_gallery_2": {
+    "category": "art_gallery",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": "Art..? Me?"
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "Art?",
+    "type": "suggestion"
+  },
+  "art_gallery_3": {
+    "category": "art_gallery",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": "Art..? Me?"
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "Art?",
+    "type": "suggestion"
+  },
+  "art_gallery_4": {
+    "category": "art_gallery",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": "Very unique"
+      },
+      "decline": {
+        "text": "I had better\nexperiences"
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "Walking through a gallery is a unique experience, don’t you think?",
+    "type": "suggestion"
+  },
+  "bakery_1": {
+    "category": "bakery",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": "Wow, sure I am!"
+      },
+      "decline": {
+        "text": "Later? I’m\nnot hungry"
+      }
+    },
+    "text": "Are you hungry for pastries?",
+    "type": "suggestion"
+  },
+  "bakery_2": {
+    "category": "bakery",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      }
+    },
+    "text": "There is a bakery in that area, want to go?",
+    "type": "suggestion"
+  },
+  "bakery_3": {
+    "category": "bakery",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      }
+    },
+    "text": "Hungry for a bakery?",
+    "type": "suggestion"
+  },
+  "bar_1": {
+    "category": "bar",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "Want a drink? On me ;)",
+    "type": "suggestion"
+  },
+  "bar_2": {
+    "category": "bar",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "Let’s go to a bar?",
+    "type": "suggestion"
+  },
+  "bar_3": {
+    "category": "bar",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "Let’s drink tonight?",
+    "type": "suggestion"
+  },
+  "beauty_salon_1": {
+    "category": "beauty_salon",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": "Let’s try it"
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "Let’s go to a beauty salon?",
+    "type": "suggestion"
+  },
+  "beauty_salon_2": {
+    "category": "beauty_salon",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": "I don’t need it"
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "Let’s be prettier? ;)",
+    "type": "suggestion"
+  },
+  "book_store_1": {
+    "category": "book_store",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": "lol"
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "Can we go to buy a book?",
+    "type": "suggestion"
+  },
+  "book_store_2": {
+    "category": "book_store",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": "I love books\nlet’s go"
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "There are books up for sale here, want to go?",
+    "type": "suggestion"
+  },
+  "bowling_alley_1": {
+    "category": "bowling_alley",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "I’m dreaming for a bowling but I can’t play.. want to play for both of us?",
+    "type": "suggestion"
+  },
+  "bowling_alley_2": {
+    "category": "bowling_alley",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": "I want!"
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "Wanna play?",
+    "type": "suggestion"
+  },
+  "bowling_alley_3": {
+    "category": "bowling_alley",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": "I want!"
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "Bowling *_* ?",
+    "type": "suggestion"
+  },
+  "café_1": {
+    "category": "café",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": "I don’t drink coofee"
+      }
+    },
+    "text": "Coffee?",
+    "type": "suggestion"
+  },
+  "café_2": {
+    "category": "café",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": "I don’t drink coffee"
+      }
+    },
+    "text": "Let’s wake up a bit with a cup of coffee?",
+    "type": "suggestion"
+  },
+  "café_3": {
+    "category": "café",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": "I don’t drink coffee"
+      }
+    },
+    "text": "Want a coffee? ",
+    "type": "suggestion"
+  },
+  "café_4": {
+    "category": "café",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": "Hmm I don’t\nwant coffee"
+      },
+      "negative": {
+        "text": "I don’t drink coffee"
+      }
+    },
+    "text": "There is a coffee place around here",
+    "type": "suggestion"
+  },
+  "café_5": {
+    "category": "café",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      }
+    },
+    "text": "I have THE thing for you to wake up! wanna go?",
+    "type": "suggestion"
+  },
+  "campground_1": {
+    "category": "campground",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": "Cool"
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "How camping sounds to you? ",
+    "type": "suggestion"
+  },
+  "campground_2": {
+    "category": "campground",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": "Yea, me too!"
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": "I hate it"
+      }
+    },
+    "text": "I love camping! What about you?",
+    "type": "suggestion"
+  },
+  "casino_1": {
+    "category": "casino",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": "Let’s try to win!"
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "Gambling someone?",
+    "type": "suggestion"
+  },
+  "casino_2": {
+    "category": "casino",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "Hey, let’s gamble?",
+    "type": "suggestion"
+  },
+  "casino_3": {
+    "category": "casino",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": "Let’s try it"
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "Casino is here! Let’s go there?",
+    "type": "suggestion"
+  },
+  "church_1": {
+    "category": "church",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "Want to explore a church?",
+    "type": "suggestion"
+  },
+  "church_2": {
+    "category": "church",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "There is a church here, wanna go?",
+    "type": "suggestion"
+  },
+  "city_hall_1": {
+    "category": "city_hall",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "The local city hall is near by, let’s go?",
+    "type": "suggestion"
+  },
+  "city_hall_2": {
+    "category": "city_hall",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "Let’s go to the city hall?",
+    "type": "suggestion"
+  },
+  "city_hall_3": {
+    "category": "city_hall",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "Let’s explore the local city hall?",
+    "type": "suggestion"
+  },
+  "clothing_store_1": {
+    "category": "clothing_store",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "Let’s go for a shopping?",
+    "type": "suggestion"
+  },
+  "clothing_store_2": {
+    "category": "clothing_store",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "Do you want new clothes?",
+    "type": "suggestion"
+  },
+  "convenience_store_1": {
+    "category": "convenience_store",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "How about we visit the convenience store?",
+    "type": "suggestion"
+  },
+  "convenience_store_2": {
+    "category": "convenience_store",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "Do you need something? there's convenience store, shall we go?",
+    "type": "suggestion"
+  },
+  "convenience_store_3": {
+    "category": "convenience_store",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "A convenience store is near, wanna go?",
+    "type": "suggestion"
+  },
+  "department_store_1": {
+    "category": "department_store",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "Let's visit the department store?",
+    "type": "suggestion"
+  },
+  "department_store_2": {
+    "category": "department_store",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "Do you need something from the department store?",
+    "type": "suggestion"
+  },
+  "department_store_3": {
+    "category": "department_store",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "I know that a good department store is in the area, shall we visit?",
+    "type": "suggestion"
+  },
+  "electronics_store_1": {
+    "category": "electronics_store",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": "Really?"
+      },
+      "negative": {
+        "text": "More like\nan Android one"
+      }
+    },
+    "text": "Are you an Apple fan?",
+    "type": "suggestion"
+  },
+  "electronics_store_2": {
+    "category": "electronics_store",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "Need some electronic shopping?",
+    "type": "suggestion"
+  },
+  "electronics_store_3": {
+    "category": "electronics_store",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "I'm a gadget freak! there's shop near by, wanna go?",
+    "type": "suggestion"
+  },
+  "gym_1": {
+    "category": "gym",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "How about some workout?",
+    "type": "suggestion"
+  },
+  "gym_2": {
+    "category": "gym",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "Let's lift some weights?",
+    "type": "suggestion"
+  },
+  "gym_3": {
+    "category": "gym",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "There's a gym near by, wanna go?",
+    "type": "suggestion"
+  },
+  "hair_care_1": {
+    "category": "hair_care",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "Wanna visit a hair designer?",
+    "type": "suggestion"
+  },
+  "hair_care_2": {
+    "category": "hair_care",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "Do you need a haircut?",
+    "type": "suggestion"
+  },
+  "hair_care_3": {
+    "category": "hair_care",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "I wish that I could design my hair but I don't have one.. how about you?",
+    "type": "suggestion"
+  },
+  "hardware_store_1": {
+    "category": "hardware_store",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "Are you a handy man? wanna go to DIY store near by?",
+    "type": "suggestion"
+  },
+  "hardware_store_2": {
+    "category": "hardware_store",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "Need some hardware tools?",
+    "type": "suggestion"
+  },
+  "hardware_store_3": {
+    "category": "hardware_store",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "I love repair stuff, let's go to a hardware store?",
+    "type": "suggestion"
+  },
+  "hindu_temple_1": {
+    "category": "hindu_temple",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "I like to visit hindu temples, shall we visit one?",
+    "type": "suggestion"
+  },
+  "hindu_temple_2": {
+    "category": "hindu_temple",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "Do you like to visit a Buddha temple?",
+    "type": "suggestion"
+  },
+  "hindu_temple_3": {
+    "category": "hindu_temple",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "There's an interesting hindu temple, let's go?",
+    "type": "suggestion"
+  },
+  "home_goods_store_1": {
+    "category": "home_goods_store",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "I Like to redecorate, shall we go to home goods store?",
+    "type": "suggestion"
+  },
+  "home_goods_store_2": {
+    "category": "home_goods_store",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "Need some home goods?",
+    "type": "suggestion"
+  },
+  "home_goods_store_3": {
+    "category": "home_goods_store",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "There's nice home goods store near, let's visit?",
+    "type": "suggestion"
+  },
+  "jewelry_store_1": {
+    "category": "jewelry_store",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "Wanna get some nice jewelry?",
+    "type": "suggestion"
+  },
+  "jewelry_store_2": {
+    "category": "jewelry_store",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "Do you want to surprise your close ones with jewelry present?",
+    "type": "suggestion"
+  },
+  "jewelry_store_3": {
+    "category": "jewelry_store",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "There's good jewelry store near by, let's go?",
+    "type": "suggestion"
+  },
+  "library_1": {
+    "category": "library",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "How about a new book to read on our trip?",
+    "type": "suggestion"
+  },
+  "library_2": {
+    "category": "library",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "Do you like books? I do. let's get one from the library!",
+    "type": "suggestion"
+  },
+  "library_3": {
+    "category": "library",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "A good library is near, shall we explore some books?",
+    "type": "suggestion"
+  },
+  "liquor_store_1": {
+    "category": "liquor_store",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "Let's go and buy some alcohol?",
+    "type": "suggestion"
+  },
+  "liquor_store_2": {
+    "category": "liquor_store",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "How about beverage shopping?",
+    "type": "suggestion"
+  },
+  "liquor_store_3": {
+    "category": "liquor_store",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "I wanna buy some alcohol bottles, wanna go?",
+    "type": "suggestion"
+  },
+  "lodging_1": {
+    "category": "lodging",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "Need a place to sleep for tonight?",
+    "type": "suggestion"
+  },
+  "lodging_2": {
+    "category": "lodging",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "I like hotels, shall we make reservation for tonight?",
+    "type": "suggestion"
+  },
+  "lodging_3": {
+    "category": "lodging",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "Do you like hostels? shall we get a bed for tonight?",
+    "type": "suggestion"
+  },
+  "meal_delivery_1": {
+    "category": "meal_delivery",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "Some takeaway food before we explore the next place?",
+    "type": "suggestion"
+  },
+  "meal_delivery_2": {
+    "category": "meal_delivery",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "Let's stop to grab some food?",
+    "type": "suggestion"
+  },
+  "meal_delivery_3": {
+    "category": "meal_delivery",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "Would you like some coffee or cake to go?",
+    "type": "suggestion"
+  },
+  "meal_takeaway_1": {
+    "category": "meal_takeaway",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "Some takeaway food before we explore the next place?",
+    "type": "suggestion"
+  },
+  "meal_takeaway_2": {
+    "category": "meal_takeaway",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "Let's stop to grab some food?",
+    "type": "suggestion"
+  },
+  "meal_takeaway_3": {
+    "category": "meal_takeaway",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "Would you like some coffee or cake to go?",
+    "type": "suggestion"
+  },
+  "food_1": {
+    "category": "food",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "Some takeaway food before we explore the next place?",
+    "type": "suggestion"
+  },
+  "food_2": {
+    "category": "food",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "Let's stop to grab some food?",
+    "type": "suggestion"
+  },
+  "food_3": {
+    "category": "food",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "Would you like some coffee or cake to go?",
+    "type": "suggestion"
+  },
+  "mosque_1": {
+    "category": "mosque",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "One of the most interesting mosques is near, wanna go?",
+    "type": "suggestion"
+  },
+  "mosque_2": {
+    "category": "mosque",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "Let's visit a mosque?",
+    "type": "suggestion"
+  },
+  "mosque_3": {
+    "category": "mosque",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "Interesting mosque is step away, shall we pay a visit?",
+    "type": "suggestion"
+  },
+  "movie_theater_1": {
+    "category": "movie_theater",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "Let's go to the cinema?",
+    "type": "suggestion"
+  },
+  "movie_theater_2": {
+    "category": "movie_theater",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "Wanna see a movie?",
+    "type": "suggestion"
+  },
+  "museum_1": {
+    "category": "museum",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "Let's go to the museum?",
+    "type": "suggestion"
+  },
+  "museum_2": {
+    "category": "museum",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "Do you love art?",
+    "type": "suggestion"
+  },
+  "night_club_1": {
+    "category": "night_club",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "Let's go to the club?",
+    "type": "suggestion"
+  },
+  "night_club_2": {
+    "category": "night_club",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "Let's drink and dance?",
+    "type": "suggestion"
+  },
+  "night_club_3": {
+    "category": "night_club",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "Let’s party?",
+    "type": "suggestion"
+  },
+  "park_1": {
+    "category": "park",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "Let's go to the park?",
+    "type": "suggestion"
+  },
+  "park_2": {
+    "category": "park",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "Do you want to walk around?",
+    "type": "suggestion"
+  },
+  "pet_store_1": {
+    "category": "pet_store",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "Let's shop a new friend?",
+    "type": "suggestion"
+  },
+  "pet_store_2": {
+    "category": "pet_store",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "Want to get a new friend?",
+    "type": "suggestion"
+  },
+  "pet_store_3": {
+    "category": "pet_store",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "Let's go to see a pet store?",
+    "type": "suggestion"
+  },
+  "restaurant_1": {
+    "category": "restaurant",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "You're hungry?",
+    "type": "suggestion"
+  },
+  "restaurant_2": {
+    "category": "restaurant",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "You're hungry? There is a restaurant here",
+    "type": "suggestion"
+  },
+  "rv_park_1": {
+    "category": "rv_park",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "Let's rip the road?",
+    "type": "suggestion"
+  },
+  "rv_park_2": {
+    "category": "rv_park",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": "What about not?"
+      }
+    },
+    "text": "What about adrenalin driving?",
+    "type": "suggestion"
+  },
+  "shoe_store_1": {
+    "category": "shoe_store",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": "I am!"
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "Need new shoes?",
+    "type": "suggestion"
+  },
+  "shoe_store_2": {
+    "category": "shoe_store",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": "Let's go\nbuy some shoes"
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "What about a shoes store?",
+    "type": "suggestion"
+  },
+  "shopping_mall_1": {
+    "category": "shopping_mall",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "Let's go to the mall for a bit of shopping!",
+    "type": "suggestion"
+  },
+  "shopping_mall_2": {
+    "category": "shopping_mall",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "What about a mall?",
+    "type": "suggestion"
+  },
+  "shopping_mall_3": {
+    "category": "shopping_mall",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": "Let’s spend\nmoney ;)"
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "Mall is here! Let’s go there?",
+    "type": "suggestion"
+  },
+  "synagogue_1": {
+    "category": "synagogue",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "What about visit a synagogue?",
+    "type": "suggestion"
+  },
+  "synagogue_2": {
+    "category": "synagogue",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "Jewish culture is near, let's explore it!",
+    "type": "suggestion"
+  },
+  "spa_1": {
+    "category": "spa",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "What about Spa and massage?",
+    "type": "suggestion"
+  },
+  "spa_2": {
+    "category": "spa",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": "Let’s get massage"
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "Spa is here! Let’s go there?",
+    "type": "suggestion"
+  },
+  "spa_3": {
+    "category": "spa",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": "Let’s get massage"
+      },
+      "decline": {
+        "text": "I can think\nabout some"
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "There is something more relaxing than a spa right now?!",
+    "type": "suggestion"
+  },
+  "stadium_1": {
+    "category": "stadium",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": "I don't\nlike matches"
+      }
+    },
+    "text": "Let’s go and watch a match?",
+    "type": "suggestion"
+  },
+  "stadium_2": {
+    "category": "stadium",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": "I don't\nlike matches"
+      }
+    },
+    "text": "Great match starting, Let’s join?",
+    "type": "suggestion"
+  },
+  "supermarket_1": {
+    "category": "supermarket",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "You need ingredients for a special recipe?",
+    "type": "suggestion"
+  },
+  "supermarket_2": {
+    "category": "supermarket",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "There is a supermarket here, do you need something?",
+    "type": "suggestion"
+  },
+  "zoo_1": {
+    "category": "zoo",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "Want to watch animals?",
+    "type": "suggestion"
+  },
+  "zoo_2": {
+    "category": "zoo",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "Zoo is here, let’s see monkeys?",
+    "type": "suggestion"
+  },
+  "zoo_3": {
+    "category": "zoo",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "Just like in Africa! Let's wander around the zoo",
+    "type": "suggestion"
+  },
+  "not_mapped_1": {
+    "category": "not_mapped",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "There is a place near by, wanna go?",
+    "type": "suggestion"
+  },
+  "not_mapped_2": {
+    "category": "not_mapped",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "Let's go to a great place?",
+    "type": "suggestion"
+  },
+  "not_mapped_3": {
+    "category": "not_mapped",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "Let me surprise you with an awesome place?",
+    "type": "suggestion"
+  },
+  "not_mapped_4": {
+    "category": "not_mapped",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "I want to surprise you, can I?",
+    "type": "suggestion"
+  },
+  "not_mapped_5": {
+    "category": "not_mapped",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "Someone told me about a great place here, Let's go there?",
+    "type": "suggestion"
+  },
+  "not_mapped_4": {
+    "category": "not_mapped",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "I want to surprise you, can I?",
+    "type": "suggestion"
+  },
+  "not_mapped_6": {
+    "category": "not_mapped",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "What an awesome place! Let's go there",
+    "type": "suggestion"
+  }
+}

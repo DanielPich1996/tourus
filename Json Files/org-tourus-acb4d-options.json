@@ -1,0 +1,89 @@
+{
+  "accept": {
+    "lastUpdate": 1552912050596,
+    "accept_1": "Yea",
+    "accept_2": "Yea!",
+    "accept_3": "Yes",
+    "accept_4": "Yes!",
+    "accept_5": "Ok",
+    "accept_6": "Totally my style",
+    "accept_7": "Sure",
+    "accept_8": "Yes, Yes, Yes!",
+    "accept_9": "Wow, yes!",
+    "accept_10": "Thanx, sure",
+    "accept_11": "Why not",
+    "accept_12": "Yea, why not",
+    "accept_13": "Let’s go!",
+    "accept_14": "Hell yea!"
+  },
+  "decline": {
+    "lastUpdate": 1552912050596,
+    "decline_1": "No",
+    "decline_2": "Na",
+    "decline_3": "Nope",
+    "decline_4": "Not much",
+    "decline_5": "Something different?",
+    "decline_6": "Thanx but no",
+    "decline_7": "No thanx",
+    "decline_8": "No, sorry",
+    "decline_9": "Not that\nmuch actually"
+  },
+  "negative": {
+    "lastUpdate": 1552912050596,
+    "negative_1": "Not my thing",
+    "negative_2": "Not my style",
+    "negative_3": "Not at all",
+    "negative_4": "Not really",
+    "negative_5": "No!",
+    "negative_6": "I don’t like it",
+    "negative_7": "Sorry"
+  },
+  "neutral": {
+    "lastUpdate": 1552912050596,
+    "neutral_1": "It's ok",
+    "neutral_2": "I'm ok with that",
+    "neutral_3": "Sounds fine"
+  },
+  "opinionless": {
+    "lastUpdate": 1552912050596,
+    "opinionless_1": "I don't care",
+    "opinionless_2": "I don't\nreally care",
+    "opinionless_3": "I don't mind",
+    "opinionless_4": "Take me anywhere"
+  },
+
+  "similiar": {
+    "lastUpdate": 1552912050596,
+    "similiar_1": "Give me the\nsame but diffrent"
+  },
+  "food": {
+    "lastUpdate": 1552912050596,
+    "food_1": "Give me food",
+    "food_2": "Food maybe?",
+    "food_3": "I'm hungry",
+    "food_4": "Food please",
+    "food_5": "Give me food",
+    "food_6": "Food?",
+    "food_7": "I would love to\neat instead",
+    "food_8": "Let's eat something",
+    "food_9": "Something to eat?"
+  },
+  "extreme": {
+    "lastUpdate": 1552912050596,
+    "extreme_1": "I want to\nhave fun",
+    "extreme_2": "Give me\nsome adrenaline",
+    "extreme_3": "Extreme somebody?",
+    "extreme_4": "Let's do\nsomething crazy",
+    "extreme_5": "Adrenaline please"
+  },
+  "relaxing": {
+    "lastUpdate": 1552912050596,
+    "relaxing_1": "Too extreme\nto me",
+    "relaxing_2": "Maybe something\nrelaxing?",
+    "relaxing_3": "I want to see\ncool things"
+  },
+  "nature": {
+    "lastUpdate": 1552912050596,
+    "nature_1": "Nature is better"
+  }
+}
