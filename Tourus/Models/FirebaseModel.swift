@@ -172,8 +172,7 @@ class FirebaseModel {
     }
     
     func getAllUsersHistory(_ callback: @escaping ([[String : Double]]) -> Void){
-        // Gets all users history, the [String : Double] part should look just like in getCurrentUserHistory
-        // and the String that comes along with each [String : Double] should be the user's email
+    // Get other users history- all users history besides the current user
         let user = currentUser()
         let uid = user?.uid
         
