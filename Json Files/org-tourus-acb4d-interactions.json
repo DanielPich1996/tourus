@@ -2,7 +2,7 @@
   "amusement_park_1": {
     "category": "amusement_park",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -21,7 +21,7 @@
   "amusement_park_2": {
     "category": "amusement_park",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -40,7 +40,7 @@
   "amusement_park_3": {
     "category": "amusement_park",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -59,7 +59,7 @@
   "amusement_park_4": {
     "category": "amusement_park",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -78,7 +78,7 @@
   "aquarium_1": {
     "category": "aquarium",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -97,7 +97,7 @@
   "aquarium_2": {
     "category": "aquarium",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -116,7 +116,7 @@
   "aquarium_3": {
     "category": "aquarium",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -135,14 +135,14 @@
   "art_gallery_1": {
     "category": "art_gallery",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
-        "text": ""
+        "text": "They are\nmy friends"
       },
       "decline": {
-        "text": ""
+        "text": "Food only"
       },
       "negative": {
         "text": ""
@@ -154,7 +154,7 @@
   "art_gallery_2": {
     "category": "art_gallery",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -173,7 +173,7 @@
   "art_gallery_3": {
     "category": "art_gallery",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -192,7 +192,7 @@
   "art_gallery_4": {
     "category": "art_gallery",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -211,7 +211,7 @@
   "bakery_1": {
     "category": "bakery",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -227,7 +227,7 @@
   "bakery_2": {
     "category": "bakery",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -243,7 +243,7 @@
   "bakery_3": {
     "category": "bakery",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -259,7 +259,7 @@
   "bar_1": {
     "category": "bar",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -278,7 +278,7 @@
   "bar_2": {
     "category": "bar",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -297,7 +297,7 @@
   "bar_3": {
     "category": "bar",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -316,7 +316,7 @@
   "beauty_salon_1": {
     "category": "beauty_salon",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -335,7 +335,7 @@
   "beauty_salon_2": {
     "category": "beauty_salon",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -354,7 +354,7 @@
   "book_store_1": {
     "category": "book_store",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -373,7 +373,7 @@
   "book_store_2": {
     "category": "book_store",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -392,7 +392,7 @@
   "bowling_alley_1": {
     "category": "bowling_alley",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -411,7 +411,7 @@
   "bowling_alley_2": {
     "category": "bowling_alley",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -430,7 +430,7 @@
   "bowling_alley_3": {
     "category": "bowling_alley",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -449,7 +449,7 @@
   "café_1": {
     "category": "café",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -468,7 +468,7 @@
   "café_2": {
     "category": "café",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -487,7 +487,7 @@
   "café_3": {
     "category": "café",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -506,7 +506,7 @@
   "café_4": {
     "category": "café",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -525,7 +525,7 @@
   "café_5": {
     "category": "café",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -541,7 +541,7 @@
   "campground_1": {
     "category": "campground",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -560,7 +560,7 @@
   "campground_2": {
     "category": "campground",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -579,7 +579,7 @@
   "casino_1": {
     "category": "casino",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -598,7 +598,7 @@
   "casino_2": {
     "category": "casino",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -617,7 +617,7 @@
   "casino_3": {
     "category": "casino",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -636,7 +636,7 @@
   "church_1": {
     "category": "church",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -655,7 +655,7 @@
   "church_2": {
     "category": "church",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -674,7 +674,7 @@
   "city_hall_1": {
     "category": "city_hall",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -693,7 +693,7 @@
   "city_hall_2": {
     "category": "city_hall",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -712,7 +712,7 @@
   "city_hall_3": {
     "category": "city_hall",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -731,7 +731,7 @@
   "clothing_store_1": {
     "category": "clothing_store",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -750,7 +750,7 @@
   "clothing_store_2": {
     "category": "clothing_store",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -769,7 +769,7 @@
   "convenience_store_1": {
     "category": "convenience_store",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -788,7 +788,7 @@
   "convenience_store_2": {
     "category": "convenience_store",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -807,7 +807,7 @@
   "convenience_store_3": {
     "category": "convenience_store",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -826,7 +826,7 @@
   "department_store_1": {
     "category": "department_store",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -845,7 +845,7 @@
   "department_store_2": {
     "category": "department_store",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -864,7 +864,7 @@
   "department_store_3": {
     "category": "department_store",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -883,7 +883,7 @@
   "electronics_store_1": {
     "category": "electronics_store",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -902,7 +902,7 @@
   "electronics_store_2": {
     "category": "electronics_store",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -921,7 +921,7 @@
   "electronics_store_3": {
     "category": "electronics_store",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -940,7 +940,7 @@
   "gym_1": {
     "category": "gym",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -959,7 +959,7 @@
   "gym_2": {
     "category": "gym",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -978,7 +978,7 @@
   "gym_3": {
     "category": "gym",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -997,7 +997,7 @@
   "hair_care_1": {
     "category": "hair_care",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -1016,7 +1016,7 @@
   "hair_care_2": {
     "category": "hair_care",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -1035,7 +1035,7 @@
   "hair_care_3": {
     "category": "hair_care",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -1054,7 +1054,7 @@
   "hardware_store_1": {
     "category": "hardware_store",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -1073,7 +1073,7 @@
   "hardware_store_2": {
     "category": "hardware_store",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -1092,7 +1092,7 @@
   "hardware_store_3": {
     "category": "hardware_store",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -1111,7 +1111,7 @@
   "hindu_temple_1": {
     "category": "hindu_temple",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -1130,7 +1130,7 @@
   "hindu_temple_2": {
     "category": "hindu_temple",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -1149,7 +1149,7 @@
   "hindu_temple_3": {
     "category": "hindu_temple",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -1168,7 +1168,7 @@
   "home_goods_store_1": {
     "category": "home_goods_store",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -1187,7 +1187,7 @@
   "home_goods_store_2": {
     "category": "home_goods_store",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -1206,7 +1206,7 @@
   "home_goods_store_3": {
     "category": "home_goods_store",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -1225,7 +1225,7 @@
   "jewelry_store_1": {
     "category": "jewelry_store",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -1244,7 +1244,7 @@
   "jewelry_store_2": {
     "category": "jewelry_store",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -1263,7 +1263,7 @@
   "jewelry_store_3": {
     "category": "jewelry_store",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -1282,7 +1282,7 @@
   "library_1": {
     "category": "library",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -1301,7 +1301,7 @@
   "library_2": {
     "category": "library",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -1320,7 +1320,7 @@
   "library_3": {
     "category": "library",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -1339,7 +1339,7 @@
   "liquor_store_1": {
     "category": "liquor_store",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -1358,7 +1358,7 @@
   "liquor_store_2": {
     "category": "liquor_store",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -1377,7 +1377,7 @@
   "liquor_store_3": {
     "category": "liquor_store",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -1396,7 +1396,7 @@
   "lodging_1": {
     "category": "lodging",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -1415,7 +1415,7 @@
   "lodging_2": {
     "category": "lodging",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -1434,7 +1434,7 @@
   "lodging_3": {
     "category": "lodging",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -1453,7 +1453,7 @@
   "meal_delivery_1": {
     "category": "meal_delivery",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -1472,7 +1472,7 @@
   "meal_delivery_2": {
     "category": "meal_delivery",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -1491,7 +1491,121 @@
   "meal_delivery_3": {
     "category": "meal_delivery",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "Would you like some coffee or cake to go?",
+    "type": "suggestion"
+  },
+  "meal_takeaway_1": {
+    "category": "meal_takeaway",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "Some takeaway food before we explore the next place?",
+    "type": "suggestion"
+  },
+  "meal_takeaway_2": {
+    "category": "meal_takeaway",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "Let's stop to grab some food?",
+    "type": "suggestion"
+  },
+  "meal_takeaway_3": {
+    "category": "meal_takeaway",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "Would you like some coffee or cake to go?",
+    "type": "suggestion"
+  },
+  "food_1": {
+    "category": "food",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "Some takeaway food before we explore the next place?",
+    "type": "suggestion"
+  },
+  "food_2": {
+    "category": "food",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "Let's stop to grab some food?",
+    "type": "suggestion"
+  },
+  "food_3": {
+    "category": "food",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -1510,7 +1624,7 @@
   "mosque_1": {
     "category": "mosque",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -1529,7 +1643,7 @@
   "mosque_2": {
     "category": "mosque",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -1548,7 +1662,7 @@
   "mosque_3": {
     "category": "mosque",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -1567,7 +1681,7 @@
   "movie_theater_1": {
     "category": "movie_theater",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -1586,7 +1700,7 @@
   "movie_theater_2": {
     "category": "movie_theater",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -1605,7 +1719,7 @@
   "museum_1": {
     "category": "museum",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -1624,7 +1738,7 @@
   "museum_2": {
     "category": "museum",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -1643,7 +1757,7 @@
   "night_club_1": {
     "category": "night_club",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -1662,7 +1776,7 @@
   "night_club_2": {
     "category": "night_club",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -1681,7 +1795,7 @@
   "night_club_3": {
     "category": "night_club",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -1700,7 +1814,7 @@
   "park_1": {
     "category": "park",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -1719,7 +1833,7 @@
   "park_2": {
     "category": "park",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -1738,7 +1852,7 @@
   "pet_store_1": {
     "category": "pet_store",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -1757,7 +1871,7 @@
   "pet_store_2": {
     "category": "pet_store",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -1776,7 +1890,7 @@
   "pet_store_3": {
     "category": "pet_store",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -1795,7 +1909,7 @@
   "restaurant_1": {
     "category": "restaurant",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -1814,7 +1928,7 @@
   "restaurant_2": {
     "category": "restaurant",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -1833,7 +1947,7 @@
   "rv_park_1": {
     "category": "rv_park",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -1852,7 +1966,7 @@
   "rv_park_2": {
     "category": "rv_park",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -1871,7 +1985,7 @@
   "shoe_store_1": {
     "category": "shoe_store",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -1890,7 +2004,7 @@
   "shoe_store_2": {
     "category": "shoe_store",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -1909,7 +2023,7 @@
   "shopping_mall_1": {
     "category": "shopping_mall",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -1928,7 +2042,7 @@
   "shopping_mall_2": {
     "category": "shopping_mall",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -1947,7 +2061,7 @@
   "shopping_mall_3": {
     "category": "shopping_mall",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -1966,7 +2080,7 @@
   "synagogue_1": {
     "category": "synagogue",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -1985,7 +2099,7 @@
   "synagogue_2": {
     "category": "synagogue",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -2004,7 +2118,7 @@
   "spa_1": {
     "category": "spa",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -2023,7 +2137,7 @@
   "spa_2": {
     "category": "spa",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -2042,7 +2156,7 @@
   "spa_3": {
     "category": "spa",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -2061,7 +2175,7 @@
   "stadium_1": {
     "category": "stadium",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -2080,7 +2194,7 @@
   "stadium_2": {
     "category": "stadium",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -2099,7 +2213,7 @@
   "supermarket_1": {
     "category": "supermarket",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -2118,7 +2232,7 @@
   "supermarket_2": {
     "category": "supermarket",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -2137,7 +2251,7 @@
   "zoo_1": {
     "category": "zoo",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -2156,7 +2270,7 @@
   "zoo_2": {
     "category": "zoo",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -2175,7 +2289,7 @@
   "zoo_3": {
     "category": "zoo",
     "isDeleted": 0,
-    "lastUpdate": 1552912050596,
+    "lastUpdate": 1552912050597,
 
     "options": {
       "accept": {
@@ -2189,6 +2303,139 @@
       }
     },
     "text": "Just like in Africa! Let's wander around the zoo",
+    "type": "suggestion"
+  },
+  "not_mapped_1": {
+    "category": "not_mapped",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "There is a place near by, wanna go?",
+    "type": "suggestion"
+  },
+  "not_mapped_2": {
+    "category": "not_mapped",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "Let's go to a great place?",
+    "type": "suggestion"
+  },
+  "not_mapped_3": {
+    "category": "not_mapped",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "Let me surprise you with an awesome place?",
+    "type": "suggestion"
+  },
+  "not_mapped_4": {
+    "category": "not_mapped",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "I want to surprise you, can I?",
+    "type": "suggestion"
+  },
+  "not_mapped_5": {
+    "category": "not_mapped",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "Someone told me about a great place here, Let's go there?",
+    "type": "suggestion"
+  },
+  "not_mapped_4": {
+    "category": "not_mapped",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "I want to surprise you, can I?",
+    "type": "suggestion"
+  },
+  "not_mapped_6": {
+    "category": "not_mapped",
+    "isDeleted": 0,
+    "lastUpdate": 1552912050597,
+
+    "options": {
+      "accept": {
+        "text": ""
+      },
+      "decline": {
+        "text": ""
+      },
+      "negative": {
+        "text": ""
+      }
+    },
+    "text": "What an awesome place! Let's go there",
     "type": "suggestion"
   }
 }

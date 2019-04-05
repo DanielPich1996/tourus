@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import Firebase
+import GooglePlaces
 
 class MainModel {
     static let instance:MainModel = MainModel()
@@ -44,13 +45,30 @@ class MainModel {
         firebaseModel.signOut(callback)
     }
     
-    func getInteraction(_ category:String? = nil) -> Interaction? {
-        var interaction = Interaction.get(database: self.sqlModel.database, category: category)
-        if(interaction == nil) {
-            interaction = Interaction.get(database: self.sqlModel.database)
+    func getInteraction(_ categories:[String]? = nil, _ callback: (Interaction?) -> Void) {
+        var interaction:Interaction? = nil
+        
+        //try to get an interaction by one of the given categories
+        if categories != nil {
+            for category in categories! {
+                interaction = Interaction.get(database: self.sqlModel.database, category: category)
+                
+                if interaction != nil {
+                    callback(interaction!)
+                    return
+                }
+            }
+        }
+
+        //if none interaction was found - return a default interaction for non-categorized place
+        if interaction == nil {
+            interaction = Interaction.get(database: self.sqlModel.database, category: "not_mapped")
+            callback(interaction)
+            return
         }
         
-        return interaction ?? nil
+        //should never get to this line
+        callback(nil)
     }
     
     private func listenToInteractionUpdates() {
@@ -146,7 +164,7 @@ class MainModel {
         if let image = self.getImageFromFile(name: localImageName){
             callback(image)
             print("got image from cache \(localImageName)")
-        }else{
+        } else {
             //2. get the image from Firebase
             firebaseModel.getImage(url){(image:UIImage?) in
                 if (image != nil){
@@ -158,6 +176,10 @@ class MainModel {
                 print("got image from firebase \(localImageName)")
             }
         }
+    }
+    
+    func getPlaceImage(_ placeId:String, _ maxwidth:Int, _ alpha:CGFloat, _ callback:@escaping (UIImage?)->Void) {
+        placesModel.fetchGoogleNearbyPlacesPhoto(placeId, maxwidth, alpha, callback)
     }
     
     func saveImageToFile(image:UIImage, name:String){
@@ -201,5 +223,13 @@ class MainModel {
                 callback(image)
             }
         }
+    }
+    
+    func fetchNearbyPlaces(location: String, radius:Int = 3000, type:String?=nil, isOpen:Bool=true, callback: @escaping ([Place]?, String?) -> Void){
+        placesModel.fetchGoogleNearbyPlaces(location: location ,radius: radius, type:type, isOpen:isOpen, callback: callback);
+    }
+    
+    func navigate(_ latitude:String, _ longitude:String) {
+        placesModel.navigate(latitude, longitude)
     }
 }
