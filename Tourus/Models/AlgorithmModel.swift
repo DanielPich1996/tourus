@@ -22,8 +22,22 @@ class AlgorithmModel{
         //30min time
     }
     private func updateCandidateSet(){
-        //30min time
+        MainModel.instance.getCurrentUserHistory { [weak self] (currUserHistory) in
+            if currUserHistory == nil{
+                return
+            }
+            
+            self?.candidateSet = []
+            
+            for (type, rating) in currUserHistory!{
+                
+                if (Int(rating) > self!.minSupport){
+                    self?.candidateSet.append(type)
+                }
+            }
+        }
     }
+    
     
     init() {
         
@@ -65,10 +79,19 @@ class AlgorithmModel{
         //data = [["food", "pizza"], ["sleep", "tv"]]
         //if data is empty - take Baruch's places categories as the data
         // if not empty and there is a place with preffered category - send place
+        candidateSet = []
         updateHistoryData()
     }
     
-    //func algorithmOrchestra(_ )
+    func algorithmOrchestra(_ places: [Place]) -> Place{
+        updateCandidateSet()
+        
+        if candidateSet == []{
+            return (places.randomElement())!
+        }
+        
+        
+    }
     
     private func loadFreqSet(_ availableUsersCategories:[[String]]) -> [String:Int] {
         var counter:Int = 0

@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-struct consts{
+struct consts {
     struct names {
         static let userInfoTableName : String = "Users"
         static let interactionsTableName : String = "Interactions"
@@ -18,6 +18,11 @@ struct consts{
         static let profileImagesFolderName : String = "ProfileImagesStorage"
         static let attractionsTableName : String = "Attractions"
         static let categoriesTableName : String = "Categories"
+    }
+    
+    struct googleMaps {
+        static let applicationLink : String = "comgooglemaps://"
+        static let browserLink : String = "https://www.google.co.in/maps/dir/"
     }
     
     struct text {
