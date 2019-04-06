@@ -95,7 +95,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "55"
             endingLineNumber = "55"
-            landmarkName = "optionButtonAction(_:)"
+            landmarkName = "viewDidLoad()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -127,7 +127,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "198"
             endingLineNumber = "198"
-            landmarkName = "getCurrentUserHistory(_:)"
+            landmarkName = "getAllUsersHistory(_:)"
             landmarkType = "7">
             <Locations>
                <Location
@@ -175,7 +175,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "199"
             endingLineNumber = "199"
-            landmarkName = "getCurrentUserHistory(_:)"
+            landmarkName = "getAllUsersHistory(_:)"
             landmarkType = "7">
             <Locations>
                <Location
@@ -223,8 +223,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "200"
             endingLineNumber = "200"
-            landmarkName = "getCurrentUserHistory(_:)"
-            landmarkType = "7">
+            landmarkName = "FirebaseModel"
+            landmarkType = "3">
             <Locations>
                <Location
                   shouldBeEnabled = "No"
@@ -271,7 +271,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "196"
             endingLineNumber = "196"
-            landmarkName = "getCurrentUserHistory(_:)"
+            landmarkName = "getAllUsersHistory(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -543,7 +543,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "68"
             endingLineNumber = "68"
-            landmarkName = "listenToInteractionUpdates()"
+            landmarkName = "getInteraction(_:_:)"
             landmarkType = "7">
             <Locations>
                <Location
@@ -591,7 +591,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "79"
             endingLineNumber = "79"
-            landmarkName = "listenToOptionUpdates()"
+            landmarkName = "listenToInteractionUpdates()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -607,7 +607,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "78"
             endingLineNumber = "78"
-            landmarkName = "listenToOptionUpdates()"
+            landmarkName = "listenToInteractionUpdates()"
             landmarkType = "7">
             <Locations>
                <Location
@@ -687,8 +687,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "29"
             endingLineNumber = "29"
-            landmarkName = "getCurrentUserHistory(_:)"
-            landmarkType = "7">
+            landmarkName = "MainModel"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

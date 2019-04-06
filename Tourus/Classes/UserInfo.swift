@@ -21,6 +21,7 @@ class UserInfo {
     var country :String?
     var trips  = [String]()
     var categories = [String]()
+    var History = [String]()
     
     init(_uid:String, _displayName:String, _email:String, _profileImageUrl:String? = nil, _timestamp:Double = 0, _phonNumber:Float? = nil, _birthYear:Int? = nil, _country:String? = nil, _city:String? = nil) {
         uid = _uid
