@@ -96,7 +96,12 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     @objc func optionButtonAction( _ button : UIOptionButton) {
-        switch button.type {
+        
+        if(interaction != nil && interaction?.place != nil) {
+            //Update user history
+            MainModel.instance.updateUserHistory((interaction?.place?.types)!, button.type.value)
+            
+            switch button.type {
             case .accept: //navigate if a place is exist
                 if (interaction != nil && interaction?.place != nil) {
                     navigate((interaction?.place)!)
@@ -106,10 +111,11 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
             case .neutral: break
             case .opinionless: break
             case .additional: break
+            }
+            
+            //#2: the actual algo should replace this line:
+            simulateOnce()
         }
-        
-        //#2: the actual algo should replace this line:
-        simulateOnce()
     }
 
     @IBAction func onSettingsClick(_ sender: Any) {

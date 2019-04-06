@@ -19,7 +19,6 @@ class FirebaseModel {
     init() {
         FirebaseApp.configure()
         databaseRef = Database.database().reference()
-
     }
     
     
@@ -214,7 +213,7 @@ class FirebaseModel {
         else {
             callback([[String : Double]]())
         }
-}
+    }
     
     func getCurrentUserHistory(_ callback:@escaping ([String : Double]?) -> Void) {
         let user = currentUser()
@@ -257,7 +256,5 @@ class FirebaseModel {
                 })
             }
         }
-    }
-
-    
+    }    
 }
