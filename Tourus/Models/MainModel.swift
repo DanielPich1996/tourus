@@ -13,14 +13,21 @@ import GooglePlaces
 
 class MainModel {
     static let instance:MainModel = MainModel()
-    
+    var isOperational = false
+
     var firebaseModel = FirebaseModel()
     var placesModel = PlacesModel()
     var sqlModel = SqlModel()
     
     init() {
+        unowned let unownedSelf = self
+        
         listenToOptionUpdates()
-        listenToInteractionUpdates()
+        
+        let deadlineTime = DispatchTime.now() + .seconds(1)
+        DispatchQueue.main.asyncAfter(deadline: deadlineTime, execute: {
+            unownedSelf.listenToInteractionUpdates()
+        })
     }
     
     func getCurrentUserHistory(_ callback:@escaping ([String : Double]?) -> Void){
@@ -43,6 +50,10 @@ class MainModel {
     
     func signOut(_ callback:@escaping () -> Void) {
         firebaseModel.signOut(callback)
+    }
+    
+    func refreshUserToken(_ callback: @escaping (User?, String?) -> Void) {
+        firebaseModel.refreshUserToken(callback)
     }
     
     func getInteraction(_ categories:[String]? = nil, _ callback: (Interaction?) -> Void) {
@@ -77,6 +88,12 @@ class MainModel {
         
         firebaseModel.getAllInteractionsFromDate(from:lastUpdated) { (data:[Interaction]) in
             self.sqlInteractionHandler(data: data) { (isUpdated:Bool) in
+                
+                if !self.isOperational {
+                    self.isOperational = true
+                     NotificationModel.onOperationalNotification.notify(data: true)
+                }
+                
                 if(isUpdated) {
                     //do something?
                 }
@@ -127,7 +144,7 @@ class MainModel {
     
     func getAdditionalOptionText(_ category:String) -> String {
         //return Interaction.Option.get(database: self.sqlModel.database, type: type.rawValue)?.text ?? type.defaultString
-    return ""
+        return ""
     }
     
     func getUserInfo(_ uid:String, callback:@escaping (UserInfo?) -> Void) {
