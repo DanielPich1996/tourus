@@ -27,8 +27,8 @@ class MainModel {
         firebaseModel.getCurrentUserHistory(callback)
     }
     
-    func updateUserHistory(_ category:String ,_ addedvalue:Double){
-        firebaseModel.updateUserHistory(category,addedvalue)
+    func updateUserHistory(_ categories:[String] ,_ addedvalue:Double){
+        firebaseModel.updateUserHistory(categories,addedvalue)
     }
     
     func signIn(_ email:String, _ password:String, _ callback:@escaping (Bool)->Void)

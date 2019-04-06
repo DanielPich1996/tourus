@@ -70,16 +70,20 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     @objc func optionButtonAction( _ button : UIOptionButton) {
         //what to do when an option button tapped?
         
-        switch button.type {
-        case .accept: //navigate if a place is exist
-            if (interaction != nil && interaction?.place != nil) {
-                navigate((interaction?.place)!)
+        if(interaction != nil && interaction?.place != nil) {
+            MainModel.instance.updateUserHistory((interaction?.place?.types)!, button.type.value)
+            
+            switch button.type {
+            case .accept: //navigate if a place is exist
+                if (interaction != nil && interaction?.place != nil) {
+                    navigate((interaction?.place)!)
+                }
+            case .decline: break
+            case .negative: break
+            case .neutral: break
+            case .opinionless: break
+            case .additional: break
             }
-        case .decline: break
-        case .negative: break
-        case .neutral: break
-        case .opinionless: break
-        case .additional: break
         }
         
         //tmp code for simulation:
@@ -89,7 +93,8 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         
         MainModel.instance.fetchNearbyPlaces(location: loc, callback: { (places,err)  in
             DispatchQueue.main.async {
-                if places != nil {
+                if places != nil && places?.count != 0 {
+                    
                     MainModel.instance.getInteraction(places![0].types, { intereact in
                         self.interaction = intereact
                         if self.interaction != nil {
