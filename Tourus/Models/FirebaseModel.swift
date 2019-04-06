@@ -19,7 +19,9 @@ class FirebaseModel {
     init() {
         FirebaseApp.configure()
         databaseRef = Database.database().reference()
+
     }
+    
     
     func getAllInteractionsFromDate(from:Double, callback:@escaping ([Interaction])->Void) {        
         let stRef = databaseRef.child(consts.names.interactionsTableName)
@@ -168,4 +170,76 @@ class FirebaseModel {
     func currentUser() -> User? {
         return Auth.auth().currentUser
     }
+    
+    func getAllUsersHistory(_ callback: @escaping ([[String : Double]]) -> Void){
+    // Get other users history- all users history besides the current user
+        let user = currentUser()
+        let uid = user?.uid
+        
+        if (user != nil && uid != nil) {
+            self.databaseRef!.child("History").observeSingleEvent(of: .value) { (snapshot) in
+
+             var history = [[String : Double]]()
+            
+            if snapshot.exists() {
+                if let value = snapshot.value as? [String : [String:Double]]{
+                    for otherUsersHistory in value{
+                        if(otherUsersHistory.key != uid){
+                            history.append(otherUsersHistory.value)
+                        }
+                    }
+                }
+            }
+                callback(history)
+            }
+        }
+        else {
+            callback([[String : Double]]())
+        }
+}
+    
+    func getCurrentUserHistory(_ callback:@escaping ([String : Double]?) -> Void) {
+        let user = currentUser()
+        let uid = user?.uid
+       
+        if(user != nil){
+        self.databaseRef!.child("History").child(uid!).observeSingleEvent(of: .value) { (snapshot) in
+                if snapshot.exists() {
+                    if let value = snapshot.value as? [String : Double]{
+                    callback(value)
+                    }
+                }
+                else {
+                    callback(nil)
+                }
+            }
+        }
+    }
+    
+    func updateUserHistory(_ categories:[String] ,_ addedvalue:Double) {
+        let user = currentUser()
+        let uid = user?.uid
+        
+        if(uid != nil) {
+
+            for category in categories{
+                let db = self.databaseRef!.child("History").child(uid!).child(category)
+
+                db.observeSingleEvent(of: .value, with: { (snapshot) in
+
+                    if snapshot.exists() {
+
+                        if let value = snapshot.value as? Double {
+                            db.setValue(value + addedvalue)
+                        }
+                    }
+                    else{
+                        db.setValue(addedvalue)
+                    }
+                })
+            }
+        }
+    }
+
+    
 }
