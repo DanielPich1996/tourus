@@ -74,6 +74,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         MainModel.instance.fetchNearbyPlaces(location: loc, callback: { (places,err)  in
             DispatchQueue.main.async {
                 if places != nil && places!.count > 0 {
+
                     MainModel.instance.getInteraction(places![0].types, { intereact in
                         self.interaction = intereact
                         if self.interaction != nil {
