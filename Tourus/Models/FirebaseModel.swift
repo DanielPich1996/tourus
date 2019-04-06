@@ -165,6 +165,24 @@ class FirebaseModel {
         }
     }
     
+    func refreshUserToken(_ callback: @escaping (User?, String?) -> Void) {
+        let currentuser = Auth.auth().currentUser
+
+        if currentuser == nil {
+            callback(nil, nil)
+            return
+        }
+
+        currentuser?.getIDTokenForcingRefresh(true) { idToken, error in
+            if let error = error {
+                self.signOut() { callback(nil, error.localizedDescription) }
+            }
+            else {
+                callback(currentuser, nil)
+            }
+        }
+    }
+    
     func currentUser() -> User? {
         return Auth.auth().currentUser
     }

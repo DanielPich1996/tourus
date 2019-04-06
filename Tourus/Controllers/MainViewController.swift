@@ -42,22 +42,20 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        BuisyIndicator.Instance.showBuisyIndicator()
+        optionsView.fadeOut()
+        interactionView.fadeOut()
+        moreInfoView.fadeOut()
         
         verticalStackView.spacing = 15.0
         inquiryImage.isHidden = true
         navigationBtn.isHidden = true
-        initLocationManager()
-        addBackgroundImage()
+        setBackroundImage(nil)
+        setInfoImage(nil)
         
-        //temp code for testing:
-        var categories = [String]()
-        categories.append("bar")
-        MainModel.instance.getInteraction(categories, { interact in
-            self.interaction = interact
-            if interaction != nil {
-                self.setInteraction(self.interaction!)
-            }
-        })
+        addBackgroundImage()
+        initLocationManager()
     }
     
     @IBAction func navigationButtonAction(_ sender: Any) {
@@ -66,30 +64,16 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
     
+    // MARK:Simulation
     var count = 0
-    @objc func optionButtonAction( _ button : UIOptionButton) {
-        //what to do when an option button tapped?
-        
-        switch button.type {
-        case .accept: //navigate if a place is exist
-            if (interaction != nil && interaction?.place != nil) {
-                navigate((interaction?.place)!)
-            }
-        case .decline: break
-        case .negative: break
-        case .neutral: break
-        case .opinionless: break
-        case .additional: break
-        }
-        
-        //tmp code for simulation:
+    private func simulateOnce() {
         let latitude:String = String(format: "%f", currUserLocation!.coordinate.latitude)
         let longitude:String = String(format:"%f", currUserLocation!.coordinate.longitude)
         let loc:String = latitude + "," + longitude
         
         MainModel.instance.fetchNearbyPlaces(location: loc, callback: { (places,err)  in
             DispatchQueue.main.async {
-                if places != nil {
+                if places != nil && places!.count > 0 {
                     MainModel.instance.getInteraction(places![0].types, { intereact in
                         self.interaction = intereact
                         if self.interaction != nil {
@@ -103,11 +87,28 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
                             }
                             
                             self.count += 1
-                        }                       
+                        }
                     })
                 }
             }
         })
+    }
+    
+    @objc func optionButtonAction( _ button : UIOptionButton) {
+        switch button.type {
+            case .accept: //navigate if a place is exist
+                if (interaction != nil && interaction?.place != nil) {
+                    navigate((interaction?.place)!)
+                }
+            case .decline: break
+            case .negative: break
+            case .neutral: break
+            case .opinionless: break
+            case .additional: break
+        }
+        
+        //#2: the actual algo should replace this line:
+        simulateOnce()
     }
 
     @IBAction func onSettingsClick(_ sender: Any) {
@@ -125,19 +126,27 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     // MARK:Background image funcs
     private func setBackroundImage(_ image:UIImage?) {
         DispatchQueue.main.async {
-            self.backgroundImage.image = image
+            //checking if the new image is valid for the current interaction's type
+            var newImage:UIImage? = nil
+            
+            if (image != nil && self.interaction != nil && self.interaction?.type == .suggestion) {
+                newImage = image
+            }
+            
+             self.backgroundImage.image = newImage
         }
     }
     
     private func setInfoImage(_ image:UIImage?) {
         DispatchQueue.main.async {
-            //self.removeInfoImage()
-            if image == nil {
-                 self.moreInfoImage.image = self.defaultInfoImage
+            
+            var newImage:UIImage? = self.defaultInfoImage
+            
+            if (image != nil && self.interaction != nil && self.interaction?.type == .suggestion) {
+                newImage = image
             }
-            else {
-                self.moreInfoImage.image = image
-            }
+            
+            self.moreInfoImage.image = newImage
         }
     }
     
@@ -164,7 +173,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     @IBAction func moreInfoTapped(_ sender: Any) {
-        
+        //TODO
     }
     
     func setInteraction(_ interaction:Interaction) {
@@ -293,14 +302,23 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         let location = locations[locations.count - 1]
         if location.horizontalAccuracy > 0 && currUserLocation == nil {
             currUserLocation = location
+            
+            if interaction == nil {
+                //#1: the actual algo should replace this line:
+                simulateOnce()
+                
+                self.view.isUserInteractionEnabled = true
+                BuisyIndicator.Instance.hideBuisyIndicator()
+            }
+            
             locationManager.stopUpdatingLocation()
-            let strLocation = "\(location.coordinate.latitude),\(location.coordinate.longitude)"
-            MainModel.instance.fetchNearbyPlaces(location: strLocation, type:"restaurant", callback: {(places, error) in
-                print(places!)
-            })
+            
+            // let strLocation = "\(location.coordinate.latitude),\(location.coordinate.longitude)"
+            // MainModel.instance.fetchNearbyPlaces(location: strLocation, type:"restaurant", callback: {(places, error) in
+            // print(places!)
+            // })
         }
     }
-    
     
     //Write the didFailWithError method here:
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
