@@ -30,6 +30,10 @@ class MainModel {
         })
     }
     
+    func getAllUsersHistory(_ callback: @escaping ([[String : Double]]) -> Void){
+        firebaseModel.getAllUsersHistory(callback)
+    }
+    
     func getCurrentUserHistory(_ callback:@escaping ([String : Double]?) -> Void){
         firebaseModel.getCurrentUserHistory(callback)
     }
