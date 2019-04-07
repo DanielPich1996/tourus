@@ -9,8 +9,9 @@
 import Foundation
 
 class NotificationModel{
+    static let onOperationalNotification = Notification<Bool>("notification.operational")
     static let userInfoNotification = Notification<UserInfo>("notification.userinfo")
-
+    
     class Notification<T>{
         let name:String
         var count = 0;
