@@ -112,7 +112,7 @@ class AlgorithmModel{
             }
         }
         
-        group.notify(queue: .main, work: DispatchWorkItem)
+        group.wait()
         return result[0]
     }
     
