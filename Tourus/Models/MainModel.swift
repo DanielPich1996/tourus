@@ -13,16 +13,31 @@ import GooglePlaces
 
 class MainModel {
     static let instance:MainModel = MainModel()
-    
+    var isOperational = false
+
     var firebaseModel = FirebaseModel()
     var placesModel = PlacesModel()
     var sqlModel = SqlModel()
     
     init() {
+        unowned let unownedSelf = self
+        
         listenToOptionUpdates()
-        listenToInteractionUpdates()
+        
+        let deadlineTime = DispatchTime.now() + .seconds(1)
+        DispatchQueue.main.asyncAfter(deadline: deadlineTime, execute: {
+            unownedSelf.listenToInteractionUpdates()
+        })
     }
-   
+    
+    func getCurrentUserHistory(_ callback:@escaping ([String : Double]?) -> Void){
+        firebaseModel.getCurrentUserHistory(callback)
+    }
+    
+    func updateUserHistory(_ categories:[String] ,_ addedvalue:Double){
+        firebaseModel.updateUserHistory(categories,addedvalue)
+    }
+    
     func signIn(_ email:String, _ password:String, _ callback:@escaping (Bool)->Void)
     {
         firebaseModel.signIn(email, password, callback)
@@ -37,13 +52,34 @@ class MainModel {
         firebaseModel.signOut(callback)
     }
     
-    func getInteraction(_ category:String? = nil) -> Interaction? {
-        var interaction = Interaction.get(database: self.sqlModel.database, category: category)
-        if(interaction == nil) {
-            interaction = Interaction.get(database: self.sqlModel.database)
+    func refreshUserToken(_ callback: @escaping (User?, String?) -> Void) {
+        firebaseModel.refreshUserToken(callback)
+    }
+    
+    func getInteraction(_ categories:[String]? = nil, _ callback: (Interaction?) -> Void) {
+        var interaction:Interaction? = nil
+        
+        //try to get an interaction by one of the given categories
+        if categories != nil {
+            for category in categories! {
+                interaction = Interaction.get(database: self.sqlModel.database, category: category)
+                
+                if interaction != nil {
+                    callback(interaction!)
+                    return
+                }
+            }
+        }
+
+        //if none interaction was found - return a default interaction for non-categorized place
+        if interaction == nil {
+            interaction = Interaction.get(database: self.sqlModel.database, category: "not_mapped")
+            callback(interaction)
+            return
         }
         
-        return interaction ?? nil
+        //should never get to this line
+        callback(nil)
     }
     
     private func listenToInteractionUpdates() {
@@ -52,6 +88,12 @@ class MainModel {
         
         firebaseModel.getAllInteractionsFromDate(from:lastUpdated) { (data:[Interaction]) in
             self.sqlInteractionHandler(data: data) { (isUpdated:Bool) in
+                
+                if !self.isOperational {
+                    self.isOperational = true
+                     NotificationModel.onOperationalNotification.notify(data: true)
+                }
+                
                 if(isUpdated) {
                     //do something?
                 }
@@ -102,7 +144,7 @@ class MainModel {
     
     func getAdditionalOptionText(_ category:String) -> String {
         //return Interaction.Option.get(database: self.sqlModel.database, type: type.rawValue)?.text ?? type.defaultString
-    return ""
+        return ""
     }
     
     func getUserInfo(_ uid:String, callback:@escaping (UserInfo?) -> Void) {
@@ -139,7 +181,7 @@ class MainModel {
         if let image = self.getImageFromFile(name: localImageName){
             callback(image)
             print("got image from cache \(localImageName)")
-        }else{
+        } else {
             //2. get the image from Firebase
             firebaseModel.getImage(url){(image:UIImage?) in
                 if (image != nil){
@@ -153,8 +195,8 @@ class MainModel {
         }
     }
     
-    func getPlaceImage(_ placeId:String, _ maxwidth:Int, _ callback:@escaping (UIImage?)->Void) {
-        placesModel.fetchGoogleNearbyPlacesPhoto(placeId, maxwidth, callback)
+    func getPlaceImage(_ placeId:String, _ maxwidth:Int, _ alpha:CGFloat, _ callback:@escaping (UIImage?)->Void) {
+        placesModel.fetchGoogleNearbyPlacesPhoto(placeId, maxwidth, alpha, callback)
     }
     
     func saveImageToFile(image:UIImage, name:String){
@@ -202,5 +244,9 @@ class MainModel {
     
     func fetchNearbyPlaces(location: String, radius:Int = 3000, type:String?=nil, isOpen:Bool=true, callback: @escaping ([Place]?, String?) -> Void){
         placesModel.fetchGoogleNearbyPlaces(location: location ,radius: radius, type:type, isOpen:isOpen, callback: callback);
+    }
+    
+    func navigate(_ latitude:String, _ longitude:String) {
+        placesModel.navigate(latitude, longitude)
     }
 }

@@ -25,7 +25,6 @@ class PlacesModel {
         var urlString = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?"
         urlString+="location="+location
         urlString+="&radius="+String(radius)
-        urlString+="&key="+apiWebKey
         //urlString+="&fields=photos" //,formatted_address,name,rating,opening_hours"
         urlString+="&language=en"
         
@@ -35,29 +34,33 @@ class PlacesModel {
         if let strType = type {
             urlString+="&type=\(strType)"
         }
+        urlString+="&key="+apiWebKey
         
-        let urlObj = URL(string: urlString)
-        URLSession.shared.dataTask(with: urlObj!) {(data, response, error) in
-            do {
-                if (error != nil) {
-                    callback(nil,error?.localizedDescription)
-                    return
+        if let url = URL(string: urlString) {
+            URLSession.shared.dataTask(with: url) {(data, response, error) in
+                do {
+                    if (error != nil) {
+                        callback(nil,error?.localizedDescription)
+                        return
+                    }
+                    let googlePlacesResponse = try JSONDecoder().decode(GooglePlacesResponse.self, from: data!)
+                    let status = googlePlacesResponse.status;
+                    if status == "NOT_FOUND" || status == "REQUEST_DENIED" {
+                        //callback(nil,status)
+                        return
+                    }
+                    callback(googlePlacesResponse.results.map({ (place) -> Place in
+                        return Place(googlePlace : place)}),nil)
+                } catch {
+                    callback(nil,error.localizedDescription)
                 }
-                let googlePlacesResponse = try JSONDecoder().decode(GooglePlacesResponse.self, from: data!)
-                let status = googlePlacesResponse.status;
-                if status == "NOT_FOUND" || status == "REQUEST_DENIED" {
-                    //callback(nil,status)
-                    return
-                }
-                callback(googlePlacesResponse.results.map({ (place) -> Place in
-                    return Place(googlePlace : place)}),nil)
-            } catch {
-                callback(nil,error.localizedDescription)
-            }
-        }.resume()
+                }.resume()
+        } else {
+            print("could not open url, equals to nil")
+        }
     }
     
-    func fetchGoogleNearbyPlacesPhoto(_ reference:String, _ maxwidth:Int,_ callback: @escaping (UIImage?) -> Void) {
+    func fetchGoogleNearbyPlacesPhoto(_ reference:String, _ maxwidth:Int, _ alpha:CGFloat, _ callback: @escaping (UIImage?) -> Void) {
 
         // Method 3
         let urlString = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=\(maxwidth)&photoreference=\(reference)&key=\(apiWebKey)"
@@ -80,7 +83,11 @@ class PlacesModel {
             guard let imageData = try? Data(contentsOf: url) else {
                 return
             }
+            
             downloadedPhoto = UIImage(data: imageData)
+            if(downloadedPhoto != nil) {
+                downloadedPhoto = downloadedPhoto!.alpha(alpha)
+            }
             callback(downloadedPhoto)
         }.resume()
     }
@@ -91,7 +98,7 @@ class PlacesModel {
                 print("Pick Place error: \(error.localizedDescription)")
                 return
             }
-            
+
             if let placeLikelihoodList = placeLikelihoodList {
                 let place = placeLikelihoodList.likelihoods.first?.place
                 if let place = place {
@@ -99,5 +106,19 @@ class PlacesModel {
                 }
             }
         })
+    }
+    
+    func navigate(_ latitude:String, _ longitude:String) {
+        var navigationPath = consts.googleMaps.browserLink //initialize with the browser link
+
+        if let UrlNavigation = URL.init(string: consts.googleMaps.applicationLink) {
+            if UIApplication.shared.canOpenURL(UrlNavigation) {
+                navigationPath = consts.googleMaps.applicationLink //google maps app link
+            }
+        }
+        
+        if let urlDestination = URL.init(string: navigationPath + "?saddr=&daddr=\(latitude),\(longitude)&&directionsmode=walking&zoom=17") {
+            UIApplication.shared.open(urlDestination, options: [:], completionHandler: nil)
+        }
     }
 }
