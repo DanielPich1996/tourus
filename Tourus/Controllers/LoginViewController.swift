@@ -22,18 +22,30 @@ class LoginViewController: UIViewController {
         self.view.isUserInteractionEnabled = false
         BuisyIndicator.Instance.showBuisyIndicator()
         
-        let user = MainModel.instance.currentUser()
-        
-        if(user != nil) {
-            self.gotoMainview();
+        MainModel.instance.refreshUserToken() { user, error in
+            
+            if(error == nil && user != nil) {
+                if !MainModel.instance.isOperational {
+                    _ = NotificationModel.onOperationalNotification.observe(cb: { _ in
+                       self.view.isUserInteractionEnabled = true
+                        
+                       self.gotoMainview();
+                    })
+                }
+                else {                    
+                    self.view.isUserInteractionEnabled = true
+                    
+                    self.gotoMainview();
+                }
+            }
+            else {
+                let singleTap = UITapGestureRecognizer(target: self, action: #selector(LoginViewController.tapDetected))
+                self.viewcontainer.addGestureRecognizer(singleTap)
+                
+                BuisyIndicator.Instance.hideBuisyIndicator()
+                self.view.isUserInteractionEnabled = true
+            }
         }
-        else {
-            let singleTap = UITapGestureRecognizer(target: self, action: #selector(LoginViewController.tapDetected))
-            viewcontainer.addGestureRecognizer(singleTap)
-        }
-        
-        BuisyIndicator.Instance.hideBuisyIndicator()
-        self.view.isUserInteractionEnabled = true
     }
     
     @objc func tapDetected() {
