@@ -87,7 +87,19 @@ class AlgorithmModel{
         updateHistoryData()
     }
     
-    func algorithmOrchestra(_ places: [Place]) -> Place{
+    func getAlgorithmNextPlace(_ location:String, _ callback: @escaping (Interaction) -> Void) {
+        MainModel.instance.fetchNearbyPlaces(location: location, callback: { (places, err)  in
+            self.algorithmOrchestra(places!) { place in
+                 MainModel.instance.getInteraction(place.types) { intereaction in
+                    
+                    intereaction!.place = place
+                    callback(intereaction!)
+                }
+            }
+        })
+    }
+    
+    func algorithmOrchestra(_ places: [Place], _ callback: (Place) -> Void){
         let group = DispatchGroup()
         var result = [Place]()
 
@@ -113,7 +125,7 @@ class AlgorithmModel{
         }
         
         group.wait()
-        return result[0]
+       callback(result[0])
     }
     
     private func getValidPlacesByTypes(_ places: [Place],types: [String]) -> [Place]{

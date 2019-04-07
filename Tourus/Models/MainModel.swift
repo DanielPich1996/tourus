@@ -18,6 +18,7 @@ class MainModel {
     var firebaseModel = FirebaseModel()
     var placesModel = PlacesModel()
     var sqlModel = SqlModel()
+    var algorithmModel = AlgorithmModel()
     
     init() {
         unowned let unownedSelf = self
@@ -28,6 +29,10 @@ class MainModel {
         DispatchQueue.main.asyncAfter(deadline: deadlineTime, execute: {
             unownedSelf.listenToInteractionUpdates()
         })
+    }
+    
+    func getAlgorithmNextPlace(_ location:String, _ callback: @escaping (Interaction) -> Void) {
+        algorithmModel.getAlgorithmNextPlace(location, callback)
     }
     
     func getAllUsersHistory(_ callback: @escaping ([[String : Double]]) -> Void){

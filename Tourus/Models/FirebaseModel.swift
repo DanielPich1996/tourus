@@ -19,10 +19,6 @@ class FirebaseModel {
     init() {
         FirebaseApp.configure()
         databaseRef = Database.database().reference()
-<<<<<<< HEAD
-        
-=======
->>>>>>> master
     }
     
     
@@ -172,20 +168,12 @@ class FirebaseModel {
     
     func refreshUserToken(_ callback: @escaping (User?, String?) -> Void) {
         let currentuser = Auth.auth().currentUser
-<<<<<<< HEAD
-        
-=======
 
->>>>>>> master
         if currentuser == nil {
             callback(nil, nil)
             return
         }
-<<<<<<< HEAD
         
-=======
-
->>>>>>> master
         currentuser?.getIDTokenForcingRefresh(true) { idToken, error in
             if let error = error {
                 self.signOut() { callback(nil, error.localizedDescription) }
@@ -268,9 +256,5 @@ class FirebaseModel {
                 })
             }
         }
-<<<<<<< HEAD
     }
-=======
-    }    
->>>>>>> master
 }
