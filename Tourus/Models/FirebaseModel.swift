@@ -211,7 +211,12 @@ class FirebaseModel {
             }
         }
         else {
+            // Local change only
             callback([[String : Double]]())
+            //callback([["establishment" : 8, "food" : -1, "lodging" : 9, "meal_takeaway" : -1, "point_of_interest" : 8, "restaurant" : -1, "university" : 3],
+           //  ["lodging" : -2, "meal_takeaway" : -1, "point_of_interest" : -4],
+            // ["establishment" : 3, "food" : 3, "lodging" : 2],
+            // [ "point_of_interest" : 1, "restaurant" : 2, "university" : -3]])
         }
     }
     

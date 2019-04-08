@@ -11,7 +11,7 @@ import Foundation
 import UIKit
 
 class AlgorithmModel{
-    private let minSupport = 2
+    private let minSupport = 0
     
     private let otherUsersHistoryData:[[String]] = [[String]()] //update every 30min time
     
@@ -26,74 +26,49 @@ class AlgorithmModel{
     private func updateCandidateSet(_ complition: @escaping ([String]?) -> Void){
         MainModel.instance.getCurrentUserHistory { [weak self] (currUserHistory) in
             if currUserHistory == nil{
-                return
+                complition(nil)
             }
-            
-            self?.candidateSet = []
-            
-            for (type, rating) in currUserHistory!{
+            else{
+                self?.candidateSet = []
                 
-                if (Int(rating) > self!.minSupport){
-                    self?.candidateSet.append(type)
+                for (type, rating) in currUserHistory!{
+                    
+                    if (Int(rating) > self!.minSupport){
+                        self?.candidateSet.append(type)
+                    }
                 }
+                
+                complition(self?.candidateSet)
             }
-            
-            complition(self?.candidateSet)
         }
     }
     
     
     init() {
-        
-        
-        // MainModel.instance.currentUser()
-        
-        
-        
-        //init updateHistoryData
-        
-        //consts:
-        //minUserCategory = 0
-        //minOthersCategory = 1
-        
-        //user1:
-        //q1 - coffee? -yes
-        //q2 - food? -no
-        
-        //history:
-        //-coffee: 1
-        //-sleep: 2
-        //-food: -1
-        
-        //user category > minUserCategory
-        //candidateSet = ["coffee", "sleep"]
-        
-        //places:
-        //p1- "food"
-        //p2- "food"
-        //p3- "coffee"
-        //p1- "watch"
-        
-        //user2:
-        //["food": 3, "tv": -2, "pizza": 1]
-        //user3:
-        //["food": -4, "sleep": 2, "tv": 1]
-        
-        //data = all users categories where category_value > minOthersCategory
-        //data = [["food", "pizza"], ["sleep", "tv"]]
-        //if data is empty - take Baruch's places categories as the data
-        // if not empty and there is a place with preffered category - send place
         candidateSet = []
         updateHistoryData()
     }
     
     func getAlgorithmNextPlace(_ location:String, _ callback: @escaping (Interaction) -> Void) {
         MainModel.instance.fetchNearbyPlaces(location: location, callback: { (places, err)  in
-            self.algorithmOrchestra(places!) { place in
-                 MainModel.instance.getInteraction(place.types) { intereaction in
+            if ((places == nil) || (places?.count == 0)){
+                DispatchQueue.main.async {
+                    let alert = UIAlertController(title: "Lonley:'(", message: "Couldn't fetch any place around you...", preferredStyle: UIAlertController.Style.alert)
+                    alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: nil))
                     
-                    intereaction!.place = place
-                    callback(intereaction!)
+                    UIApplication.topViewController()?.present(alert, animated: true, completion: nil)
+                }
+            }
+            else{
+                self.algorithmOrchestra(places!) { place in
+                    MainModel.instance.getInteraction(place.types) { intereaction in
+                        
+                        intereaction!.place = place
+                        
+                        DispatchQueue.main.async {
+                            callback(intereaction!)
+                        }
+                    }
                 }
             }
         })
@@ -101,31 +76,35 @@ class AlgorithmModel{
     
     func algorithmOrchestra(_ places: [Place], _ callback: (Place) -> Void){
         let group = DispatchGroup()
-        var result = [Place]()
 
         group.enter()
         updateCandidateSet { [weak self] (candidateSet) -> Void in
-            if candidateSet == []{
-                result.append((places.randomElement())!)
-                group.leave()
+            if candidateSet != nil{
+                self?.candidateSet = candidateSet!
             }
-            else{
-                let aprioriResults = self?.choosePlace(places)
-                let validPlaces = self?.getValidPlacesByTypes(places, types: aprioriResults!)
-                
-                if validPlaces!.count > 0{
-                    result.append((validPlaces!.randomElement())!)
-                    group.leave()
-                }
-                else {
-                    result.append((places.randomElement())!)
-                    group.leave()
-                }
-            }
+            group.leave()
         }
         
         group.wait()
-       callback(result[0])
+        
+        if candidateSet == []{
+            callback(places.randomElement()!)
+        }
+        else{
+            if let aprioriResults = choosePlace(places){
+                let validPlaces = getValidPlacesByTypes(places, types: aprioriResults)
+                
+                if validPlaces.count > 0{
+                    callback(validPlaces.randomElement()!)
+                }
+                else {
+                    callback(places.randomElement()!)
+                }
+            }
+            else{
+                callback(places.randomElement()!)
+            }
+        }
     }
     
     private func getValidPlacesByTypes(_ places: [Place],types: [String]) -> [Place]{
@@ -225,7 +204,7 @@ class AlgorithmModel{
     }
     
     //Algo
-    func choosePlace(_ places: [Place]) -> [String] {
+    func choosePlace(_ places: [Place]) -> [String]? {
         var data:[[String]] = [[String]]()
         var frequencyTable:[String:Int] = [:]
         
@@ -261,9 +240,13 @@ class AlgorithmModel{
             }
         }
         print(lastFreqCounts)
+        
+        if lastFreqCounts.count == 0{
+            return nil
+        }
+        
         return genereteTable[lastFreqCounts.index(of: lastFreqCounts.max()!)!]
     }
-    //print(apriori(minSupport: 3)) // [A,C]
 }
 
 
