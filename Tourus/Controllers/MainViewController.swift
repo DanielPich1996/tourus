@@ -64,7 +64,26 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
     
-    // MARK:Simulation
+    //MARK: ALGORYTHM
+    func getNextInteraction() {
+        let latitude:String = String(format: "%f", currUserLocation!.coordinate.latitude)
+        let longitude:String = String(format:"%f", currUserLocation!.coordinate.longitude)
+        let loc:String = latitude + "," + longitude
+        
+        MainModel.instance.getAlgorithmNextPlace(loc) { interact in
+            self.interaction = interact
+            
+            if self.interaction != nil {
+                
+                self.setInteractionwithAnimation(self.interaction!)
+            }
+            else {
+                //Handle nil situation
+            }
+        }
+    }
+    
+    // MARK: Simulation
     var count = 0
     private func simulateOnce() {
         let latitude:String = String(format: "%f", currUserLocation!.coordinate.latitude)
@@ -113,8 +132,8 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
             case .additional: break
             }
             
-            //#2: the actual algo should replace this line:
-            simulateOnce()
+            //#2: algo
+            getNextInteraction()
         }
     }
 
@@ -311,8 +330,8 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
             currUserLocation = location
             
             if interaction == nil {
-                //#1: the actual algo should replace this line:
-                simulateOnce()
+                //#1: algo
+               getNextInteraction()
                 
                 self.view.isUserInteractionEnabled = true
                 BuisyIndicator.Instance.hideBuisyIndicator()
