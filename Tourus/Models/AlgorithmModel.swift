@@ -8,62 +8,119 @@
 
 
 import Foundation
+import UIKit
 
 class AlgorithmModel{
-    private let minSupport = 2
+    private let minSupport = 0
     
     private let otherUsersHistoryData:[[String]] = [[String]()] //update every 30min time
-    //private let data:[[String]] = [["A","B","C"],["A","C"],["A","D"],["B","E","F"],["D","C","A"],["B","C","F"]]
-    private let candidateSet:[String] = ["A","B","C","D","E","F"]//update after every question
+    
+    private var candidateSet:[String] = []
+    
+    private var refusingHistory: [String] = []
     
     private func updateHistoryData(){
         //30min time
     }
-    private func updateCandidateSet(){
-        //30min time
+    
+    private func updateCandidateSet(_ complition: @escaping ([String]?) -> Void){
+        MainModel.instance.getCurrentUserHistory { [weak self] (currUserHistory) in
+            if currUserHistory == nil{
+                complition(nil)
+            }
+            else{
+                self?.candidateSet = []
+                
+                for (type, rating) in currUserHistory!{
+                    
+                    if (Int(rating) > self!.minSupport){
+                        self?.candidateSet.append(type)
+                    }
+                }
+                
+                complition(self?.candidateSet)
+            }
+        }
     }
     
+    
     init() {
+        candidateSet = []
+        updateHistoryData()
+    }
+    
+    func getAlgorithmNextPlace(_ location:String, _ callback: @escaping (Interaction) -> Void) {
+        MainModel.instance.fetchNearbyPlaces(location: location, callback: { (places, err)  in
+            if ((places == nil) || (places?.count == 0)){
+                DispatchQueue.main.async {
+                    let alert = UIAlertController(title: "Lonley:'(", message: "Couldn't fetch any place around you...", preferredStyle: UIAlertController.Style.alert)
+                    alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: nil))
+                    
+                    UIApplication.topViewController()?.present(alert, animated: true, completion: nil)
+                }
+            }
+            else{
+                self.algorithmOrchestra(places!) { place in
+                    MainModel.instance.getInteraction(place.types) { intereaction in
+                        
+                        intereaction!.place = place
+                        
+                        DispatchQueue.main.async {
+                            callback(intereaction!)
+                        }
+                    }
+                }
+            }
+        })
+    }
+    
+    func algorithmOrchestra(_ places: [Place], _ callback: (Place) -> Void){
+        let group = DispatchGroup()
+
+        group.enter()
+        updateCandidateSet { [weak self] (candidateSet) -> Void in
+            if candidateSet != nil{
+                self?.candidateSet = candidateSet!
+            }
+            group.leave()
+        }
         
+        group.wait()
         
-        // MainModel.instance.currentUser()
+        if candidateSet == []{
+            callback(places.randomElement()!)
+        }
+        else{
+            if let aprioriResults = choosePlace(places){
+                let validPlaces = getValidPlacesByTypes(places, types: aprioriResults)
+                
+                if validPlaces.count > 0{
+                    callback(validPlaces.randomElement()!)
+                }
+                else {
+                    callback(places.randomElement()!)
+                }
+            }
+            else{
+                callback(places.randomElement()!)
+            }
+        }
+    }
+    
+    private func getValidPlacesByTypes(_ places: [Place],types: [String]) -> [Place]{
+        var validPlaces = [Place]()
         
+        for place in places{
+            for type in place.types!{
+                if types.contains(type){
+                    validPlaces.append(place)
+                    
+                    break
+                }
+            }
+        }
         
-        
-        //init updateHistoryData
-        
-        //consts:
-        //minUserCategory = 0
-        //minOthersCategory = 1
-        
-        //user1:
-        //q1 - coffee? -yes
-        //q2 - food? -no
-        
-        //history:
-        //-coffee: 1
-        //-sleep: 2
-        //-food: -1
-        
-        //user category > minUserCategory
-        //candidateSet = ["coffee", "sleep"]
-        
-        //places:
-        //p1- "food"
-        //p2- "food"
-        //p3- "coffee"
-        //p1- "watch"
-        
-        //user2:
-        //["food": 3, "tv": -2, "pizza": 1]
-        //user3:
-        //["food": -4, "sleep": 2, "tv": 1]
-        
-        //data = all users categories where category_value > minOthersCategory
-        //data = [["food", "pizza"], ["sleep", "tv"]]
-        //if data is empty - take Baruch's places categories as the data
-        // if not empty and there is a place with preffered category - send place
-        
+        return validPlaces
     }
     
     private func loadFreqSet(_ availableUsersCategories:[[String]]) -> [String:Int] {
@@ -102,16 +159,52 @@ class AlgorithmModel{
         return c
     }
     
+    private func getValidTypes(_ places:[Place]) -> [String]{
+        var validTypes = [String]()
+        
+        for place in places{
+            if place.types != nil{
+                for type in place.types!{
+                    if (!validTypes.contains(type)){
+                        validTypes.append(type)
+                    }
+                }
+            }
+        }
+
+        return validTypes
+    }
+    
     private func getRelevantHistory(_ places:[Place]) ->  [[String]] {
-        let data:[[String]] = [[String]]()
+        var data:[[String]] = [[String]]()
+        let validTypes = getValidTypes(places)
+        let group = DispatchGroup()
+
+        group.enter()
+        MainModel.instance.getAllUsersHistory { [weak self] (preferenceDict) in
+            for i in 0..<preferenceDict.count{
+                var newUserPref = [String]()
+                
+                for (type, rating) in preferenceDict[i]{
+                    if((self!.minSupport < Int(rating)) && validTypes.contains(type)){
+                        newUserPref.append(type)
+                    }
+                }
+                
+                if (newUserPref != []){
+                    data.append(newUserPref)
+                }
+            }
+            
+            group.leave()
+        }
         
-        //TODO
-        
+        group.wait()
         return data
     }
     
     //Algo
-    func choosePlace(_ places: [Place]) -> [String] {
+    func choosePlace(_ places: [Place]) -> [String]? {
         var data:[[String]] = [[String]]()
         var frequencyTable:[String:Int] = [:]
         
@@ -147,9 +240,13 @@ class AlgorithmModel{
             }
         }
         print(lastFreqCounts)
+        
+        if lastFreqCounts.count == 0{
+            return nil
+        }
+        
         return genereteTable[lastFreqCounts.index(of: lastFreqCounts.max()!)!]
     }
-    //print(apriori(minSupport: 3)) // [A,C]
 }
 
 

@@ -22,13 +22,13 @@ class FirebaseModel {
     }
     
     
-    func getAllInteractionsFromDate(from:Double, callback:@escaping ([Interaction])->Void) {        
+    func getAllInteractionsFromDate(from:Double, callback:@escaping ([Interaction])->Void) {
         let stRef = databaseRef.child(consts.names.interactionsTableName)
         let fbQuery = stRef.queryOrdered(byChild: "lastUpdate").queryStarting(atValue: from)
         fbQuery.observe(.value) { (snapshot) in
             
             var data = [Interaction]()
-
+            
             if let value = snapshot.value as? [String : Any] {
                 for (id, json) in value {
                     data.append(Interaction(_id: id, json: json as! [String : Any]))
@@ -126,7 +126,7 @@ class FirebaseModel {
                 callback(nil)
             }
         })
-    }    
+    }
     
     func signUp(_ email:String, _ password:String, _ callback:@escaping (Bool) -> Void) {
         Auth.auth().createUser(withEmail: email, password: password) { (authResult, error) in
@@ -173,7 +173,7 @@ class FirebaseModel {
             callback(nil, nil)
             return
         }
-
+        
         currentuser?.getIDTokenForcingRefresh(true) { idToken, error in
             if let error = error {
                 self.signOut() { callback(nil, error.localizedDescription) }
@@ -189,24 +189,24 @@ class FirebaseModel {
     }
     
     func getAllUsersHistory(_ callback: @escaping ([[String : Double]]) -> Void){
-    // Get other users history- all users history besides the current user
+        // Get other users history- all users history besides the current user
         let user = currentUser()
         let uid = user?.uid
         
         if (user != nil && uid != nil) {
             self.databaseRef!.child("History").observeSingleEvent(of: .value) { (snapshot) in
-
-             var history = [[String : Double]]()
-            
-            if snapshot.exists() {
-                if let value = snapshot.value as? [String : [String:Double]]{
-                    for otherUsersHistory in value{
-                        if(otherUsersHistory.key != uid){
-                            history.append(otherUsersHistory.value)
+                
+                var history = [[String : Double]]()
+                
+                if snapshot.exists() {
+                    if let value = snapshot.value as? [String : [String:Double]]{
+                        for otherUsersHistory in value{
+                            if(otherUsersHistory.key != uid){
+                                history.append(otherUsersHistory.value)
+                            }
                         }
                     }
                 }
-            }
                 callback(history)
             }
         }
@@ -218,12 +218,12 @@ class FirebaseModel {
     func getCurrentUserHistory(_ callback:@escaping ([String : Double]?) -> Void) {
         let user = currentUser()
         let uid = user?.uid
-       
+        
         if(user != nil){
-        self.databaseRef!.child("History").child(uid!).observeSingleEvent(of: .value) { (snapshot) in
+            self.databaseRef!.child("History").child(uid!).observeSingleEvent(of: .value) { (snapshot) in
                 if snapshot.exists() {
                     if let value = snapshot.value as? [String : Double]{
-                    callback(value)
+                        callback(value)
                     }
                 }
                 else {
@@ -238,14 +238,14 @@ class FirebaseModel {
         let uid = user?.uid
         
         if(uid != nil) {
-
+            
             for category in categories{
                 let db = self.databaseRef!.child("History").child(uid!).child(category)
-
+                
                 db.observeSingleEvent(of: .value, with: { (snapshot) in
-
+                    
                     if snapshot.exists() {
-
+                        
                         if let value = snapshot.value as? Double {
                             db.setValue(value + addedvalue)
                         }
@@ -256,5 +256,5 @@ class FirebaseModel {
                 })
             }
         }
-    }    
+    }
 }
