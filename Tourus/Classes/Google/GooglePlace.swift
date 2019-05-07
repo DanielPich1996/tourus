@@ -62,3 +62,8 @@ class Photo: Decodable {
         self.width = width
     }
 }
+
+class GooglePlacePhotos : Decodable{
+    let photos: [Photo]?
+}
+

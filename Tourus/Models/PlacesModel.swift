@@ -16,7 +16,9 @@ class PlacesModel {
     let maxW = 200
     
     init() {
-        
+        GetPlacePhotos(placeID: "ChIJv3ZQo6CjAhUREq5niPkeBTM", callback: {(place, err) in
+            
+        })
     }
     
     
@@ -119,6 +121,37 @@ class PlacesModel {
         
         if let urlDestination = URL.init(string: navigationPath + "?saddr=&daddr=\(latitude),\(longitude)&&directionsmode=walking&zoom=17") {
             UIApplication.shared.open(urlDestination, options: [:], completionHandler: nil)
+        }
+    }
+    
+    func GetPlacePhotos(placeID:String, callback: @escaping ([Photo]?, String?)-> Void){
+        var urlString = "https://maps.googleapis.com/maps/api/place/details/json?"
+        urlString+="placeid="+placeID
+        urlString+="&fields=photo"
+        //urlString+="&fields=photos" //,formatted_address,name,rating,opening_hours"
+        
+        urlString+="&key="+apiWebKey
+        
+        if let url = URL(string: urlString) {
+            URLSession.shared.dataTask(with: url) {(data, response, error) in
+                do {
+                    if (error != nil) {
+                        callback(nil,error?.localizedDescription)
+                        return
+                    }
+                    let googlePlacePhotosResponse = try JSONDecoder().decode(GooglePlacePhotosResponse.self, from: data!)
+                    let status = googlePlacePhotosResponse.status;
+                    if status == "NOT_FOUND" || status == "REQUEST_DENIED" {
+                        //callback(nil,status)
+                        return
+                    }
+                    callback(googlePlacePhotosResponse.result.photos ,nil)
+                } catch {
+                    callback(nil,error.localizedDescription)
+                }
+                }.resume()
+        } else {
+            print("could not open url, equals to nil")
         }
     }
 }

@@ -12,3 +12,8 @@ class GooglePlacesResponse : Decodable {
     let status: String
     let results: [GooglePlace]
 }
+
+class GooglePlacePhotosResponse : Decodable {
+    let status: String
+    let result: GooglePlacePhotos
+}

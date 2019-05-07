@@ -258,4 +258,8 @@ class MainModel {
     func navigate(_ latitude:String, _ longitude:String) {
         placesModel.navigate(latitude, longitude)
     }
+    
+    func GetPlacePhotos(placeID:String, callback: @escaping ([Photo]?, String?)-> Void){
+        placesModel.GetPlacePhotos(placeID: placeID, callback: callback)
+    }
 }
