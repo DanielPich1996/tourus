@@ -10,6 +10,9 @@ import CoreLocation
 
 class MainViewController: UIViewController, CLLocationManagerDelegate {
     
+    @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var graphView: GraphView!
+    
     // MARK:Local const props
     let optionButtonMinHeight = 20
     let optionButtonSpace = 10
