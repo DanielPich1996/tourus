@@ -422,17 +422,4 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
             }
         }
     }
-    
-    func GetPlacePhotos() {
-        if let placeID = interaction?.place?.googleID{
-            MainModel.instance.GetPlacePhotos(placeID: placeID, callback: {(photos, err) in
-                if(err != nil){
-                    for photo in photos!{
-                        self.interaction?.place!.picturesUrls.append(photo.photoReference!)
-                    }
-                }
-            })
-        }
-    }
-    
 }

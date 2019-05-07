@@ -16,9 +16,7 @@ class PlacesModel {
     let maxW = 200
     
     init() {
-        GetPlacePhotos(placeID: "ChIJv3ZQo6CjAhUREq5niPkeBTM", callback: {(place, err) in
-            
-        })
+
     }
     
     
