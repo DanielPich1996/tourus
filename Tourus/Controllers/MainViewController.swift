@@ -42,6 +42,8 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     
     var interaction:Interaction? = nil
     var currUserLocation:CLLocation? = nil
+    var loadPhotosEnded:Bool = true
+    var imageIndex:Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,6 +61,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         
         addBackgroundImage()
         initLocationManager()
+        setUpSwipe()
     }
     
     @IBAction func navigationButtonAction(_ sender: Any) {
@@ -235,13 +238,9 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
                 //if interaction.place == nil {
                 //     navigationBtn.isEnabled = false
                 //}
-                
-                if(interaction.place != nil  && interaction.place!.picturesUrls.count > 0) {
-                    MainModel.instance.getPlaceImage(interaction.place!.picturesUrls[0], 800, 0.4, setBackroundImage)
-
-                    if(interaction.place!.picturesUrls.count > 1) {
-                        MainModel.instance.getPlaceImage(interaction.place!.picturesUrls[1], 800, 1, setBackroundImage)
-                    }
+                imageIndex = 0
+                if(interaction.place != nil  && interaction.place!.picturesUrls.count > imageIndex) {
+                    MainModel.instance.getPlaceImage(interaction.place!.picturesUrls[imageIndex], 800, 0.4, setBackroundImage)
                 }
             }
         }
@@ -379,6 +378,48 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         case .authorizedAlways:
             // Enable any of your app's location features
             break
+        }
+    }
+    
+    func setUpSwipe(){
+        let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe(sender:)))
+        rightSwipe.direction = .right
+        
+        let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe(sender:)))
+        leftSwipe.direction = .left
+        view.addGestureRecognizer(rightSwipe)
+        view.addGestureRecognizer(leftSwipe)
+    }
+    
+    @objc func handleSwipe(sender: UISwipeGestureRecognizer) {
+        if interaction?.place!.picturesUrls.count == 1 && loadPhotosEnded {
+            loadPhotosEnded = false
+            if let placeID = interaction?.place?.googleID{
+                MainModel.instance.GetPlacePhotos(placeID: placeID, callback: {(photos, err) in
+                    self.loadPhotosEnded = true
+                    if(err == nil){
+                        for photo in photos!{
+                            self.interaction?.place!.picturesUrls.append(photo.photoReference!)
+                        }
+                    }
+                })
+            }
+        }
+        if sender.state == .ended && (interaction?.place!.picturesUrls.count)! > 1{
+            switch sender.direction {
+            case .right:
+                if imageIndex > 0 {
+                    imageIndex -= 1
+                    MainModel.instance.getPlaceImage(interaction!.place!.picturesUrls[imageIndex], 800, 0.4, setBackroundImage)
+                }
+            case .left:
+                if imageIndex < (interaction!.place!.picturesUrls.count - 1) {
+                    imageIndex += 1
+                    MainModel.instance.getPlaceImage(interaction!.place!.picturesUrls[imageIndex], 800, 0.4, setBackroundImage)
+                }
+            default:
+                break
+            }
         }
     }
 }
