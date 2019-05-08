@@ -129,9 +129,8 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
             
             switch button.type {
             case .accept: //navigate if a place is exist
-                if (interaction != nil && interaction?.place != nil) {
-                    navigate((interaction?.place)!)
-                }
+                graphView.addData((interaction?.place)!) //temp - will be moved to another code
+                navigate((interaction?.place)!)
             case .decline: break
             case .negative: break
             case .neutral: break

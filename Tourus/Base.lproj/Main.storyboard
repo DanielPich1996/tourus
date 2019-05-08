@@ -354,7 +354,6 @@
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="QGh-js-Baf"/>
-                                <exclude reference="eIx-qc-tYN"/>
                             </mask>
                         </variation>
                     </view>
