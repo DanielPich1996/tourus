@@ -42,8 +42,9 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     
     var interaction:Interaction? = nil
     var currUserLocation:CLLocation? = nil
-    var loadPhotosEnded:Bool = true
     var imageIndex:Int = 0
+    var photos:[UIImage] = [UIImage]()
+    var lastLoadedIndex = 1;
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,7 +81,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
             self.interaction = interact
             
             if self.interaction != nil {
-                
+                self.GetMoreImageURLS()
                 self.setInteractionwithAnimation(self.interaction!)
             }
             else {
@@ -238,9 +239,17 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
                 //if interaction.place == nil {
                 //     navigationBtn.isEnabled = false
                 //}
+                photos.removeAll()
                 imageIndex = 0
+                lastLoadedIndex = 0
                 if(interaction.place != nil  && interaction.place!.picturesUrls.count > imageIndex) {
-                    MainModel.instance.getPlaceImage(interaction.place!.picturesUrls[imageIndex], 800, 0.4, setBackroundImage)
+                    MainModel.instance.getPlaceImage(interaction.place!.picturesUrls[imageIndex], 800, 0.4, {(image) in
+                        if let imageToSet = image {
+                            self.photos.append(imageToSet)
+                            self.setBackroundImage(imageToSet)
+                            self.GetMoreImages(endIndex: 3)
+                        }
+                    })
                 }
             }
         }
@@ -392,33 +401,60 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     @objc func handleSwipe(sender: UISwipeGestureRecognizer) {
-        if interaction?.place!.picturesUrls.count == 1 && loadPhotosEnded {
-            loadPhotosEnded = false
-            if let placeID = interaction?.place?.googleID{
-                MainModel.instance.GetPlacePhotos(placeID: placeID, callback: {(photos, err) in
-                    self.loadPhotosEnded = true
-                    if(err == nil){
-                        for photo in photos!{
-                            self.interaction?.place!.picturesUrls.append(photo.photoReference!)
-                        }
-                    }
-                })
-            }
-        }
-        if sender.state == .ended && (interaction?.place!.picturesUrls.count)! > 1{
+        if sender.state == .ended && (photos.count > 1){
             switch sender.direction {
             case .right:
                 if imageIndex > 0 {
                     imageIndex -= 1
-                    MainModel.instance.getPlaceImage(interaction!.place!.picturesUrls[imageIndex], 800, 0.4, setBackroundImage)
+                    //MainModel.instance.getPlaceImage(interaction!.place!.picturesUrls[imageIndex], 800, 0.4, setBackroundImage)
+                    setBackroundImage(photos[imageIndex])
                 }
             case .left:
                 if imageIndex < (interaction!.place!.picturesUrls.count - 1) {
                     imageIndex += 1
-                    MainModel.instance.getPlaceImage(interaction!.place!.picturesUrls[imageIndex], 800, 0.4, setBackroundImage)
+                    setBackroundImage(photos[imageIndex])
+                    GetMoreImages(endIndex: imageIndex + 3)
+                    //MainModel.instance.getPlaceImage(interaction!.place!.picturesUrls[imageIndex], 800, 0.4, setBackroundImage)
                 }
             default:
                 break
+            }
+        }
+    }
+    
+    func GetMoreImageURLS(){
+        if let placeID = interaction?.place?.googleID{
+            MainModel.instance.GetPlacePhotos(placeID: placeID, callback: {(photos, err) in
+                if(err == nil){
+                    for photo in photos!{
+                        self.interaction?.place!.picturesUrls.append(photo.photoReference!)
+                    }
+                }
+            })
+        }
+    }
+    
+    func GetMoreImages(endIndex:Int){
+        if ((lastLoadedIndex + 1) < (interaction?.place!.picturesUrls.count)!) {
+            let end:Int
+            let start = (lastLoadedIndex + 1)
+            
+            if(endIndex >= (interaction?.place!.picturesUrls.count)!){
+                end = ((interaction?.place!.picturesUrls.count)! - 1)
+            }else{
+                end = endIndex
+            }
+            
+            if (end > lastLoadedIndex){
+                lastLoadedIndex = end
+                
+                for index in start...end{
+                    MainModel.instance.getPlaceImage(interaction!.place!.picturesUrls[index], 800, 0.4, {(image) in
+                        if let imageToSet = image {
+                            self.photos.append(imageToSet)
+                        }
+                    })
+                }
             }
         }
     }
