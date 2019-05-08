@@ -467,10 +467,6 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
                         if let imageToSet = image {
                             self.photos.append(imageToSet)
                         }
-                        
-//                        if self.moreInfoImage.image == self.defaultInfoImage{
-//                            self.setInfoImage(self.photos[1])
-//                        }
                     })
                 }
             }
