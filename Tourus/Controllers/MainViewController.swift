@@ -424,10 +424,14 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     
     func GetMoreImageURLS(){
         if let placeID = interaction?.place?.googleID{
-            MainModel.instance.GetPlacePhotos(placeID: placeID, callback: {(photos, err) in
+            MainModel.instance.GetPlacePhotos(placeID: placeID, callback: {(photosURL, err) in
                 if(err == nil){
-                    for photo in photos!{
-                        self.interaction?.place!.picturesUrls.append(photo.photoReference!)
+                    if var urls = photosURL{
+                        urls.remove(at: 0)
+                        
+                        for photo in urls{
+                            self.interaction?.place!.picturesUrls.append(photo.photoReference!)
+                        }
                     }
                 }
             })
