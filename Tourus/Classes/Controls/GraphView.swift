@@ -21,7 +21,7 @@ private struct Constants {
 
 class GraphData {
     var name:String = ""
-    var value:Int = 0
+    var value:Int = Constants.maxDegree / 2
     var lat:Double = 0.0
     var long:Double = 0.0
     var isPopulate:Bool = false
@@ -64,11 +64,6 @@ class GraphData {
             
             
             let degree = getBearingBetweenTwoPoints(lat1: lat1, long1: long1, lat2: lat2, long2: long2)
-            
-            if iterator.value == 0 {
-                iterator.value = Int(degree)
-            }
-            
             data.append(GraphData(_place: place, _value: Int(degree)))
         }
         else {
