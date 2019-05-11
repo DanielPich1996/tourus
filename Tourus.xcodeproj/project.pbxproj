@@ -37,6 +37,9 @@
 		849D3EB921DE91E2002F74B2 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849D3EB821DE91E2002F74B2 /* UserInfo.swift */; };
 		84A50BC9225BC102001C2C06 /* UIApplicationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A50BC8225BC102001C2C06 /* UIApplicationExtension.swift */; };
 		84AF72FD22466D9B00029F48 /* AlgorithmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AF72FC22466D9B00029F48 /* AlgorithmModel.swift */; };
+		84B4B9782287516900906B27 /* PopTip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B4B9772287516900906B27 /* PopTip.swift */; };
+		84B4B97A228751D200906B27 /* PopTip+Draw.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B4B979228751D200906B27 /* PopTip+Draw.swift */; };
+		84B4B97C228751EB00906B27 /* PopTip+Transitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B4B97B228751EB00906B27 /* PopTip+Transitions.swift */; };
 		84D2D44721CE6AAC004524D3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D2D44621CE6AAC004524D3 /* AppDelegate.swift */; };
 		84D2D44C21CE6AAC004524D3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84D2D44A21CE6AAC004524D3 /* Main.storyboard */; };
 		84D2D44E21CE6AAE004524D3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84D2D44D21CE6AAE004524D3 /* Assets.xcassets */; };
@@ -100,6 +103,9 @@
 		849D3EB821DE91E2002F74B2 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		84A50BC8225BC102001C2C06 /* UIApplicationExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplicationExtension.swift; sourceTree = "<group>"; };
 		84AF72FC22466D9B00029F48 /* AlgorithmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlgorithmModel.swift; sourceTree = "<group>"; };
+		84B4B9772287516900906B27 /* PopTip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopTip.swift; sourceTree = "<group>"; };
+		84B4B979228751D200906B27 /* PopTip+Draw.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PopTip+Draw.swift"; sourceTree = "<group>"; };
+		84B4B97B228751EB00906B27 /* PopTip+Transitions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PopTip+Transitions.swift"; sourceTree = "<group>"; };
 		84D2D44321CE6AAC004524D3 /* Tourus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tourus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84D2D44621CE6AAC004524D3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		84D2D44B21CE6AAC004524D3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -237,6 +243,8 @@
 				845D1F8E223FEC2000C73585 /* InteractionSqlExtension.swift */,
 				842F902A22416C8600003932 /* OptionSqlExtension.swift */,
 				84A50BC8225BC102001C2C06 /* UIApplicationExtension.swift */,
+				84B4B979228751D200906B27 /* PopTip+Draw.swift */,
+				84B4B97B228751EB00906B27 /* PopTip+Transitions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -247,6 +255,7 @@
 				8449C6E021E13280002A6AF6 /* BuisyIndicator.swift */,
 				8458502C21E3CA5500DF7C68 /* UIOptionButton.swift */,
 				849CA33A226F433900C5DC55 /* GraphView.swift */,
+				84B4B9772287516900906B27 /* PopTip.swift */,
 			);
 			path = Controls;
 			sourceTree = "<group>";
@@ -587,6 +596,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				84DAFA3F21DEB462009DAC2E /* MainViewController.swift in Sources */,
+				84B4B97A228751D200906B27 /* PopTip+Draw.swift in Sources */,
 				8440930F222AE7EB007E058D /* Place.swift in Sources */,
 				84E3673121E15EC500122FD8 /* SBCardPopupViewController.swift in Sources */,
 				843F5E5F21DD59C60098FA3E /* NotificationModel.swift in Sources */,
@@ -609,8 +619,10 @@
 				8448D808224F95F700594661 /* GooglePlacesResponse.swift in Sources */,
 				8458503321E3D85900DF7C68 /* Interaction.swift in Sources */,
 				843F5E5D21DD593F0098FA3E /* SqlModel.swift in Sources */,
+				84B4B97C228751EB00906B27 /* PopTip+Transitions.swift in Sources */,
 				8449C6E121E13280002A6AF6 /* BuisyIndicator.swift in Sources */,
 				849D3EB321DE8F4A002F74B2 /* Consts.swift in Sources */,
+				84B4B9782287516900906B27 /* PopTip.swift in Sources */,
 				8458503721E4049100DF7C68 /* UIViewExtension.swift in Sources */,
 				849D3EB921DE91E2002F74B2 /* UserInfo.swift in Sources */,
 				84D2D44721CE6AAC004524D3 /* AppDelegate.swift in Sources */,
