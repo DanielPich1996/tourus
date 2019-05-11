@@ -25,7 +25,9 @@ class GraphData {
     var lat:Double = 0.0
     var long:Double = 0.0
     var isPopulate:Bool = false
-    
+    var shape:UIBezierPath? = nil
+    var point:CGPoint? = nil
+
     init() {
         
     }
@@ -44,11 +46,14 @@ class GraphData {
 }
 
 @IBDesignable class GraphView: UIView {
+    private var tapGesture:UITapGestureRecognizer? = nil
     var data = [GraphData]()
+    var popTip:PopTip? = nil
     
     @IBInspectable var startColor: UIColor = .clear
     @IBInspectable var endColor: UIColor = .clear
     
+
     //managing the data array as a queue - first in last out
     func addData(_ place:Place) {
         
@@ -62,31 +67,25 @@ class GraphData {
             let lat2 = place.location?.lat ?? 0
             let long2 = place.location?.lng ?? 0
             
-            
             let degree = getBearingBetweenTwoPoints(lat1: lat1, long1: long1, lat2: lat2, long2: long2)
             data.append(GraphData(_place: place, _value: Int(degree)))
         }
         else {
-             data.append(GraphData(_place: place, _value: 0))
+             data.append(GraphData(_place: place, _value: Constants.maxDegree / 2))
         }
         
         setNeedsDisplay()
     }
     
     override func draw(_ rect: CGRect) {
-        //set points if no exist
-        if data.count == 0 {
-            for _ in 0..<Constants.maxGraphPoints {
-                data.append(GraphData())
-            }
-        }
+        initialize()
         
         //draw graph only when there are more then 1 point - just to be sure
         if data.count > 1 {
             let width = rect.width
             let height = rect.height
-            
             backgroundColor = .clear
+            popTip?.hide()
             
             //calculate the x point
             let margin = Constants.margin
@@ -124,92 +123,57 @@ class GraphData {
             }
             graphPath.stroke()
             
-        
             //Draw the circles on top of the graph stroke
             for i in 0..<data.count {
+                
                 var point = CGPoint(x: columnXPoint(i), y: columnYPoint(data[i].value))
                 point.x -= Constants.circleDiameter / 2
                 point.y -= Constants.circleDiameter / 2
                 
-                let circle = UIBezierPath(ovalIn: CGRect(origin: point, size: CGSize(width: Constants.circleDiameter, height: Constants.circleDiameter)))
+                //a bigger circle for touch detection
+                let backCircle = drawCircle(point, Constants.circleDiameter*2)
+                //the actual circle
+                let circle = drawCircle(point, Constants.circleDiameter)
+                
+                //update the shape and point in the data set
+                data[i].shape = backCircle
+                data[i].point = point
                 
                 if data[i].isPopulate {
-                    if(i == data.count-1) { //the circle the selected one - paint as selected
-                        UIColor.yellow.setFill()
-                        UIColor.yellow.setStroke()
-                        
-                        let paragraphStyle = NSMutableParagraphStyle()
-                        paragraphStyle.alignment = .center
-                        
-                        let attributes: [NSAttributedString.Key : Any] = [
-                            .paragraphStyle: paragraphStyle,
-                            .font: UIFont.systemFont(ofSize: 12.0),
-                            .foregroundColor: UIColor.yellow
-                        ]
-                        
-                        let myText = "You"
-                        let attributedString = NSAttributedString(string: myText, attributes: attributes)
-                        
-                        
-                        var newY = Constants.circleDiameter
-                        
-                        if(data.count-1 > i && data[i].value < data[i+1].value) {
-                            newY = -Constants.circleDiameter-5
-                        }
-                        
-                        let size = myText.count*10
-                        point.x -= CGFloat(size/2)
-                        point.y += newY
-                        let stringRect = CGRect(origin: point, size: CGSize(width: size, height: 50))
-                        attributedString.draw(in: stringRect)
-                        
+                    if(i == data.count-1) { //the circle is the selected one - mark as selected
+                        UIColor.lightBlueColor.setFill()
                     }
                     else { //the circle is not the selected one - paint as populate and not selected
                         UIColor.darkGray.setFill()
-                        UIColor.whiteSmokeColor.setStroke()
                     }
                 } else { //the circle is not populate with any information - paint as disabled
                     UIColor.whiteSmokeColor.setFill()
-                    UIColor.whiteSmokeColor.setStroke()
                 }
                 
+                UIColor.whiteSmokeColor.setStroke()
                 circle.fill()
                 circle.stroke()
             }
         }
     }
     
-    func setBackColors() {
-        
-        //let path = UIBezierPath(roundedRect: rect,
-        //                        byRoundingCorners: .allCorners,
-        //                       cornerRadii: Constants.cornerRadiusSize)
-        //path.addClip()
-        
-        // 2
-        let context = UIGraphicsGetCurrentContext()!
-        let colors = [startColor.cgColor, endColor.cgColor]
-        
-        // 3
-        let colorSpace = CGColorSpaceCreateDeviceRGB()
-        
-        // 4
-        let colorLocations: [CGFloat] = [0.0, 1.0]
-        
-        // 5
-        let gradient = CGGradient(colorsSpace: colorSpace,
-                                  colors: colors as CFArray,
-                                  locations: colorLocations)!
-        
-        // 6
-        let startPoint = CGPoint.zero
-        let endPoint = CGPoint(x: 0, y: bounds.height)
-        context.drawLinearGradient(gradient,
-                                   start: startPoint,
-                                   end: endPoint,
-                                   options: [])
+    @objc public func tapDetected(tapRecognizer:UITapGestureRecognizer){
+        let tapLocation:CGPoint = tapRecognizer.location(in: self)
+        self.hitTest(tapLocation: CGPoint(x: tapLocation.x, y: tapLocation.y))
     }
     
+    var attributed:NSAttributedString? = nil
+    private func hitTest(tapLocation:CGPoint) {
+        
+        for dataObj in data {
+            if dataObj.isPopulate && dataObj.shape != nil && dataObj.shape!.contains(tapLocation) {
+                let rect = CGRect(origin: dataObj.point!, size: CGSize(width: Constants.circleDiameter, height: Constants.circleDiameter))
+                popTip?.show(text: dataObj.name, direction: .down, maxWidth: 200, in: self, from: rect)
+                break
+            }
+        }
+    }
+   
     func degreesToRadians(degrees: Double) -> Double { return degrees * .pi / 180.0 }
     func radiansToDegrees(radians: Double) -> Double { return radians * 180.0 / .pi }
     
@@ -232,6 +196,45 @@ class GraphData {
 
         return degrees
     }
-
+    
+    private func drawCircle(_ point:CGPoint, _ size:CGFloat) -> UIBezierPath {
+        
+        let rect = CGRect(origin: point, size: CGSize(width: size, height: size))
+        let shape = UIBezierPath(ovalIn: rect)
+        
+        UIColor.clear.setFill()
+        UIColor.clear.setStroke()
+        shape.fill()
+        shape.stroke()
+        
+        return shape
+    }
+    
+    private func initialize() {
+        
+        if popTip == nil {
+            popTip = PopTip()
+            popTip?.shouldDismissOnTap = true
+            popTip?.shouldDismissOnTapOutside = true
+            popTip?.shouldDismissOnSwipeOutside = true
+            popTip?.edgeMargin = 5
+            popTip?.offset = 2
+            popTip?.edgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+            popTip?.bubbleColor = .lightBlueColor
+        }
+        
+        ///Catch layer by tap detection
+        if tapGesture == nil {
+            tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapDetected(tapRecognizer:)))
+            addGestureRecognizer(tapGesture!)
+        }
+        
+        //set points if not exist
+        if data.count == 0 {
+            for _ in 0..<Constants.maxGraphPoints {
+                data.append(GraphData())
+            }
+        }
+    }
 }
 
