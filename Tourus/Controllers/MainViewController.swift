@@ -129,9 +129,8 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
             
             switch button.type {
             case .accept: //navigate if a place is exist
-                if (interaction != nil && interaction?.place != nil) {
-                    navigate((interaction?.place)!)
-                }
+                graphView.addData((interaction?.place)!) //temp - will be moved to another code
+                navigate((interaction?.place)!)
             case .decline: break
             case .negative: break
             case .neutral: break
@@ -241,12 +240,12 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
                 //}
                 photos.removeAll()
                 imageIndex = 0
-                lastLoadedIndex = 0
+                lastLoadedIndex = 1
                 if(interaction.place != nil  && interaction.place!.picturesUrls.count > imageIndex) {
                     MainModel.instance.getPlaceImage(interaction.place!.picturesUrls[imageIndex], 800, 0.4, {(image) in
                         if let imageToSet = image {
                             self.photos.append(imageToSet)
-                            self.setBackroundImage(imageToSet)
+                            self.setInfoImage(imageToSet)
                             self.GetMoreImages(endIndex: 3)
                         }
                     })
@@ -410,11 +409,10 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
                     setBackroundImage(photos[imageIndex])
                 }
             case .left:
-                if imageIndex < (interaction!.place!.picturesUrls.count - 1) {
+                if imageIndex + 1 < (photos.count) {
                     imageIndex += 1
                     setBackroundImage(photos[imageIndex])
                     GetMoreImages(endIndex: imageIndex + 3)
-                    //MainModel.instance.getPlaceImage(interaction!.place!.picturesUrls[imageIndex], 800, 0.4, setBackroundImage)
                 }
             default:
                 break
@@ -422,15 +420,28 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
     
-    func GetMoreImageURLS(){
-        if let placeID = interaction?.place?.googleID{
+    func GetMoreImageURLS() {
+        if let placeID = interaction?.place?.googleID {
             MainModel.instance.GetPlacePhotos(placeID: placeID, callback: {(photosURL, err) in
-                if(err == nil){
-                    if var urls = photosURL{
+                if(err == nil) {
+                    if var urls = photosURL {
                         urls.remove(at: 0)
                         
-                        for photo in urls{
+                        for photo in urls {
                             self.interaction?.place!.picturesUrls.append(photo.photoReference!)
+                        }
+                        
+                        if self.interaction!.place!.picturesUrls.count > 1 {
+                            MainModel.instance.getPlaceImage(self.interaction!.place!.picturesUrls[1], 800, 0.4, {(image) in
+                                if let imageToSet = image {
+                                    self.photos.append(imageToSet)
+                                    self.setBackroundImage(imageToSet)
+                                }
+                                
+                                //                        if self.moreInfoImage.image == self.defaultInfoImage{
+                                //                            self.setInfoImage(self.photos[1])
+                                //                        }
+                            })
                         }
                     }
                 }

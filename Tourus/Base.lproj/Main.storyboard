@@ -249,10 +249,10 @@
                                 <rect key="frame" x="264" y="646" width="150" height="130"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="no image" translatesAutoresizingMaskIntoConstraints="NO" id="fpA-14-vzo">
-                                        <rect key="frame" x="8" y="8" width="134" height="114"/>
+                                        <rect key="frame" x="8" y="8" width="134" height="122"/>
                                     </imageView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7SD-mu-rhu" userLabel="More Info Container View">
-                                        <rect key="frame" x="8" y="86" width="134" height="36"/>
+                                        <rect key="frame" x="8" y="94" width="134" height="36"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tAs-4f-E1y">
                                                 <rect key="frame" x="8" y="3" width="118" height="30"/>
@@ -277,7 +277,7 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.15354773116438356" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="fpA-14-vzo" firstAttribute="bottom" secondItem="gok-U5-wgO" secondAttribute="bottomMargin" id="8bc-3x-eyS"/>
+                                    <constraint firstItem="fpA-14-vzo" firstAttribute="bottom" secondItem="gok-U5-wgO" secondAttribute="bottomMargin" constant="8" id="8bc-3x-eyS"/>
                                     <constraint firstItem="fpA-14-vzo" firstAttribute="leading" secondItem="gok-U5-wgO" secondAttribute="leadingMargin" id="D5d-zR-MMM"/>
                                     <constraint firstAttribute="trailingMargin" secondItem="fpA-14-vzo" secondAttribute="trailing" id="Jg8-yB-jUo"/>
                                     <constraint firstAttribute="width" constant="150" id="NwU-cA-Z7c"/>
@@ -354,7 +354,6 @@
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="QGh-js-Baf"/>
-                                <exclude reference="eIx-qc-tYN"/>
                             </mask>
                         </variation>
                     </view>
