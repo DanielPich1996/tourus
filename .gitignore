@@ -8,7 +8,7 @@ DerivedData/
 
 ## Various settings
 Tourus.xcworkspace/xcuserdata/admin.xcuserdatad/UserInterfaceState.xcuserstate
-
+*.xcworkspace
 
 *.pbxuser
 !default.pbxuser
