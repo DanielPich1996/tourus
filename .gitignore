@@ -9,3 +9,6 @@
 *.xcuserstate
 project.xcworkspace/
 xcuserdata/
+
+tourus.xcodeproj/xcuserdata/*
+tourus.xcodeproj/project.xcworkspace/xcuserdata/*
