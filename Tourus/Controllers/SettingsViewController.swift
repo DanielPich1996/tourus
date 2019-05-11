@@ -10,8 +10,7 @@ import UIKit
 
 class SettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    
-    var languages = ["Pool", "Food", "Shopping", "Car Racing", "Gym", "Club"]
+    var languages = ["C#", "Pyhton", "Javascript", "Swift", "C++", "C"]
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
