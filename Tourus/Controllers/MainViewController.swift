@@ -81,7 +81,6 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
             self.interaction = interact
             
             if self.interaction != nil {
-                self.GetMoreImageURLS()
                 self.setInteractionwithAnimation(self.interaction!)
             }
             else {
@@ -242,11 +241,13 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
                 imageIndex = 0
                 lastLoadedIndex = 1
                 if(interaction.place != nil  && interaction.place!.picturesUrls.count > imageIndex) {
-                    MainModel.instance.getPlaceImage(interaction.place!.picturesUrls[imageIndex], 800, 0.4, {(image) in
-                        if let imageToSet = image {
-                            self.photos.append(imageToSet)
-                            self.setInfoImage(imageToSet)
-                            self.GetMoreImages(endIndex: 3)
+                    MainModel.instance.getPlaceImage(interaction.place!.googleID!, interaction.place!.picturesUrls[imageIndex], 800, 0.4, {(image, placeID) in
+                        if placeID == interaction.place!.googleID!{
+                            if let imageToSet = image {
+                                self.photos.append(imageToSet)
+                                self.setBackroundImage(imageToSet)
+                                self.GetMoreImageURLS()
+                            }
                         }
                     })
                 }
@@ -422,8 +423,8 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     
     func GetMoreImageURLS() {
         if let placeID = interaction?.place?.googleID {
-            MainModel.instance.GetPlacePhotos(placeID: placeID, callback: {(photosURL, err) in
-                if(err == nil) {
+            MainModel.instance.GetPlacePhotos(placeID: placeID, callback: {(photosURL, placeID ,err) in
+                if(err == nil && self.interaction?.place?.googleID == placeID) {
                     if var urls = photosURL {
                         urls.remove(at: 0)
                         
@@ -432,17 +433,16 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
                         }
                         
                         if self.interaction!.place!.picturesUrls.count > 1 {
-                            MainModel.instance.getPlaceImage(self.interaction!.place!.picturesUrls[1], 800, 0.4, {(image) in
-                                if let imageToSet = image {
-                                    self.photos.append(imageToSet)
-                                    self.setBackroundImage(imageToSet)
+                            MainModel.instance.getPlaceImage((self.interaction?.place?.googleID)!, self.interaction!.place!.picturesUrls[1], 800, 0.4, {(image, placeID) in
+                                if((self.interaction?.place?.googleID)! == placeID ){
+                                    if let imageToSet = image {
+                                        self.photos.append(imageToSet)
+                                        self.setInfoImage(imageToSet)
+                                    }
                                 }
-                                
-                                //                        if self.moreInfoImage.image == self.defaultInfoImage{
-                                //                            self.setInfoImage(self.photos[1])
-                                //                        }
                             })
                         }
+                        self.GetMoreImages(endIndex: 3)
                     }
                 }
             })
@@ -464,9 +464,11 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
                 lastLoadedIndex = end
                 
                 for index in start...end{
-                    MainModel.instance.getPlaceImage(interaction!.place!.picturesUrls[index], 800, 0.4, {(image) in
-                        if let imageToSet = image {
-                            self.photos.append(imageToSet)
+                    MainModel.instance.getPlaceImage((interaction?.place?.googleID)!  ,interaction!.place!.picturesUrls[index], 800, 0.4, {(image, placeID) in
+                        if(placeID == (self.interaction?.place?.googleID)!){
+                            if let imageToSet = image {
+                                self.photos.append(imageToSet)
+                            }
                         }
                     })
                 }

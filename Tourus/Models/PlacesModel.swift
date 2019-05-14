@@ -60,7 +60,7 @@ class PlacesModel {
         }
     }
     
-    func fetchGoogleNearbyPlacesPhoto(_ reference:String, _ maxwidth:Int, _ alpha:CGFloat, _ callback: @escaping (UIImage?) -> Void) {
+    func fetchGoogleNearbyPlacesPhoto(_ placeID :String, _ reference:String, _ maxwidth:Int, _ alpha:CGFloat, _ callback: @escaping (UIImage?, String) -> Void) {
 
         // Method 3
         let urlString = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=\(maxwidth)&photoreference=\(reference)&key=\(apiWebKey)"
@@ -88,7 +88,7 @@ class PlacesModel {
             if(downloadedPhoto != nil) {
                 downloadedPhoto = downloadedPhoto!.alpha(alpha)
             }
-            callback(downloadedPhoto)
+            callback(downloadedPhoto, placeID)
         }.resume()
     }
     
@@ -122,7 +122,7 @@ class PlacesModel {
         }
     }
     
-    func GetPlacePhotos(placeID:String, callback: @escaping ([Photo]?, String?)-> Void){
+    func GetPlacePhotos(placeID:String, callback: @escaping ([Photo]?, String, String?)-> Void){
         var urlString = "https://maps.googleapis.com/maps/api/place/details/json?"
         urlString+="placeid="+placeID
         urlString+="&fields=photo"
@@ -134,7 +134,7 @@ class PlacesModel {
             URLSession.shared.dataTask(with: url) {(data, response, error) in
                 do {
                     if (error != nil) {
-                        callback(nil,error?.localizedDescription)
+                        callback(nil, placeID, error?.localizedDescription)
                         return
                     }
                     let googlePlacePhotosResponse = try JSONDecoder().decode(GooglePlacePhotosResponse.self, from: data!)
@@ -143,9 +143,9 @@ class PlacesModel {
                         //callback(nil,status)
                         return
                     }
-                    callback(googlePlacePhotosResponse.result.photos ,nil)
+                    callback(googlePlacePhotosResponse.result.photos, placeID, nil)
                 } catch {
-                    callback(nil,error.localizedDescription)
+                    callback(nil ,placeID ,error.localizedDescription)
                 }
                 }.resume()
         } else {
