@@ -24,6 +24,15 @@ class AlgorithmModel{
         //30min time
     }
     
+    // KNN weights constants
+    
+    private let distDeltaWeight = 1
+    private let timeDeltaWeight = 1
+    private let dayInWeekWeight = 1
+    private let monthDeltaWeight = 1
+    private let positiveCtgryWeight = 1
+    private let negativeCtgryWeight = -1
+    
     private func updateCandidateSet(_ complition: @escaping ([String]?) -> Void){
         MainModel.instance.getCurrentUserHistory { [weak self] (currUserHistory) in
             if currUserHistory == nil{
