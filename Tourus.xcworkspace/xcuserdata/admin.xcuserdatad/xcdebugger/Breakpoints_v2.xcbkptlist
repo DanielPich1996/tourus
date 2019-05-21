@@ -495,8 +495,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "74"
             endingLineNumber = "74"
-            landmarkName = "getAlgorithmNextPlace(_:_:)"
-            landmarkType = "7">
+            landmarkName = "unknown"
+            landmarkType = "0">
             <Locations>
                <Location
                   shouldBeEnabled = "No"
@@ -543,8 +543,13 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "78"
             endingLineNumber = "78"
+<<<<<<< HEAD
             landmarkName = "getAlgorithmNextPlace(_:_:)"
             landmarkType = "7">
+=======
+            landmarkName = "unknown"
+            landmarkType = "0">
+>>>>>>> master
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -559,8 +564,13 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "127"
             endingLineNumber = "127"
+<<<<<<< HEAD
             landmarkName = "getValidPlacesByTypes(_:types:)"
             landmarkType = "7">
+=======
+            landmarkName = "unknown"
+            landmarkType = "0">
+>>>>>>> master
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -575,8 +585,13 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "164"
             endingLineNumber = "164"
+<<<<<<< HEAD
             landmarkName = "combineArray(data:)"
             landmarkType = "7">
+=======
+            landmarkName = "unknown"
+            landmarkType = "0">
+>>>>>>> master
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -591,8 +606,13 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "163"
             endingLineNumber = "163"
+<<<<<<< HEAD
             landmarkName = "combineArray(data:)"
             landmarkType = "7">
+=======
+            landmarkName = "unknown"
+            landmarkType = "0">
+>>>>>>> master
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -607,8 +627,13 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "179"
             endingLineNumber = "179"
+<<<<<<< HEAD
             landmarkName = "getValidTypes(_:)"
             landmarkType = "7">
+=======
+            landmarkName = "unknown"
+            landmarkType = "0">
+>>>>>>> master
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -623,8 +648,13 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "185"
             endingLineNumber = "185"
+<<<<<<< HEAD
             landmarkName = "getValidTypes(_:)"
             landmarkType = "7">
+=======
+            landmarkName = "unknown"
+            landmarkType = "0">
+>>>>>>> master
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -639,8 +669,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "218"
             endingLineNumber = "218"
-            landmarkName = "choosePlace(_:)"
-            landmarkType = "7">
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -655,8 +685,13 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "28"
             endingLineNumber = "28"
+<<<<<<< HEAD
             landmarkName = "AlgorithmModel"
             landmarkType = "3">
+=======
+            landmarkName = "unknown"
+            landmarkType = "0">
+>>>>>>> master
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -671,8 +706,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "43"
             endingLineNumber = "43"
-            landmarkName = "updateCandidateSet(_:)"
-            landmarkType = "7">
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -687,8 +722,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "86"
             endingLineNumber = "86"
-            landmarkName = "algorithmOrchestra(_:_:)"
-            landmarkType = "7">
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -751,8 +786,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "41"
             endingLineNumber = "41"
-            landmarkName = "updateCandidateSet(_:)"
-            landmarkType = "7">
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -767,8 +802,13 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "184"
             endingLineNumber = "184"
+<<<<<<< HEAD
             landmarkName = "getValidTypes(_:)"
             landmarkType = "7">
+=======
+            landmarkName = "unknown"
+            landmarkType = "0">
+>>>>>>> master
             <Locations>
                <Location
                   shouldBeEnabled = "No"
@@ -815,8 +855,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "175"
             endingLineNumber = "175"
-            landmarkName = "getValidTypes(_:)"
-            landmarkType = "7">
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -831,8 +871,13 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "215"
             endingLineNumber = "215"
+<<<<<<< HEAD
             landmarkName = "AlgorithmModel"
             landmarkType = "3">
+=======
+            landmarkName = "unknown"
+            landmarkType = "0">
+>>>>>>> master
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -959,8 +1004,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "194"
             endingLineNumber = "194"
-            landmarkName = "getRelevantHistory(_:)"
-            landmarkType = "7">
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -975,8 +1020,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "199"
             endingLineNumber = "199"
-            landmarkName = "getRelevantHistory(_:)"
-            landmarkType = "7">
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -991,8 +1036,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "144"
             endingLineNumber = "144"
-            landmarkName = "loadFreqSet(_:)"
-            landmarkType = "7">
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1007,8 +1052,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "159"
             endingLineNumber = "159"
-            landmarkName = "combineArray(data:)"
-            landmarkType = "7">
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1023,8 +1068,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "242"
             endingLineNumber = "242"
-            landmarkName = "choosePlace(_:)"
-            landmarkType = "7">
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1039,8 +1084,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "226"
             endingLineNumber = "226"
-            landmarkName = "choosePlace(_:)"
-            landmarkType = "7">
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1055,8 +1100,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "230"
             endingLineNumber = "230"
-            landmarkName = "choosePlace(_:)"
-            landmarkType = "7">
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1071,8 +1116,13 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "181"
             endingLineNumber = "181"
+<<<<<<< HEAD
             landmarkName = "getValidTypes(_:)"
             landmarkType = "7">
+=======
+            landmarkName = "unknown"
+            landmarkType = "0">
+>>>>>>> master
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1087,8 +1137,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "88"
             endingLineNumber = "88"
-            landmarkName = "algorithmOrchestra(_:_:)"
-            landmarkType = "7">
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1103,8 +1153,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "90"
             endingLineNumber = "90"
-            landmarkName = "algorithmOrchestra(_:_:)"
-            landmarkType = "7">
+            landmarkName = "unknown"
+            landmarkType = "0">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1119,8 +1169,13 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "54"
             endingLineNumber = "54"
+<<<<<<< HEAD
             landmarkName = "AlgorithmModel"
             landmarkType = "3">
+=======
+            landmarkName = "unknown"
+            landmarkType = "0">
+>>>>>>> master
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1135,8 +1190,13 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "56"
             endingLineNumber = "56"
+<<<<<<< HEAD
             landmarkName = "init()"
             landmarkType = "7">
+=======
+            landmarkName = "unknown"
+            landmarkType = "0">
+>>>>>>> master
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

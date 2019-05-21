@@ -10,15 +10,19 @@ import Foundation
 import Firebase
 import FirebaseDatabase
 import UIKit
+import CoreLocation
 
 class FirebaseModel {
     var databaseRef: DatabaseReference!
     lazy var storageRef = Storage.storage().reference(forURL:
         "gs://org-tourus-acb4d.appspot.com")
+    let firestoreRef:Firestore!
     
     init() {
         FirebaseApp.configure()
         databaseRef = Database.database().reference()
+        firestoreRef = Firestore.firestore()
+
     }
     
     
@@ -254,6 +258,36 @@ class FirebaseModel {
                         db.setValue(addedvalue)
                     }
                 })
+            }
+        }
+    }
+    
+    func addStoryToInteractions(interacton:InteractionStory) {
+        var ref: DocumentReference? = nil
+        ref = firestoreRef.collection("InteractionHistory").addDocument(data: interacton.toJson()) { err in
+            if let err = err {
+                print("Error adding document: \(err)")
+            } else {
+                print("Document added with ID: \(ref!.documentID)")
+            }
+        }
+    }
+    
+    func getInteractionsStories(_ currUserLocation:CLLocation , _ callback: @escaping ([InteractionStory]) -> Void){
+        //_ callback: @escaping ([InteractionStory]) -> Void
+        firestoreRef.collection("InteractionHistory").getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                var stories = [InteractionStory]()
+                
+                for document in querySnapshot!.documents {
+                    let interaction = InteractionStory(json: document.data())
+                    interaction.getDistanceInMeters(currUserLocation)
+                    stories.append(interaction)
+                }
+                
+                callback(stories)
             }
         }
     }

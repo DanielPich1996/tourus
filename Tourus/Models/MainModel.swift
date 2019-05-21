@@ -204,8 +204,8 @@ class MainModel {
         }
     }
     
-    func getPlaceImage(_ placeId:String, _ maxwidth:Int, _ alpha:CGFloat, _ callback:@escaping (UIImage?)->Void) {
-        placesModel.fetchGoogleNearbyPlacesPhoto(placeId, maxwidth, alpha, callback)
+    func getPlaceImage(_ placeId:String, _ imageRef:String , _ maxwidth:Int, _ alpha:CGFloat, _ callback:@escaping (UIImage?, String)->Void) {
+        placesModel.fetchGoogleNearbyPlacesPhoto(placeId, imageRef, maxwidth, alpha, callback)
     }
     
     func saveImageToFile(image:UIImage, name:String){
@@ -259,7 +259,15 @@ class MainModel {
         placesModel.navigate(latitude, longitude)
     }
     
-    func GetPlacePhotos(placeID:String, callback: @escaping ([Photo]?, String?)-> Void){
+    func GetPlacePhotos(placeID:String, callback: @escaping ([Photo]?, String, String?)-> Void){
         placesModel.GetPlacePhotos(placeID: placeID, callback: callback)
+    }
+    
+    func addStoryToInteractions(interaction:InteractionStory){
+        firebaseModel.addStoryToInteractions(interacton: interaction)
+    }
+    
+    func getInteractionsStories(_ currUserLocation:CLLocation, _ callback: @escaping ([InteractionStory]) -> Void){
+        firebaseModel.getInteractionsStories(currUserLocation, callback)
     }
 }
