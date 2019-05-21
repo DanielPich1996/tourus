@@ -18,6 +18,7 @@ class MainModel {
     var firebaseModel = FirebaseModel()
     var placesModel = PlacesModel()
     var sqlModel = SqlModel()
+    var algorithmModel = AlgorithmModel()
     
     init() {
         unowned let unownedSelf = self
@@ -28,6 +29,10 @@ class MainModel {
         DispatchQueue.main.asyncAfter(deadline: deadlineTime, execute: {
             unownedSelf.listenToInteractionUpdates()
         })
+    }
+    
+    func getAlgorithmNextPlace(_ location:String, _ callback: @escaping (Interaction) -> Void) {
+        algorithmModel.getAlgorithmNextPlace(location, callback)
     }
     
     func getAllUsersHistory(_ callback: @escaping ([[String : Double]]) -> Void){
@@ -199,8 +204,8 @@ class MainModel {
         }
     }
     
-    func getPlaceImage(_ placeId:String, _ maxwidth:Int, _ alpha:CGFloat, _ callback:@escaping (UIImage?)->Void) {
-        placesModel.fetchGoogleNearbyPlacesPhoto(placeId, maxwidth, alpha, callback)
+    func getPlaceImage(_ placeId:String, _ imageRef:String , _ maxwidth:Int, _ alpha:CGFloat, _ callback:@escaping (UIImage?, String)->Void) {
+        placesModel.fetchGoogleNearbyPlacesPhoto(placeId, imageRef, maxwidth, alpha, callback)
     }
     
     func saveImageToFile(image:UIImage, name:String){
@@ -252,5 +257,17 @@ class MainModel {
     
     func navigate(_ latitude:String, _ longitude:String) {
         placesModel.navigate(latitude, longitude)
+    }
+    
+    func GetPlacePhotos(placeID:String, callback: @escaping ([Photo]?, String, String?)-> Void){
+        placesModel.GetPlacePhotos(placeID: placeID, callback: callback)
+    }
+    
+    func addStoryToInteractions(interaction:InteractionStory){
+        firebaseModel.addStoryToInteractions(interacton: interaction)
+    }
+    
+    func getInteractionsStories(_ currUserLocation:CLLocation, _ callback: @escaping ([InteractionStory]) -> Void){
+        firebaseModel.getInteractionsStories(currUserLocation, callback)
     }
 }

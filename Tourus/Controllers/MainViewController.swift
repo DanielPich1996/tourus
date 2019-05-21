@@ -10,6 +10,9 @@ import CoreLocation
 
 class MainViewController: UIViewController, CLLocationManagerDelegate {
     
+    @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var graphView: GraphView!
+    
     // MARK:Local const props
     let optionButtonMinHeight = 20
     let optionButtonSpace = 10
@@ -39,6 +42,9 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     
     var interaction:Interaction? = nil
     var currUserLocation:CLLocation? = nil
+    var imageIndex:Int = 0
+    var photos:[UIImage] = [UIImage]()
+    var lastLoadedIndex = 1;
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,6 +62,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         
         addBackgroundImage()
         initLocationManager()
+        setUpSwipe()
     }
     
     @IBAction func navigationButtonAction(_ sender: Any) {
@@ -64,7 +71,25 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
     
-    // MARK:Simulation
+    //MARK: ALGORYTHM
+    func getNextInteraction() {
+        let latitude:String = String(format: "%f", currUserLocation!.coordinate.latitude)
+        let longitude:String = String(format:"%f", currUserLocation!.coordinate.longitude)
+        let loc:String = latitude + "," + longitude
+        
+        MainModel.instance.getAlgorithmNextPlace(loc) { interact in
+            self.interaction = interact
+            
+            if self.interaction != nil {
+                self.setInteractionwithAnimation(self.interaction!)
+            }
+            else {
+                //Handle nil situation
+            }
+        }
+    }
+    
+    // MARK: Simulation
     var count = 0
     private func simulateOnce() {
         let latitude:String = String(format: "%f", currUserLocation!.coordinate.latitude)
@@ -99,22 +124,26 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         
         if(interaction != nil && interaction?.place != nil) {
             //Update user history
+            
+            var anwser:Int
+            
             MainModel.instance.updateUserHistory((interaction?.place?.types)!, button.type.value)
             
             switch button.type {
             case .accept: //navigate if a place is exist
-                if (interaction != nil && interaction?.place != nil) {
-                    navigate((interaction?.place)!)
-                }
-            case .decline: break
-            case .negative: break
-            case .neutral: break
-            case .opinionless: break
-            case .additional: break
+                anwser = 1
+                graphView.addData((interaction?.place)!) //temp - will be moved to another code
+                navigate((interaction?.place)!)
+            case .decline: anwser = 2
+            case .negative: anwser = 3
+            case .neutral: anwser = 4
+            case .opinionless: anwser = 5
+            case .additional: anwser = 6
             }
-            
-            //#2: the actual algo should replace this line:
-            simulateOnce()
+            let  interactionStory = InteractionStory(place: (interaction?.place)!, location: currUserLocation!, _answer: anwser)
+            MainModel.instance.addStoryToInteractions(interaction: interactionStory)
+            //#2: algo
+            getNextInteraction()
         }
     }
 
@@ -213,13 +242,19 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
                 //if interaction.place == nil {
                 //     navigationBtn.isEnabled = false
                 //}
-                
-                if(interaction.place != nil  && interaction.place!.picturesUrls.count > 0) {
-                    MainModel.instance.getPlaceImage(interaction.place!.picturesUrls[0], 800, 0.4, setBackroundImage)
-
-                    if(interaction.place!.picturesUrls.count > 1) {
-                        MainModel.instance.getPlaceImage(interaction.place!.picturesUrls[1], 800, 1, setBackroundImage)
-                    }
+                photos.removeAll()
+                imageIndex = 0
+                lastLoadedIndex = 1
+                if(interaction.place != nil  && interaction.place!.picturesUrls.count > imageIndex) {
+                    MainModel.instance.getPlaceImage(interaction.place!.googleID!, interaction.place!.picturesUrls[imageIndex], 800, 0.4, {(image, placeID) in
+                        if placeID == interaction.place!.googleID!{
+                            if let imageToSet = image {
+                                self.photos.append(imageToSet)
+                                self.setBackroundImage(imageToSet)
+                                self.GetMoreImageURLS()
+                            }
+                        }
+                    })
                 }
             }
         }
@@ -310,9 +345,13 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         if location.horizontalAccuracy > 0 && currUserLocation == nil {
             currUserLocation = location
             
+//            MainModel.instance.getInteractionsStories(currUserLocation!, {(interactios:[InteractionStory]) in
+//                print(interactios)
+//            })
+            
             if interaction == nil {
-                //#1: the actual algo should replace this line:
-                simulateOnce()
+                //#1: algo
+               getNextInteraction()
                 
                 self.view.isUserInteractionEnabled = true
                 BuisyIndicator.Instance.hideBuisyIndicator()
@@ -357,6 +396,92 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         case .authorizedAlways:
             // Enable any of your app's location features
             break
+        }
+    }
+    
+    func setUpSwipe(){
+        let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe(sender:)))
+        rightSwipe.direction = .right
+        
+        let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe(sender:)))
+        leftSwipe.direction = .left
+        view.addGestureRecognizer(rightSwipe)
+        view.addGestureRecognizer(leftSwipe)
+    }
+    
+    @objc func handleSwipe(sender: UISwipeGestureRecognizer) {
+        if sender.state == .ended && (photos.count > 1){
+            switch sender.direction {
+            case .right:
+                if imageIndex > 0 {
+                    imageIndex -= 1
+                    //MainModel.instance.getPlaceImage(interaction!.place!.picturesUrls[imageIndex], 800, 0.4, setBackroundImage)
+                    setBackroundImage(photos[imageIndex])
+                }
+            case .left:
+                if imageIndex + 1 < (photos.count) {
+                    imageIndex += 1
+                    setBackroundImage(photos[imageIndex])
+                    GetMoreImages(endIndex: imageIndex + 3)
+                }
+            default:
+                break
+            }
+        }
+    }
+    
+    func GetMoreImageURLS() {
+        if let placeID = interaction?.place?.googleID {
+            MainModel.instance.GetPlacePhotos(placeID: placeID, callback: {(photosURL, placeID ,err) in
+                if(err == nil && self.interaction?.place?.googleID == placeID) {
+                    if var urls = photosURL {
+                        urls.remove(at: 0)
+                        
+                        for photo in urls {
+                            self.interaction?.place!.picturesUrls.append(photo.photoReference!)
+                        }
+                        
+                        if self.interaction!.place!.picturesUrls.count > 1 {
+                            MainModel.instance.getPlaceImage((self.interaction?.place?.googleID)!, self.interaction!.place!.picturesUrls[1], 800, 0.4, {(image, placeID) in
+                                if((self.interaction?.place?.googleID)! == placeID ){
+                                    if let imageToSet = image {
+                                        self.photos.append(imageToSet)
+                                        self.setInfoImage(imageToSet)
+                                    }
+                                }
+                            })
+                        }
+                        self.GetMoreImages(endIndex: 3)
+                    }
+                }
+            })
+        }
+    }
+    
+    func GetMoreImages(endIndex:Int){
+        if ((lastLoadedIndex + 1) < (interaction?.place!.picturesUrls.count)!) {
+            let end:Int
+            let start = (lastLoadedIndex + 1)
+            
+            if(endIndex >= (interaction?.place!.picturesUrls.count)!){
+                end = ((interaction?.place!.picturesUrls.count)! - 1)
+            }else{
+                end = endIndex
+            }
+            
+            if (end > lastLoadedIndex){
+                lastLoadedIndex = end
+                
+                for index in start...end{
+                    MainModel.instance.getPlaceImage((interaction?.place?.googleID)!  ,interaction!.place!.picturesUrls[index], 800, 0.4, {(image, placeID) in
+                        if(placeID == (self.interaction?.place?.googleID)!){
+                            if let imageToSet = image {
+                                self.photos.append(imageToSet)
+                            }
+                        }
+                    })
+                }
+            }
         }
     }
 }
