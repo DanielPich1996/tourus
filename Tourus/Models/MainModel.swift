@@ -262,4 +262,12 @@ class MainModel {
     func GetPlacePhotos(placeID:String, callback: @escaping ([Photo]?, String, String?)-> Void){
         placesModel.GetPlacePhotos(placeID: placeID, callback: callback)
     }
+    
+    func addStoryToInteractions(interaction:InteractionStory){
+        firebaseModel.addStoryToInteractions(interacton: interaction)
+    }
+    
+    func getInteractionsStories(_ currUserLocation:CLLocation, _ callback: @escaping ([InteractionStory]) -> Void){
+        firebaseModel.getInteractionsStories(currUserLocation, callback)
+    }
 }

@@ -29,6 +29,7 @@
 		8458503521E3E51200DF7C68 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8458503421E3E51200DF7C68 /* UIColorExtension.swift */; };
 		8458503721E4049100DF7C68 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8458503621E4049100DF7C68 /* UIViewExtension.swift */; };
 		845D1F8F223FEC2000C73585 /* InteractionSqlExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845D1F8E223FEC2000C73585 /* InteractionSqlExtension.swift */; };
+		846F9B22229298970046927A /* InteractionStory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846F9B21229298970046927A /* InteractionStory.swift */; };
 		848812772256A8B200FC14B6 /* org-tourus-acb4d-interactions.json in Resources */ = {isa = PBXBuildFile; fileRef = 848812762256A8B100FC14B6 /* org-tourus-acb4d-interactions.json */; };
 		849CA33B226F433900C5DC55 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849CA33A226F433900C5DC55 /* GraphView.swift */; };
 		849D3EAF21DE8D18002F74B2 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849D3EAE21DE8D18002F74B2 /* RegisterViewController.swift */; };
@@ -95,6 +96,7 @@
 		8458503421E3E51200DF7C68 /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		8458503621E4049100DF7C68 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		845D1F8E223FEC2000C73585 /* InteractionSqlExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionSqlExtension.swift; sourceTree = "<group>"; };
+		846F9B21229298970046927A /* InteractionStory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionStory.swift; sourceTree = "<group>"; };
 		848812762256A8B100FC14B6 /* org-tourus-acb4d-interactions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "org-tourus-acb4d-interactions.json"; sourceTree = "<group>"; };
 		849CA33A226F433900C5DC55 /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		849D3EAE21DE8D18002F74B2 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
@@ -190,6 +192,7 @@
 				8449C6E221E13603002A6AF6 /* Extensions */,
 				849D3EB221DE8F4A002F74B2 /* Consts.swift */,
 				849D3EB821DE91E2002F74B2 /* UserInfo.swift */,
+				846F9B21229298970046927A /* InteractionStory.swift */,
 				8458503221E3D85900DF7C68 /* Interaction.swift */,
 				8440930E222AE7EB007E058D /* Place.swift */,
 			);
@@ -532,7 +535,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Tourus/Pods-Tourus-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Tourus/Pods-Tourus-resources.sh",
 				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
 				"${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle",
 			);
@@ -543,7 +546,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Tourus/Pods-Tourus-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Tourus/Pods-Tourus-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		E81BFED3656604164071041A /* [CP] Embed Pods Frameworks */ = {
@@ -552,22 +555,30 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Tourus/Pods-Tourus-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Tourus/Pods-Tourus-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/BoringSSL-GRPC/openssl_grpc.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-C++/grpcpp.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl_grpc.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpcpp.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Tourus/Pods-Tourus-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Tourus/Pods-Tourus-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F63ABCE8B177A25C7B5A44FD /* [CP] Check Pods Manifest.lock */ = {
@@ -621,6 +632,7 @@
 				843F5E5D21DD593F0098FA3E /* SqlModel.swift in Sources */,
 				84B4B97C228751EB00906B27 /* PopTip+Transitions.swift in Sources */,
 				8449C6E121E13280002A6AF6 /* BuisyIndicator.swift in Sources */,
+				846F9B22229298970046927A /* InteractionStory.swift in Sources */,
 				849D3EB321DE8F4A002F74B2 /* Consts.swift in Sources */,
 				84B4B9782287516900906B27 /* PopTip.swift in Sources */,
 				8458503721E4049100DF7C68 /* UIViewExtension.swift in Sources */,

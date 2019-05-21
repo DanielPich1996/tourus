@@ -124,19 +124,24 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         
         if(interaction != nil && interaction?.place != nil) {
             //Update user history
+            
+            var anwser:Int
+            
             MainModel.instance.updateUserHistory((interaction?.place?.types)!, button.type.value)
             
             switch button.type {
             case .accept: //navigate if a place is exist
+                anwser = 1
                 graphView.addData((interaction?.place)!) //temp - will be moved to another code
                 navigate((interaction?.place)!)
-            case .decline: break
-            case .negative: break
-            case .neutral: break
-            case .opinionless: break
-            case .additional: break
+            case .decline: anwser = 2
+            case .negative: anwser = 3
+            case .neutral: anwser = 4
+            case .opinionless: anwser = 5
+            case .additional: anwser = 6
             }
-            
+            let  interactionStory = InteractionStory(place: (interaction?.place)!, location: currUserLocation!, _answer: anwser)
+            MainModel.instance.addStoryToInteractions(interaction: interactionStory)
             //#2: algo
             getNextInteraction()
         }
@@ -339,6 +344,10 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         let location = locations[locations.count - 1]
         if location.horizontalAccuracy > 0 && currUserLocation == nil {
             currUserLocation = location
+            
+//            MainModel.instance.getInteractionsStories(currUserLocation!, {(interactios:[InteractionStory]) in
+//                print(interactios)
+//            })
             
             if interaction == nil {
                 //#1: algo
