@@ -32,30 +32,30 @@ class GraphData {
         
     }
     
-    init(_place:Place, _value:Int) {
-        setData(_place: _place, _value: _value)
+    init(_story:InteractionStory, _value:Int) {
+        setData(_story: _story, _value: _value)
     }
     
-    func setData(_place:Place, _value:Int) {
-        name = _place.name
+    func setData(_story:InteractionStory, _value:Int) {
+        name = _story.placeNmae ?? ""
         value = _value
-        lat = _place.location?.lat ?? 0
-        long = _place.location?.lng ?? 0
+        lat = _story.userLocation.coordinate.latitude
+        long = _story.userLocation.coordinate.longitude
         isPopulate = true
     }
 }
 
 @IBDesignable class GraphView: UIView {
     private var tapGesture:UITapGestureRecognizer? = nil
-    var data = [GraphData]()
-    var popTip:PopTip? = nil
+    private var data = [GraphData]()
+    private var popTip:PopTip? = nil
     
     @IBInspectable var startColor: UIColor = .clear
     @IBInspectable var endColor: UIColor = .clear
     
 
     //managing the data array as a queue - first in last out
-    func addData(_ place:Place) {
+    func addData(_ story:InteractionStory) {
         
         if data.count >= Constants.maxGraphPoints {
             data.removeFirst()
@@ -64,17 +64,27 @@ class GraphData {
         if let iterator = data.last {
             let lat1 = iterator.lat
             let long1 = iterator.long
-            let lat2 = place.location?.lat ?? 0
-            let long2 = place.location?.lng ?? 0
+            let lat2 = story.userLocation.coordinate.latitude
+            let long2 = story.userLocation.coordinate.longitude
             
             let degree = getBearingBetweenTwoPoints(lat1: lat1, long1: long1, lat2: lat2, long2: long2)
-            data.append(GraphData(_place: place, _value: Int(degree)))
+            data.append(GraphData(_story: story, _value: Int(degree)))
         }
         else {
-             data.append(GraphData(_place: place, _value: Constants.maxDegree / 2))
+             data.append(GraphData(_story: story, _value: Constants.maxDegree / 2))
         }
         
         setNeedsDisplay()
+    }
+    
+    func overrideData(_ stories:[InteractionStory]) {
+        //clear the data collection
+        self.data.removeAll()
+        //getting the first 10 stories and reverse the array
+        let firstStories = stories.prefix(10).reversed()
+        for story in firstStories {
+            self.addData(story)
+        }
     }
     
     override func draw(_ rect: CGRect) {

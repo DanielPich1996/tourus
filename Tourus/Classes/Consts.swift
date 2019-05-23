@@ -13,6 +13,7 @@ struct consts {
     struct names {
         static let userInfoTableName : String = "Users"
         static let interactionsTableName : String = "Interactions"
+        static let interactionHistoryTableName : String = "InteractionHistory"
         static let optionsTableName : String = "Options"
         static let imagesFolderName : String = "ImagesStorage"
         static let profileImagesFolderName : String = "ProfileImagesStorage"
