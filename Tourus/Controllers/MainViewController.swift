@@ -63,6 +63,12 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         addBackgroundImage()
         initLocationManager()
         setUpSwipe()
+        
+        MainModel.instance.getUserInteractionStories() { (data) in
+            if data != nil {
+                
+            }
+        }
     }
     
     @IBAction func navigationButtonAction(_ sender: Any) {

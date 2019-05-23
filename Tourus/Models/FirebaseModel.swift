@@ -291,4 +291,27 @@ class FirebaseModel {
             }
         }
     }
+    
+    func getUserInteractionStories(_ callback: @escaping ([InteractionStory]) -> Void) {
+        //_ callback: @escaping ([InteractionStory]) -> Void
+    
+        let timeNow = Date().timeIntervalSince1970
+        let time24hoursBeforeNow = timeNow - 24 * 60 * 60
+        
+        firestoreRef.collection("InteractionHistory").whereField("userID", isEqualTo: "ddvyR7i264QW7xCVNsizYAeoBVk1").whereField("date", isGreaterThanOrEqualTo: time24hoursBeforeNow).order(by: "date").getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                var stories = [InteractionStory]()
+                
+                for document in querySnapshot!.documents {
+                    let interaction = InteractionStory(json: document.data())
+                    //interaction.getDistanceInMeters(currUserLocation)
+                    stories.append(interaction)
+                }
+                
+                callback(stories)
+            }
+        }
+    }
 }
