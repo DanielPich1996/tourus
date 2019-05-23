@@ -9,10 +9,12 @@
 import Foundation
 import UIKit
 import CoreLocation
+import FirebaseFirestore
 
 class InteractionStory {
     let placeID:String?
-    let userID:String?
+    let placeNmae:String?
+    let userID:String
     var categories = [String]()
     let date:Date
     let userLocation:CLLocation
@@ -21,17 +23,20 @@ class InteractionStory {
     
     init(place:Place, location:CLLocation, _answer:Int) {
         placeID = place.googleID
-        userID = MainModel.instance.currentUser()?.uid
+        userID = (MainModel.instance.currentUser()?.uid)!
         categories = place.types!
         date = Date()
         userLocation = location
-        self.answer = _answer
+        answer = _answer
+        placeNmae = place.name
     }
     
     
     init(json:[String:Any]) {
-        let tmpDate = json["date"] as! Double
-        date = Date(timeIntervalSince1970: tmpDate)
+        //let tmpDate = json["date"] as! Double
+        //date = Date(timeIntervalSince1970: tmpDate)
+        let dateTmp = json["date"] as! Timestamp
+        date = dateTmp.dateValue()
         categories = json["categories"] as! [String]
         placeID = (json["placeID"] as! String)
         userID = (json["userID"] as! String)
@@ -39,6 +44,7 @@ class InteractionStory {
         let lng = json["userLocationLongitude"] as! Double
         userLocation = CLLocation(latitude: lat, longitude: lng)
         answer = json["answer"] as! Int
+        placeNmae = json["name"] as? String
     }
     
     func toJson() -> [String:Any] {
@@ -47,10 +53,11 @@ class InteractionStory {
         json["placeID"] = placeID
         json["userID"] = userID
         json["categories"] = categories
-        json["date"] = date.timeIntervalSince1970
+        json["date"] = date
         json["userLocationLatitude"] = userLocation.coordinate.latitude
         json["userLocationLongitude"] = userLocation.coordinate.longitude
         json["answer"] = answer
+        json["name"] = placeNmae
         
         return json
     }

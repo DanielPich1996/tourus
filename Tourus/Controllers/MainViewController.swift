@@ -350,8 +350,8 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         let location = locations[locations.count - 1]
         if location.horizontalAccuracy > 0 && currUserLocation == nil {
             currUserLocation = location
-            
-//            MainModel.instance.getInteractionsStories(currUserLocation!, {(interactios:[InteractionStory]) in
+//Test group By
+//            MainModel.instance.GroupInteractionsByUser(currUserLocation!, {(interactios:[String:[InteractionStory]]) in
 //                print(interactios)
 //            })
             
