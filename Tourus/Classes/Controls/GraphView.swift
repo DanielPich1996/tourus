@@ -41,8 +41,6 @@ import UIKit
     }
     
     func overrideData(_ stories:[InteractionStory]) {
-        //clear the data collection
-        self.data.removeAll()
         //getting the first 10 stories and reverse the array
         let firstStories = stories.prefix(10).reversed()
         for story in firstStories {

@@ -60,14 +60,13 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         setBackroundImage(nil)
         setInfoImage(nil)
         
+        InitCurrentUserInfo()
         addBackgroundImage()
         initLocationManager()
         setUpSwipe()
-        
-        MainModel.instance.getUserInteractionStories() { (stories) in
-            self.graphView.overrideData(stories)
-        }
+        InitGraphData()
     }
+    
     
     @IBAction func navigationButtonAction(_ sender: Any) {
         if (interaction != nil && interaction?.place != nil) {
@@ -333,6 +332,19 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         backgroundImage.contentMode = UIView.ContentMode.scaleAspectFill
         backgroundImage.alpha = 0.0
         self.view.insertSubview(backgroundImage, at: 0)
+    }
+    
+    func InitCurrentUserInfo() {
+        //init the user info data on the device - save the data locally if not exists
+        if let user = MainModel.instance.currentUser() {
+            MainModel.instance.getUserInfo(user.uid) { _ in }
+        }
+    }
+    
+    func InitGraphData() {
+        MainModel.instance.getUserInteractionStories() { (stories) in
+            self.graphView.overrideData(stories)
+        }
     }
     
     ///MARK: Location Manager Functions
