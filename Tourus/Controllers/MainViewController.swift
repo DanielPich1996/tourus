@@ -60,10 +60,13 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         setBackroundImage(nil)
         setInfoImage(nil)
         
+        InitCurrentUserInfo()
         addBackgroundImage()
         initLocationManager()
         setUpSwipe()
+        InitGraphData()
     }
+    
     
     @IBAction func navigationButtonAction(_ sender: Any) {
         if (interaction != nil && interaction?.place != nil) {
@@ -123,25 +126,24 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     @objc func optionButtonAction( _ button : UIOptionButton) {
         
         if(interaction != nil && interaction?.place != nil) {
+            
             //Update user history
-            
-            var anwser:Int
-            
             MainModel.instance.updateUserHistory((interaction?.place?.types)!, button.type.value)
+            //Update user story
+            let interactionStory = InteractionStory(place: (interaction?.place)!, location: currUserLocation!, _answer: button.type.index)
+            MainModel.instance.addStoryToInteractions(interaction: interactionStory)
             
             switch button.type {
-            case .accept: //navigate if a place is exist
-                anwser = 1
-                graphView.addData((interaction?.place)!) //temp - will be moved to another code
-                navigate((interaction?.place)!)
-            case .decline: anwser = 2
-            case .negative: anwser = 3
-            case .neutral: anwser = 4
-            case .opinionless: anwser = 5
-            case .additional: anwser = 6
+                case .accept: //navigate if a place is exist
+                    graphView.addData(interactionStory) //temp - will be moved to another code
+                    navigate((interaction?.place)!)
+                case .decline: break
+                case .negative: break
+                case .neutral: break
+                case .opinionless: break
+                case .additional: break
             }
-            let  interactionStory = InteractionStory(place: (interaction?.place)!, location: currUserLocation!, _answer: anwser)
-            MainModel.instance.addStoryToInteractions(interaction: interactionStory)
+
             //#2: algo
             getNextInteraction()
         }
@@ -330,6 +332,19 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         backgroundImage.contentMode = UIView.ContentMode.scaleAspectFill
         backgroundImage.alpha = 0.0
         self.view.insertSubview(backgroundImage, at: 0)
+    }
+    
+    func InitCurrentUserInfo() {
+        //init the user info data on the device - save the data locally if not exists
+        if let user = MainModel.instance.currentUser() {
+            MainModel.instance.getUserInfo(user.uid) { _ in }
+        }
+    }
+    
+    func InitGraphData() {
+        MainModel.instance.getUserInteractionStories() { (stories) in
+            self.graphView.overrideData(stories)
+        }
     }
     
     ///MARK: Location Manager Functions
