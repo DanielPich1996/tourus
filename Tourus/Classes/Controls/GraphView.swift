@@ -213,7 +213,7 @@ import UIKit
         paragraphStyle2.alignment = .center
         let attributes2: [NSAttributedString.Key : Any] = [
             .font: UIFont(name: "HelveticaNeue", size: 10)!,
-            .foregroundColor: UIColor.white,
+            .foregroundColor: UIColor.lightYellowColor,
             .paragraphStyle: paragraphStyle2
         ]
         attributedString.addAttributes(attributes2, range: NSRange(location: mainTextCount, length: subTextCount))
