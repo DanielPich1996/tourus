@@ -225,8 +225,12 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u9K-ks-ZtC" customClass="CosmosView" customModule="Cosmos">
-                                        <rect key="frame" x="64" y="458" width="236" height="40"/>
+                                        <rect key="frame" x="64" y="468" width="236" height="40"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="236" id="5xb-tC-2ge"/>
+                                            <constraint firstAttribute="height" constant="40" id="9h3-Lr-M4o"/>
+                                        </constraints>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="rating">
                                                 <real key="value" value="3.5"/>
@@ -266,7 +270,7 @@
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="vnP-DM-0yE" secondAttribute="trailing" constant="10" id="DVi-le-zEn"/>
                                     <constraint firstItem="vnP-DM-0yE" firstAttribute="top" secondItem="iDu-SR-c7Y" secondAttribute="bottom" constant="10" id="L17-nl-aq8"/>
-                                    <constraint firstAttribute="bottom" secondItem="u9K-ks-ZtC" secondAttribute="bottom" constant="20" id="OG5-4Q-Yve"/>
+                                    <constraint firstAttribute="bottom" secondItem="u9K-ks-ZtC" secondAttribute="bottom" constant="10" id="OG5-4Q-Yve"/>
                                     <constraint firstItem="iDu-SR-c7Y" firstAttribute="leading" secondItem="RmO-qc-7tb" secondAttribute="leadingMargin" id="R2E-hf-7QU"/>
                                     <constraint firstItem="iDu-SR-c7Y" firstAttribute="top" secondItem="RmO-qc-7tb" secondAttribute="topMargin" id="Wgx-PH-XEA"/>
                                     <constraint firstItem="u9K-ks-ZtC" firstAttribute="centerX" secondItem="RmO-qc-7tb" secondAttribute="centerX" id="eem-Wc-fSQ"/>
