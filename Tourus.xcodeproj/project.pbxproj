@@ -31,6 +31,7 @@
 		845D1F8F223FEC2000C73585 /* InteractionSqlExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845D1F8E223FEC2000C73585 /* InteractionSqlExtension.swift */; };
 		84690E12229821E2000959A9 /* MoreInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84690E11229821E2000959A9 /* MoreInfoViewController.swift */; };
 		84690E1822982BCB000959A9 /* RoundUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84690E1722982BCB000959A9 /* RoundUIView.swift */; };
+		84690E1E22984DEC000959A9 /* RoundUIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84690E1D22984DEC000959A9 /* RoundUIImageView.swift */; };
 		846F9B22229298970046927A /* InteractionStory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846F9B21229298970046927A /* InteractionStory.swift */; };
 		848812772256A8B200FC14B6 /* org-tourus-acb4d-interactions.json in Resources */ = {isa = PBXBuildFile; fileRef = 848812762256A8B100FC14B6 /* org-tourus-acb4d-interactions.json */; };
 		849CA33B226F433900C5DC55 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849CA33A226F433900C5DC55 /* GraphView.swift */; };
@@ -100,6 +101,7 @@
 		845D1F8E223FEC2000C73585 /* InteractionSqlExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionSqlExtension.swift; sourceTree = "<group>"; };
 		84690E11229821E2000959A9 /* MoreInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreInfoViewController.swift; sourceTree = "<group>"; };
 		84690E1722982BCB000959A9 /* RoundUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundUIView.swift; sourceTree = "<group>"; };
+		84690E1D22984DEC000959A9 /* RoundUIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundUIImageView.swift; sourceTree = "<group>"; };
 		846F9B21229298970046927A /* InteractionStory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionStory.swift; sourceTree = "<group>"; };
 		848812762256A8B100FC14B6 /* org-tourus-acb4d-interactions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "org-tourus-acb4d-interactions.json"; sourceTree = "<group>"; };
 		849CA33A226F433900C5DC55 /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
@@ -265,6 +267,7 @@
 				849CA33A226F433900C5DC55 /* GraphView.swift */,
 				84B4B9772287516900906B27 /* PopTip.swift */,
 				84690E1722982BCB000959A9 /* RoundUIView.swift */,
+				84690E1D22984DEC000959A9 /* RoundUIImageView.swift */,
 			);
 			path = Controls;
 			sourceTree = "<group>";
@@ -621,6 +624,7 @@
 				8440930F222AE7EB007E058D /* Place.swift in Sources */,
 				84E3673121E15EC500122FD8 /* SBCardPopupViewController.swift in Sources */,
 				843F5E5F21DD59C60098FA3E /* NotificationModel.swift in Sources */,
+				84690E1E22984DEC000959A9 /* RoundUIImageView.swift in Sources */,
 				84690E1822982BCB000959A9 /* RoundUIView.swift in Sources */,
 				843F5E5B21DD58B80098FA3E /* MainModel.swift in Sources */,
 				849CA33B226F433900C5DC55 /* GraphView.swift in Sources */,
