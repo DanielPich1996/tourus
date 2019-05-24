@@ -12,7 +12,7 @@ import CoreLocation
 
 class InteractionStory {
     let placeID:String?
-    let userID:String?
+    let userID:String
     var categories = [String]()
     let date:Date
     let userLocation:CLLocation
@@ -21,7 +21,7 @@ class InteractionStory {
     
     init(place:Place, location:CLLocation, _answer:Int) {
         placeID = place.googleID
-        userID = MainModel.instance.currentUser()?.uid
+        userID = (MainModel.instance.currentUser()?.uid)!
         categories = place.types!
         date = Date()
         userLocation = location

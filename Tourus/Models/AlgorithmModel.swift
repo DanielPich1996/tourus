@@ -9,6 +9,7 @@
 
 import Foundation
 import UIKit
+import CoreLocation
 
 class AlgorithmModel{
     private let minSupport = 0
@@ -309,6 +310,29 @@ class AlgorithmModel{
         
         return genereteTable[lastFreqCounts.index(of: lastFreqCounts.max()!)!]
     }
+    
+    
+    
+    func GroupInteractionsByUser(_ currUserLocation:CLLocation, _ callback: @escaping ([String:[InteractionStory]]) -> Void) {
+        MainModel.instance.getInteractionsStories(currUserLocation, {(interactios:[InteractionStory]) in
+            var interactionsByUser = [String:[InteractionStory]]()
+            
+            if interactios.count > 0 {
+                for story in interactios {
+                    if interactionsByUser[story.userID] == nil {
+                        interactionsByUser[story.userID] = [InteractionStory]()
+                    }
+                    
+                    interactionsByUser[story.userID]?.append(story)
+                }
+            }
+            
+            callback(interactionsByUser)
+        })
+    }
+    
+    
+    
 }
 
 
