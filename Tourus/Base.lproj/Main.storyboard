@@ -481,7 +481,6 @@
                         <outlet property="interactionSettingsConstraint" destination="xph-td-QAf" id="avP-Ur-aHl"/>
                         <outlet property="interactionView" destination="baG-Uy-0zi" id="hzv-9S-aMd"/>
                         <outlet property="mainView" destination="4dF-Wq-9YE" id="dCH-Uh-bzP"/>
-                        <outlet property="moreInfoBtn" destination="tAs-4f-E1y" id="ae1-yM-2gZ"/>
                         <outlet property="moreInfoButtonView" destination="7SD-mu-rhu" id="TC8-U4-91j"/>
                         <outlet property="moreInfoImage" destination="fpA-14-vzo" id="lYx-rN-q5c"/>
                         <outlet property="moreInfoView" destination="gok-U5-wgO" id="2Da-dT-b5N"/>
