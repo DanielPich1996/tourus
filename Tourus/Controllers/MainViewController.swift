@@ -144,6 +144,8 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
                 case .additional: break
             }
 
+            //clear value
+            interaction = nil
             //#2: algo
             getNextInteraction()
         }
@@ -473,7 +475,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
     
-    func GetMoreImages(endIndex:Int){
+    func GetMoreImages(endIndex:Int) {
         if ((lastLoadedIndex + 1) < (interaction?.place!.picturesUrls.count)!) {
             let end:Int
             let start = (lastLoadedIndex + 1)
@@ -498,5 +500,27 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
                 }
             }
         }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.destination is MoreInfoViewController
+        {
+            let vc = segue.destination as? MoreInfoViewController
+            vc?.displayInteractionInfo(name: interaction?.place?.name, rating: interaction?.place?.rating)
+        }
+    }
+    
+    override func shouldPerformSegue(withIdentifier identifier: String?, sender: Any?) -> Bool {
+        //avoid more info segue when no interaction exists
+        if let ident = identifier {
+            if ident == "MoreInfoSegue" {
+                if self.interaction == nil {
+                    return false
+                }
+            }
+        }
+        
+        return true
     }
 }
