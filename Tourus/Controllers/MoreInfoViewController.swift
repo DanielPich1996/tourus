@@ -7,30 +7,49 @@
 //
 
 import UIKit
+import Cosmos
 
 class MoreInfoViewController: UIViewController {
 
-    var name:String = ""
+    var name: String = ""
+    var rating: Double = 0.0
    
+    @IBOutlet var backView: UIView!
     @IBOutlet var interactionName: UILabel!
+    @IBOutlet var cosmosRatingView: CosmosView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-       interactionName.text = name
+        setData()
+        setTapDetection()
+    }
+    
+    @objc func tapDetected() {
+        
+        dismiss(animated: true, completion: nil)
     }
     
     @IBAction func onCloseClick(_ sender: Any) {
+        
         dismiss(animated: true, completion: nil)
     }
-
-    func displayInteractionInfo(_ interaction:Interaction?)
-    {
-        name = interaction?.place?.name ?? ""
+    
+    func displayInteractionInfo(name: String?, rating: Double?) {
+        
+        self.name = name ?? ""
+        self.rating = rating ?? 0.0
     }
     
-    func displayInteractionInfo(name:String?)
-    {
-        self.name = name ?? ""
+    private func setData() {
+        
+        interactionName.text = name
+        cosmosRatingView.rating = rating
+    }
+    
+    private func setTapDetection() {
+        
+        let singleTap = UITapGestureRecognizer(target: self, action: #selector(MoreInfoViewController.tapDetected))
+        self.backView.addGestureRecognizer(singleTap)
     }
 }

@@ -505,7 +505,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         if segue.destination is MoreInfoViewController
         {
             let vc = segue.destination as? MoreInfoViewController
-            vc?.displayInteractionInfo(name: interaction?.place?.name)
+            vc?.displayInteractionInfo(name: interaction?.place?.name, rating: interaction?.place?.rating)
         }
     }
 }
