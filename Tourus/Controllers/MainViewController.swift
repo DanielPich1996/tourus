@@ -22,6 +22,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     let locationManager = CLLocationManager()
     
     // MARK:Outlets
+    @IBOutlet var moreInfoBtn: UIButton!
     @IBOutlet var settingsBtn: UIButton!
     @IBOutlet var navigationBtn: UIButton!
     @IBOutlet var mainView: UIView!
@@ -49,6 +50,9 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        //moreInfoBtn.isEnabled = false
+        //moreInfoBtn.isUserInteractionEnabled = false
+        
         BuisyIndicator.Instance.showBuisyIndicator()
         optionsView.fadeOut()
         interactionView.fadeOut()
@@ -144,6 +148,8 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
                 case .additional: break
             }
 
+            //clear value
+            interaction = nil
             //#2: algo
             getNextInteraction()
         }
@@ -500,12 +506,25 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
-    {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
         if segue.destination is MoreInfoViewController
         {
             let vc = segue.destination as? MoreInfoViewController
             vc?.displayInteractionInfo(name: interaction?.place?.name, rating: interaction?.place?.rating)
         }
+    }
+    
+    override func shouldPerformSegue(withIdentifier identifier: String?, sender: Any?) -> Bool {
+        //evoid more info segue when no interaction exists
+        if let ident = identifier {
+            if ident == "MoreInfoSegue" {
+                if self.interaction == nil {
+                    return false
+                }
+            }
+        }
+        
+        return true
     }
 }

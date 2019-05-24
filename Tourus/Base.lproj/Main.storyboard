@@ -200,9 +200,9 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RmO-qc-7tb" customClass="RoundUIView" customModule="Tourus" customModuleProvider="target">
-                                <rect key="frame" x="25" y="94" width="364" height="708"/>
+                                <rect key="frame" x="25" y="94" width="364" height="518"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iDu-SR-c7Y" userLabel="close btn">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iDu-SR-c7Y" userLabel="close btn">
                                         <rect key="frame" x="8" y="8" width="30" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="A4B-th-Jqb"/>
@@ -210,7 +210,9 @@
                                             <constraint firstAttribute="height" constant="30" id="TQz-cU-lM3"/>
                                             <constraint firstAttribute="width" constant="30" id="dA6-ot-CkA"/>
                                         </constraints>
-                                        <state key="normal" image="close_icon"/>
+                                        <state key="normal" image="close_icon">
+                                            <color key="titleColor" red="0.88078674320000006" green="0.94566447099999995" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
                                         <connections>
                                             <action selector="onCloseClick:" destination="892-kL-vwl" eventType="touchUpInside" id="nWL-hw-okw"/>
                                             <action selector="onSettingsClick:" destination="fWm-qP-zMK" eventType="touchUpInside" id="mR3-hA-ccY"/>
@@ -223,7 +225,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u9K-ks-ZtC" customClass="CosmosView" customModule="Cosmos">
-                                        <rect key="frame" x="64" y="648" width="236" height="40"/>
+                                        <rect key="frame" x="64" y="458" width="236" height="40"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="rating">
@@ -269,6 +271,7 @@
                                     <constraint firstItem="iDu-SR-c7Y" firstAttribute="top" secondItem="RmO-qc-7tb" secondAttribute="topMargin" id="Wgx-PH-XEA"/>
                                     <constraint firstItem="u9K-ks-ZtC" firstAttribute="centerX" secondItem="RmO-qc-7tb" secondAttribute="centerX" id="eem-Wc-fSQ"/>
                                     <constraint firstItem="vnP-DM-0yE" firstAttribute="leading" secondItem="RmO-qc-7tb" secondAttribute="leading" constant="10" id="tEr-9Q-Tef"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" id="yLR-fT-Cjl"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -277,11 +280,11 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.54845355308219179" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.65127354452054798" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="PQU-15-hUl" firstAttribute="top" secondItem="zaB-Ml-8MF" secondAttribute="top" id="49n-Zh-sbs"/>
                             <constraint firstItem="zaB-Ml-8MF" firstAttribute="trailing" secondItem="PQU-15-hUl" secondAttribute="trailing" id="Ca7-nV-lQy"/>
-                            <constraint firstItem="zaB-Ml-8MF" firstAttribute="bottom" secondItem="RmO-qc-7tb" secondAttribute="bottom" constant="60" id="Gp2-aT-qWf"/>
+                            <constraint firstItem="zaB-Ml-8MF" firstAttribute="centerY" secondItem="RmO-qc-7tb" secondAttribute="centerY" constant="100" id="Gp2-aT-qWf"/>
                             <constraint firstItem="RmO-qc-7tb" firstAttribute="top" secondItem="zaB-Ml-8MF" secondAttribute="top" constant="50" id="acI-sS-yzR"/>
                             <constraint firstItem="RmO-qc-7tb" firstAttribute="leading" secondItem="zaB-Ml-8MF" secondAttribute="leading" constant="25" id="b8L-yb-bKC"/>
                             <constraint firstItem="zaB-Ml-8MF" firstAttribute="trailing" secondItem="RmO-qc-7tb" secondAttribute="trailing" constant="25" id="g9Q-cX-9iR"/>
@@ -375,7 +378,7 @@
                                                 </state>
                                                 <connections>
                                                     <action selector="moreInfoTapped:" destination="fWm-qP-zMK" eventType="touchUpInside" id="ieY-YM-hMn"/>
-                                                    <segue destination="892-kL-vwl" kind="presentation" id="qbm-id-4Te"/>
+                                                    <segue destination="892-kL-vwl" kind="presentation" identifier="MoreInfoSegue" id="qbm-id-4Te"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -478,6 +481,7 @@
                         <outlet property="interactionSettingsConstraint" destination="xph-td-QAf" id="avP-Ur-aHl"/>
                         <outlet property="interactionView" destination="baG-Uy-0zi" id="hzv-9S-aMd"/>
                         <outlet property="mainView" destination="4dF-Wq-9YE" id="dCH-Uh-bzP"/>
+                        <outlet property="moreInfoBtn" destination="tAs-4f-E1y" id="ae1-yM-2gZ"/>
                         <outlet property="moreInfoButtonView" destination="7SD-mu-rhu" id="TC8-U4-91j"/>
                         <outlet property="moreInfoImage" destination="fpA-14-vzo" id="lYx-rN-q5c"/>
                         <outlet property="moreInfoView" destination="gok-U5-wgO" id="2Da-dT-b5N"/>
