@@ -8,40 +8,78 @@
 
 import UIKit
 
-class SettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+struct cellData{
+    var opened = Bool()
+    var title = String()
+    var sectionData = [String]()
+}
+
+
+class SettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
     
-    var languages = ["C#", "Pyhton", "Javascript", "Swift", "C++", "C"]
+    
+    class CheckableData {
+        var title:String = ""
+        var checked:Bool = false
+    }
+    
+    
+    var tableViewData = [cellData(opened: false, title: "Choose", sectionData:["a","b","c","d"])]
+    
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return tableViewData.count
+    }
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        return languages.count
+        if tableViewData[section].opened == true {
+            return tableViewData[section].sectionData.count + 1
+        }
+        else{
+            return 1
+        }
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = languages[indexPath.row]
+        let dataIndex = indexPath.row - 1
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell") else {return UITableViewCell()}
+        
+        if indexPath.row == 0 {
+            cell.textLabel?.text = tableViewData[indexPath.section].title
+        }
+        else {
+            cell.textLabel?.text = tableViewData[indexPath.section].sectionData[dataIndex]
+        }
+        
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
-        if tableView.cellForRow(at: indexPath)?.accessoryType == UITableViewCell.AccessoryType.checkmark
-        {
-            tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCell.AccessoryType.none
+        //let tmp = indexPath.row
+        if indexPath.row == 0{
+            if tableViewData[indexPath.section].opened == true {
+                tableViewData[indexPath.section].opened = false
+                let sections = IndexSet.init(integer: indexPath.section)
+                tableView.reloadSections(sections, with: .none)
+            }
+            else {
+                tableViewData[indexPath.section].opened = true
+                let sections = IndexSet.init(integer: indexPath.section)
+                tableView.reloadSections(sections, with: .none)                
+            }
         }
-        else
-        {
-            tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCell.AccessoryType.checkmark
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath)
-    {
-        if editingStyle == UITableViewCell.EditingStyle.delete
-        {
-            languages.remove(at: indexPath.row)
-            tableView.reloadData()
+        else {
+            if tableView.cellForRow(at: indexPath)?.accessoryType == UITableViewCell.AccessoryType.checkmark {
+                tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCell.AccessoryType.none
+            }
+            else {
+                
+                tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCell.AccessoryType.checkmark
+            }
         }
     }
     
@@ -75,6 +113,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                 }
             })
         }
+        
     }
     
     @IBAction func onSignoutTap(_ sender: Any) {
@@ -105,3 +144,4 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         self.dismiss(animated: true, completion: nil)
     }
 }
+
