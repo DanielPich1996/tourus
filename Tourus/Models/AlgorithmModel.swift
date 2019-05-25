@@ -110,6 +110,8 @@ class AlgorithmModel{
                 }
             }
         }
+        
+        callback(categoriesGrades)
     }
     
     func getAlgorithmNextPlace(_ location:String, _ callback: @escaping (Interaction) -> Void) {
