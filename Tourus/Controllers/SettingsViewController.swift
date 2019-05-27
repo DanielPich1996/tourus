@@ -12,19 +12,21 @@ struct cellData{
     var opened = Bool()
     var title = String()
     var sectionData = [String]()
+    var checked = [Bool]()
+    
+    
 }
 
+//class CheckableData {
+//    var title:String = ""
+//    var checked:Bool = false
+//}
 
 class SettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
     
-    
-    class CheckableData {
-        var title:String = ""
-        var checked:Bool = false
-    }
-    
-    
-    var tableViewData = [cellData(opened: false, title: "Choose", sectionData:["a","b","c","d"])]
+      //  var selectIndexPath: IndexPath!
+    var selectedcells = [String]()
+    var tableViewData = [cellData(opened: false, title: "Choose", sectionData:["a","b","c","d"], checked: [false,false,false,false])]
     
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -52,14 +54,38 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         }
         else {
             cell.textLabel?.text = tableViewData[indexPath.section].sectionData[dataIndex]
+            //cell.accessoryType = .checkmark
         }
         
         return cell
     }
+
+
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
+        // store titles of selected cells to selectedcells
+        let nowCell = tableView.cellForRow(at: indexPath)
+        let nowCellTitle = nowCell?.textLabel?.text
+        var titleRepeat = false
+        var showMark = false
+        
+        if(nowCellTitle != "Choose" && titleRepeat == false){
+            for a in selectedcells{
+                if (a ==  nowCellTitle){
+                    titleRepeat = true
+                }
+            }
+            if (titleRepeat == false){
+                self.selectedcells.append(nowCellTitle!)
+//                for n in selectedcells {
+//                    print(n)
+//                }
+            }
+        }
+        //
         //let tmp = indexPath.row
+        
         if indexPath.row == 0{
             if tableViewData[indexPath.section].opened == true {
                 tableViewData[indexPath.section].opened = false
@@ -69,19 +95,42 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             else {
                 tableViewData[indexPath.section].opened = true
                 let sections = IndexSet.init(integer: indexPath.section)
-                tableView.reloadSections(sections, with: .none)                
+                tableView.reloadSections(sections, with: .none)
             }
         }
         else {
-            if tableView.cellForRow(at: indexPath)?.accessoryType == UITableViewCell.AccessoryType.checkmark {
-                tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCell.AccessoryType.none
+            for b in selectedcells{
+                if nowCellTitle == b {
+                    showMark = true
+                }
             }
-            else {
-                
-                tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCell.AccessoryType.checkmark
+            
+            
+            if nowCell?.accessoryType == UITableViewCell.AccessoryType.checkmark {
+                nowCell?.accessoryType = UITableViewCell.AccessoryType.none
+            }
+            else if showMark == true {
+                //tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCell.AccessoryType.checkmark
+                nowCell?.accessoryType = UITableViewCell.AccessoryType.checkmark
             }
         }
     }
+    
+//     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: IndexPath) {
+//        //selectIndexPath.append(indexPath)
+//        let selectedCell = tableView.cellForRow(at: indexPath)
+//        print(selectedCell?.textLabel?.text)
+//
+//
+//    }
+//
+//    func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+//
+////        if let index = find(selectedIndexPaths, indexPath) {
+////            selectIndexPath.removeAtIndex(index)
+////        }
+//        
+//    }
     
     
     @IBOutlet var profileImage: UIImageView!
@@ -113,7 +162,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                 }
             })
         }
-        
+      
     }
     
     @IBAction func onSignoutTap(_ sender: Any) {
