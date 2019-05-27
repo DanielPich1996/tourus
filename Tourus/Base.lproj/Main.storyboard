@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="U5E-WO-Oco">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="fGu-52-kTo">
     <device id="retina6_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -641,6 +641,61 @@
             </objects>
             <point key="canvasLocation" x="-4184" y="369"/>
         </scene>
+        <!--Map View Controller-->
+        <scene sceneID="f0N-Sq-H2W">
+            <objects>
+                <viewController storyboardIdentifier="MapViewController" id="fGu-52-kTo" customClass="MapViewController" customModule="Tourus" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="AmQ-5A-bBE">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" showsPointsOfInterest="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wq9-jk-Fb2">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <connections>
+                                    <outlet property="delegate" destination="fGu-52-kTo" id="Og2-IQ-Zu1"/>
+                                </connections>
+                            </mapView>
+                            <view contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="7wO-yh-3Xw" userLabel="DirectionsView">
+                                <rect key="frame" x="0.0" y="44" width="414" height="27.666666666666671"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Directions" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UWF-mc-yqs" userLabel="DirectionsLabel">
+                                        <rect key="frame" x="5" y="5" width="404" height="17.666666666666668"/>
+                                        <fontDescription key="fontDescription" name="TrebuchetMS-Bold" family="Trebuchet MS" pointSize="15"/>
+                                        <color key="textColor" red="0.2427512500617082" green="0.34719869164502376" blue="0.39433296319796951" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.19994394593416737" green="0.30045345048772015" blue="0.47255710659898476" alpha="0.1495344606" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="UWF-mc-yqs" secondAttribute="trailing" constant="5" id="FAK-zj-eCk"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" id="NyK-zO-Fc2"/>
+                                    <constraint firstItem="UWF-mc-yqs" firstAttribute="leading" secondItem="7wO-yh-3Xw" secondAttribute="leading" constant="5" id="W5L-5U-jpc"/>
+                                    <constraint firstAttribute="bottom" secondItem="UWF-mc-yqs" secondAttribute="bottom" constant="5" id="c1J-Hj-T7P"/>
+                                    <constraint firstItem="UWF-mc-yqs" firstAttribute="top" secondItem="7wO-yh-3Xw" secondAttribute="top" constant="5" id="cDt-xD-fvm"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="wq9-jk-Fb2" firstAttribute="trailing" secondItem="OzR-TQ-3Ip" secondAttribute="trailing" id="RMX-wp-GZE"/>
+                            <constraint firstItem="wq9-jk-Fb2" firstAttribute="leading" secondItem="OzR-TQ-3Ip" secondAttribute="leading" id="Sa3-Rp-yeK"/>
+                            <constraint firstItem="wq9-jk-Fb2" firstAttribute="leading" secondItem="7wO-yh-3Xw" secondAttribute="leading" id="U8A-mX-q3q"/>
+                            <constraint firstItem="7wO-yh-3Xw" firstAttribute="top" secondItem="OzR-TQ-3Ip" secondAttribute="top" id="eKM-UQ-W3M"/>
+                            <constraint firstItem="wq9-jk-Fb2" firstAttribute="top" secondItem="AmQ-5A-bBE" secondAttribute="top" id="hXR-N9-FyJ"/>
+                            <constraint firstItem="wq9-jk-Fb2" firstAttribute="trailing" secondItem="7wO-yh-3Xw" secondAttribute="trailing" id="lWg-PA-RiM"/>
+                            <constraint firstAttribute="bottom" secondItem="wq9-jk-Fb2" secondAttribute="bottom" id="vs7-Hd-E9E"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="OzR-TQ-3Ip"/>
+                    </view>
+                    <connections>
+                        <outlet property="directionLabel" destination="UWF-mc-yqs" id="vU0-Hc-vtX"/>
+                        <outlet property="mapView" destination="wq9-jk-Fb2" id="FZn-Nw-zp2"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9do-01-QzU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3397.1014492753625" y="370.98214285714283"/>
+        </scene>
         <!--Login View Controller-->
         <scene sceneID="q74-iX-dAm">
             <objects>
@@ -776,4 +831,7 @@
         <image name="no image" width="180" height="152"/>
         <image name="settings" width="160" height="192"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="8qV-fg-oO5"/>
+    </inferredMetricsTieBreakers>
 </document>
