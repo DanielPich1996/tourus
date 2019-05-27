@@ -27,4 +27,6 @@ extension UIColor
     
     static var whiteSmokeColor:UIColor { return UIColor(red: 245.0/255.0, green: 245.0/255.0, blue: 245.0/255.0, alpha: 1.0) }
     static var lightBlueColor:UIColor { return UIColor(red: 0.0/255.0, green: 175.0/255.0, blue: 224.0/255.0, alpha: 1.0) }
+    
+    static var lightYellowColor:UIColor { return UIColor(red: 255.0/255.0, green: 240.0/255.0, blue: 198.0/255.0, alpha: 1.0) }
 }

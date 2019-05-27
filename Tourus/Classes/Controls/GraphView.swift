@@ -8,73 +8,44 @@
 
 import UIKit
 
-private struct Constants {
-    static let maxGraphPoints = 10
-    static let maxDegree = 360
-    static let cornerRadiusSize = CGSize(width: 8.0, height: 8.0)
-    static let margin: CGFloat = 25.0
-    static let topBorder: CGFloat = 35.0
-    static let bottomBorder: CGFloat = 25
-    static let colorAlpha: CGFloat = 0.3
-    static let circleDiameter: CGFloat = 10.0
-}
-
-class GraphData {
-    var name:String = ""
-    var value:Int = Constants.maxDegree / 2
-    var lat:Double = 0.0
-    var long:Double = 0.0
-    var isPopulate:Bool = false
-    var shape:UIBezierPath? = nil
-    var point:CGPoint? = nil
-
-    init() {
-        
-    }
-    
-    init(_place:Place, _value:Int) {
-        setData(_place: _place, _value: _value)
-    }
-    
-    func setData(_place:Place, _value:Int) {
-        name = _place.name
-        value = _value
-        lat = _place.location?.lat ?? 0
-        long = _place.location?.lng ?? 0
-        isPopulate = true
-    }
-}
-
 @IBDesignable class GraphView: UIView {
     private var tapGesture:UITapGestureRecognizer? = nil
-    var data = [GraphData]()
-    var popTip:PopTip? = nil
+    private var data = [GraphData]()
+    private var popTip:PopTip? = nil
     
     @IBInspectable var startColor: UIColor = .clear
     @IBInspectable var endColor: UIColor = .clear
     
 
     //managing the data array as a queue - first in last out
-    func addData(_ place:Place) {
+    func addData(_ story:InteractionStory) {
         
-        if data.count >= Constants.maxGraphPoints {
+        if data.count >= consts.graph.maxGraphPoints {
             data.removeFirst()
         }
         
         if let iterator = data.last {
             let lat1 = iterator.lat
             let long1 = iterator.long
-            let lat2 = place.location?.lat ?? 0
-            let long2 = place.location?.lng ?? 0
+            let lat2 = story.userLocation.coordinate.latitude
+            let long2 = story.userLocation.coordinate.longitude
             
             let degree = getBearingBetweenTwoPoints(lat1: lat1, long1: long1, lat2: lat2, long2: long2)
-            data.append(GraphData(_place: place, _value: Int(degree)))
+            data.append(GraphData(_story: story, _value: Int(degree)))
         }
         else {
-             data.append(GraphData(_place: place, _value: Constants.maxDegree / 2))
+             data.append(GraphData(_story: story, _value: consts.graph.maxDegree / 2))
         }
         
         setNeedsDisplay()
+    }
+    
+    func overrideData(_ stories:[InteractionStory]) {
+        //getting the first 10 stories and reverse the array
+        let firstStories = stories.prefix(10).reversed()
+        for story in firstStories {
+            self.addData(story)
+        }
     }
     
     override func draw(_ rect: CGRect) {
@@ -88,7 +59,7 @@ class GraphData {
             popTip?.hide()
             
             //calculate the x point
-            let margin = Constants.margin
+            let margin = consts.graph.margin
             let graphWidth = width - margin * 2 - 4
             let columnXPoint = { (column: Int) -> CGFloat in
                 //Calculate the gap between points
@@ -97,11 +68,11 @@ class GraphData {
             }
             
             // calculate the y point
-            let topBorder = Constants.topBorder
-            let bottomBorder = Constants.bottomBorder
+            let topBorder = consts.graph.topBorder
+            let bottomBorder = consts.graph.bottomBorder
             let graphHeight = height - topBorder - bottomBorder
             let columnYPoint = { (graphPoint: Int) -> CGFloat in
-                let y = CGFloat(graphPoint) / CGFloat(Constants.maxDegree) * graphHeight
+                let y = CGFloat(graphPoint) / CGFloat(consts.graph.maxDegree) * graphHeight
                 return graphHeight + topBorder - y // Flip the graph
             }
             
@@ -127,13 +98,13 @@ class GraphData {
             for i in 0..<data.count {
                 
                 var point = CGPoint(x: columnXPoint(i), y: columnYPoint(data[i].value))
-                point.x -= Constants.circleDiameter / 2
-                point.y -= Constants.circleDiameter / 2
+                point.x -= consts.graph.circleDiameter / 2
+                point.y -= consts.graph.circleDiameter / 2
                 
                 //a bigger circle for touch detection
-                let backCircle = drawCircle(point, Constants.circleDiameter*2)
+                let backCircle = drawCircle(point, consts.graph.circleDiameter*2)
                 //the actual circle
-                let circle = drawCircle(point, Constants.circleDiameter)
+                let circle = drawCircle(point, consts.graph.circleDiameter)
                 
                 //update the shape and point in the data set
                 data[i].shape = backCircle
@@ -166,9 +137,14 @@ class GraphData {
     private func hitTest(tapLocation:CGPoint) {
         
         for dataObj in data {
+            
             if dataObj.isPopulate && dataObj.shape != nil && dataObj.shape!.contains(tapLocation) {
-                let rect = CGRect(origin: dataObj.point!, size: CGSize(width: Constants.circleDiameter, height: Constants.circleDiameter))
-                popTip?.show(text: dataObj.name, direction: .down, maxWidth: 200, in: self, from: rect)
+                
+                let rect = CGRect(origin: dataObj.point!, size: CGSize(width: consts.graph.circleDiameter, height: consts.graph.circleDiameter))
+                let attributedPopText = getAttributedPopText(dataObj)
+                
+                popTip?.show(attributedText: attributedPopText, direction: .down, maxWidth: 200, in: self, from: rect, duration: 30)
+                
                 break
             }
         }
@@ -210,6 +186,39 @@ class GraphData {
         return shape
     }
     
+    private func getAttributedPopText(_ data:GraphData) -> NSAttributedString{
+        
+        let subText = data.getSubText()
+        let text = data.name + "\n" + subText
+        
+        let subTextCount = subText.count
+        let mainTextCount = text.count - subTextCount
+        
+        let attributedString = NSMutableAttributedString(string: text)
+        
+        //first line - main text
+        let paragraphStyle0 = NSMutableParagraphStyle()
+        paragraphStyle0.alignment = .center
+        let attributes0: [NSAttributedString.Key : Any] = [
+            .font: UIFont(name: "HelveticaNeue", size: 13)!,
+            .foregroundColor: UIColor.white,
+            .paragraphStyle: paragraphStyle0
+        ]
+        attributedString.addAttributes(attributes0, range: NSRange(location: 0, length: mainTextCount))
+        
+        //sec line - sub text
+        let paragraphStyle2 = NSMutableParagraphStyle()
+        paragraphStyle2.alignment = .center
+        let attributes2: [NSAttributedString.Key : Any] = [
+            .font: UIFont(name: "HelveticaNeue", size: 10)!,
+            .foregroundColor: UIColor.lightYellowColor,
+            .paragraphStyle: paragraphStyle2
+        ]
+        attributedString.addAttributes(attributes2, range: NSRange(location: mainTextCount, length: subTextCount))
+        
+        return attributedString
+    }
+    
     private func initialize() {
         
         if popTip == nil {
@@ -231,10 +240,50 @@ class GraphData {
         
         //set points if not exist
         if data.count == 0 {
-            for _ in 0..<Constants.maxGraphPoints {
+            for _ in 0..<consts.graph.maxGraphPoints {
                 data.append(GraphData())
             }
         }
     }
+    
+    
+    class GraphData {
+        var name:String = ""
+        var date:Date? = nil
+        var value:Int = consts.graph.maxDegree / 2
+        var lat:Double = 0.0
+        var long:Double = 0.0
+        var isPopulate:Bool = false
+        var shape:UIBezierPath? = nil
+        var point:CGPoint? = nil
+        
+        init() {
+            
+        }
+        
+        init(_story:InteractionStory, _value:Int) {
+            setData(_story: _story, _value: _value)
+        }
+        
+        func setData(_story:InteractionStory, _value:Int) {
+            name = _story.placeNmae ?? ""
+            date = _story.date
+            value = _value
+            lat = _story.userLocation.coordinate.latitude
+            long = _story.userLocation.coordinate.longitude
+            isPopulate = true
+        }
+        
+        func getSubText() -> String {
+            if let date = date {
+                let now = Date()
+                let formatter = DateComponentsFormatter()
+                formatter.allowedUnits = [.day, .weekOfMonth, .hour, .minute]
+                formatter.unitsStyle = .full
+                return formatter.string(from: date, to: now)! + " ago"
+            }
+            
+            return ""
+        }
+    }
 }
-
