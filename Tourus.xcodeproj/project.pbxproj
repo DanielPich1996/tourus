@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		3436C34B12530129A0A53615 /* Pods_TourusTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69E149F3742025E8D629FDF0 /* Pods_TourusTests.framework */; };
 		422F9A4484FE7EBADD89A4A1 /* Pods_TourusUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 061A154EA91F4A4ADE7EC42F /* Pods_TourusUITests.framework */; };
+		84240359229C463B00F897A4 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84240358229C463B00F897A4 /* MapViewController.swift */; };
+		8424035B229C487600F897A4 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8424035A229C487600F897A4 /* MapKit.framework */; };
 		842F902B22416C8600003932 /* OptionSqlExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842F902A22416C8600003932 /* OptionSqlExtension.swift */; };
 		842F902F2241878500003932 /* org-tourus-acb4d-options.json in Resources */ = {isa = PBXBuildFile; fileRef = 842F902D2241878500003932 /* org-tourus-acb4d-options.json */; };
 		843F5E5921DD55440098FA3E /* FirebaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843F5E5821DD55440098FA3E /* FirebaseModel.swift */; };
@@ -79,6 +81,8 @@
 		061A154EA91F4A4ADE7EC42F /* Pods_TourusUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TourusUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BEDB67B36EF30DACBDB381F /* Pods-TourusTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TourusTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TourusTests/Pods-TourusTests.debug.xcconfig"; sourceTree = "<group>"; };
 		69E149F3742025E8D629FDF0 /* Pods_TourusTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TourusTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		84240358229C463B00F897A4 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		8424035A229C487600F897A4 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		842F902A22416C8600003932 /* OptionSqlExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionSqlExtension.swift; sourceTree = "<group>"; };
 		842F902D2241878500003932 /* org-tourus-acb4d-options.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "org-tourus-acb4d-options.json"; sourceTree = "<group>"; };
 		843F5E5821DD55440098FA3E /* FirebaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseModel.swift; sourceTree = "<group>"; };
@@ -142,6 +146,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8424035B229C487600F897A4 /* MapKit.framework in Frameworks */,
 				F2DC9ACDC3D5861E2EE851B3 /* Pods_Tourus.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -168,6 +173,7 @@
 		43149C8A1ADE4A2878B0249F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8424035A229C487600F897A4 /* MapKit.framework */,
 				94A8D8BCB1BF426C538DA8AE /* Pods_Tourus.framework */,
 				69E149F3742025E8D629FDF0 /* Pods_TourusTests.framework */,
 				061A154EA91F4A4ADE7EC42F /* Pods_TourusUITests.framework */,
@@ -222,6 +228,7 @@
 				84DAFA3E21DEB462009DAC2E /* MainViewController.swift */,
 				8449C6EF21E14093002A6AF6 /* SettingsViewController.swift */,
 				84690E11229821E2000959A9 /* MoreInfoViewController.swift */,
+				84240358229C463B00F897A4 /* MapViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -440,6 +447,14 @@
 				TargetAttributes = {
 					84D2D44221CE6AAC004524D3 = {
 						CreatedOnToolsVersion = 10.1;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					84D2D45621CE6AAE004524D3 = {
 						CreatedOnToolsVersion = 10.1;
@@ -626,6 +641,7 @@
 				843F5E5F21DD59C60098FA3E /* NotificationModel.swift in Sources */,
 				84690E1E22984DEC000959A9 /* RoundUIImageView.swift in Sources */,
 				84690E1822982BCB000959A9 /* RoundUIView.swift in Sources */,
+				84240359229C463B00F897A4 /* MapViewController.swift in Sources */,
 				843F5E5B21DD58B80098FA3E /* MainModel.swift in Sources */,
 				849CA33B226F433900C5DC55 /* GraphView.swift in Sources */,
 				842F902B22416C8600003932 /* OptionSqlExtension.swift in Sources */,
