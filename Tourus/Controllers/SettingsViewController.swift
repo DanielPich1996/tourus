@@ -12,21 +12,15 @@ struct cellData{
     var opened = Bool()
     var title = String()
     var sectionData = [String]()
-    var checked = [Bool]()
     
     
 }
-
-//class CheckableData {
-//    var title:String = ""
-//    var checked:Bool = false
-//}
 
 class SettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
     
       //  var selectIndexPath: IndexPath!
     var selectedcells = [String]()
-    var tableViewData = [cellData(opened: false, title: "Choose", sectionData:["a","b","c","d"], checked: [false,false,false,false])]
+    var tableViewData = [cellData(opened: false, title: "Choose", sectionData:["a","b","c","d"])]
     
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -105,7 +99,6 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                 }
             }
             
-            
             if nowCell?.accessoryType == UITableViewCell.AccessoryType.checkmark {
                 nowCell?.accessoryType = UITableViewCell.AccessoryType.none
             }
@@ -116,21 +109,33 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         }
     }
     
-//     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: IndexPath) {
-//        //selectIndexPath.append(indexPath)
-//        let selectedCell = tableView.cellForRow(at: indexPath)
-//        print(selectedCell?.textLabel?.text)
-//
-//
-//    }
-//
-//    func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
-//
-////        if let index = find(selectedIndexPaths, indexPath) {
-////            selectIndexPath.removeAtIndex(index)
-////        }
-//        
-//    }
+    func tableView(_ tableView: UITableView, didDeSelectRowAt indexPath: IndexPath){
+        // store titles of selected cells to selectedcells
+        let nowCell = tableView.cellForRow(at: indexPath)
+        let nowCellTitle = nowCell?.textLabel?.text
+        var titleRepeat = false
+        
+        if(nowCellTitle != "Choose" && titleRepeat == false){
+            for a in selectedcells{
+                if (a ==  nowCellTitle){
+                    titleRepeat = true
+                }
+            }
+            if (titleRepeat == true){
+                //To Do
+                
+                
+                //self.selectedcells.remove(at: 0)
+                //                for n in selectedcells {
+                //                    print(n)
+                //                }
+            }
+        }
+        //
+        //let tmp = indexPath.row
+        
+        
+    }
     
     
     @IBOutlet var profileImage: UIImageView!
