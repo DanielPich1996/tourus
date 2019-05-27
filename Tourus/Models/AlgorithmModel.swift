@@ -9,6 +9,7 @@
 
 import Foundation
 import UIKit
+import CoreLocation
 
 class AlgorithmModel{
     private let minSupport = 0
@@ -22,6 +23,15 @@ class AlgorithmModel{
     private func updateHistoryData(){
         //30min time
     }
+    
+    // KNN weights constants
+    
+    private let distDeltaWeight = 1
+    private let timeDeltaWeight = 1
+    private let dayInWeekWeight = 1
+    private let monthDeltaWeight = 1
+    private let positiveCtgryWeight = 1
+    private let negativeCtgryWeight = -1
     
     private func updateCandidateSet(_ complition: @escaping ([String]?) -> Void){
         MainModel.instance.getCurrentUserHistory { [weak self] (currUserHistory) in
@@ -247,6 +257,29 @@ class AlgorithmModel{
         
         return genereteTable[lastFreqCounts.index(of: lastFreqCounts.max()!)!]
     }
+    
+    
+    
+    func GroupInteractionsByUser(_ currUserLocation:CLLocation, _ callback: @escaping ([String:[InteractionStory]]) -> Void) {
+        MainModel.instance.getInteractionsStories(currUserLocation, {(interactios:[InteractionStory]) in
+            var interactionsByUser = [String:[InteractionStory]]()
+            
+            if interactios.count > 0 {
+                for story in interactios {
+                    if interactionsByUser[story.userID] == nil {
+                        interactionsByUser[story.userID] = [InteractionStory]()
+                    }
+                    
+                    interactionsByUser[story.userID]?.append(story)
+                }
+            }
+            
+            callback(interactionsByUser)
+        })
+    }
+    
+    
+    
 }
 
 

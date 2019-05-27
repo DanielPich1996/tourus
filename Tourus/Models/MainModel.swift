@@ -270,4 +270,14 @@ class MainModel {
     func getInteractionsStories(_ currUserLocation:CLLocation, _ callback: @escaping ([InteractionStory]) -> Void){
         firebaseModel.getInteractionsStories(currUserLocation, callback)
     }
+    
+    func getUserInteractionStories(_ callback: @escaping ([InteractionStory]) -> Void) {
+        firebaseModel.getUserInteractionStories(callback)
+    }
+    
+    //temp to check
+//    func GroupInteractionsByUser(_ currUserLocation:CLLocation, _ callback: @escaping ([String:[InteractionStory]]) -> Void) {
+//        algorithmModel.GroupInteractionsByUser(currUserLocation, callback)
+//    }
+    
 }

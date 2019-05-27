@@ -217,6 +217,23 @@ enum OptionType : String {
         }
     }
     
+    var index : Int {
+        switch self {
+        case .accept:
+            return 1
+        case .decline:
+            return 2
+        case .negative:
+            return 3
+        case .neutral:
+            return 4
+        case .opinionless:
+            return 5
+        case .additional:
+            return 6
+        }
+    }
+    
     var defaultString : String {
         switch self {
         case .accept:
