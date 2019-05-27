@@ -67,13 +67,30 @@ class MapViewController: UIViewController {
                 self.mapView.addOverlay(circle)
             }
             
-            let initialMessage = "In \(self.steps[0].distance) meters, \(self.steps[0].instructions)"
-            self.directionLabel.text = initialMessage
-            let speechUtterance = AVSpeechUtterance(string: initialMessage)
-            self.speechSynthesizer.speak(speechUtterance)
-            
+            self.setDirections(self.steps[0])
             self.stepCounter += 1
         }
+    }
+    
+    func getDirectionsFormat(_ step:MKRoute.Step) -> String {
+        
+        let distanceInt = Int(step.distance)
+        if step.instructions.isEmpty {
+            return "Go \(distanceInt) meters"
+        } else {
+            return "In \(distanceInt) meters \(step.instructions)"
+        }
+    }
+    
+    func setDirections(_ step:MKRoute.Step) {
+        let directions = getDirectionsFormat(step)
+        setDirections(directions)
+    }
+    
+    func setDirections(_ directions:String) {
+        self.directionLabel.text = directions
+        let speechUtterance = AVSpeechUtterance(string: directions)
+        self.speechSynthesizer.speak(speechUtterance)
     }
 }
 
@@ -98,16 +115,13 @@ extension MapViewController : CLLocationManagerDelegate {
         
         if stepCounter < steps.count {
             let currentStep = steps[stepCounter]
-            let initialMessage = "In \(self.steps[stepCounter].distance) meters, \(self.steps[stepCounter].instructions)"
-            self.directionLabel.text = initialMessage
+            self.setDirections(currentStep)
         } else {
             //arrived
             let message = "Arrived at destination"
-            directionLabel.text = message
-            
-            let speechUtterance = AVSpeechUtterance(string: message)
-            self.speechSynthesizer.speak(speechUtterance)
+            setDirections(message)
             stepCounter = 0
+            //remove regions
             self.locationManager.monitoredRegions.forEach({ self.locationManager.stopMonitoring(for: $0)})
         }
     }

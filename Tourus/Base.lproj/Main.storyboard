@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="fGu-52-kTo">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="U5E-WO-Oco">
     <device id="retina6_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -656,7 +656,7 @@
                                 </connections>
                             </mapView>
                             <view contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="7wO-yh-3Xw" userLabel="DirectionsView">
-                                <rect key="frame" x="0.0" y="44" width="414" height="27.666666666666671"/>
+                                <rect key="frame" x="0.0" y="814.33333333333337" width="414" height="27.666666666666629"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Directions" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UWF-mc-yqs" userLabel="DirectionsLabel">
                                         <rect key="frame" x="5" y="5" width="404" height="17.666666666666668"/>
@@ -677,10 +677,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="OzR-TQ-3Ip" firstAttribute="bottom" secondItem="7wO-yh-3Xw" secondAttribute="bottom" constant="20" id="Dz1-so-epq"/>
                             <constraint firstItem="wq9-jk-Fb2" firstAttribute="trailing" secondItem="OzR-TQ-3Ip" secondAttribute="trailing" id="RMX-wp-GZE"/>
                             <constraint firstItem="wq9-jk-Fb2" firstAttribute="leading" secondItem="OzR-TQ-3Ip" secondAttribute="leading" id="Sa3-Rp-yeK"/>
                             <constraint firstItem="wq9-jk-Fb2" firstAttribute="leading" secondItem="7wO-yh-3Xw" secondAttribute="leading" id="U8A-mX-q3q"/>
-                            <constraint firstItem="7wO-yh-3Xw" firstAttribute="top" secondItem="OzR-TQ-3Ip" secondAttribute="top" id="eKM-UQ-W3M"/>
                             <constraint firstItem="wq9-jk-Fb2" firstAttribute="top" secondItem="AmQ-5A-bBE" secondAttribute="top" id="hXR-N9-FyJ"/>
                             <constraint firstItem="wq9-jk-Fb2" firstAttribute="trailing" secondItem="7wO-yh-3Xw" secondAttribute="trailing" id="lWg-PA-RiM"/>
                             <constraint firstAttribute="bottom" secondItem="wq9-jk-Fb2" secondAttribute="bottom" id="vs7-Hd-E9E"/>
