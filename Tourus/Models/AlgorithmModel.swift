@@ -25,13 +25,17 @@ class AlgorithmModel{
     }
     
     // KNN weights constants
+    private let distDeltaWeight = 1.0
+    private let timeDeltaWeight = 1.0
+    private let dayInWeekWeight = 1.0
+    private let monthDeltaWeight = 1.0
+    private let positiveCtgryWeight = 1.0
+    private let negativeCtgryWeight = -1.0
     
-    private let distDeltaWeight = 1
-    private let timeDeltaWeight = 1
-    private let dayInWeekWeight = 1
-    private let monthDeltaWeight = 1
-    private let positiveCtgryWeight = 1
-    private let negativeCtgryWeight = -1
+    init() {
+        candidateSet = []
+        updateHistoryData()
+    }
     
     private func updateCandidateSet(_ complition: @escaping ([String]?) -> Void){
         MainModel.instance.getCurrentUserHistory { [weak self] (currUserHistory) in
@@ -53,10 +57,61 @@ class AlgorithmModel{
         }
     }
     
+    func distanceGradeCalculator(distanceInMeters: Int, topGrade: Int, interestingKilometers: Double) -> Double{
+        return (Double(topGrade) - ((Double(distanceInMeters)/(interestingKilometers * 1000)) * Double(topGrade)))
+    }
     
-    init() {
-        candidateSet = []
-        updateHistoryData()
+    func timeGradeCalculator(candidatesDate: Date, topGrade: Int, interestingHourInterval: Int) -> Double{
+        let candidateHour = Calendar.current.component(.hour, from: candidatesDate)
+        let currHour = Calendar.current.component(.hour, from: Date())
+        
+        return(Double(topGrade) - (Double(abs(candidateHour - currHour))/Double(interestingHourInterval)) * Double(topGrade))
+    }
+    
+    func dayInWeekGradeCalculator(candidatesDate: Date, topGrade: Int, interestingDaysInterval: Int) -> Double{
+        let candidateDay = Calendar.current.component(.weekday, from: candidatesDate)
+        let currDay = Calendar.current.component(.weekday, from: Date())
+        let dayDelta = abs(currDay - candidateDay)
+        
+        return(Double(topGrade) - (Double(dayDelta)/Double(interestingDaysInterval)) * Double(topGrade))
+    }
+    
+    func monthGradeCalculator(candidatesDate: Date, topGrade: Int, interestingMonthsInterval: Int) -> Double{
+        let candidateMonth = Calendar.current.component(.month, from: candidatesDate)
+        let currMonth = Calendar.current.component(.month, from: Date())
+        var monthDelta = abs(currMonth - candidateMonth)
+        
+        if (monthDelta > 6){
+            monthDelta = 12 - monthDelta
+        }
+        
+        return(Double(topGrade) - (Double(monthDelta)/Double(interestingMonthsInterval)) * Double(topGrade))
+    }
+    
+    func knnAlgorithm(_ usersStory: [String:[InteractionStory]],_ places: [Place], _ callback: @escaping ([String:Double]) -> Void){
+        var categoriesGrades = [String:Double]()
+        
+        for userData in usersStory{
+            for userStory in userData.value{
+                for category in userStory.categories{
+                    let currAnswerWeight = userStory.answer == 1 ? positiveCtgryWeight : negativeCtgryWeight
+                    let currDataGrade = (distanceGradeCalculator(distanceInMeters: userStory.distanceBetweenUsers ?? 5000,
+                                                                topGrade: 10, interestingKilometers: 5) * distDeltaWeight +
+                                         timeGradeCalculator(candidatesDate: userStory.date, topGrade: 10, interestingHourInterval: 6) * timeDeltaWeight +
+                                         dayInWeekGradeCalculator(candidatesDate: userStory.date, topGrade: 10, interestingDaysInterval: 6) * dayInWeekWeight +
+                                         monthGradeCalculator(candidatesDate: userStory.date, topGrade: 10, interestingMonthsInterval: 6) * monthDeltaWeight) * currAnswerWeight
+                    
+                    if (categoriesGrades.keys.contains(category)){
+                        categoriesGrades[category]! += currDataGrade
+                    }
+                    else{
+                        categoriesGrades.updateValue(currDataGrade, forKey: category)
+                    }
+                }
+            }
+        }
+        
+        callback(categoriesGrades)
     }
     
     func getAlgorithmNextPlace(_ location:String, _ callback: @escaping (Interaction) -> Void) {
