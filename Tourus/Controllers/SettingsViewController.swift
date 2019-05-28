@@ -2,7 +2,7 @@
 //  SettingsViewController.swift
 //  Tourus
 //
-//  Created by admin on 05/01/2019.
+//  Created by Alice on 05/01/2019.
 //  Copyright © 2019 Tourus. All rights reserved.
 //
 
@@ -12,8 +12,6 @@ struct cellData{
     var opened = Bool()
     var title = String()
     var sectionData = [String]()
-    
-    
 }
 
 class SettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
@@ -68,6 +66,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             for a in selectedcells{
                 if (a ==  nowCellTitle){
                     titleRepeat = true
+                    break
                 }
             }
             if (titleRepeat == false){
@@ -119,6 +118,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             for a in selectedcells{
                 if (a ==  nowCellTitle){
                     titleRepeat = true
+                
                 }
             }
             if (titleRepeat == true){
