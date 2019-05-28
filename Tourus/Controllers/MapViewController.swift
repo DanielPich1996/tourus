@@ -24,10 +24,9 @@ class MapViewController: UIViewController {
     var long:Double? = nil
     
     var steps = [MKRoute.Step]()
+    var route:MKRoute? = nil
     let speechSynthesizer = AVSpeechSynthesizer()
     
-    var stepCounter = 0
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -56,7 +55,8 @@ class MapViewController: UIViewController {
         directions.calculate { (response, _) in
             guard let response = response else { return }
             guard let primaryRoute = response.routes.first else { return }
-        
+            
+            self.route = primaryRoute
             //add a polyline path to the map
             self.mapView.addOverlay(primaryRoute.polyline)
             
@@ -70,7 +70,7 @@ class MapViewController: UIViewController {
                 print(step.instructions)
                 print(step.distance)
                 
-                let region = CLCircularRegion(center: step.polyline.coordinate, radius: 2, identifier: "\(i)")
+                let region = CLCircularRegion(center: step.polyline.coordinate, radius: 10, identifier: "\(i)")
                 
                 self.locationManager.startMonitoring(for: region)
                 let circle = MKCircle(center: region.center, radius: region.radius)
@@ -79,7 +79,6 @@ class MapViewController: UIViewController {
             
             self.setArrivalData(primaryRoute)
             self.setDirections(self.steps[0])
-            self.stepCounter += 1
         }
     }
     
@@ -105,11 +104,11 @@ class MapViewController: UIViewController {
     }
     
     func setArrivalData(_ route:MKRoute) {
-        
-        let distance = Int(route.distance)
+
+        let distance = String(format: "%.1f Km", route.distance/1000)
         let travelTime = route.expectedTravelTime.toDisplayString()
-        
-        ArrivalLabel.text = "total of \(distance)m to arrive in \(travelTime)"
+
+        ArrivalLabel.text = "\(distance) away" + "\n" + "arrive in \(travelTime)"
     }
 }
 
@@ -118,31 +117,33 @@ extension MapViewController : CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
        
         manager.stopUpdatingLocation()
-        guard let currentLocation = locations.first else { return }
         
-        
-        if lat != nil && long != nil {
+        if route == nil {
+            guard let currentLocation = locations.first else { return }
             
-            currentCoordinate = currentLocation.coordinate
-            //follows the user's direction by the phone rotating
-            mapView.userTrackingMode = .followWithHeading
-            
-            getDirections(to: MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: lat!, longitude: long!))))
-        } else {
-            //error - no lat nor long were found
-            self.stopNavigation()
-            self.dismissAndGoToMain()
+            if lat != nil && long != nil {
+                
+                currentCoordinate = currentLocation.coordinate
+                //follows the user's direction by the phone rotating
+                mapView.userTrackingMode = .followWithHeading
+                
+                getDirections(to: MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: lat!, longitude: long!))))
+            } else {
+                //error - no lat nor long were found
+                self.stopNavigation()
+                self.dismissAndGoToMain()
+            }
         }
     }
     
     func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
 
-        stepCounter += 1
         let stepIndex = Int(region.identifier)
+        if stepIndex == 0 { return } //we've already directed the user by the first step
         
         if stepIndex != nil {
             let currentStep = steps[stepIndex!]
-            if stepIndex! < steps.count-1 {
+            if stepIndex! < (steps.count-1) {
                 setDirections(currentStep)
             } else {
                 //arrived
@@ -230,10 +231,14 @@ extension TimeInterval {
         
         //let ms = Int((self.truncatingRemainder(dividingBy: 1)) * 1000)
         //let seconds = time % 60
-        let minutes = (time / 60) % 60
-        let hours = (time / 3600)
+        let minutes = Int((time / 60) % 60)
+        let hours = Int(time / 3600)
         
-        return String(format: "%0.2d:%0.2d",hours,minutes)
+        var message = String(format: "%.1d Minutes", minutes)
+        if hours > 0 {
+            message = String(format: "%.1d:%02d Hours", hours, minutes)
+        }
         
+        return message
     }
 }
