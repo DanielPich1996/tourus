@@ -260,25 +260,30 @@ class AlgorithmModel{
     
     
     
-    func GroupInteractionsByUser(_ currUserLocation:CLLocation, _ callback: @escaping ([String:[InteractionStory]]) -> Void) {
-        MainModel.instance.getInteractionsStories(currUserLocation, {(interactios:[InteractionStory]) in
-            var interactionsByUser = [String:[InteractionStory]]()
+    func GroupInteractionsByUser(_ interactions:[InteractionStory]) ->[String:[InteractionStory]] {
+        
+        var interactionsByUser = [String:[InteractionStory]]()
             
-            if interactios.count > 0 {
-                for story in interactios {
-                    if interactionsByUser[story.userID] == nil {
-                        interactionsByUser[story.userID] = [InteractionStory]()
-                    }
-                    
-                    interactionsByUser[story.userID]?.append(story)
+        if interactions.count > 0 {
+            for story in interactions {
+                if interactionsByUser[story.userID] == nil {
+                    interactionsByUser[story.userID] = [InteractionStory]()
                 }
+                    
+                interactionsByUser[story.userID]?.append(story)
             }
+        }
+        
+        return(interactionsByUser)
+    }
+    
+    func GatCategoryByKnn(_ currUserLocation:CLLocation, _ callback: @escaping ([String:[InteractionStory]]) -> Void){
+        MainModel.instance.getInteractionsStories(currUserLocation, {(interactions:[InteractionStory]) in
+            let interactionsByUser = self.GroupInteractionsByUser(interactions)
             
             callback(interactionsByUser)
         })
     }
-    
-    
     
 }
 

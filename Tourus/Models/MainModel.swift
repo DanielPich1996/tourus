@@ -252,8 +252,33 @@ class MainModel {
     }
     
     func fetchNearbyPlaces(location: String, radius:Int = 3000, type:String?=nil, isOpen:Bool=true, callback: @escaping ([Place]?, String?) -> Void){
-        placesModel.fetchGoogleNearbyPlaces(location: location ,radius: radius, type:type, isOpen:isOpen, callback: callback);
+        var placesBack = [Place]()
+        
+        placesModel.fetchGoogleNearbyPlaces(location: location ,radius: radius, type:type, isOpen:isOpen, callback: {(places, token, err) in
+            if(err == nil){
+                
+                placesBack += places!
+                
+                if token != nil{
+                    self.placesModel.fetchMoreGoogleNearbyPlaces(nextPgeToken: token!, callback: { (morePlaces, token, err) in
+                        if (err == nil){
+                            placesBack += morePlaces!
+                        }
+                        callback(placesBack, nil)
+                    })
+                }else{
+                    callback(placesBack, nil)
+                }
+            }
+            else{
+                callback(places, err)
+            }
+        });
     }
+    
+//    func fetchMoreNearbyPlaces(token: String, callback: @escaping ([Place]?, String?, String?) -> Void){
+//        placesModel.fetchMoreGoogleNearbyPlaces(nextPgeToken: token, callback: callback)
+//    }
     
     func navigate(_ latitude:String, _ longitude:String) {
         placesModel.navigate(latitude, longitude)

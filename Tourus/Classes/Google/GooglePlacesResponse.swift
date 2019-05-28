@@ -9,6 +9,7 @@
 import Foundation
 
 class GooglePlacesResponse : Decodable {
+    let next_page_token: String?
     let status: String
     let results: [GooglePlace]
 }
