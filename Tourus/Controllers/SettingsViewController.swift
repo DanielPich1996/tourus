@@ -15,131 +15,12 @@ struct cellData{
 }
 
 class SettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
-    
-      //  var selectIndexPath: IndexPath!
-    var selectedcells = [String]()
-    var tableViewData = [cellData(opened: false, title: "Choose", sectionData:["a","b","c","d"])]
-    
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return tableViewData.count
-    }
-    
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
-    {
-        if tableViewData[section].opened == true {
-            return tableViewData[section].sectionData.count + 1
-        }
-        else{
-            return 1
-        }
-    }
 
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
-    {
-        let dataIndex = indexPath.row - 1
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell") else {return UITableViewCell()}
-        
-        if indexPath.row == 0 {
-            cell.textLabel?.text = tableViewData[indexPath.section].title
-        }
-        else {
-            cell.textLabel?.text = tableViewData[indexPath.section].sectionData[dataIndex]
-            //cell.accessoryType = .checkmark
-        }
-        
-        return cell
-    }
-
-
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
-    {
-        // store titles of selected cells to selectedcells
-        let nowCell = tableView.cellForRow(at: indexPath)
-        let nowCellTitle = nowCell?.textLabel?.text
-        var titleRepeat = false
-        var showMark = false
-        
-        if(nowCellTitle != "Choose" && titleRepeat == false){
-            for a in selectedcells{
-                if (a ==  nowCellTitle){
-                    titleRepeat = true
-                    break
-                }
-            }
-            if (titleRepeat == false){
-                self.selectedcells.append(nowCellTitle!)
-//                for n in selectedcells {
-//                    print(n)
-//                }
-            }
-        }
-        //
-        //let tmp = indexPath.row
-        
-        if indexPath.row == 0{
-            if tableViewData[indexPath.section].opened == true {
-                tableViewData[indexPath.section].opened = false
-                let sections = IndexSet.init(integer: indexPath.section)
-                tableView.reloadSections(sections, with: .none)
-            }
-            else {
-                tableViewData[indexPath.section].opened = true
-                let sections = IndexSet.init(integer: indexPath.section)
-                tableView.reloadSections(sections, with: .none)
-            }
-        }
-        else {
-            for b in selectedcells{
-                if nowCellTitle == b {
-                    showMark = true
-                }
-            }
-            
-            if nowCell?.accessoryType == UITableViewCell.AccessoryType.checkmark {
-                nowCell?.accessoryType = UITableViewCell.AccessoryType.none
-            }
-            else if showMark == true {
-                //tableView.cellForRow(at: indexPath)?.accessoryType = UITableViewCell.AccessoryType.checkmark
-                nowCell?.accessoryType = UITableViewCell.AccessoryType.checkmark
-            }
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, didDeSelectRowAt indexPath: IndexPath){
-        // store titles of selected cells to selectedcells
-        let nowCell = tableView.cellForRow(at: indexPath)
-        let nowCellTitle = nowCell?.textLabel?.text
-        var titleRepeat = false
-        
-        if(nowCellTitle != "Choose" && titleRepeat == false){
-            for a in selectedcells{
-                if (a ==  nowCellTitle){
-                    titleRepeat = true
-                
-                }
-            }
-            if (titleRepeat == true){
-                //To Do
-                
-                
-                //self.selectedcells.remove(at: 0)
-                //                for n in selectedcells {
-                //                    print(n)
-                //                }
-            }
-        }
-        //
-        //let tmp = indexPath.row
-        
-        
-    }
-    
-    
     @IBOutlet var profileImage: UIImageView!
     @IBOutlet var userNameLabel: UILabel!
+    
+    var selectedcells = [String]()
+    var tableViewData = [cellData(opened: false, title: "Choose", sectionData:["a","b","c","d"])]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -167,7 +48,6 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                 }
             })
         }
-      
     }
     
     @IBAction func onSignoutTap(_ sender: Any) {
@@ -197,5 +77,91 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     @IBAction func onBackTap(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
+    
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        
+        return tableViewData.count
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        if tableViewData[section].opened == true {
+            return tableViewData[section].sectionData.count + 1
+        }
+        else{
+            return 1
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
+    {
+        let dataIndex = indexPath.row - 1
+        let cell:CategoryTableViewCell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath) as! CategoryTableViewCell
+        
+        var category = tableViewData[indexPath.section].title
+        var checked = false
+        
+        if indexPath.row != 0 {
+            
+            category = tableViewData[indexPath.section].sectionData[dataIndex]
+            checked = selectedcells.contains(category)
+        }
+        
+        cell.setCellData(category, checked)
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
+    {
+        // store titles of selected cells to selectedcells
+        let nowCell = tableView.cellForRow(at: indexPath) as! CategoryTableViewCell
+        
+        if !nowCell.category.isEmpty {
+            if(nowCell.category != tableViewData[0].title) {
+                
+                let categoryExists = selectedcells.contains(nowCell.category)
+                
+                if (!categoryExists) {
+                    self.selectedcells.append(nowCell.category)
+                }
+            }
+            
+            if indexPath.row == 0 {
+                if tableViewData[indexPath.section].opened == true {
+                    tableViewData[indexPath.section].opened = false
+                    let sections = IndexSet.init(integer: indexPath.section)
+                    tableView.reloadSections(sections, with: .none)
+                }
+                else {
+                    tableViewData[indexPath.section].opened = true
+                    let sections = IndexSet.init(integer: indexPath.section)
+                    tableView.reloadSections(sections, with: .none)
+                }
+            }
+            else {
+                nowCell.setCellData(nowCell.category, true)
+            }
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath){
+        // store titles of selected cells to selectedcells
+        let nowCell = tableView.cellForRow(at: indexPath) as! CategoryTableViewCell
+        
+        if !nowCell.category.isEmpty {
+            if(nowCell.category != tableViewData[0].title) {
+                
+                let categoryExists = selectedcells.contains(nowCell.category)
+                
+                if (categoryExists) {
+                    self.selectedcells.removeAll{ $0 == nowCell.category }
+                }
+            }
+            
+            if indexPath.row != 0 {
+                nowCell.setCellData(nowCell.category, false)
+            }
+        }
+    }
 }
-
