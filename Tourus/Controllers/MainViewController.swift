@@ -135,8 +135,9 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
             
             switch button.type {
                 case .accept: //navigate if a place is exist
-                    graphView.addData(interactionStory) //temp - will be moved to another code
+                    //graphView.addData(interactionStory) //temp - will be moved to another code
                     navigate((interaction?.place)!)
+                    return
                 case .decline: break
                 case .negative: break
                 case .neutral: break
@@ -157,12 +158,18 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
 
     // MARK:Navigation funcs
     private func navigate(_ place:Place) {
-        let lat = String((place.location?.lat)!)
-        let long = String((place.location?.lng)!)
-            
-        MainModel.instance.navigate(lat, long)
+        let lat = (place.location?.lat)!
+        let long = (place.location?.lng)!
+        
+        let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        guard let mapVC = mainStoryboard.instantiateViewController(withIdentifier: "MapViewController") as? MapViewController else { return }
+        
+        mapVC.lat = lat
+        mapVC.long = long
+        
+        present(mapVC, animated: true, completion: nil)
     }
-    
+
     // MARK:Background image funcs
     private func setBackroundImage(_ image:UIImage?) {
         DispatchQueue.main.async {
