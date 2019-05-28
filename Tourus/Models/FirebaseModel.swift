@@ -10,15 +10,18 @@ import Foundation
 import Firebase
 import FirebaseDatabase
 import UIKit
+import CoreLocation
 
 class FirebaseModel {
     var databaseRef: DatabaseReference!
+    let firestoreRef:Firestore!
     lazy var storageRef = Storage.storage().reference(forURL:
         "gs://org-tourus-acb4d.appspot.com")
     
     init() {
         FirebaseApp.configure()
         databaseRef = Database.database().reference()
+        firestoreRef = Firestore.firestore()
     }
     
     
@@ -254,6 +257,61 @@ class FirebaseModel {
                         db.setValue(addedvalue)
                     }
                 })
+            }
+        }
+    }
+    
+    func addStoryToInteractions(interacton:InteractionStory) {
+        var ref: DocumentReference? = nil
+        ref = firestoreRef.collection(consts.names.interactionHistoryTableName).addDocument(data: interacton.toJson()) { err in
+            if let err = err {
+                print("Error adding document: \(err)")
+            } else {
+                print("Document added with ID: \(ref!.documentID)")
+            }
+        }
+    }
+    
+    func getInteractionsStories(_ currUserLocation:CLLocation , _ callback: @escaping ([InteractionStory]) -> Void){
+        //_ callback: @escaping ([InteractionStory]) -> Void
+        firestoreRef.collection(consts.names.interactionHistoryTableName).getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                var stories = [InteractionStory]()
+                
+                for document in querySnapshot!.documents {
+                    let interaction = InteractionStory(json: document.data())
+                    interaction.getDistanceInMeters(currUserLocation)
+                    stories.append(interaction)
+                }
+                
+                callback(stories)
+            }
+        }
+    }
+    
+    func getUserInteractionStories(_ callback: @escaping ([InteractionStory]) -> Void) {
+    
+        let time24hoursBeforeNow = Date().timeIntervalSince1970 - (24 * 60 * 60)
+        let date = Date(timeIntervalSince1970: time24hoursBeforeNow)
+        let userId = currentUser()?.uid ?? nil
+        
+        if userId != nil {
+            firestoreRef.collection(consts.names.interactionHistoryTableName).whereField("userID", isEqualTo: userId!).whereField("date", isGreaterThanOrEqualTo: date).whereField("answer", isEqualTo: OptionType.accept.index).order(by: "date", descending: true).getDocuments() { (querySnapshot, err) in
+                if let err = err {
+                    print("Error getting documents: \(err)")
+                } else {
+                    var stories = [InteractionStory]()
+                    
+                    for document in querySnapshot!.documents {
+                        let interaction = InteractionStory(json: document.data())
+                        //interaction.getDistanceInMeters(currUserLocation)
+                        stories.append(interaction)
+                    }
+                    
+                    callback(stories)
+                }
             }
         }
     }

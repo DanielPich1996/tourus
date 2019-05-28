@@ -60,10 +60,13 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         setBackroundImage(nil)
         setInfoImage(nil)
         
+        InitCurrentUserInfo()
         addBackgroundImage()
         initLocationManager()
         setUpSwipe()
+        InitGraphData()
     }
+    
     
     @IBAction func navigationButtonAction(_ sender: Any) {
         if (interaction != nil && interaction?.place != nil) {
@@ -81,7 +84,6 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
             self.interaction = interact
             
             if self.interaction != nil {
-                self.GetMoreImageURLS()
                 self.setInteractionwithAnimation(self.interaction!)
             }
             else {
@@ -124,20 +126,27 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     @objc func optionButtonAction( _ button : UIOptionButton) {
         
         if(interaction != nil && interaction?.place != nil) {
+            
             //Update user history
             MainModel.instance.updateUserHistory((interaction?.place?.types)!, button.type.value)
+            //Update user story
+            let interactionStory = InteractionStory(place: (interaction?.place)!, location: currUserLocation!, _answer: button.type.index)
+            MainModel.instance.addStoryToInteractions(interaction: interactionStory)
             
             switch button.type {
-            case .accept: //navigate if a place is exist
-                graphView.addData((interaction?.place)!) //temp - will be moved to another code
-                navigate((interaction?.place)!)
-            case .decline: break
-            case .negative: break
-            case .neutral: break
-            case .opinionless: break
-            case .additional: break
+                case .accept: //navigate if a place is exist
+                    //graphView.addData(interactionStory) //temp - will be moved to another code
+                    navigate((interaction?.place)!)
+                    return
+                case .decline: break
+                case .negative: break
+                case .neutral: break
+                case .opinionless: break
+                case .additional: break
             }
-            
+
+            //clear value
+            interaction = nil
             //#2: algo
             getNextInteraction()
         }
@@ -149,12 +158,18 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
 
     // MARK:Navigation funcs
     private func navigate(_ place:Place) {
-        let lat = String((place.location?.lat)!)
-        let long = String((place.location?.lng)!)
-            
-        MainModel.instance.navigate(lat, long)
+        let lat = (place.location?.lat)!
+        let long = (place.location?.lng)!
+        
+        let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        guard let mapVC = mainStoryboard.instantiateViewController(withIdentifier: "MapViewController") as? MapViewController else { return }
+        
+        mapVC.lat = lat
+        mapVC.long = long
+        
+        present(mapVC, animated: true, completion: nil)
     }
-    
+
     // MARK:Background image funcs
     private func setBackroundImage(_ image:UIImage?) {
         DispatchQueue.main.async {
@@ -242,11 +257,13 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
                 imageIndex = 0
                 lastLoadedIndex = 1
                 if(interaction.place != nil  && interaction.place!.picturesUrls.count > imageIndex) {
-                    MainModel.instance.getPlaceImage(interaction.place!.picturesUrls[imageIndex], 800, 0.4, {(image) in
-                        if let imageToSet = image {
-                            self.photos.append(imageToSet)
-                            self.setInfoImage(imageToSet)
-                            self.GetMoreImages(endIndex: 3)
+                    MainModel.instance.getPlaceImage(interaction.place!.googleID!, interaction.place!.picturesUrls[imageIndex], 800, 0.4, {(image, placeID) in
+                        if placeID == interaction.place!.googleID!{
+                            if let imageToSet = image {
+                                self.photos.append(imageToSet)
+                                self.setBackroundImage(imageToSet)
+                                self.GetMoreImageURLS()
+                            }
                         }
                     })
                 }
@@ -326,6 +343,19 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         self.view.insertSubview(backgroundImage, at: 0)
     }
     
+    func InitCurrentUserInfo() {
+        //init the user info data on the device - save the data locally if not exists
+        if let user = MainModel.instance.currentUser() {
+            MainModel.instance.getUserInfo(user.uid) { _ in }
+        }
+    }
+    
+    func InitGraphData() {
+        MainModel.instance.getUserInteractionStories() { (stories) in
+            self.graphView.overrideData(stories)
+        }
+    }
+    
     ///MARK: Location Manager Functions
     func initLocationManager() {
         locationManager.delegate = self
@@ -338,6 +368,10 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         let location = locations[locations.count - 1]
         if location.horizontalAccuracy > 0 && currUserLocation == nil {
             currUserLocation = location
+//Test group By
+//            MainModel.instance.GroupInteractionsByUser(currUserLocation!, {(interactios:[String:[InteractionStory]]) in
+//                print(interactios)
+//            })
             
             if interaction == nil {
                 //#1: algo
@@ -422,8 +456,8 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     
     func GetMoreImageURLS() {
         if let placeID = interaction?.place?.googleID {
-            MainModel.instance.GetPlacePhotos(placeID: placeID, callback: {(photosURL, err) in
-                if(err == nil) {
+            MainModel.instance.GetPlacePhotos(placeID: placeID, callback: {(photosURL, placeID ,err) in
+                if(err == nil && self.interaction?.place?.googleID == placeID) {
                     if var urls = photosURL {
                         urls.remove(at: 0)
                         
@@ -432,24 +466,23 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
                         }
                         
                         if self.interaction!.place!.picturesUrls.count > 1 {
-                            MainModel.instance.getPlaceImage(self.interaction!.place!.picturesUrls[1], 800, 0.4, {(image) in
-                                if let imageToSet = image {
-                                    self.photos.append(imageToSet)
-                                    self.setBackroundImage(imageToSet)
+                            MainModel.instance.getPlaceImage((self.interaction?.place?.googleID)!, self.interaction!.place!.picturesUrls[1], 800, 0.4, {(image, placeID) in
+                                if((self.interaction?.place?.googleID)! == placeID ){
+                                    if let imageToSet = image {
+                                        self.photos.append(imageToSet)
+                                        self.setInfoImage(imageToSet)
+                                    }
                                 }
-                                
-                                //                        if self.moreInfoImage.image == self.defaultInfoImage{
-                                //                            self.setInfoImage(self.photos[1])
-                                //                        }
                             })
                         }
+                        self.GetMoreImages(endIndex: 3)
                     }
                 }
             })
         }
     }
     
-    func GetMoreImages(endIndex:Int){
+    func GetMoreImages(endIndex:Int) {
         if ((lastLoadedIndex + 1) < (interaction?.place!.picturesUrls.count)!) {
             let end:Int
             let start = (lastLoadedIndex + 1)
@@ -464,13 +497,37 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
                 lastLoadedIndex = end
                 
                 for index in start...end{
-                    MainModel.instance.getPlaceImage(interaction!.place!.picturesUrls[index], 800, 0.4, {(image) in
-                        if let imageToSet = image {
-                            self.photos.append(imageToSet)
+                    MainModel.instance.getPlaceImage((interaction?.place?.googleID)!  ,interaction!.place!.picturesUrls[index], 800, 0.4, {(image, placeID) in
+                        if(placeID == (self.interaction?.place?.googleID)!){
+                            if let imageToSet = image {
+                                self.photos.append(imageToSet)
+                            }
                         }
                     })
                 }
             }
         }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.destination is MoreInfoViewController
+        {
+            let vc = segue.destination as? MoreInfoViewController
+            vc?.displayInteractionInfo(name: interaction?.place?.name, rating: interaction?.place?.rating)
+        }
+    }
+    
+    override func shouldPerformSegue(withIdentifier identifier: String?, sender: Any?) -> Bool {
+        //avoid more info segue when no interaction exists
+        if let ident = identifier {
+            if ident == "MoreInfoSegue" {
+                if self.interaction == nil {
+                    return false
+                }
+            }
+        }
+        
+        return true
     }
 }

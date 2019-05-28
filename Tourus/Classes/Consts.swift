@@ -13,6 +13,7 @@ struct consts {
     struct names {
         static let userInfoTableName : String = "Users"
         static let interactionsTableName : String = "Interactions"
+        static let interactionHistoryTableName : String = "InteractionHistory"
         static let optionsTableName : String = "Options"
         static let imagesFolderName : String = "ImagesStorage"
         static let profileImagesFolderName : String = "ProfileImagesStorage"
@@ -46,5 +47,18 @@ struct consts {
             
             return alertController
         }
+    }
+    
+    struct graph {
+        static let maxGraphPoints = 10
+        static let maxDegree = 360
+        static let cornerRadiusSize = CGSize(width: 8.0, height: 8.0)
+        static let margin: CGFloat = 25.0
+        static let topBorder: CGFloat = 35.0
+        static let bottomBorder: CGFloat = 25
+        static let colorAlpha: CGFloat = 0.3
+        static let circleDiameter: CGFloat = 10.0
+        static let maxPopWidth: Int = 200
+        static let dismissAfterSec: Int = 30
     }
 }

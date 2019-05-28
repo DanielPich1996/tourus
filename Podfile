@@ -10,9 +10,14 @@ pod 'Firebase/Auth'
 pod 'Firebase/Core'
 pod 'Firebase/Database'
 pod 'Firebase/Storage'
+pod 'Firebase/Firestore'
 # Google api pods for Tourus
 pod 'GooglePlaces'
 pod 'GoogleMaps'
+#Rating controls pods
+pod 'Cosmos'
+pod 'TinyConstraints'
+
 
   target 'TourusTests' do
     inherit! :search_paths

@@ -25,11 +25,6 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        profileImage.layer.cornerRadius = profileImage.frame.size.width / 2
-        profileImage.clipsToBounds = true
-        profileImage.layer.borderWidth = 2.0
-        profileImage.layer.borderColor = UIColor.white.cgColor
-        
         let image = UIImage(named: "default_profile")
         profileImage.image = image
         
