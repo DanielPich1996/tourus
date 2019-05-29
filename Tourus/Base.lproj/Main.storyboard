@@ -612,7 +612,7 @@
                                 </constraints>
                             </imageView>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RlO-kb-Dj6" userLabel="PreferencesView">
-                                <rect key="frame" x="5" y="246" width="404" height="611"/>
+                                <rect key="frame" x="5" y="230.66666666666669" width="404" height="626.33333333333326"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YTA-o9-IyI">
                                         <rect key="frame" x="0.0" y="0.0" width="104" height="36"/>
@@ -633,11 +633,11 @@
                                                 <rect key="frame" x="0.0" y="28" width="217" height="44"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="eyg-Mm-waI" id="7r5-17-tyr">
-                                                    <rect key="frame" x="0.0" y="0.0" width="217" height="43.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="217" height="43.666666666666664"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="69v-YV-XIe">
-                                                            <rect key="frame" x="15" y="0.0" width="186" height="43.5"/>
+                                                            <rect key="frame" x="15" y="0.0" width="186" height="43.666666666666664"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
@@ -753,7 +753,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading..." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fSm-vI-XEb" userLabel="ArrivalLabel">
                                         <rect key="frame" x="5" y="5" width="304" height="17.666666666666668"/>
                                         <fontDescription key="fontDescription" name="TrebuchetMS-Bold" family="Trebuchet MS" pointSize="15"/>
-                                        <color key="textColor" red="0.81787219319681015" green="1" blue="0.98678532744238412" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="textColor" red="0.86540113735725843" green="1" blue="0.9566901187061434" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -792,6 +792,17 @@
                                     <action selector="onSettingsClick:" destination="fWm-qP-zMK" eventType="touchUpInside" id="c9z-T0-Di2"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JZ8-Sz-xyf">
+                                <rect key="frame" x="354" y="756" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="0oU-75-YOF"/>
+                                    <constraint firstAttribute="height" constant="50" id="99X-wq-x32"/>
+                                </constraints>
+                                <state key="normal" image="navigate"/>
+                                <connections>
+                                    <action selector="onNavigateTap:" destination="fGu-52-kTo" eventType="touchUpInside" id="l9i-hE-rOb"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -806,7 +817,9 @@
                             <constraint firstItem="wq9-jk-Fb2" firstAttribute="leading" secondItem="7wO-yh-3Xw" secondAttribute="leading" id="U8A-mX-q3q"/>
                             <constraint firstItem="nJX-9O-euD" firstAttribute="trailing" secondItem="7wO-yh-3Xw" secondAttribute="trailing" constant="-50" id="cit-p2-gE4"/>
                             <constraint firstItem="wq9-jk-Fb2" firstAttribute="top" secondItem="AmQ-5A-bBE" secondAttribute="top" id="hXR-N9-FyJ"/>
+                            <constraint firstItem="OzR-TQ-3Ip" firstAttribute="trailing" secondItem="JZ8-Sz-xyf" secondAttribute="trailing" constant="10" id="lIg-Bz-sre"/>
                             <constraint firstItem="wq9-jk-Fb2" firstAttribute="trailing" secondItem="7wO-yh-3Xw" secondAttribute="trailing" id="lWg-PA-RiM"/>
+                            <constraint firstItem="7wO-yh-3Xw" firstAttribute="top" secondItem="JZ8-Sz-xyf" secondAttribute="bottom" constant="10" id="tsr-dQ-OVO"/>
                             <constraint firstAttribute="bottom" secondItem="wq9-jk-Fb2" secondAttribute="bottom" id="vs7-Hd-E9E"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="OzR-TQ-3Ip"/>
@@ -954,10 +967,8 @@
         <image name="close_red_icon" width="150" height="150"/>
         <image name="default_profile" width="218" height="187"/>
         <image name="google_maps" width="57" height="66"/>
+        <image name="navigate" width="170" height="170"/>
         <image name="no image" width="180" height="152"/>
         <image name="settings" width="160" height="192"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="8qV-fg-oO5"/>
-    </inferredMetricsTieBreakers>
 </document>

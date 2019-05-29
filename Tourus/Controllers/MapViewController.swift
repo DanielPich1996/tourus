@@ -23,6 +23,8 @@ class MapViewController: UIViewController {
     var lat:Double? = nil
     var long:Double? = nil
     
+    private var directed = false
+
     var steps = [MKRoute.Step]()
     var route:MKRoute? = nil
     let speechSynthesizer = AVSpeechSynthesizer()
@@ -41,6 +43,11 @@ class MapViewController: UIViewController {
        self.alertStoppingNavigation()
     }
     
+    @IBAction func onNavigateTap(_ sender: Any) {
+        
+        self.alertNavigationRefresh()
+    }
+    
     func getDirections(to destination: MKMapItem) {
         
         let sourcePlacemark = MKPlacemark(coordinate: currentCoordinate)
@@ -56,11 +63,11 @@ class MapViewController: UIViewController {
             guard let response = response else { return }
             guard let primaryRoute = response.routes.first else { return }
             
+            self.stopNavigation()
+            
             self.route = primaryRoute
             //add a polyline path to the map
             self.mapView.addOverlay(primaryRoute.polyline)
-            
-            self.locationManager.monitoredRegions.forEach({ self.locationManager.stopMonitoring(for: $0)})
             
             //add polyline steps to the map
             self.steps = primaryRoute.steps
@@ -76,7 +83,7 @@ class MapViewController: UIViewController {
                 let circle = MKCircle(center: region.center, radius: region.radius)
                 self.mapView.addOverlay(circle)
             }
-            
+
             self.setArrivalData(primaryRoute)
             self.setDirections(self.steps[0])
         }
@@ -86,7 +93,7 @@ class MapViewController: UIViewController {
         
         let distanceInt = Int(step.distance)
         if step.instructions.isEmpty {
-            return "Go \(distanceInt) meters"
+            return "Walk forward for \(distanceInt) meters"
         } else {
             return "In \(distanceInt) meters \(step.instructions)"
         }
@@ -110,30 +117,58 @@ class MapViewController: UIViewController {
 
         ArrivalLabel.text = "\(distance) away" + "\n" + "arrive in \(travelTime)"
     }
+    
+    func navigate() {
+        
+        if lat != nil && long != nil {
+            //follows the user's direction by the phone rotating
+            mapView.userTrackingMode = .followWithHeading
+            
+            getDirections(to: MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: lat!, longitude: long!))))
+        } else {
+            //error - no lat nor long were found
+            self.stopNavigation()
+            self.dismissAndGoToMain()
+        }
+    }
+    
+    func navigateIfUserIsFarFromRoute() {
+        
+        var closestDistance:Int? = nil
+        for step in self.steps {
+            
+            let userPoint  = MKMapPoint(currentCoordinate)
+            let routePoint = MKMapPoint(step.polyline.coordinate)
+            
+            let distance = Int(userPoint.distance(to: routePoint))
+            
+            if closestDistance == nil || distance < closestDistance! {
+                closestDistance = distance
+            }
+        }
+        
+        if closestDistance != nil && closestDistance! > consts.map.maxFarFromRouteInMeters {
+            //far from route - navigate again
+            
+            getDirections(to: MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: lat!, longitude: long!))))
+        }
+    }
 }
 
 extension MapViewController : CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
        
-        manager.stopUpdatingLocation()
+        //manager.stopUpdatingLocation()
+        guard let currentLocation = locations.first else { return }
+        currentCoordinate = currentLocation.coordinate
         
-        if route == nil {
-            guard let currentLocation = locations.first else { return }
+        if !directed {
             
-            if lat != nil && long != nil {
-                
-                currentCoordinate = currentLocation.coordinate
-                //follows the user's direction by the phone rotating
-                mapView.userTrackingMode = .followWithHeading
-                
-                getDirections(to: MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: lat!, longitude: long!))))
-            } else {
-                //error - no lat nor long were found
-                self.stopNavigation()
-                self.dismissAndGoToMain()
-            }
-        }
+            directed = true
+            navigate()
+            
+        } else { navigateIfUserIsFarFromRoute() }
     }
     
     func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
@@ -176,6 +211,27 @@ extension MapViewController : CLLocationManagerDelegate {
         let acceptAction = UIAlertAction(title: "Yes", style: .destructive) { _ in
             DispatchQueue.main.async {
                 self.dismissAndGoToMain()
+            }
+        }
+        
+        //Add the actions to the alert controller
+        alert.addAction(cancelAction)
+        alert.addAction(acceptAction)
+        
+        //Present the alert controller
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func alertNavigationRefresh() {
+        
+        let alert = UIAlertController(title: "Navigation", message: "Refresh navigation for you'r attraction?", preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let acceptAction = UIAlertAction(title: "Refresh", style: .destructive) { _ in
+            DispatchQueue.main.async {
+                self.route = nil
+                self.steps = [MKRoute.Step]()
+                
+                self.navigate()
             }
         }
         
