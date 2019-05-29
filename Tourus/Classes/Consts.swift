@@ -26,6 +26,10 @@ struct consts {
         static let browserLink : String = "https://www.google.co.in/maps/dir/"
     }
     
+    struct map {
+         static let maxFarFromRouteInMeters:Int = 100
+    }
+    
     struct text {
         static let lineBreak:String = "\n"
     }
