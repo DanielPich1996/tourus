@@ -31,7 +31,7 @@ class MainModel {
         })
     }
     
-    func getAlgorithmNextPlace(_ location:String, _ callback: @escaping (Interaction) -> Void) {
+    func getAlgorithmNextPlace(_ location:CLLocation, _ callback: @escaping (Interaction) -> Void) {
         algorithmModel.getAlgorithmNextPlace(location, callback)
     }
     
@@ -251,7 +251,7 @@ class MainModel {
         }
     }
     
-    func fetchNearbyPlaces(location: String, radius:Int = 3000, type:String?=nil, isOpen:Bool=true, callback: @escaping ([Place]?, String?) -> Void){
+    func fetchNearbyPlaces(location: CLLocation, radius:Int = 3000, type:String?=nil, isOpen:Bool=true, callback: @escaping ([Place]?, String?) -> Void){
         var placesBack = [Place]()
         
         placesModel.fetchGoogleNearbyPlaces(location: location ,radius: radius, type:type, isOpen:isOpen, callback: {(places, token, err) in

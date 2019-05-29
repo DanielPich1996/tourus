@@ -21,9 +21,13 @@ class PlacesModel {
     
     
     
-    func fetchGoogleNearbyPlaces(location: String!, radius: Int!, type:String? = nil, isOpen:Bool?=true, callback: @escaping ([Place]?, String?, String?) -> Void) {
+    func fetchGoogleNearbyPlaces(location: CLLocation, radius: Int!, type:String? = nil, isOpen:Bool?=true, callback: @escaping ([Place]?, String?, String?) -> Void) {
+        let latitude:String = String(format: "%f", location.coordinate.latitude)
+        let longitude:String = String(format:"%f", location.coordinate.longitude)
+        let loc:String = latitude + "," + longitude
+        
         var urlString = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?"
-        urlString+="location="+location
+        urlString+="location="+loc
         urlString+="&radius="+String(radius)
         //urlString+="&fields=photos" //,formatted_address,name,rating,opening_hours"
         urlString+="&language=en"

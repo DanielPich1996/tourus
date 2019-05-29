@@ -73,11 +73,11 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     
     //MARK: ALGORYTHM
     func getNextInteraction() {
-        let latitude:String = String(format: "%f", currUserLocation!.coordinate.latitude)
-        let longitude:String = String(format:"%f", currUserLocation!.coordinate.longitude)
-        let loc:String = latitude + "," + longitude
+//        let latitude:String = String(format: "%f", currUserLocation!.coordinate.latitude)
+//        let longitude:String = String(format:"%f", currUserLocation!.coordinate.longitude)
+//        let loc:String = latitude + "," + longitude
         
-        MainModel.instance.getAlgorithmNextPlace(loc) { interact in
+        MainModel.instance.getAlgorithmNextPlace(currUserLocation!) { interact in
             self.interaction = interact
             
             if self.interaction != nil {
@@ -92,11 +92,11 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     // MARK: Simulation
     var count = 0
     private func simulateOnce() {
-        let latitude:String = String(format: "%f", currUserLocation!.coordinate.latitude)
-        let longitude:String = String(format:"%f", currUserLocation!.coordinate.longitude)
-        let loc:String = latitude + "," + longitude
+//        let latitude:String = String(format: "%f", currUserLocation!.coordinate.latitude)
+//        let longitude:String = String(format:"%f", currUserLocation!.coordinate.longitude)
+//        let loc:String = latitude + "," + longitude
         
-        MainModel.instance.fetchNearbyPlaces(location: loc, callback: { (places,err)  in
+        MainModel.instance.fetchNearbyPlaces(location: currUserLocation!, callback: { (places,err)  in
             DispatchQueue.main.async {
                 if places != nil && places!.count > 0 {
 

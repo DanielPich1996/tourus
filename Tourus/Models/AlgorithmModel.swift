@@ -24,6 +24,10 @@ class AlgorithmModel{
         //30min time
     }
     
+    var interactionsByUser = [String:[InteractionStory]]()
+    var lastUpdatedInteractionsDate:Date?
+    var lastUpdatedPlace:CLLocation?
+    
     // KNN weights constants
     private let distDeltaWeight = 1.0
     private let timeDeltaWeight = 1.0
@@ -114,7 +118,7 @@ class AlgorithmModel{
         callback(categoriesGrades)
     }
     
-    func getAlgorithmNextPlace(_ location:String, _ callback: @escaping (Interaction) -> Void) {
+    func getAlgorithmNextPlace(_ location:CLLocation, _ callback: @escaping (Interaction) -> Void) {
         MainModel.instance.fetchNearbyPlaces(location: location, callback: { (places, err)  in
             if ((places == nil) || (places?.count == 0)){
                 DispatchQueue.main.async {
@@ -125,7 +129,7 @@ class AlgorithmModel{
                 }
             }
             else{
-                self.algorithmOrchestra(places!) { place in
+                self.algorithmOrchestra(location, places!) { place in
                     MainModel.instance.getInteraction(place.types) { intereaction in
                         
                         intereaction!.place = place
@@ -139,7 +143,7 @@ class AlgorithmModel{
         })
     }
     
-    func algorithmOrchestra(_ places: [Place], _ callback: (Place) -> Void){
+    func algorithmOrchestra(_ currUserLocation:CLLocation, _ places: [Place], _ callback: (Place) -> Void){
         let group = DispatchGroup()
 
         group.enter()
@@ -158,7 +162,7 @@ class AlgorithmModel{
         else{
             if let aprioriResults = choosePlace(places){
                 let validPlaces = getValidPlacesByTypes(places, types: aprioriResults)
-                
+
                 if validPlaces.count > 0{
                     callback(validPlaces.randomElement()!)
                 }
@@ -169,6 +173,33 @@ class AlgorithmModel{
             else{
                 callback(places.randomElement()!)
             }
+            
+//            GetCategoryByKnn(currUserLocation, places, {(categoryList) in
+//
+//            })
+        }
+    }
+    
+    func GetCategoryByKnn(_ currUserLocation:CLLocation, _ places: [Place], _ callback: @escaping ([String:Double]) -> Void){
+        let currDate  = Date()
+        let interval :Double =  (currDate.timeIntervalSince(lastUpdatedInteractionsDate ?? Date(timeIntervalSince1970: 0)) / 3600)
+        let distance : Int
+        
+        if let loc = lastUpdatedPlace{
+            distance = Int(loc.distance(from: currUserLocation))
+        }else{
+            distance = 5000
+        }
+        
+        if (interval >= 1 || distance > 500){
+            MainModel.instance.getInteractionsStories(currUserLocation, {(interactions:[InteractionStory]) in
+                self.lastUpdatedPlace = currUserLocation
+                self.lastUpdatedInteractionsDate = Date()
+                self.interactionsByUser = self.GroupInteractionsByUser(interactions)
+                self.knnAlgorithm(self.interactionsByUser, places, callback)
+            })
+        }else{
+            self.knnAlgorithm(self.interactionsByUser, places, callback)
         }
     }
     
@@ -330,14 +361,6 @@ class AlgorithmModel{
         }
         
         return(interactionsByUser)
-    }
-    
-    func GatCategoryByKnn(_ currUserLocation:CLLocation, _ callback: @escaping ([String:[InteractionStory]]) -> Void){
-        MainModel.instance.getInteractionsStories(currUserLocation, {(interactions:[InteractionStory]) in
-            let interactionsByUser = self.GroupInteractionsByUser(interactions)
-            
-            callback(interactionsByUser)
-        })
     }
     
 }
