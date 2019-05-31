@@ -7,13 +7,41 @@
 		<key>BoringSSL-GRPC.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>13</integer>
+			<integer>14</integer>
 		</dict>
 		<key>Cosmos.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>14</integer>
 		</dict>
+<<<<<<< HEAD
+=======
+		<key>Cosmos.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>13</integer>
+		</dict>
+		<key>Firebase.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Firebase.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>21</integer>
+		</dict>
+		<key>FirebaseAnalytics.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>FirebaseAnalytics.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>22</integer>
+		</dict>
+>>>>>>> 9dd0d025273e94f0c0e6a942d5bbcff5b3a54b29
 		<key>FirebaseAuth.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -22,47 +50,55 @@
 		<key>FirebaseCore.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>2</integer>
+			<integer>1</integer>
 		</dict>
 		<key>FirebaseDatabase.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>3</integer>
+			<integer>2</integer>
 		</dict>
 		<key>FirebaseFirestore.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>15</integer>
 		</dict>
+<<<<<<< HEAD
+=======
+		<key>FirebaseFirestore.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>15</integer>
+		</dict>
+>>>>>>> 9dd0d025273e94f0c0e6a942d5bbcff5b3a54b29
 		<key>FirebaseInstanceID.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>4</integer>
+			<integer>3</integer>
 		</dict>
 		<key>FirebaseStorage.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>5</integer>
+			<integer>4</integer>
 		</dict>
 		<key>GTMSessionFetcher.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>7</integer>
+			<integer>6</integer>
 		</dict>
 		<key>GoogleUtilities.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>6</integer>
+			<integer>5</integer>
 		</dict>
 		<key>Pods-Tourus.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>10</integer>
+			<integer>9</integer>
 		</dict>
 		<key>Pods-TourusTests.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>11</integer>
+			<integer>10</integer>
 		</dict>
 		<key>Pods-TourusUITests.xcscheme</key>
 		<dict>
@@ -74,7 +110,20 @@
 			<key>orderHint</key>
 			<integer>19</integer>
 		</dict>
+<<<<<<< HEAD
+=======
+		<key>Protobuf.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>19</integer>
+		</dict>
+>>>>>>> 9dd0d025273e94f0c0e6a942d5bbcff5b3a54b29
 		<key>TinyConstraints.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>20</integer>
+		</dict>
+		<key>TinyConstraints.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>20</integer>
@@ -84,25 +133,49 @@
 			<key>orderHint</key>
 			<integer>17</integer>
 		</dict>
+<<<<<<< HEAD
+=======
+		<key>gRPC-C++-gRPCCertificates.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>17</integer>
+		</dict>
+>>>>>>> 9dd0d025273e94f0c0e6a942d5bbcff5b3a54b29
 		<key>gRPC-C++.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>16</integer>
 		</dict>
+<<<<<<< HEAD
+=======
+		<key>gRPC-C++.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>16</integer>
+		</dict>
+>>>>>>> 9dd0d025273e94f0c0e6a942d5bbcff5b3a54b29
 		<key>gRPC-Core.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>18</integer>
 		</dict>
+<<<<<<< HEAD
+=======
+		<key>gRPC-Core.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>18</integer>
+		</dict>
+>>>>>>> 9dd0d025273e94f0c0e6a942d5bbcff5b3a54b29
 		<key>leveldb-library.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>8</integer>
+			<integer>7</integer>
 		</dict>
 		<key>nanopb.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>9</integer>
+			<integer>8</integer>
 		</dict>
 	</dict>
 </dict>

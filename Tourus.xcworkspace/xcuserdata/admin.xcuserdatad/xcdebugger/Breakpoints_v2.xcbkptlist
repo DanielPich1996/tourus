@@ -2,6 +2,7 @@
 <Bucket
    type = "0"
    version = "2.0">
+<<<<<<< HEAD
    <Breakpoints>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
@@ -15,7 +16,11 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "91"
             endingLineNumber = "91"
+<<<<<<< HEAD
             landmarkName = "monthGradeCalculator(candidatesDate:topGrade:interestingMonthsInterval:)"
+=======
+            landmarkName = "algorithmOrchestra(_:_:)"
+>>>>>>> master
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -31,9 +36,15 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "92"
             endingLineNumber = "92"
+<<<<<<< HEAD
             landmarkName = "monthGradeCalculator(candidatesDate:topGrade:interestingMonthsInterval:)"
+=======
+            landmarkName = "algorithmOrchestra(_:_:)"
+>>>>>>> master
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
+=======
+>>>>>>> 9dd0d025273e94f0c0e6a942d5bbcff5b3a54b29
 </Bucket>
