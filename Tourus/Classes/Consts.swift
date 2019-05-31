@@ -27,7 +27,7 @@ struct consts {
     }
     
     struct map {
-         static let maxFarFromRouteInMeters:Int = 100
+         static let maxFarFromRouteInMeters:Int = 60
     }
     
     struct text {

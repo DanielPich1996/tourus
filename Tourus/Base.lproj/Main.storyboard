@@ -305,7 +305,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yJa-pV-xcc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-5715.9420289855079" y="368.97321428571428"/>
+            <point key="canvasLocation" x="-4933" y="1053"/>
         </scene>
         <!--Main View Controller-->
         <scene sceneID="0EO-uM-uAZ">
@@ -792,7 +792,7 @@
                                     <action selector="onSettingsClick:" destination="fWm-qP-zMK" eventType="touchUpInside" id="c9z-T0-Di2"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JZ8-Sz-xyf">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JZ8-Sz-xyf" userLabel="navigation btn">
                                 <rect key="frame" x="354" y="756" width="50" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="0oU-75-YOF"/>
@@ -803,15 +803,28 @@
                                     <action selector="onNavigateTap:" destination="fGu-52-kTo" eventType="touchUpInside" id="l9i-hE-rOb"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="er0-pH-H3m" userLabel="info btn">
+                                <rect key="frame" x="361.66666666666669" y="713" width="35" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="35" id="86K-Dq-4G2"/>
+                                    <constraint firstAttribute="height" constant="35" id="9Nj-jC-2Vk"/>
+                                </constraints>
+                                <state key="normal" image="info_png"/>
+                                <connections>
+                                    <segue destination="892-kL-vwl" kind="presentation" id="bHC-Yh-oog"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="9OP-0f-gAE" firstAttribute="top" secondItem="nJX-9O-euD" secondAttribute="top" id="7rc-6s-3ee"/>
                             <constraint firstItem="nJX-9O-euD" firstAttribute="top" secondItem="OzR-TQ-3Ip" secondAttribute="top" id="BpQ-Gt-qC2"/>
                             <constraint firstItem="9OP-0f-gAE" firstAttribute="leading" secondItem="OzR-TQ-3Ip" secondAttribute="leading" constant="10" id="Cci-pE-Djz"/>
+                            <constraint firstItem="JZ8-Sz-xyf" firstAttribute="centerX" secondItem="er0-pH-H3m" secondAttribute="centerX" id="Dnq-wX-eh9"/>
                             <constraint firstAttribute="bottom" secondItem="7wO-yh-3Xw" secondAttribute="bottom" id="Dz1-so-epq"/>
                             <constraint firstItem="nJX-9O-euD" firstAttribute="leading" secondItem="7wO-yh-3Xw" secondAttribute="leading" constant="50" id="JRD-9C-lrl"/>
                             <constraint firstItem="nJX-9O-euD" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="9OP-0f-gAE" secondAttribute="trailing" constant="5" id="LU8-ru-4BR"/>
+                            <constraint firstItem="JZ8-Sz-xyf" firstAttribute="top" secondItem="er0-pH-H3m" secondAttribute="bottom" constant="8" id="RJE-a9-Lnx"/>
                             <constraint firstItem="wq9-jk-Fb2" firstAttribute="trailing" secondItem="OzR-TQ-3Ip" secondAttribute="trailing" id="RMX-wp-GZE"/>
                             <constraint firstItem="wq9-jk-Fb2" firstAttribute="leading" secondItem="OzR-TQ-3Ip" secondAttribute="leading" id="Sa3-Rp-yeK"/>
                             <constraint firstItem="wq9-jk-Fb2" firstAttribute="leading" secondItem="7wO-yh-3Xw" secondAttribute="leading" id="U8A-mX-q3q"/>
@@ -832,7 +845,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9do-01-QzU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3397.1014492753625" y="370.98214285714283"/>
+            <point key="canvasLocation" x="-5713" y="1053"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="q74-iX-dAm">
@@ -967,8 +980,12 @@
         <image name="close_red_icon" width="150" height="150"/>
         <image name="default_profile" width="218" height="187"/>
         <image name="google_maps" width="57" height="66"/>
+        <image name="info_png" width="170" height="170"/>
         <image name="navigate" width="170" height="170"/>
         <image name="no image" width="180" height="152"/>
         <image name="settings" width="160" height="192"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="bHC-Yh-oog"/>
+    </inferredMetricsTieBreakers>
 </document>

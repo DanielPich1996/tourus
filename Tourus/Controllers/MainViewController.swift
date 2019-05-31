@@ -158,14 +158,13 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
 
     // MARK:Navigation funcs
     private func navigate(_ place:Place) {
-        let lat = (place.location?.lat)!
-        let long = (place.location?.lng)!
+        
+        guard let lat = place.location?.lat else { return }
+        guard let long = place.location?.lng else { return }
         
         let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         guard let mapVC = mainStoryboard.instantiateViewController(withIdentifier: "MapViewController") as? MapViewController else { return }
-        
-        mapVC.lat = lat
-        mapVC.long = long
+        mapVC.setDestinationData(destLat: lat, destlong: long, destName: place.name, destRating: place.rating)
         
         present(mapVC, animated: true, completion: nil)
     }
