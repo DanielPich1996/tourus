@@ -92,32 +92,6 @@ class AlgorithmModel{
         return(Double(topGrade) - (Double(monthDelta)/Double(interestingMonthsInterval)) * Double(topGrade))
     }
     
-    func knnAlgorithm(_ usersStory: [String:[InteractionStory]],_ places: [Place], _ callback: @escaping ([String:Double]) -> Void){
-        var categoriesGrades = [String:Double]()
-        
-        for userData in usersStory{
-            for userStory in userData.value{
-                for category in userStory.categories{
-                    let currAnswerWeight = userStory.answer == 1 ? positiveCtgryWeight : negativeCtgryWeight
-                    let currDataGrade = (distanceGradeCalculator(distanceInMeters: userStory.distanceBetweenUsers ?? 5000,
-                                                                topGrade: 10, interestingKilometers: 5) * distDeltaWeight +
-                                         timeGradeCalculator(candidatesDate: userStory.date, topGrade: 10, interestingHourInterval: 6) * timeDeltaWeight +
-                                         dayInWeekGradeCalculator(candidatesDate: userStory.date, topGrade: 10, interestingDaysInterval: 6) * dayInWeekWeight +
-                                         monthGradeCalculator(candidatesDate: userStory.date, topGrade: 10, interestingMonthsInterval: 6) * monthDeltaWeight) * currAnswerWeight
-                    
-                    if (categoriesGrades.keys.contains(category)){
-                        categoriesGrades[category]! += currDataGrade
-                    }
-                    else{
-                        categoriesGrades.updateValue(currDataGrade, forKey: category)
-                    }
-                }
-            }
-        }
-        
-        callback(categoriesGrades)
-    }
-    
     func getAlgorithmNextPlace(_ location:CLLocation, _ callback: @escaping (Interaction) -> Void) {
         MainModel.instance.fetchNearbyPlaces(location: location, callback: { (places, err)  in
             if ((places == nil) || (places?.count == 0)){
@@ -143,9 +117,47 @@ class AlgorithmModel{
         })
     }
     
-    func algorithmOrchestra(_ currUserLocation:CLLocation, _ places: [Place], _ callback: (Place) -> Void){
+    func knnAlgorithm(_ usersStory: [String:[InteractionStory]],_ places: [Place], _ callback: @escaping ([String:Double]) -> Void){
+        var categoriesGrades = [String:Double]()
+        var remIndx = [String]()
+        
+        for userData in usersStory{
+            for userStory in userData.value{
+                for category in userStory.categories{
+                    let currAnswerWeight = userStory.answer == 1 ? positiveCtgryWeight : negativeCtgryWeight
+                    let currDataGrade = (distanceGradeCalculator(distanceInMeters: userStory.distanceBetweenUsers ?? 5000,
+                                                                 topGrade: 10, interestingKilometers: 5) * distDeltaWeight +
+                        timeGradeCalculator(candidatesDate: userStory.date, topGrade: 10, interestingHourInterval: 6) * timeDeltaWeight +
+                        dayInWeekGradeCalculator(candidatesDate: userStory.date, topGrade: 10, interestingDaysInterval: 6) * dayInWeekWeight +
+                        monthGradeCalculator(candidatesDate: userStory.date, topGrade: 10, interestingMonthsInterval: 6) * monthDeltaWeight) * currAnswerWeight
+                    
+                    if (categoriesGrades.keys.contains(category)){
+                        categoriesGrades[category]! += currDataGrade
+                    }
+                    else{
+                        categoriesGrades.updateValue(currDataGrade, forKey: category)
+                    }
+                }
+            }
+        }
+        
+        for currCat in categoriesGrades{
+            if currCat.value < 10 {
+                remIndx.append(currCat.key)
+            }
+        }
+        
+        for currRem in remIndx {
+            categoriesGrades.remove(at: categoriesGrades.index(forKey: currRem)!)
+        }
+        
+        callback(categoriesGrades)
+    }
+    
+    func algorithmOrchestra(_ currUserLocation:CLLocation, _ places: [Place], _ callback: @escaping (Place) -> Void){
         let group = DispatchGroup()
-
+        var isKnn = false
+        
         group.enter()
         updateCandidateSet { [weak self] (candidateSet) -> Void in
             if candidateSet != nil{
@@ -160,6 +172,47 @@ class AlgorithmModel{
             callback(places.randomElement()!)
         }
         else{
+            group.enter()
+
+            GetCategoryByKnn(currUserLocation, places, {[weak self] (categories) in
+                if categories.count > 0 {
+                    isKnn = true
+                    
+                    let categoriesSortedByGrades = Array(categories.sorted { $0.1 < $1.1 })
+                    var validPlaces = [Place]()
+                    
+                    if categoriesSortedByGrades.endIndex > 5{
+                        validPlaces = self?.getValidPlacesByTypes(places, types: [categoriesSortedByGrades[0].key,
+                                                                                  categoriesSortedByGrades[1].key,
+                                                                                  categoriesSortedByGrades[2].key,
+                                                                                  categoriesSortedByGrades[3].key,
+                                                                                  categoriesSortedByGrades[4].key]) ?? [Place]()
+                    }
+                    else{
+                        var lessThanFiveCat = [String]()
+                        
+                        for cat in categoriesSortedByGrades{
+                            lessThanFiveCat.append(cat.key)
+                        }
+                    
+                        validPlaces = self?.getValidPlacesByTypes(places, types: lessThanFiveCat) ?? [Place]()
+                    }
+                    
+                    if validPlaces.count > 0{
+                        callback(validPlaces.randomElement()!)
+                    }
+                    else {
+                        callback(places.randomElement()!)
+                    }
+                }
+                
+                group.leave()
+            })
+            
+            group.wait()
+        }
+        
+        if isKnn == false{
             if let aprioriResults = choosePlace(places){
                 let validPlaces = getValidPlacesByTypes(places, types: aprioriResults)
 
