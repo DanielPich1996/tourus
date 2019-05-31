@@ -300,6 +300,18 @@ class MainModel {
         firebaseModel.getUserInteractionStories(callback)
     }
     
+    func getAllCategories(_ callback: @escaping ([String]) -> Void) {
+        firebaseModel.getAllInteractions(callback: {(interactions) in
+            var categories = [String]()
+            
+            for interaction in interactions{
+                if !(categories.contains(interaction.category)){
+                    categories.append(interaction.category)
+                }
+            }
+            callback(categories)
+        })
+    }
     //temp to check
 //    func GroupInteractionsByUser(_ currUserLocation:CLLocation, _ callback: @escaping ([String:[InteractionStory]]) -> Void) {
 //        algorithmModel.GroupInteractionsByUser(currUserLocation, callback)
