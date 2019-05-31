@@ -28,6 +28,7 @@ struct consts {
     
     struct map {
          static let maxFarFromRouteInMeters:Int = 60
+         static let destinationPinIdentifier:String = "destinationPin"
     }
     
     struct text {
