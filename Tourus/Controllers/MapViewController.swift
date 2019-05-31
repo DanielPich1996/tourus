@@ -17,17 +17,17 @@ class MapViewController: UIViewController {
     @IBOutlet weak var directionLabel: UILabel!
     @IBOutlet weak var ArrivalLabel: UILabel!
     
-    let locationManager = CLLocationManager()
-    var currentCoordinate: CLLocationCoordinate2D!
-    
     var lat:Double? = nil
     var long:Double? = nil
+    var destinationName: String? = nil
+    var destinationRating: Double? = nil
     
+    private let locationManager = CLLocationManager()
+    private var currentCoordinate: CLLocationCoordinate2D!
     private var directed = false
-
-    var steps = [MKRoute.Step]()
-    var route:MKRoute? = nil
-    let speechSynthesizer = AVSpeechSynthesizer()
+    private var steps = [MKRoute.Step]()
+    private var route:MKRoute? = nil
+    private let speechSynthesizer = AVSpeechSynthesizer()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +36,14 @@ class MapViewController: UIViewController {
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
         locationManager.startUpdatingLocation()
+    }
+    
+    func setDestinationData(destLat:Double?, destlong:Double?, destName:String?, destRating:Double?) {
+        
+        lat = destLat
+        long = destlong
+        destinationName = destName
+        destinationRating = destRating
     }
     
     @IBAction func onExitTap(_ sender: Any) {
@@ -132,25 +140,41 @@ class MapViewController: UIViewController {
         }
     }
     
-    func navigateIfUserIsFarFromRoute() {
+    func calculateMaxDistanceFromRoute() {
         
-        var closestDistance:Int? = nil
+        var farestDistance:Int? = nil
+        guard let currentRoute = route else { return }
+        
+        //calculating the center point of the route
+        let centerRoutePoint  = MKMapPoint(currentRoute.polyline.coordinate)
+
         for step in self.steps {
-            
-            let userPoint  = MKMapPoint(currentCoordinate)
-            let routePoint = MKMapPoint(step.polyline.coordinate)
-            
-            let distance = Int(userPoint.distance(to: routePoint))
-            
-            if closestDistance == nil || distance < closestDistance! {
-                closestDistance = distance
+            //calculating the current step distance from the center of the entire route
+            let stepPoint = MKMapPoint(step.polyline.coordinate)
+            let distance = Int(centerRoutePoint.distance(to: stepPoint))
+            //taking the max distance
+            if farestDistance == nil || distance > farestDistance! {
+                farestDistance = distance
             }
         }
         
-        if closestDistance != nil && closestDistance! > consts.map.maxFarFromRouteInMeters {
+        guard var maxDistance = farestDistance else { return }
+        maxDistance += consts.map.maxFarFromRouteInMeters
+        //calculating user point
+        let userPoint  = MKMapPoint(currentCoordinate)
+        let userDistance = Int(centerRoutePoint.distance(to: userPoint))
+        
+        if  userDistance > maxDistance {
             //far from route - navigate again
-            
             getDirections(to: MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: lat!, longitude: long!))))
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.destination is MoreInfoViewController {
+            let vc = segue.destination as? MoreInfoViewController
+            vc?.displayInteractionInfo(name: destinationName, rating: destinationRating)
         }
     }
 }
@@ -168,25 +192,21 @@ extension MapViewController : CLLocationManagerDelegate {
             directed = true
             navigate()
             
-        } else { navigateIfUserIsFarFromRoute() }
+        } else { calculateMaxDistanceFromRoute() }
     }
     
     func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
 
-        let stepIndex = Int(region.identifier)
+        guard let stepIndex = Int(region.identifier) else { stopNavigation(); return }
         if stepIndex == 0 { return } //we've already directed the user by the first step
         
-        if stepIndex != nil {
-            let currentStep = steps[stepIndex!]
-            if stepIndex! < (steps.count-1) {
-                setDirections(currentStep)
-            } else {
-                //arrived
-                let message = "Arrived at destination"
-                setDirections(message)
-                stopNavigation()
-            }
+        let currentStep = steps[stepIndex]
+        if stepIndex < (steps.count-1) {
+            setDirections(currentStep)
         } else {
+            //arrived
+            let message = "Arrived at destination"
+            setDirections(message)
             stopNavigation()
         }
     }
