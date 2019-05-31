@@ -32,4 +32,6 @@ extension UIColor
     
      static var directionColor:UIColor { return UIColor(red: 96.0/255.0, green: 145.0/255.0, blue: 236.0/255.0, alpha: 1.0) }
      static var directionPointColor:UIColor { return UIColor(red: 163.0/255.0, green: 192.0/255.0, blue: 236.0/255.0, alpha: 1.0) }
+     static var destinationPointColor:UIColor { return UIColor(red: 255.0/255.0, green: 100.0/255.0, blue: 56.0/255.0, alpha: 1.0) }
+     static var destinationBorderPointColor:UIColor { return UIColor(red: 136.0/255.0, green: 78.0/255.0, blue: 34.0/255.0, alpha: 1.0) }
 }
