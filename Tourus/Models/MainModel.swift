@@ -91,6 +91,12 @@ class MainModel {
         callback(nil)
     }
     
+    func getAllCategories(_ callback: @escaping ([String]) -> Void) {
+       
+        let categories = Interaction.getCategories(database: sqlModel.database)
+        callback(categories)
+    }
+    
     private func listenToInteractionUpdates() {
         var lastUpdated = Interaction.getLastUpdateDate(database: sqlModel.database)
         lastUpdated += 1
