@@ -303,6 +303,21 @@ class MainModel {
         }
     }
     
+    func updateSettings(_ settings:Settings) {
+        Settings.addNew(database: sqlModel.database, settings: settings)
+    }
+    
+    func getSettings() -> Settings? {
+        let user = currentUser()
+        let uid = user?.uid
+        
+        if uid != nil {
+           return Settings.get(database: sqlModel.database, userId: uid!)
+        }
+        
+        return nil
+    }
+    
     //temp to check
 //    func GroupInteractionsByUser(_ currUserLocation:CLLocation, _ callback: @escaping ([String:[InteractionStory]]) -> Void) {
 //        algorithmModel.GroupInteractionsByUser(currUserLocation, callback)

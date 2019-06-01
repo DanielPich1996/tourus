@@ -19,8 +19,8 @@ class MapViewController: UIViewController {
     
     var lat:Double? = nil
     var long:Double? = nil
-    var destinationName: String? = nil
-    var destinationRating: Double? = nil
+    var destinationName:String? = nil
+    var destinationRating:Double? = nil
     
     private let locationManager = CLLocationManager()
     private var currentCoordinate: CLLocationCoordinate2D!
@@ -28,10 +28,15 @@ class MapViewController: UIViewController {
     private var steps = [MKRoute.Step]()
     private var route:MKRoute? = nil
     private let speechSynthesizer = AVSpeechSynthesizer()
+    private var isDirectionalAudioOn = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        if let settings = MainModel.instance.getSettings() {
+            isDirectionalAudioOn = settings.isDirectionalAudioOn
+        }
+        
         locationManager.requestAlwaysAuthorization()
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
@@ -122,8 +127,11 @@ class MapViewController: UIViewController {
     
     func setDirections(_ directions:String) {
         self.directionLabel.text = directions
-        let speechUtterance = AVSpeechUtterance(string: directions)
-        self.speechSynthesizer.speak(speechUtterance)
+        
+        if isDirectionalAudioOn {
+            let speechUtterance = AVSpeechUtterance(string: directions)
+            self.speechSynthesizer.speak(speechUtterance)
+        }
     }
     
     func setArrivalData(_ route:MKRoute) {
