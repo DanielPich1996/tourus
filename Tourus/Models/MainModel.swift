@@ -189,6 +189,10 @@ class MainModel {
         }
     }
     
+    func updateUserInfo(_ userId:String, _ preImageUrl:String?, _ image:UIImage?, _ completionBlock:@escaping (Bool) -> Void = {_  in}) {
+        firebaseModel.updateUserInfo(userId, preImageUrl, image, completionBlock)
+    }
+    
     func getImage(_ url:String, _ callback:@escaping (UIImage?)->Void){
         //1. try to get the image from local store
         let _url = URL(string: url)

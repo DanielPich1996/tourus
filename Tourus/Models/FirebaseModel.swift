@@ -131,6 +131,42 @@ class FirebaseModel {
         })
     }
     
+    func updateUserInfo(_ userId:String, _ preImageUrl:String?, _ image:UIImage?, _ completionBlock:@escaping (Bool) -> Void = {_  in}) {
+        if image != nil {
+            let folder = consts.names.profileImagesFolderName
+            saveImage(folderName: folder, image: image!) { (url:String?) in
+                if url != nil {
+                    if (preImageUrl != nil && preImageUrl != "") {
+                        self.deleteImage(preImageUrl!)
+                    }
+                    let userInfo = consts.names.userInfoTableName
+                    self.databaseRef!.child(userInfo).child(userId).child("profileImageUrl").setValue(url)
+                    //saving the new userinfo details and saving the image locally
+                    MainModel.instance.getUserInfo(userId) { userInfo in
+                        MainModel.instance.getImage(url!) { image in completionBlock(true) }
+                    }
+                } else {
+                    completionBlock(false)
+                }
+            }
+        }
+        else {
+            completionBlock(false)
+        }
+    }
+    
+    func deleteImage(_ imageUrl:String) {
+        let desertRef = Storage.storage().reference(forURL: imageUrl)
+        
+        desertRef.delete { error in
+            if error != nil {
+                print("error while trying to delete an image")
+            } else {
+                print("image deleted")
+            }
+        }
+    }
+    
     func signUp(_ email:String, _ password:String, _ callback:@escaping (Bool) -> Void) {
         Auth.auth().createUser(withEmail: email, password: password) { (authResult, error) in
             if authResult?.user != nil {

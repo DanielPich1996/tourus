@@ -13,7 +13,7 @@ struct cellData{
     var displayCategory = String()
 }
 
-class SettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
+class SettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     @IBOutlet var profileImage: UIImageView!
     @IBOutlet var userNameLabel: UILabel!
@@ -36,9 +36,12 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let singleTap = UITapGestureRecognizer(target: self, action: #selector(SettingsViewController.tapDetected))
         let image = UIImage(named: "default_profile")
         profileImage.image = image
-        
+        profileImage.isUserInteractionEnabled = true
+        profileImage.addGestureRecognizer(singleTap)
+
         if let settings = MainModel.instance.getSettings() {
             directionalSwitch.isOn = settings.isDirectionalAudioOn
         } else {
@@ -183,4 +186,63 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         }
     }
     
+    //IMAGE
+    
+    @objc func tapDetected(){
+        showImagePicker()
+    }
+    
+    @objc private func showImagePicker(){
+        //Creating an instance of the image picker controller and using it
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.delegate = self
+        imagePickerController.allowsEditing = false
+        imagePickerController.sourceType = .photoLibrary
+        present(imagePickerController, animated: true, completion: nil)
+    }
+    
+    //Closing the picker in case of a cancelation request from the user
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    //If the user picked an image, wer'e grabbing the image
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            
+            BuisyIndicator.Instance.showBuisyIndicator()
+            self.view.isUserInteractionEnabled = false
+            
+            if let user = MainModel.instance.currentUser() {
+                MainModel.instance.getUserInfo(user.uid, callback: {(userInfo:UserInfo?) in
+                    
+                    if (userInfo != nil) {
+                        MainModel.instance.updateUserInfo(userInfo!.uid, userInfo!.profileImageUrl, image, {(res:Bool) in
+                            if(res == true) {
+                                self.profileImage.image = image
+                            } else {
+                                self.present(consts.general.getCancelAlertController(title: "Profile Image", messgae: "Error while uploading the image"), animated: true)
+                            }
+                            
+                            BuisyIndicator.Instance.hideBuisyIndicator()
+                            self.view.isUserInteractionEnabled = true
+                        })
+                    } else {
+                        self.present(consts.general.getCancelAlertController(title: "Profile Image", messgae: "Error while uploading profile image"), animated: true)
+                        
+                        BuisyIndicator.Instance.hideBuisyIndicator()
+                        self.view.isUserInteractionEnabled = true
+                    }
+                })
+            }
+        } else {
+            present(consts.general.getCancelAlertController(title: "Profile Image", messgae: "Error while selecting an image"), animated: true)
+            
+            BuisyIndicator.Instance.hideBuisyIndicator()
+            self.view.isUserInteractionEnabled = true
+        }
+        
+        self.dismiss(animated: true, completion: nil)
+    }
 }

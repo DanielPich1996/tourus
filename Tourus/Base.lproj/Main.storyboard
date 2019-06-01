@@ -673,6 +673,8 @@
                                     </button>
                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cmJ-G3-3ZH" userLabel="directional audio switch">
                                         <rect key="frame" x="242.33333333333337" y="10" width="51" height="31"/>
+                                        <color key="onTintColor" red="0.3127747838018991" green="0.72100526851323421" blue="0.99680758250000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="thumbTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <action selector="onDirectionalAudioSwitchTap:" destination="d9r-0p-FcZ" eventType="valueChanged" id="YvN-pA-xw7"/>
                                         </connections>
