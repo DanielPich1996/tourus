@@ -281,6 +281,28 @@ class MainModel {
         firebaseModel.getUserInteractionStories(callback)
     }
     
+    func updateUserPreferences(_ categories:[String]){
+        firebaseModel.updateUserPreferences(categories)
+    }
+    
+    func getCurrentUserPreferences(_ callback:@escaping ([String]) -> Void){
+        
+        firebaseModel.getCurrentUserPreferences() { categories in
+            
+            if categories.count < 1 {
+                
+                self.getAllCategories() { allCategories in
+                    
+                    self.updateUserPreferences(allCategories)
+                    callback(allCategories)
+                }
+            } else {
+            
+                callback(categories)
+            }
+        }
+    }
+    
     //temp to check
 //    func GroupInteractionsByUser(_ currUserLocation:CLLocation, _ callback: @escaping ([String:[InteractionStory]]) -> Void) {
 //        algorithmModel.GroupInteractionsByUser(currUserLocation, callback)

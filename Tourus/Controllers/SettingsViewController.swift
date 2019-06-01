@@ -38,12 +38,10 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                 let data = cellData(category: category, displayCategory: displayName)
                 self.tableViewData.append(data)
             }
-            
-            
-            MainModel.instance.getAllCategories() { categories in
-                
-                self.selectedcells = categories
-            }
+        }
+        
+        MainModel.instance.getCurrentUserPreferences() { categories in
+            self.selectedcells = categories
         }
         
         if let user = MainModel.instance.currentUser() {
@@ -63,7 +61,6 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         }
     }
     
-    
     var isOpened = false
     @IBAction func onDropExpand(_ sender: Any) {
         
@@ -78,13 +75,14 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         }
     }
     
-    @IBAction func onSignoutTap(_ sender: Any) {        
-        
+    @IBAction func onSignoutTap(_ sender: Any) {
         //Create the alert controller and actions
         let alert = UIAlertController(title: "Log Out", message: "That's it?", preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let deleteAction = UIAlertAction(title: "Log Out", style: .destructive) { _ in
             DispatchQueue.main.async {
+                
+                MainModel.instance.updateUserPreferences(self.selectedcells)
                 MainModel.instance.signOut() {() in
                     let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
                     guard let loginVC = mainStoryboard.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController else {
@@ -105,7 +103,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     
     @IBAction func onBackTap(_ sender: Any) {
         
-        //save selectedells to firebase
+        MainModel.instance.updateUserPreferences(self.selectedcells)
         self.dismiss(animated: true, completion: nil)
     }
     

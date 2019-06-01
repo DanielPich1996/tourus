@@ -315,4 +315,40 @@ class FirebaseModel {
             }
         }
     }
+    
+    func updateUserPreferences(_ categories:[String]) {
+        let user = currentUser()
+        let uid = user?.uid
+        
+        if(uid != nil) {
+            
+            var json = Dictionary<String, Double>()
+            categories.forEach() { category in
+                json[category] = 0
+            }
+        
+           self.databaseRef!.child("Preferences").child(uid!).setValue(json)
+        }
+    }
+    
+    func getCurrentUserPreferences(_ callback:@escaping ([String]) -> Void) {
+        let user = currentUser()
+        let uid = user?.uid
+        var categories = [String]()
+        
+        if(uid != nil){
+            self.databaseRef!.child("Preferences").child(uid!).observeSingleEvent(of: .value) { (snapshot) in
+                if snapshot.exists() {
+    
+                    if let value = snapshot.value as? Dictionary<String, Double> {
+                        for snap in value {
+                            let category = snap.key
+                            categories.append(category)
+                        }
+                    }
+                }
+                callback(categories)
+            }
+        }
+    }
 }
