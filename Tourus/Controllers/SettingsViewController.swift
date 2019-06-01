@@ -19,16 +19,31 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet var userNameLabel: UILabel!
     @IBOutlet var preferencesTableView: UITableView!
     @IBOutlet var preferencesButton: UIButton!
-
+    @IBOutlet weak var directionalSwitch: UISwitch!
+    
     var selectedcells = [String]()
     var tableViewData = [cellData]()
     
+    
+    @IBAction func onDirectionalAudioSwitchTap(_ sender: Any) {
+        
+        if let uid = MainModel.instance.currentUser()?.uid {
+            let settings = Settings(uid, directionalSwitch.isOn)
+            MainModel.instance.updateSettings(settings)
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         let image = UIImage(named: "default_profile")
         profileImage.image = image
+        
+        if let settings = MainModel.instance.getSettings() {
+            directionalSwitch.isOn = settings.isDirectionalAudioOn
+        } else {
+            directionalSwitch.isOn = true
+        }
         
         MainModel.instance.getAllCategories() { categories in
             
