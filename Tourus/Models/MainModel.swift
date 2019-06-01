@@ -91,6 +91,12 @@ class MainModel {
         callback(nil)
     }
     
+    func getAllCategories(_ callback: @escaping ([String]) -> Void) {
+       
+        let categories = Interaction.getCategories(database: sqlModel.database)
+        callback(categories)
+    }
+    
     private func listenToInteractionUpdates() {
         var lastUpdated = Interaction.getLastUpdateDate(database: sqlModel.database)
         lastUpdated += 1
@@ -273,6 +279,28 @@ class MainModel {
     
     func getUserInteractionStories(_ callback: @escaping ([InteractionStory]) -> Void) {
         firebaseModel.getUserInteractionStories(callback)
+    }
+    
+    func updateUserPreferences(_ categories:[String]){
+        firebaseModel.updateUserPreferences(categories)
+    }
+    
+    func getCurrentUserPreferences(_ callback:@escaping ([String]) -> Void){
+        
+        firebaseModel.getCurrentUserPreferences() { categories in
+            
+            if categories.count < 1 {
+                
+                self.getAllCategories() { allCategories in
+                    
+                    self.updateUserPreferences(allCategories)
+                    callback(allCategories)
+                }
+            } else {
+            
+                callback(categories)
+            }
+        }
     }
     
     //temp to check

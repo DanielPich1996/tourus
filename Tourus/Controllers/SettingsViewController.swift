@@ -9,24 +9,40 @@
 import UIKit
 
 struct cellData{
-    var opened = Bool()
-    var title = String()
-    var sectionData = [String]()
+    var category = String()
+    var displayCategory = String()
 }
 
 class SettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
 
     @IBOutlet var profileImage: UIImageView!
     @IBOutlet var userNameLabel: UILabel!
-    
+    @IBOutlet var preferencesTableView: UITableView!
+    @IBOutlet var preferencesButton: UIButton!
+
     var selectedcells = [String]()
-    var tableViewData = [cellData(opened: false, title: "Choose", sectionData:["a","b","c","d"])]
+    var tableViewData = [cellData]()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         let image = UIImage(named: "default_profile")
         profileImage.image = image
+        
+        MainModel.instance.getAllCategories() { categories in
+            
+            for category in categories {
+                
+                let displayName = category.replacingOccurrences(of: "_", with: " ").capitalized
+                let data = cellData(category: category, displayCategory: displayName)
+                self.tableViewData.append(data)
+            }
+        }
+        
+        MainModel.instance.getCurrentUserPreferences() { categories in
+            self.selectedcells = categories
+        }
         
         if let user = MainModel.instance.currentUser() {
             MainModel.instance.getUserInfo(user.uid, callback: { (info) in
@@ -45,12 +61,28 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         }
     }
     
+    var isOpened = false
+    @IBAction func onDropExpand(_ sender: Any) {
+        
+        isOpened = !isOpened
+        if isOpened {
+            let sections = IndexSet.init(integer: 0)
+            preferencesTableView.reloadSections(sections, with: .none)
+        }
+        else {
+            let sections = IndexSet.init(integer: 0)
+            preferencesTableView.reloadSections(sections, with: .none)
+        }
+    }
+    
     @IBAction func onSignoutTap(_ sender: Any) {
         //Create the alert controller and actions
         let alert = UIAlertController(title: "Log Out", message: "That's it?", preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let deleteAction = UIAlertAction(title: "Log Out", style: .destructive) { _ in
             DispatchQueue.main.async {
+                
+                MainModel.instance.updateUserPreferences(self.selectedcells)
                 MainModel.instance.signOut() {() in
                     let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
                     guard let loginVC = mainStoryboard.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController else {
@@ -70,40 +102,36 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     @IBAction func onBackTap(_ sender: Any) {
+        
+        MainModel.instance.updateUserPreferences(self.selectedcells)
         self.dismiss(animated: true, completion: nil)
     }
     
     
     func numberOfSections(in tableView: UITableView) -> Int {
         
-        return tableViewData.count
+        return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if tableViewData[section].opened == true {
-            return tableViewData[section].sectionData.count + 1
+        if isOpened {
+            return tableViewData.count
         }
         else{
-            return 1
+            return 0
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        let dataIndex = indexPath.row - 1
         let cell:CategoryTableViewCell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath) as! CategoryTableViewCell
         
-        var category = tableViewData[indexPath.section].title
-        var checked = false
+        let category = tableViewData[indexPath.row].category
+        let displayCategory = tableViewData[indexPath.row].displayCategory
+        let checked = selectedcells.contains(category)
         
-        if indexPath.row != 0 {
-            
-            category = tableViewData[indexPath.section].sectionData[dataIndex]
-            checked = selectedcells.contains(category)
-        }
-        
-        cell.setCellData(category, checked)
+        cell.setCellData(category, displayCategory, checked)
         return cell
     }
     
@@ -113,30 +141,14 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         let nowCell = tableView.cellForRow(at: indexPath) as! CategoryTableViewCell
         
         if !nowCell.category.isEmpty {
-            if(nowCell.category != tableViewData[0].title) {
-                
-                let categoryExists = selectedcells.contains(nowCell.category)
-                
-                if (!categoryExists) {
-                    self.selectedcells.append(nowCell.category)
-                }
-            }
             
-            if indexPath.row == 0 {
-                if tableViewData[indexPath.section].opened == true {
-                    tableViewData[indexPath.section].opened = false
-                    let sections = IndexSet.init(integer: indexPath.section)
-                    tableView.reloadSections(sections, with: .none)
-                }
-                else {
-                    tableViewData[indexPath.section].opened = true
-                    let sections = IndexSet.init(integer: indexPath.section)
-                    tableView.reloadSections(sections, with: .none)
-                }
+            let categoryExists = selectedcells.contains(nowCell.category)
+                
+            if (!categoryExists) {
+                self.selectedcells.append(nowCell.category)
             }
-            else {
-                nowCell.setCellData(nowCell.category, true)
-            }
+           
+            nowCell.setCellData(nowCell.category, nowCell.displayCategory, true)
         }
     }
     
@@ -145,18 +157,15 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         let nowCell = tableView.cellForRow(at: indexPath) as! CategoryTableViewCell
         
         if !nowCell.category.isEmpty {
-            if(nowCell.category != tableViewData[0].title) {
+            
+            let categoryExists = selectedcells.contains(nowCell.category)
                 
-                let categoryExists = selectedcells.contains(nowCell.category)
-                
-                if (categoryExists) {
-                    self.selectedcells.removeAll{ $0 == nowCell.category }
-                }
+            if (categoryExists) {
+                self.selectedcells.removeAll{ $0 == nowCell.category }
             }
             
-            if indexPath.row != 0 {
-                nowCell.setCellData(nowCell.category, false)
-            }
+            nowCell.setCellData(nowCell.category, nowCell.displayCategory, false)
         }
     }
+    
 }

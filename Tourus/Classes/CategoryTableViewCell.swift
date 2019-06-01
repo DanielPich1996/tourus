@@ -16,12 +16,15 @@ class CategoryTableViewCell : UITableViewCell {
 
     var isChecked = false
     var category = ""
+    var displayCategory = ""
     
-    public func setCellData(_ category:String, _ isChecked:Bool) {
+    public func setCellData(_ category:String, _ displayCategory:String, _ isChecked:Bool) {
         
        self.isChecked = isChecked
         self.category = category
-        categoryLabel.text = category
+        self.displayCategory = displayCategory
+        
+        categoryLabel.text = displayCategory
         
         if self.isChecked {
             accessoryType = UITableViewCell.AccessoryType.checkmark

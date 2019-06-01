@@ -75,6 +75,27 @@ extension Interaction {
         return info
     }
     
+    static func getCategories(database: OpaquePointer?) -> [String] {
+        var sqlite3_stmt: OpaquePointer? = nil
+        var categories = [String]()
+        
+        let query = "SELECT DISTINCT CATEGORY from INTERACTION"
+       
+        if (sqlite3_prepare_v2(database,query,-1,&sqlite3_stmt,nil)
+            == SQLITE_OK){
+            
+            while(sqlite3_step(sqlite3_stmt) == SQLITE_ROW) {
+                
+                let category = String(cString:sqlite3_column_text(sqlite3_stmt,0)!)
+                categories.append(category)
+            }
+        }
+        
+        sqlite3_finalize(sqlite3_stmt)
+        return categories
+    }
+    
+    
     static func addNew(database: OpaquePointer?, interaction:Interaction) {
         var sqlite3_stmt: OpaquePointer? = nil
         if (sqlite3_prepare_v2(database,"INSERT OR REPLACE INTO INTERACTION(ID, TYPE, TEXT, CATEGORY, LAST_UPDATE, OPTIONS) VALUES (?,?,?,?,?,?);",-1, &sqlite3_stmt,nil) == SQLITE_OK) {
