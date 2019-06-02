@@ -91,6 +91,12 @@ class MainModel {
         callback(nil)
     }
     
+    func getAllCategories(_ callback: @escaping ([String]) -> Void) {
+       
+        let categories = Interaction.getCategories(database: sqlModel.database)
+        callback(categories)
+    }
+    
     private func listenToInteractionUpdates() {
         var lastUpdated = Interaction.getLastUpdateDate(database: sqlModel.database)
         lastUpdated += 1
@@ -181,6 +187,10 @@ class MainModel {
             callback(info)
             NotificationModel.userInfoNotification.notify(data: info!)
         }
+    }
+    
+    func updateUserInfo(_ userId:String, _ preImageUrl:String?, _ image:UIImage?, _ completionBlock:@escaping (Bool) -> Void = {_  in}) {
+        firebaseModel.updateUserInfo(userId, preImageUrl, image, completionBlock)
     }
     
     func getImage(_ url:String, _ callback:@escaping (UIImage?)->Void){
@@ -300,18 +310,43 @@ class MainModel {
         firebaseModel.getUserInteractionStories(callback)
     }
     
-    func getAllCategories(_ callback: @escaping ([String]) -> Void) {
-        firebaseModel.getAllInteractions(callback: {(interactions) in
-            var categories = [String]()
-            
-            for interaction in interactions{
-                if !(categories.contains(interaction.category)){
-                    categories.append(interaction.category)
-                }
-            }
-            callback(categories)
-        })
+    func updateUserPreferences(_ categories:[String]){
+        firebaseModel.updateUserPreferences(categories)
     }
+    
+    func getCurrentUserPreferences(_ callback:@escaping ([String]) -> Void){
+        
+        firebaseModel.getCurrentUserPreferences() { categories in
+            
+            if categories.count < 1 {
+                
+                self.getAllCategories() { allCategories in
+                    
+                    self.updateUserPreferences(allCategories)
+                    callback(allCategories)
+                }
+            } else {
+            
+                callback(categories)
+            }
+        }
+    }
+    
+    func updateSettings(_ settings:Settings) {
+        Settings.addNew(database: sqlModel.database, settings: settings)
+    }
+    
+    func getSettings() -> Settings? {
+        let user = currentUser()
+        let uid = user?.uid
+        
+        if uid != nil {
+           return Settings.get(database: sqlModel.database, userId: uid!)
+        }
+        
+        return nil
+    }
+    
     //temp to check
 //    func GroupInteractionsByUser(_ currUserLocation:CLLocation, _ callback: @escaping ([String:[InteractionStory]]) -> Void) {
 //        algorithmModel.GroupInteractionsByUser(currUserLocation, callback)

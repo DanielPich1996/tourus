@@ -19,8 +19,8 @@ class MapViewController: UIViewController {
     
     var lat:Double? = nil
     var long:Double? = nil
-    var destinationName: String? = nil
-    var destinationRating: Double? = nil
+    var destinationName:String? = nil
+    var destinationRating:Double? = nil
     
     private let locationManager = CLLocationManager()
     private var currentCoordinate: CLLocationCoordinate2D!
@@ -28,10 +28,15 @@ class MapViewController: UIViewController {
     private var steps = [MKRoute.Step]()
     private var route:MKRoute? = nil
     private let speechSynthesizer = AVSpeechSynthesizer()
+    private var isDirectionalAudioOn = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        if let settings = MainModel.instance.getSettings() {
+            isDirectionalAudioOn = settings.isDirectionalAudioOn
+        }
+        
         locationManager.requestAlwaysAuthorization()
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
@@ -85,13 +90,21 @@ class MapViewController: UIViewController {
                 print(step.instructions)
                 print(step.distance)
                 
+                //let region = CLRegion( MTLRegion(origin: nil, size: nil)
                 let region = CLCircularRegion(center: step.polyline.coordinate, radius: 10, identifier: "\(i)")
                 
                 self.locationManager.startMonitoring(for: region)
                 let circle = MKCircle(center: region.center, radius: region.radius)
                 self.mapView.addOverlay(circle)
             }
-
+            
+            //add destination pin
+            let annotation = DestinationPointAnnotation()
+            annotation.title = self.destinationName
+            annotation.coordinate = primaryRoute.steps[primaryRoute.steps.count-1].polyline.coordinate
+            self.mapView.addAnnotation(annotation)
+            
+            //set durections
             self.setArrivalData(primaryRoute)
             self.setDirections(self.steps[0])
         }
@@ -114,8 +127,11 @@ class MapViewController: UIViewController {
     
     func setDirections(_ directions:String) {
         self.directionLabel.text = directions
-        let speechUtterance = AVSpeechUtterance(string: directions)
-        self.speechSynthesizer.speak(speechUtterance)
+        
+        if isDirectionalAudioOn {
+            let speechUtterance = AVSpeechUtterance(string: directions)
+            self.speechSynthesizer.speak(speechUtterance)
+        }
     }
     
     func setArrivalData(_ route:MKRoute) {
@@ -221,6 +237,12 @@ extension MapViewController : CLLocationManagerDelegate {
                 self.mapView.removeOverlay($0)
             }
         }
+        //remove annotations
+        self.mapView.annotations.forEach {
+            if !($0 is MKUserLocation) {
+                self.mapView.removeAnnotation($0)
+            }
+        }
     }
     
     func alertStoppingNavigation() {
@@ -273,6 +295,46 @@ extension MapViewController : CLLocationManagerDelegate {
 
 extension MapViewController : MKMapViewDelegate {
     
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        
+        if annotation is DestinationPointAnnotation {
+            
+            var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: consts.map.destinationPinIdentifier)
+            
+            if annotationView == nil {
+                annotationView = DestinationAnnotationView(annotation: annotation, reuseIdentifier: consts.map.destinationPinIdentifier)
+                
+                annotationView?.image = UIImage(named: "destinationPin.png")
+            } else {
+                annotationView?.annotation = annotation
+            }
+            
+            return annotationView
+        }
+        
+        return nil
+    }
+    
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        
+        if view is DestinationAnnotationView {
+            
+            let destView = view as! DestinationAnnotationView
+            
+            destView.selected()
+        }
+    }
+    
+    func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
+        
+        if view is DestinationAnnotationView {
+            
+            let destView = view as! DestinationAnnotationView
+            
+            destView.deselected()
+        }
+    }
+    
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         
         if overlay is MKPolyline {
@@ -317,4 +379,91 @@ extension TimeInterval {
         
         return message
     }
+}
+
+class DestinationAnnotationView: MKAnnotationView {
+    
+    private var originalTransform: CGAffineTransform? = nil
+    private let annotationFrame = CGRect(x: 0, y: 0, width: 100, height: 20)
+    private let label: UILabel
+    
+    override var annotation: MKAnnotation? {
+        didSet {
+            
+            updateTitleLabel()
+            if originalTransform == nil {
+                
+                transform = transform.scaledBy(x: 0.9, y: 0.9)
+                originalTransform = CGAffineTransform(a: transform.a, b: transform.b, c: transform.c, d: transform.d, tx: transform.tx, ty: transform.ty)
+            }
+        }
+    }
+    
+    override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
+
+        label = UILabel(frame: annotationFrame.offsetBy(dx: -15, dy: 55))
+        
+        super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
+        
+        canShowCallout = false
+        backgroundColor = .clear
+        frame = annotationFrame
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        label = UILabel(frame: annotationFrame)
+        super.init(coder: aDecoder)
+    }
+    
+    private func updateTitleLabel() {
+        
+        if subviews.contains(label) {
+            willRemoveSubview(label)
+        }
+        
+        guard let title = annotation?.title else { return }
+        
+        label.alpha = 0
+        label.textAlignment = .center
+        
+        let strokeTextAttributes = [
+            NSAttributedString.Key.strokeColor : UIColor.destinationBorderPointColor,
+            NSAttributedString.Key.foregroundColor : UIColor.destinationPointColor,
+            NSAttributedString.Key.strokeWidth : -4.0,
+            NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 10)
+            ] as [NSAttributedString.Key : Any] as [NSAttributedString.Key : Any]
+        
+        label.attributedText = NSMutableAttributedString(string: title ?? "", attributes: strokeTextAttributes)
+        
+        label.numberOfLines = 0;
+        label.sizeToFit()
+        
+        addSubview(label)
+    }
+    
+    func selected() {
+        
+        guard let transform = originalTransform else { return }
+        
+        UIView.animate(withDuration: 0.1, delay: 0.0, options: .curveLinear, animations: {
+            
+            self.transform = transform.scaledBy(x: 1.3, y: 1.3)
+            self.label.alpha = 1
+        })
+    }
+    
+    func deselected() {
+        
+        guard let transform = originalTransform else { return }
+
+        UIView.animate(withDuration: 0.1, delay: 0.0, options: .curveLinear, animations: {
+            
+            self.transform = transform
+            self.label.alpha = 0
+        })
+    }
+}
+
+class DestinationPointAnnotation : MKPointAnnotation {
+    
 }
