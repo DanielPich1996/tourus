@@ -45,25 +45,91 @@ class AlgorithmModel{
 //        updateHistoryData()
     }
     
-//    private func updateCandidateSet(_ complition: @escaping ([String]?) -> Void){
-//        MainModel.instance.getCurrentUserHistory { [weak self] (currUserHistory) in
-//            if currUserHistory == nil{
-//                complition(nil)
-//            }
-//            else{
-//                self?.candidateSet = []
-//
-//                for (type, rating) in currUserHistory!{
-//
-//                    if (Int(rating) > self!.minSupport){
-//                        self?.candidateSet.append(type)
-//                    }
-//                }
-//
-//                complition(self?.candidateSet)
-//            }
-//        }
-//    }
+    func getAlgorithmNextPlace(_ location:CLLocation, _ lastInteraction:InteractionStory?, _ callback: @escaping (Interaction) -> Void) {
+        if lastInteraction == nil {
+            setCategories()
+            //setPreferdCategories()
+        }
+        else{
+            // TODO update grade for atrraction caregories
+            lastUserInteractions?.append(lastInteraction!)
+            for category in (lastInteraction?.categories)!{
+                if categories![category] != nil {
+                    categories![category] = (categories![category]! / 2)
+                }
+            }
+        }
+        
+        GetCategoryByKnn(location) {
+            var interactionToBack:Interaction? = nil
+            var categoriesSortedByGrades = Array(self.categories!.sorted { $0.1 < $1.1 })
+            
+            while (interactionToBack == nil){
+                let group = DispatchGroup()
+                group.enter()
+                
+                self.getInteraction(category: categoriesSortedByGrades[0].key, location: location, {(interaction) in
+                    
+                    if (interaction != nil){
+                        interactionToBack = interaction!
+                    }else{
+                        self.categories![categoriesSortedByGrades[0].key] = 0
+                        categoriesSortedByGrades = Array(self.categories!.sorted { $0.1 < $1.1 })
+                    }
+                    
+                    group.leave()
+                })
+                
+                group.wait()
+            }
+            callback(interactionToBack!)
+        }
+    }
+    
+    func GetCategoryByKnn(_ currUserLocation:CLLocation, _ callback: @escaping () -> Void){
+        let currDate  = Date()
+        let interval :Double =  (currDate.timeIntervalSince(lastUpdatedInteractionsDate ?? Date(timeIntervalSince1970: 0)) / 3600)
+        let distance : Int
+        
+        if let loc = lastUpdatedPlace{
+            distance = Int(loc.distance(from: currUserLocation))
+        }else{
+            distance = 5000
+        }
+        
+        if (interval >= 1 || distance > 500){
+            MainModel.instance.getInteractionsStories(currUserLocation, {(interactions:[InteractionStory]) in
+                self.lastUpdatedPlace = currUserLocation
+                self.lastUpdatedInteractionsDate = Date()
+                self.interactionsByUser = self.GroupInteractionsByUser(interactions)
+                self.knnAlgorithm(self.interactionsByUser, callback)
+            })
+        }
+        else{
+            callback()
+        }
+    }
+    
+    func knnAlgorithm(_ usersStory: [String:[InteractionStory]], _ callback: @escaping () -> Void){
+        
+        for userData in usersStory{
+            for userStory in userData.value{
+                for category in userStory.categories{
+                    let currAnswerWeight = userStory.answer == 1 ? positiveCtgryWeight : negativeCtgryWeight
+                    let currDataGrade = (distanceGradeCalculator(distanceInMeters: userStory.distanceBetweenUsers ?? 5000,
+                                                                 topGrade: 10, interestingKilometers: 5) * distDeltaWeight +
+                        timeGradeCalculator(candidatesDate: userStory.date, topGrade: 10, interestingHourInterval: 6) * timeDeltaWeight +
+                        dayInWeekGradeCalculator(candidatesDate: userStory.date, topGrade: 10, interestingDaysInterval: 6) * dayInWeekWeight +
+                        monthGradeCalculator(candidatesDate: userStory.date, topGrade: 10, interestingMonthsInterval: 6) * monthDeltaWeight) * currAnswerWeight
+                    
+                    if (categories!.keys.contains(category)){
+                        categories![category]! += currDataGrade
+                    }
+                }
+            }
+        }
+        callback()
+    }
     
     func distanceGradeCalculator(distanceInMeters: Int, topGrade: Int, interestingKilometers: Double) -> Double{
         return (Double(topGrade) - ((Double(distanceInMeters)/(interestingKilometers * 1000)) * Double(topGrade)))
@@ -96,7 +162,128 @@ class AlgorithmModel{
         return(Double(topGrade) - (Double(monthDelta)/Double(interestingMonthsInterval)) * Double(topGrade))
     }
     
-    func getAlgorithmNextPlace(_ location:CLLocation, _ lastInteraction:InteractionStory?, _ callback: @escaping (Interaction) -> Void) {
+    func getInteraction(category:String, location:CLLocation, _ callback: @escaping (Interaction?) -> Void) -> Void {
+        MainModel.instance.fetchNearbyPlaces(location: location, radius: 2000, type: category, isOpen: true){(places, token, err) in
+            if err == nil{
+                let validPlaces = self.removePlacesByInteractions(places: places!)
+                if validPlaces.count > 1 {
+                    
+                    let placeToInteraction = validPlaces.randomElement()
+                    
+                    MainModel.instance.getInteraction(placeToInteraction!.types) { intereaction in
+                        if intereaction != nil {
+                            intereaction!.place = placeToInteraction!
+                            
+                            callback(intereaction)
+                        }
+                        else{
+                            callback(nil)
+                        }
+                    }
+                }else{
+                    callback(nil)
+                }
+            }
+        }
+    }
+    
+    func GroupInteractionsByUser(_ interactions:[InteractionStory]) ->[String:[InteractionStory]] {
+        
+        var interactionsByUser = [String:[InteractionStory]]()
+        
+        if interactions.count > 0 {
+            for story in interactions {
+                if interactionsByUser[story.userID] == nil {
+                    interactionsByUser[story.userID] = [InteractionStory]()
+                }
+                
+                interactionsByUser[story.userID]?.append(story)
+            }
+        }
+        
+        let currUserId = MainModel.instance.currentUser()?.uid
+        if (interactionsByUser[currUserId!] != nil){
+            for interaction in interactionsByUser[currUserId!]!{
+                let interval = -interaction.date.timeIntervalSinceNow
+                if (interval < 60*60*24) {
+                    lastUserInteractions?.append(interaction)
+                }
+            }
+        }
+        
+        return(interactionsByUser)
+    }
+    
+    func setCategories(){
+        let group = DispatchGroup()
+        group.enter()
+        
+        MainModel.instance.getAllCategories(){(_categories) in
+            self.categories = [String:Double]()
+            for cat in _categories{
+                self.categories![cat] = 0
+            }
+            group.leave()
+        }
+        
+        group.wait()
+    }
+    
+    func setPreferdCategories() {
+        let group = DispatchGroup()
+        group.enter()
+        
+        MainModel.instance.getCurrentUserPreferences(){(_preferdCategories) in
+            if _preferdCategories.count > 10  {
+                self.prferdCategories?.append(contentsOf: _preferdCategories)
+            }
+            group.leave()
+        }
+        group.wait()
+    }
+    
+    func removePlacesByInteractions(places:[Place]) -> [Place] {
+        var placesToReturn = [Place]()
+        
+        for place in places{
+            var ifAppend = true
+            
+            for interaction in lastUserInteractions!{
+                if interaction.placeID == place.googleID{
+                    ifAppend = false
+                    break
+                }
+            }
+            
+            if ifAppend{
+                placesToReturn.append(place)
+            }
+        }
+        
+        return (placesToReturn)
+    }
+    
+//    private func updateCandidateSet(_ complition: @escaping ([String]?) -> Void){
+//        MainModel.instance.getCurrentUserHistory { [weak self] (currUserHistory) in
+//            if currUserHistory == nil{
+//                complition(nil)
+//            }
+//            else{
+//                self?.candidateSet = []
+//
+//                for (type, rating) in currUserHistory!{
+//
+//                    if (Int(rating) > self!.minSupport){
+//                        self?.candidateSet.append(type)
+//                    }
+//                }
+//
+//                complition(self?.candidateSet)
+//            }
+//        }
+//    }
+//
+//    func getAlgorithmNextPlace(_ location:CLLocation, _ lastInteraction:InteractionStory?, _ callback: @escaping (Interaction) -> Void) {
 //        MainModel.instance.fetchNearbyPlaces(location: location, callback: { (places, err)  in
 //            if ((places == nil) || (places?.count == 0)){
 //                DispatchQueue.main.async {
@@ -126,78 +313,8 @@ class AlgorithmModel{
 //                })
 //            }
 //        })
-        if lastInteraction == nil {
-            setCategories()
-            //setPreferdCategories()
-            //setUserLastInteractions()
-        }
-        else{
-            // TODO update grade for atrraction caregories
-            lastUserInteractions?.append(lastInteraction!)
-            for category in (lastInteraction?.categories)!{
-                if categories![category] != nil {
-                    categories![category] = (categories![category]! / 2)
-                }
-            }
-        }
-        
-        GetCategoryByKnn(location) { (categoriesGrades) in
-            var interactionToBack:Interaction? = nil
-            var categoriesSortedByGrades = Array(self.categories!.sorted { $0.1 < $1.1 })
-            
-            while (interactionToBack == nil){
-                let group = DispatchGroup()
-                group.enter()
-                
-                self.getInteraction(category: categoriesSortedByGrades[0].key, location: location, {(interaction) in
-                    if (interaction != nil){
-                        interactionToBack = interaction!
-                    }else{
-                        self.categories![categoriesSortedByGrades[0].key] = 0
-                        categoriesSortedByGrades = Array(self.categories!.sorted { $0.1 < $1.1 })
-                    }
-                    
-                    group.leave()
-                })
-                
-                group.wait()
-            }
-            callback(interactionToBack!)
-        }
-    }
-    
-    func knnAlgorithm(_ usersStory: [String:[InteractionStory]], _ callback: @escaping ([String:Double]) -> Void){
-        
-        for userData in usersStory{
-            for userStory in userData.value{
-                for category in userStory.categories{
-                    let currAnswerWeight = userStory.answer == 1 ? positiveCtgryWeight : negativeCtgryWeight
-                    let currDataGrade = (distanceGradeCalculator(distanceInMeters: userStory.distanceBetweenUsers ?? 5000,
-                                                                 topGrade: 10, interestingKilometers: 5) * distDeltaWeight +
-                        timeGradeCalculator(candidatesDate: userStory.date, topGrade: 10, interestingHourInterval: 6) * timeDeltaWeight +
-                        dayInWeekGradeCalculator(candidatesDate: userStory.date, topGrade: 10, interestingDaysInterval: 6) * dayInWeekWeight +
-                        monthGradeCalculator(candidatesDate: userStory.date, topGrade: 10, interestingMonthsInterval: 6) * monthDeltaWeight) * currAnswerWeight
-                    
-                    if (categories!.keys.contains(category)){
-                        categories![category]! += currDataGrade
-                    }
-                }
-            }
-        }
-        
-//        for currCat in categoriesGrades{
-//            if currCat.value < 10 {
-//                remIndx.append(currCat.key)
-//            }
-//        }
+//    }
 //
-//        for currRem in remIndx {
-//            categoriesGrades.remove(at: categoriesGrades.index(forKey: currRem)!)
-//        }
-        
-        callback(categories!)
-    }
-    
 //    func algorithmOrchestra(_ currUserLocation:CLLocation, _ places: [Place], _ callback: @escaping (Place) -> Void){
 //        let group = DispatchGroup()
 //        var isKnn = false
@@ -272,274 +389,145 @@ class AlgorithmModel{
 //            }
 //        }
 //    }
-    
-    func GetCategoryByKnn(_ currUserLocation:CLLocation, _ callback: @escaping ([String:Double]) -> Void){
-        let currDate  = Date()
-        let interval :Double =  (currDate.timeIntervalSince(lastUpdatedInteractionsDate ?? Date(timeIntervalSince1970: 0)) / 3600)
-        let distance : Int
-        
-        if let loc = lastUpdatedPlace{
-            distance = Int(loc.distance(from: currUserLocation))
-        }else{
-            distance = 5000
-        }
-        
-        if (interval >= 1 || distance > 500){
-            MainModel.instance.getInteractionsStories(currUserLocation, {(interactions:[InteractionStory]) in
-                self.lastUpdatedPlace = currUserLocation
-                self.lastUpdatedInteractionsDate = Date()
-                self.interactionsByUser = self.GroupInteractionsByUser(interactions)
-                self.knnAlgorithm(self.interactionsByUser, callback)
-            })
-        }
-        else{
-            callback(categories!)
-        }
-    }
-    
-    private func getValidPlacesByTypes(_ places: [Place],types: [String]) -> [Place]{
-        var validPlaces = [Place]()
-        
-        for place in places{
-            for type in place.types!{
-                if types.contains(type){
-                    validPlaces.append(place)
-                    
-                    break
-                }
-            }
-        }
-        
-        return validPlaces
-    }
-    
-    private func loadFreqSet(_ availableUsersCategories:[[String]]) -> [String:Int] {
-        var counter:Int = 0
-        var frequencyTable:[String:Int] = [:]
-        
-        for i in 0..<candidateSet.count {
-            counter = 0
-            for j in 0..<availableUsersCategories.count {
-                for q in 0..<availableUsersCategories[j].count {
-                    if candidateSet[i] == availableUsersCategories[j][q] {
-                        counter += 1
-                    }
-                }
-            }
-            
-            frequencyTable[candidateSet[i]] = counter
-            
-        }
-        
-        return frequencyTable
-    }
-    
-    //loadFreqSet()
-    
-    private func combineArray<T:Equatable>(data:[T]) -> [[T]] {
-        var c:[[T]] = []
-        
-        for i in 0..<data.count {
-            for j in i+1..<data.count {
-                if data[i] != data[j] {
-                    c.append([data[i],data[j]])
-                }
-            }
-        }
-        return c
-    }
-    
-    private func getValidTypes(_ places:[Place]) -> [String]{
-        var validTypes = [String]()
-        
-        for place in places{
-            if place.types != nil{
-                for type in place.types!{
-                    if (!validTypes.contains(type)){
-                        validTypes.append(type)
-                    }
-                }
-            }
-        }
-
-        return validTypes
-    }
-    
-    private func getRelevantHistory(_ places:[Place]) ->  [[String]] {
-        var data:[[String]] = [[String]]()
-        let validTypes = getValidTypes(places)
-        let group = DispatchGroup()
-
-        group.enter()
-        MainModel.instance.getAllUsersHistory { [weak self] (preferenceDict) in
-            for i in 0..<preferenceDict.count{
-                var newUserPref = [String]()
-                
-                for (type, rating) in preferenceDict[i]{
-                    if((self!.minSupport < Int(rating)) && validTypes.contains(type)){
-                        newUserPref.append(type)
-                    }
-                }
-                
-                if (newUserPref != []){
-                    data.append(newUserPref)
-                }
-            }
-            
-            group.leave()
-        }
-        
-        group.wait()
-        return data
-    }
-    
-    //Algo
-    func choosePlace(_ places: [Place]) -> [String]? {
-        var data:[[String]] = [[String]]()
-        var frequencyTable:[String:Int] = [:]
-        
-        //initialize data by places array from Baruch
-        data = getRelevantHistory(places)
-        
-        //Initialize FreqSet
-        frequencyTable = loadFreqSet(data)
-        
-        
-        var newFreqTable:[String:Int] = frequencyTable
-        
-        for (key,value) in newFreqTable {
-            if value < minSupport {
-                newFreqTable.removeValue(forKey: key)
-            }
-        }
-        
-        let fqTable:[String] = Array(newFreqTable.keys)
-        var genereteTable = [[String]](repeating: [], count: newFreqTable.count)
-        genereteTable = combineArray(data: fqTable)
-        var lastFreqCounts:[Int] = [Int](repeating: 0, count: genereteTable.count)
-        print(genereteTable)
-        
-        for i in 0..<data.count {
-            for w in 0..<genereteTable.count {
-                for r in 0..<genereteTable[w].count - 1 {
-                    if data[i].contains(genereteTable[w][r]) && data[i].contains(genereteTable[w][r + 1])  {
-                        print("\(i) -> \(genereteTable[w][r]),\(genereteTable[w][r + 1])")
-                        lastFreqCounts[w] += 1
-                    }
-                }
-            }
-        }
-        print(lastFreqCounts)
-        
-        if lastFreqCounts.count == 0{
-            return nil
-        }
-        
-        return genereteTable[lastFreqCounts.index(of: lastFreqCounts.max()!)!]
-    }
-    
-    
-    
-    func GroupInteractionsByUser(_ interactions:[InteractionStory]) ->[String:[InteractionStory]] {
-        
-        var interactionsByUser = [String:[InteractionStory]]()
-            
-        if interactions.count > 0 {
-            for story in interactions {
-                if interactionsByUser[story.userID] == nil {
-                    interactionsByUser[story.userID] = [InteractionStory]()
-                }
-                    
-                interactionsByUser[story.userID]?.append(story)
-            }
-        }
-        
-        return(interactionsByUser)
-    }
-    
-    func setCategories(){
-        let group = DispatchGroup()
-        group.enter()
-        
-        MainModel.instance.getAllCategories(){(_categories) in
-            self.categories = [String:Double]()
-            for cat in _categories{
-                self.categories![cat] = 0
-            }
-            group.leave()
-        }
-        
-        group.wait()
-    }
-    
-    func setPreferdCategories() {
-        let group = DispatchGroup()
-        group.enter()
-        
-        MainModel.instance.getCurrentUserPreferences(){(_preferdCategories) in
-            if _preferdCategories.count > 10  {
-                self.prferdCategories?.append(contentsOf: _preferdCategories)
-            }
-            group.leave()
-        }
-        group.wait()
-    }
-    
-    func setUserLastInteractions(){
-        let group = DispatchGroup()
-        group.enter()
-        
-        MainModel.instance.getUserInteractionStories(){(_lastIntractions) in
-            self.lastUserInteractions = [InteractionStory]()
-            self.lastUserInteractions?.append(contentsOf: _lastIntractions)
-            group.leave()
-        }
-        group.wait()
-    }
-    
-    func removePlacesByInteractions(places:[Place]) -> [Place] {
-        var placesToReturn = [Place]()
-        
-        for place in places{
-            var ifAppend = true
-            
-            for interaction in lastUserInteractions!{
-                if interaction.placeID == place.googleID{
-                    ifAppend = false
-                    break
-                }
-            }
-            
-            if ifAppend{
-                placesToReturn.append(place)
-            }
-        }
-        
-        return (placesToReturn)
-    }
-    
-    func getInteraction(category:String, location:CLLocation, _ callback: @escaping (Interaction?) -> Void) -> Void {
-        MainModel.instance.fetchNearbyPlaces(location: location, radius: 2000, type: category, isOpen: true){(places, token, err) in
-            if err == nil{
-                let validPlaces = self.removePlacesByInteractions(places: places!)
-                if validPlaces.count > 1 {
-                    
-                    let placeToInteraction = validPlaces.randomElement()
-                    
-                    MainModel.instance.getInteraction(placeToInteraction!.types) { intereaction in
-                        if intereaction != nil {
-                            intereaction!.place = placeToInteraction!
-                            
-                            callback(intereaction)
-                        }
-                        else{
-                            callback(nil)
-                        }
-                    }
-                }else{
-                    callback(nil)
-                }
-            }
-        }
-    }
+//    
+//    private func getValidPlacesByTypes(_ places: [Place],types: [String]) -> [Place]{
+//        var validPlaces = [Place]()
+//        
+//        for place in places{
+//            for type in place.types!{
+//                if types.contains(type){
+//                    validPlaces.append(place)
+//                    
+//                    break
+//                }
+//            }
+//        }
+//        
+//        return validPlaces
+//    }
+//    
+//    private func loadFreqSet(_ availableUsersCategories:[[String]]) -> [String:Int] {
+//        var counter:Int = 0
+//        var frequencyTable:[String:Int] = [:]
+//        
+//        for i in 0..<candidateSet.count {
+//            counter = 0
+//            for j in 0..<availableUsersCategories.count {
+//                for q in 0..<availableUsersCategories[j].count {
+//                    if candidateSet[i] == availableUsersCategories[j][q] {
+//                        counter += 1
+//                    }
+//                }
+//            }
+//            
+//            frequencyTable[candidateSet[i]] = counter
+//            
+//        }
+//        
+//        return frequencyTable
+//    }
+//    
+//    //loadFreqSet()
+//    
+//    private func combineArray<T:Equatable>(data:[T]) -> [[T]] {
+//        var c:[[T]] = []
+//        
+//        for i in 0..<data.count {
+//            for j in i+1..<data.count {
+//                if data[i] != data[j] {
+//                    c.append([data[i],data[j]])
+//                }
+//            }
+//        }
+//        return c
+//    }
+//    
+//    private func getValidTypes(_ places:[Place]) -> [String]{
+//        var validTypes = [String]()
+//        
+//        for place in places{
+//            if place.types != nil{
+//                for type in place.types!{
+//                    if (!validTypes.contains(type)){
+//                        validTypes.append(type)
+//                    }
+//                }
+//            }
+//        }
+//
+//        return validTypes
+//    }
+//    
+//    private func getRelevantHistory(_ places:[Place]) ->  [[String]] {
+//        var data:[[String]] = [[String]]()
+//        let validTypes = getValidTypes(places)
+//        let group = DispatchGroup()
+//
+//        group.enter()
+//        MainModel.instance.getAllUsersHistory { [weak self] (preferenceDict) in
+//            for i in 0..<preferenceDict.count{
+//                var newUserPref = [String]()
+//                
+//                for (type, rating) in preferenceDict[i]{
+//                    if((self!.minSupport < Int(rating)) && validTypes.contains(type)){
+//                        newUserPref.append(type)
+//                    }
+//                }
+//                
+//                if (newUserPref != []){
+//                    data.append(newUserPref)
+//                }
+//            }
+//            
+//            group.leave()
+//        }
+//        
+//        group.wait()
+//        return data
+//    }
+//    
+//    //Algo
+//    func choosePlace(_ places: [Place]) -> [String]? {
+//        var data:[[String]] = [[String]]()
+//        var frequencyTable:[String:Int] = [:]
+//        
+//        //initialize data by places array from Baruch
+//        data = getRelevantHistory(places)
+//        
+//        //Initialize FreqSet
+//        frequencyTable = loadFreqSet(data)
+//        
+//        
+//        var newFreqTable:[String:Int] = frequencyTable
+//        
+//        for (key,value) in newFreqTable {
+//            if value < minSupport {
+//                newFreqTable.removeValue(forKey: key)
+//            }
+//        }
+//        
+//        let fqTable:[String] = Array(newFreqTable.keys)
+//        var genereteTable = [[String]](repeating: [], count: newFreqTable.count)
+//        genereteTable = combineArray(data: fqTable)
+//        var lastFreqCounts:[Int] = [Int](repeating: 0, count: genereteTable.count)
+//        print(genereteTable)
+//        
+//        for i in 0..<data.count {
+//            for w in 0..<genereteTable.count {
+//                for r in 0..<genereteTable[w].count - 1 {
+//                    if data[i].contains(genereteTable[w][r]) && data[i].contains(genereteTable[w][r + 1])  {
+//                        print("\(i) -> \(genereteTable[w][r]),\(genereteTable[w][r + 1])")
+//                        lastFreqCounts[w] += 1
+//                    }
+//                }
+//            }
+//        }
+//        print(lastFreqCounts)
+//        
+//        if lastFreqCounts.count == 0{
+//            return nil
+//        }
+//        
+//        return genereteTable[lastFreqCounts.index(of: lastFreqCounts.max()!)!]
+//    }
 }

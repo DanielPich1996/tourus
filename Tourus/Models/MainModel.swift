@@ -261,28 +261,7 @@ class MainModel {
         }
     }
     
-    func fetchNearbyPlaces(location: CLLocation, radius:Int = 3000, type:String?=nil, isOpen:Bool=true, callback: @escaping ([Place]?, String?, String?) -> Void){
-//        placesModel.fetchGoogleNearbyPlaces(location: location ,radius: radius, type:type, isOpen:isOpen, callback: {(places, token, err) in
-//            if(err == nil){
-//                var placesBack = [Place]()
-//                placesBack += places!
-//
-//                if token != nil{
-//                    self.placesModel.fetchMoreGoogleNearbyPlaces(nextPgeToken: token!, callback: { (morePlaces, token, err) in
-//                        if (err == nil){
-//                            placesBack += morePlaces!
-//                        }
-//                        callback(placesBack, nil)
-//                    })
-//                }else{
-//                    callback(placesBack, nil)
-//                }
-//            }
-//            else{
-//                callback([Place](), err)
-//            }
-//        });
-        
+    func fetchNearbyPlaces(location: CLLocation, radius:Int = 3000, type:String?=nil, isOpen:Bool=true, callback: @escaping ([Place]?, String?, String?) -> Void){        
         placesModel.fetchGoogleNearbyPlaces(location: location ,radius: radius, type:type, isOpen:isOpen, callback: callback)
     }
     
@@ -346,10 +325,5 @@ class MainModel {
         
         return nil
     }
-    
-    //temp to check
-//    func GroupInteractionsByUser(_ currUserLocation:CLLocation, _ callback: @escaping ([String:[InteractionStory]]) -> Void) {
-//        algorithmModel.GroupInteractionsByUser(currUserLocation, callback)
-//    }
     
 }
