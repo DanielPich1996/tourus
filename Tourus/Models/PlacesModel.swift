@@ -21,9 +21,13 @@ class PlacesModel {
     
     
     
-    func fetchGoogleNearbyPlaces(location: String!, radius: Int!, type:String? = nil, isOpen:Bool?=true, callback: @escaping ([Place]?, String?) -> Void) {
+    func fetchGoogleNearbyPlaces(location: CLLocation, radius: Int!, type:String? = nil, isOpen:Bool?=true, callback: @escaping ([Place]?, String?, String?) -> Void) {
+        let latitude:String = String(format: "%f", location.coordinate.latitude)
+        let longitude:String = String(format:"%f", location.coordinate.longitude)
+        let loc:String = latitude + "," + longitude
+        
         var urlString = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?"
-        urlString+="location="+location
+        urlString+="location="+loc
         urlString+="&radius="+String(radius)
         //urlString+="&fields=photos" //,formatted_address,name,rating,opening_hours"
         urlString+="&language=en"
@@ -40,7 +44,7 @@ class PlacesModel {
             URLSession.shared.dataTask(with: url) {(data, response, error) in
                 do {
                     if (error != nil) {
-                        callback(nil,error?.localizedDescription)
+                        callback(nil, nil, error?.localizedDescription)
                         return
                     }
                     let googlePlacesResponse = try JSONDecoder().decode(GooglePlacesResponse.self, from: data!)
@@ -50,9 +54,38 @@ class PlacesModel {
                         return
                     }
                     callback(googlePlacesResponse.results.map({ (place) -> Place in
-                        return Place(googlePlace : place)}),nil)
+                        return Place(googlePlace : place)}), googlePlacesResponse.next_page_token ,nil)
                 } catch {
-                    callback(nil,error.localizedDescription)
+                    callback(nil, nil, error.localizedDescription)
+                }
+                }.resume()
+        } else {
+            print("could not open url, equals to nil")
+        }
+    }
+    
+    func fetchMoreGoogleNearbyPlaces(nextPgeToken:String, callback: @escaping ([Place]?, String?, String?) -> Void) {
+        var urlString = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?"
+        urlString+="pagetoken="+nextPgeToken
+        urlString+="&key="+apiWebKey
+        
+        if let url = URL(string: urlString) {
+            URLSession.shared.dataTask(with: url) {(data, response, error) in
+                do {
+                    if (error != nil) {
+                        callback(nil, nil, error?.localizedDescription)
+                        return
+                    }
+                    let googlePlacesResponse = try JSONDecoder().decode(GooglePlacesResponse.self, from: data!)
+                    let status = googlePlacesResponse.status;
+                    if status == "NOT_FOUND" || status == "REQUEST_DENIED" {
+                        //callback(nil,status)
+                        return
+                    }
+                    callback(googlePlacesResponse.results.map({ (place) -> Place in
+                        return Place(googlePlace : place)}), googlePlacesResponse.next_page_token, nil)
+                } catch {
+                    callback(nil, nil, error.localizedDescription)
                 }
                 }.resume()
         } else {

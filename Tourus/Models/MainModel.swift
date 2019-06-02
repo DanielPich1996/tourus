@@ -31,8 +31,8 @@ class MainModel {
         })
     }
     
-    func getAlgorithmNextPlace(_ location:String, _ callback: @escaping (Interaction) -> Void) {
-        algorithmModel.getAlgorithmNextPlace(location, callback)
+    func getAlgorithmNextPlace(_ location:CLLocation, interaction:InteractionStory?, _ callback: @escaping (Interaction) -> Void) {
+        algorithmModel.getAlgorithmNextPlace(location, interaction, callback)
     }
     
     func getAllUsersHistory(_ callback: @escaping ([[String : Double]]) -> Void){
@@ -261,9 +261,13 @@ class MainModel {
         }
     }
     
-    func fetchNearbyPlaces(location: String, radius:Int = 3000, type:String?=nil, isOpen:Bool=true, callback: @escaping ([Place]?, String?) -> Void){
-        placesModel.fetchGoogleNearbyPlaces(location: location ,radius: radius, type:type, isOpen:isOpen, callback: callback);
+    func fetchNearbyPlaces(location: CLLocation, radius:Int = 3000, type:String?=nil, isOpen:Bool=true, callback: @escaping ([Place]?, String?, String?) -> Void){        
+        placesModel.fetchGoogleNearbyPlaces(location: location ,radius: radius, type:type, isOpen:isOpen, callback: callback)
     }
+    
+//    func fetchMoreNearbyPlaces(token: String, callback: @escaping ([Place]?, String?, String?) -> Void){
+//        placesModel.fetchMoreGoogleNearbyPlaces(nextPgeToken: token, callback: callback)
+//    }
     
     func navigate(_ latitude:String, _ longitude:String) {
         placesModel.navigate(latitude, longitude)
@@ -321,10 +325,5 @@ class MainModel {
         
         return nil
     }
-    
-    //temp to check
-//    func GroupInteractionsByUser(_ currUserLocation:CLLocation, _ callback: @escaping ([String:[InteractionStory]]) -> Void) {
-//        algorithmModel.GroupInteractionsByUser(currUserLocation, callback)
-//    }
     
 }

@@ -22,6 +22,10 @@ class FirebaseModel {
         FirebaseApp.configure()
         databaseRef = Database.database().reference()
         firestoreRef = Firestore.firestore()
+        
+//        getAllInteractions(callback: {(int) in
+//            print(int)
+//        })
     }
     
     
@@ -29,6 +33,22 @@ class FirebaseModel {
         let stRef = databaseRef.child(consts.names.interactionsTableName)
         let fbQuery = stRef.queryOrdered(byChild: "lastUpdate").queryStarting(atValue: from)
         fbQuery.observe(.value) { (snapshot) in
+            
+            var data = [Interaction]()
+            
+            if let value = snapshot.value as? [String : Any] {
+                for (id, json) in value {
+                    data.append(Interaction(_id: id, json: json as! [String : Any]))
+                }
+            }
+            
+            callback(data)
+        }
+    }
+    
+    func getAllInteractions(callback:@escaping ([Interaction])->Void) {
+        let stRef = databaseRef.child(consts.names.interactionsTableName)
+        stRef.observeSingleEvent(of: .value) { (snapshot) in
             
             var data = [Interaction]()
             
