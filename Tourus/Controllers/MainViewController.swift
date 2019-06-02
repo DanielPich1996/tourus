@@ -76,12 +76,9 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     
     //MARK: ALGORYTHM
     func getNextInteraction(interaction:InteractionStory?) {
-//        let latitude:String = String(format: "%f", currUserLocation!.coordinate.latitude)
-//        let longitude:String = String(format:"%f", currUserLocation!.coordinate.longitude)
-//        let loc:String = latitude + "," + longitude
         
         MainModel.instance.getAlgorithmNextPlace(currUserLocation!, interaction: interaction) { interact in
-            self.interaction = interact
+            self.interaction = Interaction(interact.id, interact.isDeleted, interact.type.rawValue, interact.text, interact.options, interact.category, interact.lastUpdate, interact.place!)
             
             if self.interaction != nil {
                 self.setInteractionwithAnimation(self.interaction!)
@@ -466,7 +463,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
                         
                         if self.interaction!.place!.picturesUrls.count > 1 {
                             MainModel.instance.getPlaceImage((self.interaction?.place?.googleID)!, self.interaction!.place!.picturesUrls[1], 800, 0.4, {(image, placeID) in
-                                if((self.interaction?.place?.googleID)! == placeID ){
+                                if((self.interaction?.place?.googleID) ?? nil == placeID ){
                                     if let imageToSet = image {
                                         self.photos.append(imageToSet)
                                         self.setInfoImage(imageToSet)
@@ -497,7 +494,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
                 
                 for index in start...end{
                     MainModel.instance.getPlaceImage((interaction?.place?.googleID)!  ,interaction!.place!.picturesUrls[index], 800, 0.4, {(image, placeID) in
-                        if(placeID == (self.interaction?.place?.googleID)!){
+                        if(placeID == (self.interaction?.place?.googleID) ?? nil ){
                             if let imageToSet = image {
                                 self.photos.append(imageToSet)
                             }
