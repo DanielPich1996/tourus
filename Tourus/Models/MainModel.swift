@@ -31,8 +31,8 @@ class MainModel {
         })
     }
     
-    func getAlgorithmNextPlace(_ location:CLLocation, _ callback: @escaping (Interaction) -> Void) {
-        algorithmModel.getAlgorithmNextPlace(location, callback)
+    func getAlgorithmNextPlace(_ location:CLLocation, interaction:InteractionStory?, _ callback: @escaping (Interaction) -> Void) {
+        algorithmModel.getAlgorithmNextPlace(location, interaction, callback)
     }
     
     func getAllUsersHistory(_ callback: @escaping ([[String : Double]]) -> Void){
@@ -261,29 +261,29 @@ class MainModel {
         }
     }
     
-    func fetchNearbyPlaces(location: CLLocation, radius:Int = 3000, type:String?=nil, isOpen:Bool=true, callback: @escaping ([Place]?, String?) -> Void){
-        var placesBack = [Place]()
+    func fetchNearbyPlaces(location: CLLocation, radius:Int = 3000, type:String?=nil, isOpen:Bool=true, callback: @escaping ([Place]?, String?, String?) -> Void){
+//        placesModel.fetchGoogleNearbyPlaces(location: location ,radius: radius, type:type, isOpen:isOpen, callback: {(places, token, err) in
+//            if(err == nil){
+//                var placesBack = [Place]()
+//                placesBack += places!
+//
+//                if token != nil{
+//                    self.placesModel.fetchMoreGoogleNearbyPlaces(nextPgeToken: token!, callback: { (morePlaces, token, err) in
+//                        if (err == nil){
+//                            placesBack += morePlaces!
+//                        }
+//                        callback(placesBack, nil)
+//                    })
+//                }else{
+//                    callback(placesBack, nil)
+//                }
+//            }
+//            else{
+//                callback([Place](), err)
+//            }
+//        });
         
-        placesModel.fetchGoogleNearbyPlaces(location: location ,radius: radius, type:type, isOpen:isOpen, callback: {(places, token, err) in
-            if(err == nil){
-                
-                placesBack += places!
-                
-                if token != nil{
-                    self.placesModel.fetchMoreGoogleNearbyPlaces(nextPgeToken: token!, callback: { (morePlaces, token, err) in
-                        if (err == nil){
-                            placesBack += morePlaces!
-                        }
-                        callback(placesBack, nil)
-                    })
-                }else{
-                    callback(placesBack, nil)
-                }
-            }
-            else{
-                callback(places, err)
-            }
-        });
+        placesModel.fetchGoogleNearbyPlaces(location: location ,radius: radius, type:type, isOpen:isOpen, callback: callback)
     }
     
 //    func fetchMoreNearbyPlaces(token: String, callback: @escaping ([Place]?, String?, String?) -> Void){

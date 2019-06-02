@@ -27,6 +27,10 @@ class AlgorithmModel{
     var interactionsByUser = [String:[InteractionStory]]()
     var lastUpdatedInteractionsDate:Date?
     var lastUpdatedPlace:CLLocation?
+    var categories:[String:Double]? = nil
+    var prferdCategories:[String]? = nil
+    var lastUserInteractions:[InteractionStory]? = [InteractionStory]()
+    
     
     // KNN weights constants
     private let distDeltaWeight = 1.0
@@ -37,29 +41,29 @@ class AlgorithmModel{
     private let negativeCtgryWeight = -1.0
     
     init() {
-        candidateSet = []
-        updateHistoryData()
+//        candidateSet = []
+//        updateHistoryData()
     }
     
-    private func updateCandidateSet(_ complition: @escaping ([String]?) -> Void){
-        MainModel.instance.getCurrentUserHistory { [weak self] (currUserHistory) in
-            if currUserHistory == nil{
-                complition(nil)
-            }
-            else{
-                self?.candidateSet = []
-                
-                for (type, rating) in currUserHistory!{
-                    
-                    if (Int(rating) > self!.minSupport){
-                        self?.candidateSet.append(type)
-                    }
-                }
-                
-                complition(self?.candidateSet)
-            }
-        }
-    }
+//    private func updateCandidateSet(_ complition: @escaping ([String]?) -> Void){
+//        MainModel.instance.getCurrentUserHistory { [weak self] (currUserHistory) in
+//            if currUserHistory == nil{
+//                complition(nil)
+//            }
+//            else{
+//                self?.candidateSet = []
+//
+//                for (type, rating) in currUserHistory!{
+//
+//                    if (Int(rating) > self!.minSupport){
+//                        self?.candidateSet.append(type)
+//                    }
+//                }
+//
+//                complition(self?.candidateSet)
+//            }
+//        }
+//    }
     
     func distanceGradeCalculator(distanceInMeters: Int, topGrade: Int, interestingKilometers: Double) -> Double{
         return (Double(topGrade) - ((Double(distanceInMeters)/(interestingKilometers * 1000)) * Double(topGrade)))
@@ -92,34 +96,77 @@ class AlgorithmModel{
         return(Double(topGrade) - (Double(monthDelta)/Double(interestingMonthsInterval)) * Double(topGrade))
     }
     
-    func getAlgorithmNextPlace(_ location:CLLocation, _ callback: @escaping (Interaction) -> Void) {
-        MainModel.instance.fetchNearbyPlaces(location: location, callback: { (places, err)  in
-            if ((places == nil) || (places?.count == 0)){
-                DispatchQueue.main.async {
-                    let alert = UIAlertController(title: "Lonley:'(", message: "Couldn't fetch any place around you...", preferredStyle: UIAlertController.Style.alert)
-                    alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: nil))
-                    
-                    UIApplication.topViewController()?.present(alert, animated: true, completion: nil)
+    func getAlgorithmNextPlace(_ location:CLLocation, _ lastInteraction:InteractionStory?, _ callback: @escaping (Interaction) -> Void) {
+//        MainModel.instance.fetchNearbyPlaces(location: location, callback: { (places, err)  in
+//            if ((places == nil) || (places?.count == 0)){
+//                DispatchQueue.main.async {
+//                    let alert = UIAlertController(title: "Lonley:'(", message: "Couldn't fetch any place around you...", preferredStyle: UIAlertController.Style.alert)
+//                    alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.default, handler: nil))
+//
+//                    UIApplication.topViewController()?.present(alert, animated: true, completion: nil)
+//                }
+//            }
+//            else{
+//                MainModel.instance.getAllCategories({(categories) in
+//                    if categories.count > 10
+//                    {
+//                        var filteredPlaces = self.getValidPlacesByTypes(places!, types: categories)
+//
+//                        self.algorithmOrchestra(location, filteredPlaces) { place in
+//                            MainModel.instance.getInteraction(place.types) { intereaction in
+//
+//                                intereaction!.place = place
+//
+//                                DispatchQueue.main.async {
+//                                    callback(intereaction!)
+//                                }
+//                            }
+//                        }
+//                    }
+//                })
+//            }
+//        })
+        if lastInteraction == nil {
+            setCategories()
+            //setPreferdCategories()
+            //setUserLastInteractions()
+        }
+        else{
+            // TODO update grade for atrraction caregories
+            lastUserInteractions?.append(lastInteraction!)
+            for category in (lastInteraction?.categories)!{
+                if categories![category] != nil {
+                    categories![category] = (categories![category]! / 2)
                 }
             }
-            else{
-                self.algorithmOrchestra(location, places!) { place in
-                    MainModel.instance.getInteraction(place.types) { intereaction in
-                        
-                        intereaction!.place = place
-                        
-                        DispatchQueue.main.async {
-                            callback(intereaction!)
-                        }
+        }
+        
+        GetCategoryByKnn(location) { (categoriesGrades) in
+            var interactionToBack:Interaction? = nil
+            var categoriesSortedByGrades = Array(self.categories!.sorted { $0.1 < $1.1 })
+            
+            while (interactionToBack == nil){
+                let group = DispatchGroup()
+                group.enter()
+                
+                self.getInteraction(category: categoriesSortedByGrades[0].key, location: location, {(interaction) in
+                    if (interaction != nil){
+                        interactionToBack = interaction!
+                    }else{
+                        self.categories![categoriesSortedByGrades[0].key] = 0
+                        categoriesSortedByGrades = Array(self.categories!.sorted { $0.1 < $1.1 })
                     }
-                }
+                    
+                    group.leave()
+                })
+                
+                group.wait()
             }
-        })
+            callback(interactionToBack!)
+        }
     }
     
-    func knnAlgorithm(_ usersStory: [String:[InteractionStory]],_ places: [Place], _ callback: @escaping ([String:Double]) -> Void){
-        var categoriesGrades = [String:Double]()
-        var remIndx = [String]()
+    func knnAlgorithm(_ usersStory: [String:[InteractionStory]], _ callback: @escaping ([String:Double]) -> Void){
         
         for userData in usersStory{
             for userStory in userData.value{
@@ -131,109 +178,102 @@ class AlgorithmModel{
                         dayInWeekGradeCalculator(candidatesDate: userStory.date, topGrade: 10, interestingDaysInterval: 6) * dayInWeekWeight +
                         monthGradeCalculator(candidatesDate: userStory.date, topGrade: 10, interestingMonthsInterval: 6) * monthDeltaWeight) * currAnswerWeight
                     
-                    if (categoriesGrades.keys.contains(category)){
-                        categoriesGrades[category]! += currDataGrade
-                    }
-                    else{
-                        categoriesGrades.updateValue(currDataGrade, forKey: category)
+                    if (categories!.keys.contains(category)){
+                        categories![category]! += currDataGrade
                     }
                 }
             }
         }
         
-        for currCat in categoriesGrades{
-            if currCat.value < 10 {
-                remIndx.append(currCat.key)
-            }
-        }
-        
-        for currRem in remIndx {
-            categoriesGrades.remove(at: categoriesGrades.index(forKey: currRem)!)
-        }
-        
-        callback(categoriesGrades)
-    }
-    
-    func algorithmOrchestra(_ currUserLocation:CLLocation, _ places: [Place], _ callback: @escaping (Place) -> Void){
-        let group = DispatchGroup()
-        var isKnn = false
-        
-        group.enter()
-        updateCandidateSet { [weak self] (candidateSet) -> Void in
-            if candidateSet != nil{
-                self?.candidateSet = candidateSet!
-            }
-            group.leave()
-        }
-        
-        group.wait()
-        
-        if candidateSet == []{
-            callback(places.randomElement()!)
-        }
-        else{
-            group.enter()
-
-            GetCategoryByKnn(currUserLocation, places, {[weak self] (categories) in
-                if categories.count > 0 {
-                    isKnn = true
-                    
-                    let categoriesSortedByGrades = Array(categories.sorted { $0.1 < $1.1 })
-                    var validPlaces = [Place]()
-                    
-                    if categoriesSortedByGrades.endIndex > 5{
-                        validPlaces = self?.getValidPlacesByTypes(places, types: [categoriesSortedByGrades[0].key,
-                                                                                  categoriesSortedByGrades[1].key,
-                                                                                  categoriesSortedByGrades[2].key,
-                                                                                  categoriesSortedByGrades[3].key,
-                                                                                  categoriesSortedByGrades[4].key]) ?? [Place]()
-                    }
-                    else{
-                        var lessThanFiveCat = [String]()
-                        
-                        for cat in categoriesSortedByGrades{
-                            lessThanFiveCat.append(cat.key)
-                        }
-                    
-                        validPlaces = self?.getValidPlacesByTypes(places, types: lessThanFiveCat) ?? [Place]()
-                    }
-                    
-                    if validPlaces.count > 0{
-                        callback(validPlaces.randomElement()!)
-                    }
-                    else {
-                        callback(places.randomElement()!)
-                    }
-                }
-                
-                group.leave()
-            })
-            
-            group.wait()
-        }
-        
-        if isKnn == false{
-            if let aprioriResults = choosePlace(places){
-                let validPlaces = getValidPlacesByTypes(places, types: aprioriResults)
-
-                if validPlaces.count > 0{
-                    callback(validPlaces.randomElement()!)
-                }
-                else {
-                    callback(places.randomElement()!)
-                }
-            }
-            else{
-                callback(places.randomElement()!)
-            }
-            
-//            GetCategoryByKnn(currUserLocation, places, {(categoryList) in
+//        for currCat in categoriesGrades{
+//            if currCat.value < 10 {
+//                remIndx.append(currCat.key)
+//            }
+//        }
 //
-//            })
-        }
+//        for currRem in remIndx {
+//            categoriesGrades.remove(at: categoriesGrades.index(forKey: currRem)!)
+//        }
+        
+        callback(categories!)
     }
     
-    func GetCategoryByKnn(_ currUserLocation:CLLocation, _ places: [Place], _ callback: @escaping ([String:Double]) -> Void){
+//    func algorithmOrchestra(_ currUserLocation:CLLocation, _ places: [Place], _ callback: @escaping (Place) -> Void){
+//        let group = DispatchGroup()
+//        var isKnn = false
+//
+//        group.enter()
+//        updateCandidateSet { [weak self] (candidateSet) -> Void in
+//            if candidateSet != nil{
+//                self?.candidateSet = candidateSet!
+//            }
+//            group.leave()
+//        }
+//
+//        group.wait()
+//
+//        if candidateSet == []{
+//            callback(places.randomElement()!)
+//        }
+//        else{
+//            group.enter()
+//
+//            GetCategoryByKnn(currUserLocation, {[weak self] (categories) in
+//                if categories.count > 0 {
+//                    isKnn = true
+//
+//                    let categoriesSortedByGrades = Array(categories.sorted { $0.1 < $1.1 })
+//                    var validPlaces = [Place]()
+//
+//                    if categoriesSortedByGrades.endIndex > 5{
+//                        validPlaces = self?.getValidPlacesByTypes(places, types: [categoriesSortedByGrades[0].key,
+//                                                                                  categoriesSortedByGrades[1].key,
+//                                                                                  categoriesSortedByGrades[2].key,
+//                                                                                  categoriesSortedByGrades[3].key,
+//                                                                                  categoriesSortedByGrades[4].key]) ?? [Place]()
+//                    }
+//                    else{
+//                        var lessThanFiveCat = [String]()
+//
+//                        for cat in categoriesSortedByGrades{
+//                            lessThanFiveCat.append(cat.key)
+//                        }
+//
+//                        validPlaces = self?.getValidPlacesByTypes(places, types: lessThanFiveCat) ?? [Place]()
+//                    }
+//
+//                    if validPlaces.count > 0{
+//                        callback(validPlaces.randomElement()!)
+//                    }
+//                    else {
+//                        callback(places.randomElement()!)
+//                    }
+//                }
+//
+//                group.leave()
+//            })
+//
+//            group.wait()
+//        }
+//
+//        if isKnn == false{
+//            if let aprioriResults = choosePlace(places){
+//                let validPlaces = getValidPlacesByTypes(places, types: aprioriResults)
+//
+//                if validPlaces.count > 0{
+//                    callback(validPlaces.randomElement()!)
+//                }
+//                else {
+//                    callback(places.randomElement()!)
+//                }
+//            }
+//            else{
+//                callback(places.randomElement()!)
+//            }
+//        }
+//    }
+    
+    func GetCategoryByKnn(_ currUserLocation:CLLocation, _ callback: @escaping ([String:Double]) -> Void){
         let currDate  = Date()
         let interval :Double =  (currDate.timeIntervalSince(lastUpdatedInteractionsDate ?? Date(timeIntervalSince1970: 0)) / 3600)
         let distance : Int
@@ -249,10 +289,11 @@ class AlgorithmModel{
                 self.lastUpdatedPlace = currUserLocation
                 self.lastUpdatedInteractionsDate = Date()
                 self.interactionsByUser = self.GroupInteractionsByUser(interactions)
-                self.knnAlgorithm(self.interactionsByUser, places, callback)
+                self.knnAlgorithm(self.interactionsByUser, callback)
             })
-        }else{
-            self.knnAlgorithm(self.interactionsByUser, places, callback)
+        }
+        else{
+            callback(categories!)
         }
     }
     
@@ -416,9 +457,89 @@ class AlgorithmModel{
         return(interactionsByUser)
     }
     
+    func setCategories(){
+        let group = DispatchGroup()
+        group.enter()
+        
+        MainModel.instance.getAllCategories(){(_categories) in
+            self.categories = [String:Double]()
+            for cat in _categories{
+                self.categories![cat] = 0
+            }
+            group.leave()
+        }
+        
+        group.wait()
+    }
+    
+    func setPreferdCategories() {
+        let group = DispatchGroup()
+        group.enter()
+        
+        MainModel.instance.getCurrentUserPreferences(){(_preferdCategories) in
+            if _preferdCategories.count > 10  {
+                self.prferdCategories?.append(contentsOf: _preferdCategories)
+            }
+            group.leave()
+        }
+        group.wait()
+    }
+    
+    func setUserLastInteractions(){
+        let group = DispatchGroup()
+        group.enter()
+        
+        MainModel.instance.getUserInteractionStories(){(_lastIntractions) in
+            self.lastUserInteractions = [InteractionStory]()
+            self.lastUserInteractions?.append(contentsOf: _lastIntractions)
+            group.leave()
+        }
+        group.wait()
+    }
+    
+    func removePlacesByInteractions(places:[Place]) -> [Place] {
+        var placesToReturn = [Place]()
+        
+        for place in places{
+            var ifAppend = true
+            
+            for interaction in lastUserInteractions!{
+                if interaction.placeID == place.googleID{
+                    ifAppend = false
+                    break
+                }
+            }
+            
+            if ifAppend{
+                placesToReturn.append(place)
+            }
+        }
+        
+        return (placesToReturn)
+    }
+    
+    func getInteraction(category:String, location:CLLocation, _ callback: @escaping (Interaction?) -> Void) -> Void {
+        MainModel.instance.fetchNearbyPlaces(location: location, radius: 2000, type: category, isOpen: true){(places, token, err) in
+            if err == nil{
+                let validPlaces = self.removePlacesByInteractions(places: places!)
+                if validPlaces.count > 1 {
+                    
+                    let placeToInteraction = validPlaces.randomElement()
+                    
+                    MainModel.instance.getInteraction(placeToInteraction!.types) { intereaction in
+                        if intereaction != nil {
+                            intereaction!.place = placeToInteraction!
+                            
+                            callback(intereaction)
+                        }
+                        else{
+                            callback(nil)
+                        }
+                    }
+                }else{
+                    callback(nil)
+                }
+            }
+        }
+    }
 }
-
-
-
-
-

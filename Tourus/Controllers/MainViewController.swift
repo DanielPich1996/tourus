@@ -75,12 +75,12 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     //MARK: ALGORYTHM
-    func getNextInteraction() {
+    func getNextInteraction(interaction:InteractionStory?) {
 //        let latitude:String = String(format: "%f", currUserLocation!.coordinate.latitude)
 //        let longitude:String = String(format:"%f", currUserLocation!.coordinate.longitude)
 //        let loc:String = latitude + "," + longitude
         
-        MainModel.instance.getAlgorithmNextPlace(currUserLocation!) { interact in
+        MainModel.instance.getAlgorithmNextPlace(currUserLocation!, interaction: interaction) { interact in
             self.interaction = interact
             
             if self.interaction != nil {
@@ -99,7 +99,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
 //        let longitude:String = String(format:"%f", currUserLocation!.coordinate.longitude)
 //        let loc:String = latitude + "," + longitude
         
-        MainModel.instance.fetchNearbyPlaces(location: currUserLocation!, callback: { (places,err)  in
+        MainModel.instance.fetchNearbyPlaces(location: currUserLocation!, callback: { (places, token, err)  in
             DispatchQueue.main.async {
                 if places != nil && places!.count > 0 {
 
@@ -148,7 +148,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
             //clear value
             interaction = nil
             //#2: algo
-            getNextInteraction()
+            getNextInteraction(interaction: interactionStory)
         }
     }
 
@@ -374,7 +374,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
             
             if interaction == nil {
                 //#1: algo
-               getNextInteraction()
+                getNextInteraction(interaction: nil)
                 
                 self.view.isUserInteractionEnabled = true
                 BuisyIndicator.Instance.hideBuisyIndicator()
