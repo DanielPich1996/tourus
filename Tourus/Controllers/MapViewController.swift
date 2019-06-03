@@ -12,7 +12,7 @@ import CoreLocation
 import AVFoundation
 
 class MapViewController: UIViewController {
-
+    
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var directionLabel: UILabel!
     @IBOutlet weak var ArrivalLabel: UILabel!
@@ -32,7 +32,7 @@ class MapViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         if let settings = MainModel.instance.getSettings() {
             isDirectionalAudioOn = settings.isDirectionalAudioOn
         }
@@ -53,7 +53,7 @@ class MapViewController: UIViewController {
     
     @IBAction func onExitTap(_ sender: Any) {
         
-       self.alertStoppingNavigation()
+        self.alertStoppingNavigation()
     }
     
     @IBAction func onNavigateTap(_ sender: Any) {
@@ -135,10 +135,10 @@ class MapViewController: UIViewController {
     }
     
     func setArrivalData(_ route:MKRoute) {
-
+        
         let distance = String(format: "%.1f Km", route.distance/1000)
         let travelTime = route.expectedTravelTime.toDisplayString()
-
+        
         ArrivalLabel.text = "\(distance) away" + "\n" + "arrive in \(travelTime)"
     }
     
@@ -163,7 +163,7 @@ class MapViewController: UIViewController {
         
         //calculating the center point of the route
         let centerRoutePoint  = MKMapPoint(currentRoute.polyline.coordinate)
-
+        
         for step in self.steps {
             //calculating the current step distance from the center of the entire route
             let stepPoint = MKMapPoint(step.polyline.coordinate)
@@ -198,7 +198,7 @@ class MapViewController: UIViewController {
 extension MapViewController : CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-       
+        
         //manager.stopUpdatingLocation()
         guard let currentLocation = locations.first else { return }
         currentCoordinate = currentLocation.coordinate
@@ -212,7 +212,7 @@ extension MapViewController : CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
-
+        
         guard let stepIndex = Int(region.identifier) else { stopNavigation(); return }
         if stepIndex == 0 { return } //we've already directed the user by the first step
         
@@ -400,7 +400,7 @@ class DestinationAnnotationView: MKAnnotationView {
     }
     
     override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
-
+        
         label = UILabel(frame: annotationFrame.offsetBy(dx: -15, dy: 55))
         
         super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
@@ -455,7 +455,7 @@ class DestinationAnnotationView: MKAnnotationView {
     func deselected() {
         
         guard let transform = originalTransform else { return }
-
+        
         UIView.animate(withDuration: 0.1, delay: 0.0, options: .curveLinear, animations: {
             
             self.transform = transform

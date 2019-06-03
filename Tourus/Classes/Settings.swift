@@ -12,10 +12,12 @@ class Settings {
     
     var uid:String = ""
     var isDirectionalAudioOn:Bool = false
+    var preferencesCategories:[String]? = nil
     
-    init(_ uid:String, _ isDirectionalAudioOn:Bool) {
+    init(_ uid:String, _ isDirectionalAudioOn:Bool, _ preferencesCategories:[String]? = nil) {
         
         self.uid = uid
         self.isDirectionalAudioOn = isDirectionalAudioOn
+        self.preferencesCategories = preferencesCategories
     }
 }
