@@ -90,8 +90,11 @@ extension Interaction {
                 categories.append(category)
             }
         }
-        
         sqlite3_finalize(sqlite3_stmt)
+        
+        let notMapped = consts.settings.notMapped
+        categories.removeAll{ $0 == notMapped }
+        
         return categories
     }
     
