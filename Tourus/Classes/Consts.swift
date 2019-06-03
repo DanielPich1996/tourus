@@ -22,7 +22,7 @@ struct consts {
     }
     
     struct settings {
-        static let notMapped = "not_mapped"
+        static let notMapped = ["not_mapped", "food"]
         static let minUserPreferences = 1
     }
     
