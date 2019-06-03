@@ -33,12 +33,12 @@ class AlgorithmModel{
     
     
     // KNN weights constants
-    private let distDeltaWeight = 1.0
-    private let timeDeltaWeight = 1.0
+    private let distDeltaWeight = 0.8
+    private let timeDeltaWeight = 1.9
     private let dayInWeekWeight = 1.0
-    private let monthDeltaWeight = 1.0
+    private let monthDeltaWeight = 1.2
     private let positiveCtgryWeight = 1.0
-    private let negativeCtgryWeight = -1.0
+    private let negativeCtgryWeight = -0.7
     
     init() {
 //        candidateSet = []
@@ -111,6 +111,7 @@ class AlgorithmModel{
     }
     
     func knnAlgorithm(_ usersStory: [String:[InteractionStory]], _ callback: @escaping () -> Void){
+        var categoryRankerCount = [String:Int]()
         
         for userData in usersStory{
             for userStory in userData.value{
@@ -123,15 +124,31 @@ class AlgorithmModel{
                         monthGradeCalculator(candidatesDate: userStory.date, topGrade: 10, interestingMonthsInterval: 6) * monthDeltaWeight) * currAnswerWeight
                     
                     if (categories!.keys.contains(category)){
+                        if(categories![category]! == 0){
+                            categoryRankerCount[category] = 1
+                        }
+                        else{
+                            categoryRankerCount[category]! += 1
+                        }
+                        
                         categories![category]! += currDataGrade
                     }
                 }
             }
         }
+        
+        for category in categoryRankerCount.keys{
+            categories![category] = categories![category]! / Double(categoryRankerCount[category]!)
+        }
+        
         callback()
     }
     
     func distanceGradeCalculator(distanceInMeters: Int, topGrade: Int, interestingKilometers: Double) -> Double{
+        if distanceInMeters > 5000{
+            return 0
+        }
+        
         return (Double(topGrade) - ((Double(distanceInMeters)/(interestingKilometers * 1000)) * Double(topGrade)))
     }
     
