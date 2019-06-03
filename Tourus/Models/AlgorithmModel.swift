@@ -141,6 +141,8 @@ class AlgorithmModel{
             categories![category] = categories![category]! / Double(categoryRankerCount[category]!)
         }
         
+        setPreferdCategories()
+        checkCategories()
         callback()
     }
     
