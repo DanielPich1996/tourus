@@ -62,7 +62,7 @@ class AlgorithmModel{
         
         GetCategoryByKnn(location) {
             var interactionToBack:Interaction? = nil
-            var categoriesSortedByGrades = Array(self.categories!.sorted { $0.1 < $1.1 })
+            var categoriesSortedByGrades = Array(self.categories!.sorted { $0.1 > $1.1 })
             
             while (interactionToBack == nil){
                 let group = DispatchGroup()
@@ -73,7 +73,6 @@ class AlgorithmModel{
                     if (interaction != nil){
                         interactionToBack = interaction!
                     }else{
-                        self.categories![categoriesSortedByGrades[0].key] = 0
                         categoriesSortedByGrades = Array(self.categories!.sorted { $0.1 < $1.1 })
                     }
                     
@@ -166,7 +165,7 @@ class AlgorithmModel{
         MainModel.instance.fetchNearbyPlaces(location: location, radius: 2000, type: category, isOpen: true){(places, token, err) in
             if err == nil{
                 let validPlaces = self.removePlacesByInteractions(places: places!)
-                if validPlaces.count > 1 {
+                if validPlaces.count >= 1 {
                     
                     let placeToInteraction = validPlaces.randomElement()
                     
@@ -181,6 +180,7 @@ class AlgorithmModel{
                         }
                     }
                 }else{
+                    self.categories?.removeValue(forKey: category)
                     callback(nil)
                 }
             }
