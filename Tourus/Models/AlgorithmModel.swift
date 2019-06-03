@@ -28,7 +28,8 @@ class AlgorithmModel{
     var lastUpdatedInteractionsDate:Date?
     var lastUpdatedPlace:CLLocation?
     var categories:[String:Double]? = nil
-    var prferdCategories:[String]? = nil
+    var unprferdCategories = [String:Double]()
+    var prferdCategories = [String]()
     var lastUserInteractions:[InteractionStory]? = [InteractionStory]()
     
     
@@ -48,7 +49,7 @@ class AlgorithmModel{
     func getAlgorithmNextPlace(_ location:CLLocation, _ lastInteraction:InteractionStory?, _ callback: @escaping (Interaction) -> Void) {
         if lastInteraction == nil {
             setCategories()
-            //setPreferdCategories()
+            getPreferdCategories()
         }
         else{
             lastUserInteractions?.append(lastInteraction!)
@@ -72,6 +73,7 @@ class AlgorithmModel{
                     if (interaction != nil){
                         interactionToBack = interaction!
                     }else{
+                        self.checkCategories()
                         categoriesSortedByGrades = Array(self.categories!.sorted { $0.1 < $1.1 })
                     }
                     
@@ -126,6 +128,9 @@ class AlgorithmModel{
                 }
             }
         }
+        
+        setPreferdCategories()
+        checkCategories()
         callback()
     }
     
@@ -162,9 +167,10 @@ class AlgorithmModel{
     
     func getInteraction(category:String, location:CLLocation, _ callback: @escaping (Interaction?) -> Void) -> Void {
         MainModel.instance.fetchNearbyPlaces(location: location, radius: 2000, type: category, isOpen: true){(places, token, err) in
-            if err == nil{                
-                //var validPlaces = self.validPlacesByCategory(category: category, places:places!)
-                let validPlaces = self.removePlacesByInteractions(places: places!)
+            if err == nil{
+                
+                var validPlaces = self.validPlacesByCategory(category: category, places:places!)
+                validPlaces = self.removePlacesByInteractions(places: validPlaces)
                 
                 if validPlaces.count >= 1 {
                     
@@ -232,17 +238,28 @@ class AlgorithmModel{
         group.wait()
     }
     
-    func setPreferdCategories() {
+    func getPreferdCategories() {
         let group = DispatchGroup()
         group.enter()
         
         MainModel.instance.getCurrentUserPreferences(){(_preferdCategories) in
-            if _preferdCategories.count > 10  {
-                self.prferdCategories?.append(contentsOf: _preferdCategories)
-            }
+            
+            self.prferdCategories.append(contentsOf: _preferdCategories)
             group.leave()
         }
         group.wait()
+    }
+    
+    func setPreferdCategories(){
+        for category in categories!{
+            if !(prferdCategories.contains(category.key)) {
+                unprferdCategories[category.key] = category.value
+            }
+        }
+        
+        for category in unprferdCategories{
+            categories?.removeValue(forKey: category.key)
+        }
     }
     
     func removePlacesByInteractions(places:[Place]) -> [Place] {
@@ -274,6 +291,20 @@ class AlgorithmModel{
             }
         }
         return placesToReturn
+    }
+    
+    func checkCategories(){
+        if categories?.count == 0 {
+            if unprferdCategories.count > 0{
+                for category in unprferdCategories {
+                    categories![category.key] = category.value
+                }
+                unprferdCategories.removeAll()
+            }
+            else{
+                //alert Error
+            }
+        }
     }
     
 //    private func updateCandidateSet(_ complition: @escaping ([String]?) -> Void){
