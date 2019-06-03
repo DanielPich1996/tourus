@@ -34,6 +34,7 @@ class SqlModel {
         Interaction.Option.createTable(database: database)
         LastUpdateSplDates.createTable(database: database);
         Settings.createTable(database: database)
+        Settings.createPreferencesTable(database: database)
     }
     
     func dropTables() {
@@ -42,5 +43,6 @@ class SqlModel {
         Interaction.Option.drop(database: database)
         LastUpdateSplDates.drop(database: database);
         Settings.drop(database: database)
+        Settings.dropPreferencesTable(database: database)
     }
 }

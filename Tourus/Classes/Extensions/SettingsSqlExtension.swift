@@ -29,33 +29,38 @@ extension Settings {
         }
     }
     
-    static func get(database: OpaquePointer?, userId:String)-> Settings? {
+    static func get(database: OpaquePointer?, userId:String) -> Settings? {
+        
+        let directionalAudioOn = self.getIsNavigationAudioOn(database: database, userId: userId)
+        let preferences = self.getPreferences(database: database, uid: userId)
+        
+        return Settings(userId, directionalAudioOn, preferences)
+    }
+    
+    static func getIsNavigationAudioOn(database: OpaquePointer?, userId:String) -> Bool {
         var sqlite3_stmt: OpaquePointer? = nil
         let query = "SELECT UID, IS_DIRECTIONAL_AUDIO_ON from SETTINGS where UID = '" + userId + "' ;"
-        var settings:Settings? = nil
+        var directionalAudioOnBoolFromat:Bool = true
         
         if (sqlite3_prepare_v2(database,query,-1,&sqlite3_stmt,nil)
             == SQLITE_OK){
             
             if(sqlite3_step(sqlite3_stmt) == SQLITE_ROW){
                 
-                let uid = String(cString:sqlite3_column_text(sqlite3_stmt,0)!)
                 let directionalAudioOn:Int32 = sqlite3_column_int(sqlite3_stmt,1)
-                let directionalAudioOnBoolFromat = (directionalAudioOn==1)
-                
-                settings = Settings(uid, directionalAudioOnBoolFromat)
+                directionalAudioOnBoolFromat = (directionalAudioOn==1)
             }
         }
         
         sqlite3_finalize(sqlite3_stmt)
-        return settings
+        return directionalAudioOnBoolFromat
     }
     
     static func addNew(database: OpaquePointer?, settings:Settings) {
         var sqlite3_stmt: OpaquePointer? = nil
-       
+        
         if (sqlite3_prepare_v2(database,"INSERT OR REPLACE INTO SETTINGS(UID, IS_DIRECTIONAL_AUDIO_ON) VALUES (?,?);",-1, &sqlite3_stmt,nil) == SQLITE_OK){
-           
+            
             let uid = settings.uid.cString(using: .utf8)
             var directionalAudioOn:Int32 = 0
             if settings.isDirectionalAudioOn {
@@ -68,6 +73,10 @@ extension Settings {
             if(sqlite3_step(sqlite3_stmt) == SQLITE_DONE){
                 print("new row added succefully")
             }
+        }
+        
+        if let preferences = settings.preferencesCategories {
+            self.updateUserPreferences(database: database, uid: settings.uid, categories: preferences)
         }
     }
 }
