@@ -318,12 +318,9 @@ class FirebaseModel {
     }
     
     func addStoryToInteractions(interacton:InteractionStory) {
-        var ref: DocumentReference? = nil
-        ref = firestoreRef.collection(consts.names.interactionHistoryTableName).addDocument(data: interacton.toJson()) { err in
+        firestoreRef.collection(consts.names.interactionHistoryTableName).addDocument(data: interacton.toJson()) { err in
             if let err = err {
                 print("Error adding document: \(err)")
-            } else {
-                print("Document added with ID: \(ref!.documentID)")
             }
         }
     }

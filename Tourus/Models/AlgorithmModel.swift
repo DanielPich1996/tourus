@@ -12,17 +12,17 @@ import UIKit
 import CoreLocation
 
 class AlgorithmModel{
-    private let minSupport = 0
-    
-    private let otherUsersHistoryData:[[String]] = [[String]()] //update every 30min time
-    
-    private var candidateSet:[String] = []
-    
-    private var refusingHistory: [String] = []
-    
-    private func updateHistoryData(){
-        //30min time
-    }
+//    private let minSupport = 0
+//
+//    private let otherUsersHistoryData:[[String]] = [[String]()] //update every 30min time
+//
+//    private var candidateSet:[String] = []
+//
+//    private var refusingHistory: [String] = []
+//
+//    private func updateHistoryData(){
+//        //30min time
+//    }
     
     var interactionsByUser = [String:[InteractionStory]]()
     var lastUpdatedInteractionsDate:Date?
@@ -81,6 +81,7 @@ class AlgorithmModel{
                 
                 group.wait()
             }
+            print(interactionToBack?.place?.types!)
             callback(interactionToBack!)
         }
     }
@@ -164,7 +165,10 @@ class AlgorithmModel{
     func getInteraction(category:String, location:CLLocation, _ callback: @escaping (Interaction?) -> Void) -> Void {
         MainModel.instance.fetchNearbyPlaces(location: location, radius: 2000, type: category, isOpen: true){(places, token, err) in
             if err == nil{
-                let validPlaces = self.removePlacesByInteractions(places: places!)
+                
+                var validPlaces = self.validPlacesByCategory(category: category, places:places!)
+                validPlaces = self.removePlacesByInteractions(places: places!)
+                
                 if validPlaces.count >= 1 {
                     
                     let placeToInteraction = validPlaces.randomElement()
@@ -183,6 +187,8 @@ class AlgorithmModel{
                     self.categories?.removeValue(forKey: category)
                     callback(nil)
                 }
+            }else{
+                callback(nil)
             }
         }
     }
@@ -261,6 +267,16 @@ class AlgorithmModel{
         }
         
         return (placesToReturn)
+    }
+    
+    func validPlacesByCategory(category:String, places:[Place]) -> [Place] {
+        var placesToReturn =  [Place]()
+        for place in places{
+            if place.types!.contains(category){
+                placesToReturn.append(place)
+            }
+        }
+        return placesToReturn
     }
     
 //    private func updateCandidateSet(_ complition: @escaping ([String]?) -> Void){
