@@ -21,6 +21,11 @@ struct consts {
         static let categoriesTableName : String = "Categories"
     }
     
+    struct settings {
+        static let notMapped = "not_mapped"
+        static let minUserPreferences = 1
+    }
+    
     struct googleMaps {
         static let applicationLink : String = "comgooglemaps://"
         static let browserLink : String = "https://www.google.co.in/maps/dir/"
