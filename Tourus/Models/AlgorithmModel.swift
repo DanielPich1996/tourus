@@ -51,7 +51,6 @@ class AlgorithmModel{
             //setPreferdCategories()
         }
         else{
-            // TODO update grade for atrraction caregories
             lastUserInteractions?.append(lastInteraction!)
             for category in (lastInteraction?.categories)!{
                 if categories![category] != nil {
@@ -81,7 +80,6 @@ class AlgorithmModel{
                 
                 group.wait()
             }
-            print(interactionToBack?.place?.types!)
             callback(interactionToBack!)
         }
     }
@@ -164,10 +162,9 @@ class AlgorithmModel{
     
     func getInteraction(category:String, location:CLLocation, _ callback: @escaping (Interaction?) -> Void) -> Void {
         MainModel.instance.fetchNearbyPlaces(location: location, radius: 2000, type: category, isOpen: true){(places, token, err) in
-            if err == nil{
-                
-                var validPlaces = self.validPlacesByCategory(category: category, places:places!)
-                validPlaces = self.removePlacesByInteractions(places: places!)
+            if err == nil{                
+                //var validPlaces = self.validPlacesByCategory(category: category, places:places!)
+                let validPlaces = self.removePlacesByInteractions(places: places!)
                 
                 if validPlaces.count >= 1 {
                     
