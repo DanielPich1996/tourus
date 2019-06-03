@@ -19,8 +19,6 @@ class PlacesModel {
 
     }
     
-    
-    
     func fetchGoogleNearbyPlaces(location: CLLocation, radius: Int!, type:String? = nil, isOpen:Bool?=true, callback: @escaping ([Place]?, String?, String?) -> Void) {
         let latitude:String = String(format: "%f", location.coordinate.latitude)
         let longitude:String = String(format:"%f", location.coordinate.longitude)
@@ -61,6 +59,7 @@ class PlacesModel {
                 }.resume()
         } else {
             print("could not open url, equals to nil")
+            callback(nil, nil, "could not open url, equals to nil")
         }
     }
     
@@ -90,6 +89,7 @@ class PlacesModel {
                 }.resume()
         } else {
             print("could not open url, equals to nil")
+            callback(nil, nil, "could not open url, equals to nil")
         }
     }
     
@@ -183,6 +183,7 @@ class PlacesModel {
                 }.resume()
         } else {
             print("could not open url, equals to nil")
+            callback(nil ,placeID ,"could not open url, equals to nil")
         }
     }
 }
