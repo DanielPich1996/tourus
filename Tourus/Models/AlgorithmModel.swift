@@ -62,6 +62,7 @@ class AlgorithmModel{
         
         GetCategoryByKnn(location) {
             var interactionToBack:Interaction? = nil
+            self.comparePreferences()
             var categoriesSortedByGrades = Array(self.categories!.sorted { $0.1 > $1.1 })
             
             while (interactionToBack == nil){
@@ -320,6 +321,30 @@ class AlgorithmModel{
             else{
                 //alert Error
             }
+        }
+    }
+    
+    func comparePreferences(){
+        MainModel.instance.getCurrentUserPreferences(){(_categories) in
+            for category in _categories{
+                if !self.prferdCategories.contains(category){
+                    if self.unprferdCategories[category] != nil{
+                        self.categories![category] = self.unprferdCategories[category]
+                        self.unprferdCategories.removeValue(forKey: category)
+                    }
+                }
+            }
+            
+            for category in self.prferdCategories{
+                if !_categories.contains(category){
+                    if self.categories![category] != nil && self.unprferdCategories.count > 0 {
+                        self.unprferdCategories[category] = self.categories![category]
+                        self.categories?.removeValue(forKey: category)
+                    }
+                }
+            }
+            
+            self.prferdCategories = _categories
         }
     }
     
