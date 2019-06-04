@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -693,6 +692,7 @@
                                     <constraint firstItem="YTA-o9-IyI" firstAttribute="leading" secondItem="RlO-kb-Dj6" secondAttribute="leading" id="DsI-Yq-Aje"/>
                                     <constraint firstItem="cmJ-G3-3ZH" firstAttribute="centerY" secondItem="KLa-dg-Gt2" secondAttribute="centerY" id="IlE-ig-K2y"/>
                                     <constraint firstItem="YTA-o9-IyI" firstAttribute="centerX" secondItem="cmJ-G3-3ZH" secondAttribute="centerX" id="KxN-r8-Dwx"/>
+                                    <constraint firstItem="YTA-o9-IyI" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="B6u-Dw-hum" secondAttribute="trailing" constant="8" symbolic="YES" id="L49-PY-yeu"/>
                                     <constraint firstAttribute="trailing" secondItem="YTA-o9-IyI" secondAttribute="trailing" constant="24" id="Ol6-R4-zWj"/>
                                     <constraint firstItem="rxB-nn-y1w" firstAttribute="leading" secondItem="YTA-o9-IyI" secondAttribute="leading" id="YzK-x4-aaW"/>
                                     <constraint firstAttribute="bottom" secondItem="YTA-o9-IyI" secondAttribute="bottom" id="btX-uU-XPF"/>
@@ -855,10 +855,22 @@
                                     <segue destination="892-kL-vwl" kind="presentation" id="bHC-Yh-oog"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l3x-o2-KmN">
+                                <rect key="frame" x="10" y="728.66666666666663" width="55" height="55"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="55" id="0ct-b9-3Gq"/>
+                                    <constraint firstAttribute="height" constant="55" id="Ofr-jp-ZGe"/>
+                                </constraints>
+                                <state key="normal" title="Center" image="center_png"/>
+                                <connections>
+                                    <action selector="onCenterTap:" destination="fGu-52-kTo" eventType="touchUpInside" id="GJD-eD-oZV"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="9OP-0f-gAE" firstAttribute="top" secondItem="nJX-9O-euD" secondAttribute="top" id="7rc-6s-3ee"/>
+                            <constraint firstItem="JZ8-Sz-xyf" firstAttribute="top" secondItem="l3x-o2-KmN" secondAttribute="centerY" id="89V-wK-Nof"/>
                             <constraint firstItem="nJX-9O-euD" firstAttribute="top" secondItem="OzR-TQ-3Ip" secondAttribute="top" id="BpQ-Gt-qC2"/>
                             <constraint firstItem="9OP-0f-gAE" firstAttribute="leading" secondItem="OzR-TQ-3Ip" secondAttribute="leading" constant="10" id="Cci-pE-Djz"/>
                             <constraint firstItem="JZ8-Sz-xyf" firstAttribute="centerX" secondItem="er0-pH-H3m" secondAttribute="centerX" id="Dnq-wX-eh9"/>
@@ -869,6 +881,7 @@
                             <constraint firstItem="wq9-jk-Fb2" firstAttribute="trailing" secondItem="OzR-TQ-3Ip" secondAttribute="trailing" id="RMX-wp-GZE"/>
                             <constraint firstItem="wq9-jk-Fb2" firstAttribute="leading" secondItem="OzR-TQ-3Ip" secondAttribute="leading" id="Sa3-Rp-yeK"/>
                             <constraint firstItem="wq9-jk-Fb2" firstAttribute="leading" secondItem="7wO-yh-3Xw" secondAttribute="leading" id="U8A-mX-q3q"/>
+                            <constraint firstItem="l3x-o2-KmN" firstAttribute="leading" secondItem="OzR-TQ-3Ip" secondAttribute="leading" constant="10" id="Zne-wX-gOB"/>
                             <constraint firstItem="nJX-9O-euD" firstAttribute="trailing" secondItem="7wO-yh-3Xw" secondAttribute="trailing" constant="-50" id="cit-p2-gE4"/>
                             <constraint firstItem="wq9-jk-Fb2" firstAttribute="top" secondItem="AmQ-5A-bBE" secondAttribute="top" id="hXR-N9-FyJ"/>
                             <constraint firstItem="OzR-TQ-3Ip" firstAttribute="trailing" secondItem="JZ8-Sz-xyf" secondAttribute="trailing" constant="10" id="lIg-Bz-sre"/>
@@ -1017,6 +1030,7 @@
     </scenes>
     <resources>
         <image name="TOURUS_NAME" width="712" height="186"/>
+        <image name="center_png" width="170" height="170"/>
         <image name="close_icon" width="150" height="150"/>
         <image name="close_red_icon" width="150" height="150"/>
         <image name="default_profile" width="218" height="187"/>
