@@ -62,10 +62,12 @@ class MapViewController: UIViewController {
     }
     
     @IBAction func onCenterTap(_ sender: Any) {
-            self.centerMapOnUserLocation()
+        
+        self.centerMapOnUserLocation()
     }
     
     func centerMapOnUserLocation() {
+        
         guard let coordinate = locationManager.location?.coordinate else { return }
         let region = MKCoordinateRegion(center: coordinate, latitudinalMeters: 2000, longitudinalMeters: 2000)
         mapView.setRegion(region, animated: true)
