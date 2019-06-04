@@ -28,17 +28,18 @@ class AlgorithmModel{
     var lastUpdatedInteractionsDate:Date?
     var lastUpdatedPlace:CLLocation?
     var categories:[String:Double]? = nil
-    var prferdCategories:[String]? = nil
+    var unprferdCategories = [String:Double]()
+    var prferdCategories = [String]()
     var lastUserInteractions:[InteractionStory]? = [InteractionStory]()
     
     
     // KNN weights constants
-    private let distDeltaWeight = 1.0
-    private let timeDeltaWeight = 1.0
+    private let distDeltaWeight = 0.8
+    private let timeDeltaWeight = 1.9
     private let dayInWeekWeight = 1.0
-    private let monthDeltaWeight = 1.0
+    private let monthDeltaWeight = 1.2
     private let positiveCtgryWeight = 1.0
-    private let negativeCtgryWeight = -1.0
+    private let negativeCtgryWeight = -0.7
     
     init() {
 //        candidateSet = []
@@ -48,10 +49,9 @@ class AlgorithmModel{
     func getAlgorithmNextPlace(_ location:CLLocation, _ lastInteraction:InteractionStory?, _ callback: @escaping (Interaction) -> Void) {
         if lastInteraction == nil {
             setCategories()
-            //setPreferdCategories()
+            getPreferdCategories()
         }
         else{
-            // TODO update grade for atrraction caregories
             lastUserInteractions?.append(lastInteraction!)
             for category in (lastInteraction?.categories)!{
                 if categories![category] != nil {
@@ -62,6 +62,7 @@ class AlgorithmModel{
         
         GetCategoryByKnn(location) {
             var interactionToBack:Interaction? = nil
+            self.comparePreferences()
             var categoriesSortedByGrades = Array(self.categories!.sorted { $0.1 > $1.1 })
             
             while (interactionToBack == nil){
@@ -73,6 +74,7 @@ class AlgorithmModel{
                     if (interaction != nil){
                         interactionToBack = interaction!
                     }else{
+                        self.checkCategories()
                         categoriesSortedByGrades = Array(self.categories!.sorted { $0.1 < $1.1 })
                     }
                     
@@ -81,7 +83,6 @@ class AlgorithmModel{
                 
                 group.wait()
             }
-            print(interactionToBack?.place?.types!)
             callback(interactionToBack!)
         }
     }
@@ -111,6 +112,7 @@ class AlgorithmModel{
     }
     
     func knnAlgorithm(_ usersStory: [String:[InteractionStory]], _ callback: @escaping () -> Void){
+        var categoryRankerCount = [String:Int]()
         
         for userData in usersStory{
             for userStory in userData.value{
@@ -123,15 +125,33 @@ class AlgorithmModel{
                         monthGradeCalculator(candidatesDate: userStory.date, topGrade: 10, interestingMonthsInterval: 6) * monthDeltaWeight) * currAnswerWeight
                     
                     if (categories!.keys.contains(category)){
+                        if(categories![category]! == 0){
+                            categoryRankerCount[category] = 1
+                        }
+                        else{
+                            categoryRankerCount[category]! += 1
+                        }
+                        
                         categories![category]! += currDataGrade
                     }
                 }
             }
         }
+        
+        for category in categoryRankerCount.keys{
+            categories![category] = categories![category]! / Double(categoryRankerCount[category]!)
+        }
+        
+        setPreferdCategories()
+        checkCategories()
         callback()
     }
     
     func distanceGradeCalculator(distanceInMeters: Int, topGrade: Int, interestingKilometers: Double) -> Double{
+        if distanceInMeters > 5000{
+            return 0
+        }
+        
         return (Double(topGrade) - ((Double(distanceInMeters)/(interestingKilometers * 1000)) * Double(topGrade)))
     }
     
@@ -167,7 +187,7 @@ class AlgorithmModel{
             if err == nil{
                 
                 var validPlaces = self.validPlacesByCategory(category: category, places:places!)
-                validPlaces = self.removePlacesByInteractions(places: places!)
+                validPlaces = self.removePlacesByInteractions(places: validPlaces)
                 
                 if validPlaces.count >= 1 {
                     
@@ -235,17 +255,28 @@ class AlgorithmModel{
         group.wait()
     }
     
-    func setPreferdCategories() {
+    func getPreferdCategories() {
         let group = DispatchGroup()
         group.enter()
         
         MainModel.instance.getCurrentUserPreferences(){(_preferdCategories) in
-            if _preferdCategories.count > 10  {
-                self.prferdCategories?.append(contentsOf: _preferdCategories)
-            }
+            
+            self.prferdCategories.append(contentsOf: _preferdCategories)
             group.leave()
         }
         group.wait()
+    }
+    
+    func setPreferdCategories(){
+        for category in categories!{
+            if !(prferdCategories.contains(category.key)) {
+                unprferdCategories[category.key] = category.value
+            }
+        }
+        
+        for category in unprferdCategories{
+            categories?.removeValue(forKey: category.key)
+        }
     }
     
     func removePlacesByInteractions(places:[Place]) -> [Place] {
@@ -277,6 +308,44 @@ class AlgorithmModel{
             }
         }
         return placesToReturn
+    }
+    
+    func checkCategories(){
+        if categories?.count == 0 {
+            if unprferdCategories.count > 0{
+                for category in unprferdCategories {
+                    categories![category.key] = category.value
+                }
+                unprferdCategories.removeAll()
+            }
+            else{
+                //alert Error
+            }
+        }
+    }
+    
+    func comparePreferences(){
+        MainModel.instance.getCurrentUserPreferences(){(_categories) in
+            for category in _categories{
+                if !self.prferdCategories.contains(category){
+                    if self.unprferdCategories[category] != nil{
+                        self.categories![category] = self.unprferdCategories[category]
+                        self.unprferdCategories.removeValue(forKey: category)
+                    }
+                }
+            }
+            
+            for category in self.prferdCategories{
+                if !_categories.contains(category){
+                    if self.categories![category] != nil && self.unprferdCategories.count > 0 {
+                        self.unprferdCategories[category] = self.categories![category]
+                        self.categories?.removeValue(forKey: category)
+                    }
+                }
+            }
+            
+            self.prferdCategories = _categories
+        }
     }
     
 //    private func updateCandidateSet(_ complition: @escaping ([String]?) -> Void){

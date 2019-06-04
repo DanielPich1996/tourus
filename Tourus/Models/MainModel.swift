@@ -14,7 +14,7 @@ import GooglePlaces
 class MainModel {
     static let instance:MainModel = MainModel()
     var isOperational = false
-
+    
     var firebaseModel = FirebaseModel()
     var placesModel = PlacesModel()
     var sqlModel = SqlModel()
@@ -28,7 +28,17 @@ class MainModel {
         let deadlineTime = DispatchTime.now() + .seconds(1)
         DispatchQueue.main.asyncAfter(deadline: deadlineTime, execute: {
             unownedSelf.listenToInteractionUpdates()
+            unownedSelf.updateUserPreferences()
         })
+    }
+    
+    private func updateUserPreferences() {
+        
+        if let uid = currentUser()?.uid {
+            firebaseModel.getCurrentUserPreferences() { preferences in
+                Settings.updateUserPreferences(database: self.sqlModel.database, uid: uid, categories: preferences)
+            }
+        }
     }
     
     func getAlgorithmNextPlace(_ location:CLLocation, interaction:InteractionStory?, _ callback: @escaping (Interaction) -> Void) {
@@ -49,7 +59,14 @@ class MainModel {
     
     func signIn(_ email:String, _ password:String, _ callback:@escaping (Bool)->Void)
     {
-        firebaseModel.signIn(email, password, callback)
+        firebaseModel.signIn(email, password) { res in
+            
+            callback(res)
+            
+            if res {
+                self.updateUserPreferences()
+            }
+        }
     }
     
     func signUp(_ email:String, _ password:String, _ callback:@escaping (Bool)->Void)
@@ -79,7 +96,7 @@ class MainModel {
                 }
             }
         }
-
+        
         //if none interaction was found - return a default interaction for non-categorized place
         if interaction == nil {
             interaction = Interaction.get(database: self.sqlModel.database, category: "not_mapped")
@@ -92,7 +109,7 @@ class MainModel {
     }
     
     func getAllCategories(_ callback: @escaping ([String]) -> Void) {
-       
+        
         let categories = Interaction.getCategories(database: sqlModel.database)
         callback(categories)
     }
@@ -106,7 +123,7 @@ class MainModel {
                 
                 if !self.isOperational {
                     self.isOperational = true
-                     NotificationModel.onOperationalNotification.notify(data: true)
+                    NotificationModel.onOperationalNotification.notify(data: true)
                 }
                 
                 if(isUpdated) {
@@ -261,13 +278,13 @@ class MainModel {
         }
     }
     
-    func fetchNearbyPlaces(location: CLLocation, radius:Int = 3000, type:String?=nil, isOpen:Bool=true, callback: @escaping ([Place]?, String?, String?) -> Void){        
+    func fetchNearbyPlaces(location: CLLocation, radius:Int = 3000, type:String?=nil, isOpen:Bool=true, callback: @escaping ([Place]?, String?, String?) -> Void){
         placesModel.fetchGoogleNearbyPlaces(location: location ,radius: radius, type:type, isOpen:isOpen, callback: callback)
     }
     
-//    func fetchMoreNearbyPlaces(token: String, callback: @escaping ([Place]?, String?, String?) -> Void){
-//        placesModel.fetchMoreGoogleNearbyPlaces(nextPgeToken: token, callback: callback)
-//    }
+    //    func fetchMoreNearbyPlaces(token: String, callback: @escaping ([Place]?, String?, String?) -> Void){
+    //        placesModel.fetchMoreGoogleNearbyPlaces(nextPgeToken: token, callback: callback)
+    //    }
     
     func navigate(_ latitude:String, _ longitude:String) {
         placesModel.navigate(latitude, longitude)
@@ -289,25 +306,21 @@ class MainModel {
         firebaseModel.getUserInteractionStories(callback)
     }
     
-    func updateUserPreferences(_ categories:[String]){
-        firebaseModel.updateUserPreferences(categories)
+    func updateUserPreferences(_ categories:[String]) {
+        
+        if let uid = currentUser()?.uid {
+            Settings.updateUserPreferences(database: sqlModel.database, uid: uid, categories: categories)
+            firebaseModel.updateUserPreferences(categories)
+        }
     }
     
-    func getCurrentUserPreferences(_ callback:@escaping ([String]) -> Void){
+    func getCurrentUserPreferences(_ callback:@escaping ([String]) -> Void) {
         
-        firebaseModel.getCurrentUserPreferences() { categories in
-            
-            if categories.count < 1 {
-                
-                self.getAllCategories() { allCategories in
-                    
-                    self.updateUserPreferences(allCategories)
-                    callback(allCategories)
-                }
-            } else {
-            
-                callback(categories)
-            }
+        if let uid = currentUser()?.uid {
+            let categories = Settings.getPreferences(database: sqlModel.database, uid: uid)
+            callback(categories)
+        } else {
+            callback([String]())
         }
     }
     
@@ -316,11 +329,9 @@ class MainModel {
     }
     
     func getSettings() -> Settings? {
-        let user = currentUser()
-        let uid = user?.uid
         
-        if uid != nil {
-           return Settings.get(database: sqlModel.database, userId: uid!)
+        if let uid = currentUser()?.uid {
+            return Settings.get(database: sqlModel.database, userId: uid)
         }
         
         return nil

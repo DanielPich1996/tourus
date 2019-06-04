@@ -36,6 +36,7 @@
 		84690E1E22984DEC000959A9 /* RoundUIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84690E1D22984DEC000959A9 /* RoundUIImageView.swift */; };
 		846F9B22229298970046927A /* InteractionStory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846F9B21229298970046927A /* InteractionStory.swift */; };
 		848812772256A8B200FC14B6 /* org-tourus-acb4d-interactions.json in Resources */ = {isa = PBXBuildFile; fileRef = 848812762256A8B100FC14B6 /* org-tourus-acb4d-interactions.json */; };
+		849A249022A56E8C00BE7C87 /* PreferencesSqlExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849A248F22A56E8C00BE7C87 /* PreferencesSqlExtension.swift */; };
 		849CA33B226F433900C5DC55 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849CA33A226F433900C5DC55 /* GraphView.swift */; };
 		849D3EAF21DE8D18002F74B2 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849D3EAE21DE8D18002F74B2 /* RegisterViewController.swift */; };
 		849D3EB121DE8D2D002F74B2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849D3EB021DE8D2D002F74B2 /* LoginViewController.swift */; };
@@ -111,6 +112,7 @@
 		84690E1D22984DEC000959A9 /* RoundUIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundUIImageView.swift; sourceTree = "<group>"; };
 		846F9B21229298970046927A /* InteractionStory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionStory.swift; sourceTree = "<group>"; };
 		848812762256A8B100FC14B6 /* org-tourus-acb4d-interactions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "org-tourus-acb4d-interactions.json"; sourceTree = "<group>"; };
+		849A248F22A56E8C00BE7C87 /* PreferencesSqlExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesSqlExtension.swift; sourceTree = "<group>"; };
 		849CA33A226F433900C5DC55 /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		849D3EAE21DE8D18002F74B2 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		849D3EB021DE8D2D002F74B2 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -271,6 +273,7 @@
 				84B4B979228751D200906B27 /* PopTip+Draw.swift */,
 				84B4B97B228751EB00906B27 /* PopTip+Transitions.swift */,
 				84A7C14322A2BEAB00E8AF9B /* SettingsSqlExtension.swift */,
+				849A248F22A56E8C00BE7C87 /* PreferencesSqlExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -658,6 +661,7 @@
 				849D3EAF21DE8D18002F74B2 /* RegisterViewController.swift in Sources */,
 				843F5E5921DD55440098FA3E /* FirebaseModel.swift in Sources */,
 				8448D806224F6CC800594661 /* GooglePlace.swift in Sources */,
+				849A249022A56E8C00BE7C87 /* PreferencesSqlExtension.swift in Sources */,
 				8458502D21E3CA5500DF7C68 /* UIOptionButton.swift in Sources */,
 				8458503521E3E51200DF7C68 /* UIColorExtension.swift in Sources */,
 				8449C6E421E1362C002A6AF6 /* UiImageExtension.swift in Sources */,
@@ -852,7 +856,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = HN99LM38W6;
+				DEVELOPMENT_TEAM = L6968S5FSB;
 				INFOPLIST_FILE = Tourus/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -872,7 +876,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = HN99LM38W6;
+				DEVELOPMENT_TEAM = L6968S5FSB;
 				INFOPLIST_FILE = Tourus/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (

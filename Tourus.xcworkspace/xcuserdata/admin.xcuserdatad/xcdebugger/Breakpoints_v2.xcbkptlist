@@ -2,25 +2,20 @@
 <Bucket
    type = "0"
    version = "2.0">
-<<<<<<< HEAD
    <Breakpoints>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Tourus/Models/AlgorithmModel.swift"
-            timestampString = "580674947.518263"
+            filePath = "Tourus/Models/PlacesModel.swift"
+            timestampString = "581278172.57858"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "91"
-            endingLineNumber = "91"
-<<<<<<< HEAD
-            landmarkName = "monthGradeCalculator(candidatesDate:topGrade:interestingMonthsInterval:)"
-=======
-            landmarkName = "algorithmOrchestra(_:_:)"
->>>>>>> master
+            startingLineNumber = "186"
+            endingLineNumber = "186"
+            landmarkName = "GetPlacePhotos(placeID:callback:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -31,20 +26,14 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Tourus/Models/AlgorithmModel.swift"
-            timestampString = "580676019.807891"
+            timestampString = "581278182.317273"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "92"
-            endingLineNumber = "92"
-<<<<<<< HEAD
-            landmarkName = "monthGradeCalculator(candidatesDate:topGrade:interestingMonthsInterval:)"
-=======
-            landmarkName = "algorithmOrchestra(_:_:)"
->>>>>>> master
+            startingLineNumber = "248"
+            endingLineNumber = "248"
+            landmarkName = "setCategories()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
-=======
->>>>>>> 9dd0d025273e94f0c0e6a942d5bbcff5b3a54b29
 </Bucket>

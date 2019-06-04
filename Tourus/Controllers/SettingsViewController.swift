@@ -14,7 +14,7 @@ struct cellData{
 }
 
 class SettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-
+    
     @IBOutlet var profileImage: UIImageView!
     @IBOutlet var userNameLabel: UILabel!
     @IBOutlet var preferencesTableView: UITableView!
@@ -41,16 +41,12 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         profileImage.image = image
         profileImage.isUserInteractionEnabled = true
         profileImage.addGestureRecognizer(singleTap)
-
-        if let settings = MainModel.instance.getSettings() {
-            directionalSwitch.isOn = settings.isDirectionalAudioOn
-        } else {
-            directionalSwitch.isOn = true
-        }
+        
         
         MainModel.instance.getAllCategories() { categories in
             
-            for category in categories {
+            let sortedCategories = categories.sorted { $0 < $1 }
+            for category in sortedCategories {
                 
                 let displayName = category.replacingOccurrences(of: "_", with: " ").capitalized
                 let data = cellData(category: category, displayCategory: displayName)
@@ -58,8 +54,14 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
             }
         }
         
-        MainModel.instance.getCurrentUserPreferences() { categories in
-            self.selectedcells = categories
+        if let settings = MainModel.instance.getSettings() {
+            self.directionalSwitch.isOn = settings.isDirectionalAudioOn
+            
+            if let preferences = settings.preferencesCategories {
+                self.selectedcells = preferences
+            }
+        } else {
+            directionalSwitch.isOn = true
         }
         
         if let user = MainModel.instance.currentUser() {
@@ -90,6 +92,8 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         else {
             let sections = IndexSet.init(integer: 0)
             preferencesTableView.reloadSections(sections, with: .none)
+            //saves the data
+            MainModel.instance.updateUserPreferences(self.selectedcells)
         }
     }
     
@@ -124,7 +128,6 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         MainModel.instance.updateUserPreferences(self.selectedcells)
         self.dismiss(animated: true, completion: nil)
     }
-    
     
     func numberOfSections(in tableView: UITableView) -> Int {
         
@@ -161,11 +164,11 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         if !nowCell.category.isEmpty {
             
             let categoryExists = selectedcells.contains(nowCell.category)
-                
+            
             if (!categoryExists) {
                 self.selectedcells.append(nowCell.category)
             }
-           
+            
             nowCell.setCellData(nowCell.category, nowCell.displayCategory, true)
         }
     }
@@ -177,7 +180,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         if !nowCell.category.isEmpty {
             
             let categoryExists = selectedcells.contains(nowCell.category)
-                
+            
             if (categoryExists) {
                 self.selectedcells.removeAll{ $0 == nowCell.category }
             }
