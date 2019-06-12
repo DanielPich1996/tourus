@@ -53,11 +53,36 @@ class AlgorithmModel{
         }
         else{
             lastUserInteractions?.append(lastInteraction!)
-            for category in (lastInteraction?.categories)!{
-                if categories![category] != nil {
-                    categories![category] = (categories![category]! / 2)
+            switch lastInteraction?.answer {
+                case 1:
+                    for category in (lastInteraction?.categories)!{
+                        if categories![category] != nil {
+                            categories![category] = (categories![category]! / 2)
+                        }
                 }
+                
+                case 2:
+                    for category in (lastInteraction?.categories)!{
+                        if categories![category] != nil {
+                            categories![category] = (categories![category]! / 2)
+                        }
+                }
+                
+                case 3:
+                    for category in (lastInteraction?.categories)!{
+                        if categories![category] != nil {
+                            categories![category] = nil
+                        }
+                    }
+                
+                default : print("")
+                
             }
+            
+            
+            
+            
+            
         }
         
         GetCategoryByKnn(location) {
@@ -98,7 +123,7 @@ class AlgorithmModel{
             distance = 5000
         }
         
-        if (interval >= 1 || distance > 500){
+        if (interval >= 2 || distance > 500){
             MainModel.instance.getInteractionsStories(currUserLocation, {(interactions:[InteractionStory]) in
                 self.lastUpdatedPlace = currUserLocation
                 self.lastUpdatedInteractionsDate = Date()
@@ -124,22 +149,24 @@ class AlgorithmModel{
                         dayInWeekGradeCalculator(candidatesDate: userStory.date, topGrade: 10, interestingDaysInterval: 6) * dayInWeekWeight +
                         monthGradeCalculator(candidatesDate: userStory.date, topGrade: 10, interestingMonthsInterval: 6) * monthDeltaWeight) * currAnswerWeight
                     
-                    if (categories!.keys.contains(category)){
-                        if(categories![category]! == 0){
-                            categoryRankerCount[category] = 1
+                    let cat = category != "café" ? category : "cafe"
+                    
+                    if (categories!.keys.contains(cat)){
+                        if(categories![cat]! == 1){
+                            categoryRankerCount[cat] = 1
                         }
                         else{
-                            categoryRankerCount[category]! += 1
+                            categoryRankerCount[cat]! += 1
                         }
                         
-                        categories![category]! += currDataGrade
+                        categories![cat]! += currDataGrade
                     }
                 }
             }
         }
         
         for category in categoryRankerCount.keys{
-            categories![category] = categories![category]! / Double(categoryRankerCount[category]!)
+            categories![category] = (categories![category]! / Double(categoryRankerCount[category]!)) + 35
         }
         
         setPreferdCategories()
@@ -246,8 +273,10 @@ class AlgorithmModel{
         
         MainModel.instance.getAllCategories(){(_categories) in
             self.categories = [String:Double]()
+            
             for cat in _categories{
-                self.categories![cat] = 0
+                let category = cat != "café" ? cat : "cafe"
+                self.categories![category] = 1
             }
             group.leave()
         }
@@ -260,8 +289,13 @@ class AlgorithmModel{
         group.enter()
         
         MainModel.instance.getCurrentUserPreferences(){(_preferdCategories) in
+            var preferd = _preferdCategories
+            if _preferdCategories.contains("café"){
+                preferd = preferd.filter { $0 != "café" }
+                preferd.append("cafe")
+            }
             
-            self.prferdCategories.append(contentsOf: _preferdCategories)
+            self.prferdCategories.append(contentsOf: preferd)
             group.leave()
         }
         group.wait()
@@ -326,7 +360,14 @@ class AlgorithmModel{
     
     func comparePreferences(){
         MainModel.instance.getCurrentUserPreferences(){(_categories) in
-            for category in _categories{
+            
+            var preferd = _categories
+            if _categories.contains("café"){
+                preferd = preferd.filter { $0 != "café" }
+                preferd.append("cafe")
+            }
+            
+            for category in preferd{
                 if !self.prferdCategories.contains(category){
                     if self.unprferdCategories[category] != nil{
                         self.categories![category] = self.unprferdCategories[category]
@@ -336,7 +377,7 @@ class AlgorithmModel{
             }
             
             for category in self.prferdCategories{
-                if !_categories.contains(category){
+                if !preferd.contains(category){
                     if self.categories![category] != nil && self.unprferdCategories.count > 0 {
                         self.unprferdCategories[category] = self.categories![category]
                         self.categories?.removeValue(forKey: category)
@@ -344,7 +385,7 @@ class AlgorithmModel{
                 }
             }
             
-            self.prferdCategories = _categories
+            self.prferdCategories = preferd
         }
     }
     
