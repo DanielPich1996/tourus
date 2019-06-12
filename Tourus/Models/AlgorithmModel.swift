@@ -59,35 +59,28 @@ class AlgorithmModel{
                         if categories![category] != nil {
                             categories![category] = (categories![category]! / 2)
                         }
-                }
-                
+                    }
                 case 2:
                     for category in (lastInteraction?.categories)!{
                         if categories![category] != nil {
                             categories![category] = (categories![category]! / 2)
                         }
-                }
-                
+                    }
                 case 3:
                     for category in (lastInteraction?.categories)!{
                         if categories![category] != nil {
                             categories![category] = nil
                         }
                     }
-                
                 default : print("")
-                
             }
-            
-            
-            
-            
-            
         }
         
         GetCategoryByKnn(location) {
             var interactionToBack:Interaction? = nil
             self.comparePreferences()
+            self.checkCategories()
+            
             var categoriesSortedByGrades = Array(self.categories!.sorted { $0.1 > $1.1 })
             
             while (interactionToBack == nil){
