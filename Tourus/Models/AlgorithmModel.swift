@@ -24,13 +24,18 @@ class AlgorithmModel{
 //        //30min time
 //    }
     
+    // KNN varibals
     var interactionsByUser = [String:[InteractionStory]]()
     var lastUpdatedInteractionsDate:Date?
     var lastUpdatedPlace:CLLocation?
+    var lastUserInteractions:[InteractionStory]? = [InteractionStory]()
+    
+    // categoris wat will be offerd to user
     var categories:[String:Double]? = nil
+    
     var unprferdCategories = [String:Double]()
     var prferdCategories = [String]()
-    var lastUserInteractions:[InteractionStory]? = [InteractionStory]()
+    
     
     
     // KNN weights constants
@@ -46,11 +51,15 @@ class AlgorithmModel{
 //        updateHistoryData()
     }
     
+    // get interaction to user
     func getAlgorithmNextPlace(_ location:CLLocation, _ lastInteraction:InteractionStory?, _ callback: @escaping (Interaction) -> Void) {
+        
+        // if interaction is nill this the first time and need to set categories Weight
         if lastInteraction == nil {
             setCategories()
             getPreferdCategories()
         }
+        // set categories Weight by user's answer and append it to last interactions
         else{
             lastUserInteractions?.append(lastInteraction!)
             switch lastInteraction?.answer {
@@ -76,22 +85,31 @@ class AlgorithmModel{
             }
         }
         
+        // call get categories and send function to de after callback
         GetCategoryByKnn(location) {
             var interactionToBack:Interaction? = nil
+            
+            // check if preferces is cahged and update it
             self.comparePreferences()
+            
+            // check if all preferd categories ended and give another gategories
             self.checkCategories()
             
+            // sort the categories by Weigth
             var categoriesSortedByGrades = Array(self.categories!.sorted { $0.1 > $1.1 })
             
+            // tray to get interaction by sorted categories
             while (interactionToBack == nil){
                 let group = DispatchGroup()
                 group.enter()
                 
+                // tray get interaction
                 self.getInteraction(category: categoriesSortedByGrades[0].key, location: location, {(interaction) in
                     
                     if (interaction != nil){
                         interactionToBack = interaction!
                     }else{
+                        // check if all preferd categories is ended and give another gategories
                         self.checkCategories()
                         categoriesSortedByGrades = Array(self.categories!.sorted { $0.1 < $1.1 })
                     }
@@ -105,9 +123,13 @@ class AlgorithmModel{
         }
     }
     
+    // chek if nedd to run categories weights again
     func GetCategoryByKnn(_ currUserLocation:CLLocation, _ callback: @escaping () -> Void){
         let currDate  = Date()
+        // interval time in houwes between now and last knn run
         let interval :Double =  (currDate.timeIntervalSince(lastUpdatedInteractionsDate ?? Date(timeIntervalSince1970: 0)) / 3600)
+        
+        // distance beetwinnow and last algoritem run
         let distance : Int
         
         if let loc = lastUpdatedPlace{
@@ -116,11 +138,15 @@ class AlgorithmModel{
             distance = 5000
         }
         
+        // if last algoritem run was in more then 2 houwers or in more distance then 500 meters run algoritem again 
         if (interval >= 2 || distance > 500){
             MainModel.instance.getInteractionsStories(currUserLocation, {(interactions:[InteractionStory]) in
+                // update algoritem varibalse
                 self.lastUpdatedPlace = currUserLocation
                 self.lastUpdatedInteractionsDate = Date()
                 self.interactionsByUser = self.GroupInteractionsByUser(interactions)
+                
+                //call to run categories wheights
                 self.knnAlgorithm(self.interactionsByUser, callback)
             })
         }
@@ -142,6 +168,7 @@ class AlgorithmModel{
                         dayInWeekGradeCalculator(candidatesDate: userStory.date, topGrade: 10, interestingDaysInterval: 6) * dayInWeekWeight +
                         monthGradeCalculator(candidatesDate: userStory.date, topGrade: 10, interestingMonthsInterval: 6) * monthDeltaWeight) * currAnswerWeight
                     
+                    // ios dont support requests with "é" in htt request and need to parse it to "e"
                     let cat = category != "café" ? category : "cafe"
                     
                     if (categories!.keys.contains(cat)){
@@ -203,9 +230,12 @@ class AlgorithmModel{
     }
     
     func getInteraction(category:String, location:CLLocation, _ callback: @escaping (Interaction?) -> Void) -> Void {
+        
+        // get places by category
         MainModel.instance.fetchNearbyPlaces(location: location, radius: 2000, type: category, isOpen: true){(places, token, err) in
             if err == nil{
                 
+                // chack if all places valid by category and user dont was here ore egnired it in the past
                 var validPlaces = self.validPlacesByCategory(category: category, places:places!)
                 validPlaces = self.removePlacesByInteractions(places: validPlaces)
                 
@@ -213,6 +243,7 @@ class AlgorithmModel{
                     
                     let placeToInteraction = validPlaces.randomElement()
                     
+                    // parse plase to interaction
                     MainModel.instance.getInteraction(placeToInteraction!.types) { intereaction in
                         if intereaction != nil {
                             intereaction!.place = placeToInteraction!
@@ -224,6 +255,7 @@ class AlgorithmModel{
                         }
                     }
                 }else{
+                    // if there are not valid places in the range remove category from the list
                     self.categories?.removeValue(forKey: category)
                     callback(nil)
                 }
@@ -233,6 +265,7 @@ class AlgorithmModel{
         }
     }
     
+    // group all interactio by user and return it and update user last interactions
     func GroupInteractionsByUser(_ interactions:[InteractionStory]) ->[String:[InteractionStory]] {
         
         var interactionsByUser = [String:[InteractionStory]]()
@@ -260,6 +293,7 @@ class AlgorithmModel{
         return(interactionsByUser)
     }
     
+    // get categories and give them start value 1
     func setCategories(){
         let group = DispatchGroup()
         group.enter()
@@ -268,6 +302,7 @@ class AlgorithmModel{
             self.categories = [String:Double]()
             
             for cat in _categories{
+                // ios dont support requests with "é" in htt request and need to parse it to "e"
                 let category = cat != "café" ? cat : "cafe"
                 self.categories![category] = 1
             }
@@ -277,12 +312,14 @@ class AlgorithmModel{
         group.wait()
     }
     
+    // get preferd categories
     func getPreferdCategories() {
         let group = DispatchGroup()
         group.enter()
         
         MainModel.instance.getCurrentUserPreferences(){(_preferdCategories) in
             var preferd = _preferdCategories
+            // ios dont support requests with "é" in htt request and need to parse it to "e"
             if _preferdCategories.contains("café"){
                 preferd = preferd.filter { $0 != "café" }
                 preferd.append("cafe")
@@ -294,6 +331,7 @@ class AlgorithmModel{
         group.wait()
     }
     
+    // set categories to preferd
     func setPreferdCategories(){
         for category in categories!{
             if !(prferdCategories.contains(category.key)) {
@@ -306,6 +344,7 @@ class AlgorithmModel{
         }
     }
     
+    //remove vizited and ignored places
     func removePlacesByInteractions(places:[Place]) -> [Place] {
         var placesToReturn = [Place]()
         
@@ -327,6 +366,7 @@ class AlgorithmModel{
         return (placesToReturn)
     }
     
+    // check if places containe the category
     func validPlacesByCategory(category:String, places:[Place]) -> [Place] {
         var placesToReturn =  [Place]()
         for place in places{
@@ -337,6 +377,7 @@ class AlgorithmModel{
         return placesToReturn
     }
     
+    // check if last preferd categories and if not give unpreferd categories
     func checkCategories(){
         if categories?.count == 0 {
             if unprferdCategories.count > 0{
@@ -351,15 +392,17 @@ class AlgorithmModel{
         }
     }
     
+    // chack if added or removed category from user preferences
     func comparePreferences(){
         MainModel.instance.getCurrentUserPreferences(){(_categories) in
-            
+            // ios dont support requests with "é" in htt request and need to parse it to "e"
             var preferd = _categories
             if _categories.contains("café"){
                 preferd = preferd.filter { $0 != "café" }
                 preferd.append("cafe")
             }
             
+            // check if preferd category added and remove them from unpeferds and append to categories
             for category in preferd{
                 if !self.prferdCategories.contains(category){
                     if self.unprferdCategories[category] != nil{
@@ -369,6 +412,7 @@ class AlgorithmModel{
                 }
             }
             
+            // chack if category removed from preferd and remove from catgories
             for category in self.prferdCategories{
                 if !preferd.contains(category){
                     if self.categories![category] != nil && self.unprferdCategories.count > 0 {
@@ -378,6 +422,7 @@ class AlgorithmModel{
                 }
             }
             
+            // update now preferd categories
             self.prferdCategories = preferd
         }
     }

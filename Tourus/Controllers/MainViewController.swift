@@ -74,7 +74,8 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
     
-    //MARK: ALGORYTHM
+    //MARK: Knn algo
+    // get interaction offer to user
     func getNextInteraction(interaction:InteractionStory?) {
         
         MainModel.instance.getAlgorithmNextPlace(currUserLocation!, interaction: interaction) { interact in
@@ -92,9 +93,6 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     // MARK: Simulation
     var count = 0
     private func simulateOnce() {
-//        let latitude:String = String(format: "%f", currUserLocation!.coordinate.latitude)
-//        let longitude:String = String(format:"%f", currUserLocation!.coordinate.longitude)
-//        let loc:String = latitude + "," + longitude
         
         MainModel.instance.fetchNearbyPlaces(location: currUserLocation!, callback: { (places, token, err)  in
             DispatchQueue.main.async {
@@ -246,14 +244,14 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
                 //navigationBtn.isHidden = false
                 moreInfoView.isHidden = false
                 
-                //if interaction.place == nil {
-                //     navigationBtn.isEnabled = false
-                //}
                 photos.removeAll()
                 imageIndex = 0
                 lastLoadedIndex = 1
+                
+                // check if place exist and if url's count is more then 0
                 if(interaction.place != nil  && interaction.place!.picturesUrls.count > imageIndex) {
                     MainModel.instance.getPlaceImage(interaction.place!.googleID!, interaction.place!.picturesUrls[imageIndex], 800, 0.4, {(image, placeID) in
+                        // check if place not changed
                         if placeID == interaction.place!.googleID!{
                             if let imageToSet = image {
                                 self.photos.append(imageToSet)
@@ -354,23 +352,26 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
     
     ///MARK: Location Manager Functions
     func initLocationManager() {
+        // set selfe be location deligate
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         enableLocationServices()
+        // statr geting cordinates
         locationManager.startUpdatingLocation()
     }
     
+    // function that location managet call after geting cordinates
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        // get locatio cordinates
         let location = locations[locations.count - 1]
+        
+        // check if cordinates is precise
         if location.horizontalAccuracy > 0 && currUserLocation == nil {
             currUserLocation = location
-//Test group By
-//            MainModel.instance.GroupInteractionsByUser(currUserLocation!, {(interactios:[String:[InteractionStory]]) in
-//                print(interactios)
-//            })
             
+            // if no iteraction offferd to user call getNextInteraction with nill to set Knn algoritem
             if interaction == nil {
-                //#1: algo
+                
                 getNextInteraction(interaction: nil)
                 
                 self.view.isUserInteractionEnabled = true
@@ -378,11 +379,6 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
             }
             
             locationManager.stopUpdatingLocation()
-            
-            // let strLocation = "\(location.coordinate.latitude),\(location.coordinate.longitude)"
-            // MainModel.instance.fetchNearbyPlaces(location: strLocation, type:"restaurant", callback: {(places, error) in
-            // print(places!)
-            // })
         }
     }
     
@@ -391,6 +387,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         print(error)
     }
     
+    // update user location
     func updateLocation(){
         currUserLocation = nil
         locationManager.startUpdatingLocation()
@@ -419,6 +416,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
     
+    // enable handle right Swipe and left Swipe
     func setUpSwipe(){
         let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe(sender:)))
         rightSwipe.direction = .right
@@ -429,19 +427,22 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         view.addGestureRecognizer(leftSwipe)
     }
     
+    // function that wiil be called then swipe handeled
     @objc func handleSwipe(sender: UISwipeGestureRecognizer) {
         if sender.state == .ended && (photos.count > 1){
             switch sender.direction {
             case .right:
+                // check if index is not 0 and set thie image as background
                 if imageIndex > 0 {
                     imageIndex -= 1
-                    //MainModel.instance.getPlaceImage(interaction!.place!.picturesUrls[imageIndex], 800, 0.4, setBackroundImage)
                     setBackroundImage(photos[imageIndex])
                 }
             case .left:
+                // check if index is not bigger than count of images and set as background
                 if imageIndex + 1 < (photos.count) {
                     imageIndex += 1
                     setBackroundImage(photos[imageIndex])
+                    // get 3 more images to enble fast left swipe
                     GetMoreImages(endIndex: imageIndex + 3)
                 }
             default:
@@ -450,7 +451,9 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
     
+    // get place's more image url's
     func GetMoreImageURLS() {
+        // check if interaction exist
         if let placeID = interaction?.place?.googleID {
             MainModel.instance.GetPlacePhotos(placeID: placeID, callback: {(photosURL, placeID ,err) in
                 if(err == nil && self.interaction?.place?.googleID == placeID) {
@@ -460,9 +463,11 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
                         for photo in urls {
                             self.interaction?.place!.picturesUrls.append(photo.photoReference!)
                         }
-                        
+                        // get firs image and set as more info background
                         if self.interaction!.place!.picturesUrls.count > 1 {
                             MainModel.instance.getPlaceImage((self.interaction?.place?.googleID)!, self.interaction!.place!.picturesUrls[1], 800, 0.4, {(image, placeID) in
+                                
+                                // check if interaction not changed
                                 if((self.interaction?.place?.googleID) ?? nil == placeID ){
                                     if let imageToSet = image {
                                         self.photos.append(imageToSet)
@@ -483,17 +488,21 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
             let end:Int
             let start = (lastLoadedIndex + 1)
             
+            //if gated end index bigger then images count set end images index by count of images
             if(endIndex >= (interaction?.place!.picturesUrls.count)!){
                 end = ((interaction?.place!.picturesUrls.count)! - 1)
             }else{
                 end = endIndex
             }
             
+            // chack if nedd request images
             if (end > lastLoadedIndex){
                 lastLoadedIndex = end
                 
                 for index in start...end{
                     MainModel.instance.getPlaceImage((interaction?.place?.googleID)!  ,interaction!.place!.picturesUrls[index], 800, 0.4, {(image, placeID) in
+                        
+                        // check if interaction not changed
                         if(placeID == (self.interaction?.place?.googleID) ?? nil ){
                             if let imageToSet = image {
                                 self.photos.append(imageToSet)
