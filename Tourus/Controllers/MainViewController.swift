@@ -67,7 +67,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         InitGraphData()
     }
     
-    
+    // not in use
     @IBAction func navigationButtonAction(_ sender: Any) {
         if (interaction != nil && interaction?.place != nil) {
             navigate((interaction?.place)!)
@@ -90,7 +90,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
     
-    // MARK: Simulation
+    // MARK: Simulation - not in use
     var count = 0
     private func simulateOnce() {
         
@@ -238,7 +238,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
             do {
                 bottomConstraint = (self.view.frame.height / 5 - moreInfoView.frame.height) * -1
             }
-        case .suggestion:
+        case .suggestion: //the only type in use
             do {
                 interactionBackOpacity = 0.3
                 //navigationBtn.isHidden = false
@@ -393,6 +393,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         locationManager.startUpdatingLocation()
     }
     
+    // app permission for navigation option
     private func enableLocationServices() {
         let status = CLLocationManager.authorizationStatus()
         
@@ -416,7 +417,7 @@ class MainViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
     
-    // enable handle right Swipe and left Swipe
+    // enable handle right Swipe and left Swipe to pics
     func setUpSwipe(){
         let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe(sender:)))
         rightSwipe.direction = .right

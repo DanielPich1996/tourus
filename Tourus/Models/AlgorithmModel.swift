@@ -30,12 +30,10 @@ class AlgorithmModel{
     var lastUpdatedPlace:CLLocation?
     var lastUserInteractions:[InteractionStory]? = [InteractionStory]()
     
-    // categoris wat will be offerd to user
+    // categoris of what will be offerd to user
     var categories:[String:Double]? = nil
-    
     var unprferdCategories = [String:Double]()
     var prferdCategories = [String]()
-    
     
     
     // KNN weights constants
@@ -63,19 +61,19 @@ class AlgorithmModel{
         else{
             lastUserInteractions?.append(lastInteraction!)
             switch lastInteraction?.answer {
-                case 1:
+                case 1: //accept
                     for category in (lastInteraction?.categories)!{
                         if categories![category] != nil {
                             categories![category] = (categories![category]! / 2)
                         }
                     }
-                case 2:
+                case 2: //decline
                     for category in (lastInteraction?.categories)!{
                         if categories![category] != nil {
                             categories![category] = (categories![category]! / 2)
                         }
                     }
-                case 3:
+                case 3: //negative
                     for category in (lastInteraction?.categories)!{
                         if categories![category] != nil {
                             categories![category] = nil
@@ -98,7 +96,7 @@ class AlgorithmModel{
             // sort the categories by Weigth
             var categoriesSortedByGrades = Array(self.categories!.sorted { $0.1 > $1.1 })
             
-            // tray to get interaction by sorted categories
+            // try to get interaction by sorted categories
             while (interactionToBack == nil){
                 let group = DispatchGroup()
                 group.enter()
@@ -184,7 +182,7 @@ class AlgorithmModel{
                 }
             }
         }
-        
+        //avarage of categories grades
         for category in categoryRankerCount.keys{
             categories![category] = (categories![category]! / Double(categoryRankerCount[category]!)) + 35
         }
@@ -198,14 +196,14 @@ class AlgorithmModel{
         if distanceInMeters > 5000{
             return 0
         }
-        
+        // get a value between 0-1
         return (Double(topGrade) - ((Double(distanceInMeters)/(interestingKilometers * 1000)) * Double(topGrade)))
     }
     
     func timeGradeCalculator(candidatesDate: Date, topGrade: Int, interestingHourInterval: Int) -> Double{
         let candidateHour = Calendar.current.component(.hour, from: candidatesDate)
         let currHour = Calendar.current.component(.hour, from: Date())
-        
+        // get a value between 0-1
         return(Double(topGrade) - (Double(abs(candidateHour - currHour))/Double(interestingHourInterval)) * Double(topGrade))
     }
     
@@ -213,7 +211,7 @@ class AlgorithmModel{
         let candidateDay = Calendar.current.component(.weekday, from: candidatesDate)
         let currDay = Calendar.current.component(.weekday, from: Date())
         let dayDelta = abs(currDay - candidateDay)
-        
+        // get a value between 0-1
         return(Double(topGrade) - (Double(dayDelta)/Double(interestingDaysInterval)) * Double(topGrade))
     }
     
@@ -225,7 +223,7 @@ class AlgorithmModel{
         if (monthDelta > 6){
             monthDelta = 12 - monthDelta
         }
-        
+        // get a value between 0-1
         return(Double(topGrade) - (Double(monthDelta)/Double(interestingMonthsInterval)) * Double(topGrade))
     }
     
@@ -344,7 +342,7 @@ class AlgorithmModel{
         }
     }
     
-    //remove vizited and ignored places
+    //remove visited and ignored places
     func removePlacesByInteractions(places:[Place]) -> [Place] {
         var placesToReturn = [Place]()
         
@@ -377,7 +375,7 @@ class AlgorithmModel{
         return placesToReturn
     }
     
-    // check if last preferd categories and if not give unpreferd categories
+    // Check if our categories list is empty, if it is - append all unprefered categories to categories.
     func checkCategories(){
         if categories?.count == 0 {
             if unprferdCategories.count > 0{
@@ -385,9 +383,6 @@ class AlgorithmModel{
                     categories![category.key] = category.value
                 }
                 unprferdCategories.removeAll()
-            }
-            else{
-                //alert Error
             }
         }
     }
